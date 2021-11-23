@@ -230,7 +230,7 @@ class SAX:
 
     def transform(self, time_series):
         if self.width is None:
-            self.width = len(time_series) // n_paa_segments
+            self.width = len(time_series) // self.n_paa_segments
         compressed_time_series = self.paa_mean(time_series)
         symbolic_time_series = self._digitize(compressed_time_series)
         return symbolic_time_series
