@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: slearn
+Version: 0.0.1
+Summary: A package linking symbolic representation with sklearn for time series prediction
+Home-page: https://github.com/nla-group/slearn.git
+Author: Stefan Guettel, Xinye Chen
+Author-email: stefan.guettel@manchester.ac.uk
+License: MIT License
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# slearn
+
+
+[![Build Status](https://app.travis-ci.com/nla-group/sblearn.svg?token=SziD2n1qxpnRwysssUVq&branch=main)](https://app.travis-ci.com/github/nla-group/sblearn)
+
+A package linking symbolic representation with sklearn for time series prediction
+
+
