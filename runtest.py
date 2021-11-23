@@ -1,5 +1,5 @@
 import numpy as np
-from .slearn import symbolicML, slearn, SAX
+from slearn.slearn import symbolicML, slearn, SAX
 
 ts = np.random.normal(size = 500)
 ts = np.cumsum(ts)
