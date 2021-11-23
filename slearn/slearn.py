@@ -220,13 +220,17 @@ class SAX:
         if n_paa_segments is not None:
             if verbose == True:
                 warnings.warn("Deprecated parameter w. Set width to ``len(ts) // n_paa_segments''")
-            self.width = len(ts) // n_paa_segments
+            self.n_paa_segments = n_paa_segments
+            self.width = None 
         else:
+            self.n_paa_segments = None
             self.width = w
         self.number_of_symbols = k
         self.return_list = return_list
 
     def transform(self, time_series):
+        if self.width is None:
+            self.width = len(time_series) // n_paa_segments
         compressed_time_series = self.paa_mean(time_series)
         symbolic_time_series = self._digitize(compressed_time_series)
         return symbolic_time_series
