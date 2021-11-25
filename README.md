@@ -28,7 +28,7 @@ We can predict any symbolic sequence by choosing the classifiers available in sc
 ```
 
 Also, you can use it by passing into parameters of dictionary form
-```
+```python
 >>> string = 'aaaabbbccd'
 >>> sbml = symbolicML(classifier_name="mlp", gap=3, random_seed=0, verbose=0)
 >>> x, y = sbml._encoding(string)
