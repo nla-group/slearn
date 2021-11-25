@@ -11,7 +11,7 @@ A package linking symbolic representation with sklearn for time series predictio
 import the package
 ```python
 from slearn import symbolicML, slearn
-```python
+```
 
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
 ```python
