@@ -20,9 +20,6 @@ We can predict any symbolic sequence by choosing the classifiers available in sc
 >>> x, y = sbml._encoding(string)
 >>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
 >>> print(pred)
+['d', 'b', 'a', 'b', 'b'] # The prediction
 ```
 
-The prediction is
-```python
-['d', 'b', 'a', 'b', 'b']
-```
