@@ -6,3 +6,7 @@ before_install:
   - pip3 install -r requirements.txt
 script:
   - python3 runtest.py
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+notifications:
+  email: false
