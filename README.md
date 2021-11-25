@@ -23,6 +23,7 @@ $ pip install slearn
 | Quadratic Discriminant Analysis  | ['QuadraticDiscriminantAnalysis'](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html) |
 | AdaBoost classifier  | ['AdaBoostClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) |
 | Random Forest   | ['RandomForestClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) |
+| LightGBM | ['LGBM'](https://lightgbm.readthedocs.io/en/latest/) |
 
 ## Symbolic machine learning prediction
 Import the package
