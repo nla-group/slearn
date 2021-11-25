@@ -11,6 +11,13 @@ Install the slearn package simply by
 ```
 $ pip install slearn
 ```
+|  Support Classifiers | Parameter call |
+|  ----  | ----  |
+| Multi-layer Perceptron  |['MLPClassifier'](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron)  |
+| K-Nearest Neighbors  | ['KNeighborsClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
+| Gaussian Naive Bayes  | ['GaussianNB'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
+| Decision Tree  | ['DecisionTreeClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier) |
+| Random Forest   | ['RandomForestClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) |
 
 ## Symbolic machine learning prediction
 Import the package
