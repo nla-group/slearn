@@ -61,7 +61,7 @@ Load libraries.
 >>> import numpy as np
 >>> import seaborn as sns
 >>> import matplotlib.pyplot as plt
->>> from slearn.slearn import *
+>>> from slearn import *
 
 >>> time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
 >>> ts = time_series.Close.values
