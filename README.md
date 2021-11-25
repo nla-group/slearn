@@ -14,7 +14,7 @@ $pip install slearn
 
 Then, import the package
 ```python
-from slearn import symbolicML, slearn
+>>> from slearn import symbolicML, slearn
 ```
 
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
