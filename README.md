@@ -51,7 +51,7 @@ Also, you can use it by passing into parameters of dictionary form
 >>> print(pred)
 ['d', 'b', 'a', 'b', 'b'] # the prediction
 ```
-But ensure that parameters are existing in the scikit-learn classifiers.
+The parameters for the chosen classifier follow the same as the scikit-learn library, so just ensure that parameters are existing in the scikit-learn classifiers.
 
 ## Prediction with symbolic representation
 
@@ -72,8 +72,7 @@ Set the number of symbols you would like to predict.
 step = 200
 ```
 
-You can select the available classifiers for prediction, and the parameters of the chosen classifier follow the same as the scikit-learn library.
-We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
+You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
 Use Gaussian Naive Bayes method: 
 ```python
