@@ -17,6 +17,8 @@ $ pip install slearn
 | K-Nearest Neighbors  | ['KNeighborsClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
 | Gaussian Naive Bayes  | ['GaussianNB'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
 | Decision Tree  | ['DecisionTreeClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier) |
+| Support Vector Classification | ['SVC'](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) |
+| Radial-basis Function Kernel | ['RBF'](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html) |
 | Logistic Regression  | ['LogisticRegression'](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) |
 | Quadratic Discriminant Analysis  | ['QuadraticDiscriminantAnalysis'](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html) |
 | AdaBoost classifier  | ['AdaBoostClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) |
