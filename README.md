@@ -7,8 +7,12 @@
 
 A package linking symbolic representation with sklearn for time series prediction
 
+Install the slearn package simply by
+```
+$pip install slearn
+```
 
-import the package
+Then, import the package
 ```python
 from slearn import symbolicML, slearn
 ```
