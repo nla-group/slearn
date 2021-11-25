@@ -100,4 +100,4 @@ plt.show()
 ```
 
 
-![original image](https://raw.githubusercontent.com/nla-group/fABBA/master/figs/img.png)
+![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.png)
