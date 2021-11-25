@@ -6,3 +6,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A package linking symbolic representation with sklearn for time series prediction
+
+
+import the package
+```python
+from slearn import symbolicML, slearn
+```python
+
+We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
+```python
+>>> string = 'aaaabbbccd'
+>>> sbml = symbolicML(classifier_name="mlp", gap=3, random_seed=0, verbose=0)
+>>> x, y = sbml._encoding(string)
+>>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
+>>> print(pred)
+```python
+
+The output is
+```python
+['d', 'b', 'a', 'b', 'b']
+```
