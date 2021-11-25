@@ -13,17 +13,17 @@ $ pip install slearn
 ```
 |  Support Classifiers | Parameter call |
 |  ----  | ----  |
-| Multi-layer Perceptron  |['MLPClassifier'](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron)  |
-| K-Nearest Neighbors  | ['KNeighborsClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
-| Gaussian Naive Bayes  | ['GaussianNB'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
-| Decision Tree  | ['DecisionTreeClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier) |
-| Support Vector Classification | ['SVC'](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) |
-| Radial-basis Function Kernel | ['RBF'](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html) |
-| Logistic Regression  | ['LogisticRegression'](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) |
-| Quadratic Discriminant Analysis  | ['QuadraticDiscriminantAnalysis'](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html) |
-| AdaBoost classifier  | ['AdaBoostClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) |
-| Random Forest   | ['RandomForestClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) |
-| LightGBM | ['LGBM'](https://lightgbm.readthedocs.io/en/latest/) |
+| [Multi-layer Perceptron](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron)   |'MLPClassifier' |
+| [K-Nearest Neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier)  | 'KNeighborsClassifier' |
+| [Gaussian Naive Bayes](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier)   | ['GaussianNB']|
+| [Decision Tree](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)  | 'DecisionTreeClassifier' |
+| [Support Vector Classification](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) | 'SVC' |
+| [Radial-basis Function Kernel] | 'RBF'|
+| [Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html)  | 'LogisticRegression'(https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) |
+| [Quadratic Discriminant Analysis](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)  | 'QuadraticDiscriminantAnalysis' |
+| [AdaBoost classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)  | 'AdaBoostClassifier' |
+| [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier)  | 'RandomForestClassifier' |
+| [LightGBM](https://lightgbm.readthedocs.io/en/latest/ | 'LGBM') |
 
 ## Symbolic machine learning prediction
 Import the package
