@@ -13,9 +13,9 @@ $ pip install slearn
 ```
 
 ## Symbolic machine learning prediction
-Then, import the package
+Import the package
 ```python
->>> from slearn import symbolicML, slearn
+>>> from slearn import symbolicML
 ```
 
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
