@@ -22,7 +22,7 @@ We can predict any symbolic sequence by choosing the classifiers available in sc
 >>> print(pred)
 ```
 
-The output is
+The prediction is
 ```python
 ['d', 'b', 'a', 'b', 'b']
 ```
