@@ -69,7 +69,7 @@ Load libraries.
 
 Set the number of symbols you would like to predict.
 ```python
-step = 200
+>>> step = 200
 ```
 
 You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
