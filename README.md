@@ -57,14 +57,14 @@ The parameters for the chosen classifier follow the same as the scikit-learn lib
 
 Load libraries.
 ```python
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-from slearn.slearn import *
+>>> import pandas as pd
+>>> import numpy as np
+>>> import seaborn as sns
+>>> import matplotlib.pyplot as plt
+>>> from slearn.slearn import *
 
-time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
-ts = time_series.Close.values
+>>> time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
+>>> ts = time_series.Close.values
 ```
 
 Set the number of symbols you would like to predict.
@@ -76,39 +76,39 @@ You can select the available classifiers and symbolic representation method (cur
 
 Use Gaussian Naive Bayes method: 
 ```python
-sl = slearn(series=ts, method='ABBA', 
+>>> sl = slearn(series=ts, method='ABBA', 
             gap=10, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="GaussianNB",
             random_seed=1, verbose=1)
-sklearn_params = {'var_smoothing':0.001}
-abba_nb_pred = sl.predict(**sklearn_params)
+>>> sklearn_params = {'var_smoothing':0.001}
+>>> abba_nb_pred = sl.predict(**sklearn_params)
 ```
 
 
 Use neural network models method: 
 ```python
-sl = slearn(series=ts, method='ABBA',
+>>> sl = slearn(series=ts, method='ABBA',
             gap=10, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="MLPClassifier",
             random_seed=1, verbose=1)
-sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
-abba_nn_pred = sl.predict(**sklearn_params)
+>>> sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
+>>> abba_nn_pred = sl.predict(**sklearn_params)
 ```
 
 We can plot the prediction, 
 
 ```python
-sns.set_theme(style="whitegrid")
-plt.figure(figsize=(25, 9))
-sns.set(font_scale=2, style="whitegrid")
-sns.lineplot(x=np.arange(0, len(ts)), y= ts, color='c', linewidth=6, label='Time series')
-sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nb_pred[:min_len], color='tomato', linewidth=6, label='Prediction (ABBA - GaussianNB)')
-sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nn_pred[:min_len], color='darkgreen', linewidth=6, label='Prediction (ABBA - MLPClassifier)')
-plt.tight_layout()
-plt.tick_params(axis='both', labelsize=25)
-plt.show()
+>>> sns.set_theme(style="whitegrid")
+>>> plt.figure(figsize=(25, 9))
+>>> sns.set(font_scale=2, style="whitegrid")
+>>> sns.lineplot(x=np.arange(0, len(ts)), y= ts, color='c', linewidth=6, label='Time series')
+>>> sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nb_pred[:min_len], color='tomato', linewidth=6, label='Prediction (ABBA - GaussianNB)')
+>>> sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nn_pred[:min_len], color='darkgreen', linewidth=6, label='Prediction (ABBA - MLPClassifier)')
+>>> plt.tight_layout()
+>>> plt.tick_params(axis='both', labelsize=25)
+>>> plt.show()
 ```
 
 
