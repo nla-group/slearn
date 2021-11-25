@@ -429,10 +429,9 @@ class slearn(symbolicML):
         if self.method == 'ABBA':
             from fABBA import fabba_model
             try:
-                self.s_model = fabba_model(tol=params['tol'], alpha=params['alpha'], 
-                                           sorting=params['sorting'], verbose=self.verbose, 
-                                           return_list=True)
+                self.s_model = fabba_model(**params, verbose=self.verbose, return_list=True)  
             except:
+                warnings.warn("Exception, default setting (tol=0.1, alpha=0.1, sorting='2-norm') apply.")
                 self.s_model = fabba_model(tol=0.1, alpha=0.1, sorting='2-norm', verbose=self.verbose,
                                           return_list=True)
             
