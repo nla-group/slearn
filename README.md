@@ -12,7 +12,7 @@ Install the slearn package simply by
 $ pip install slearn
 ```
 
-# Symbolic machine learning prediction
+## Symbolic machine learning prediction
 Then, import the package
 ```python
 >>> from slearn import symbolicML, slearn
@@ -40,7 +40,7 @@ Also, you can use it by passing into parameters of dictionary form
 ```
 But ensure that parameters are existing in the scikit-learn classifiers.
 
-# Prediction with symbolic representation
+## Prediction with symbolic representation
 
 Load libraries.
 ```python
