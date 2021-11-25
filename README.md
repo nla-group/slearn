@@ -17,6 +17,9 @@ $ pip install slearn
 | K-Nearest Neighbors  | ['KNeighborsClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
 | Gaussian Naive Bayes  | ['GaussianNB'](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier) |
 | Decision Tree  | ['DecisionTreeClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier) |
+| Logistic Regression  | ['LogisticRegression'](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) |
+| Quadratic Discriminant Analysis  | ['QuadraticDiscriminantAnalysis'](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html) |
+| AdaBoost classifier  | ['AdaBoostClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html) |
 | Random Forest   | ['RandomForestClassifier'](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) |
 
 ## Symbolic machine learning prediction
