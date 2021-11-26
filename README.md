@@ -112,4 +112,4 @@ We can plot the prediction,
 ```
 
 
-![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.png)
+![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.PNG)
