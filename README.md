@@ -161,11 +161,9 @@ Processing: 2 of 2
 
 
 
-## Software Contributors
+## Software Contributors ###(equal contributions)
 ```
-Roberto Cahuantzi \orcidID{0000-0002-0212-6825} 
-\and
-Xinye Chen \orcidID{0000-0003-1778-393X}
-\and
-Stefan Güttel \orcidID{0000-0003-1494-4478}}
+Roberto Cahuantzi
+Xinye Chen 
+Stefan Güttel 
 ```
