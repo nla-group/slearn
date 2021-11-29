@@ -125,8 +125,6 @@ We can plot the prediction,
 slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity.
 
 
-## Example
-
 ```python
 >>> from slearn import *
 >>> df_strings = LZWStringLibrary(symbols=3, complexity=[3, 9])
