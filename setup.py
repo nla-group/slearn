@@ -13,7 +13,7 @@ setuptools.setup(
     include_dirs=[numpy.get_include()],
     long_description=long_description,
     author="Stefan Güttel, Xinye Chen, Roberto Cahuantzi",
-    author_email="stefan.guettel@manchester.ac.uk; xinye.chen@manchester.ac.uk; Roberto.Cahuantzi@manchester.ac.uk",
+    author_email="stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk, Roberto.Cahuantzi@manchester.ac.uk",
     maintainer="Xinye Chen",
     maintainer_email="xinye.chen@manchester.ac.uk",
     description="A package linking symbolic representation with sklearn for time series prediction",
