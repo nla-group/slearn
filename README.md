@@ -161,9 +161,10 @@ Processing: 2 of 2
 
 
 
-## Software Contributors ###(equal contributions)
+## Software Contributors
 ```
 Roberto Cahuantzi
 Xinye Chen 
 Stefan Güttel 
 ```
+equal contributions, ordered by first name
