@@ -159,3 +159,13 @@ Processing: 2 of 2
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
 
+
+
+## Software Contributors
+```
+Roberto Cahuantzi \orcidID{0000-0002-0212-6825} 
+\and
+Xinye Chen \orcidID{0000-0003-1778-393X}
+\and
+Stefan Güttel \orcidID{0000-0003-1494-4478}}
+```
