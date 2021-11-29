@@ -1,3 +1,5 @@
+https://github.com/robcah/RNNExploration4SymbolicTS
+    
 from random import randint
 import pandas as pd
 import numpy as np
