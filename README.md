@@ -114,6 +114,14 @@ We can plot the prediction,
 
 
 
+
+
+
+![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.PNG)
+
+
+
+## Flexible symbolic sequence generator
 slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity.
 
 
@@ -151,7 +159,3 @@ Processing: 2 of 2
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
 
-
-
-
-![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.PNG)
