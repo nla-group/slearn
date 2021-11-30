@@ -333,7 +333,7 @@ class slearn(symbolicML):
     series - numpy.ndarray:
         The numeric time series. 
         
-    method - str {'ABBA', 'SAX'}:
+    method - str {'fABBA', 'SAX'}:
         The symbolic time series representation.
         We use fABBA for ABBA method.
     
@@ -364,7 +364,7 @@ class slearn(symbolicML):
     >>> import numpy as np
     >>> from slearn import slearn
     >>> ts = [np.sin(0.05*i) for i in range(1000)]
-    >>> sl = slearn(series=ts, method='ABBA', ws=10, step=1, tol=0.5, alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
+    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5, alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
     >>> sl.predict(hidden_layer_sizes=(10,10), activation='relu', learning_rate_init=0.1)
     array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
        -0.49625277, -0.52724904, -0.55824531, -0.58924158, -0.62023785,
@@ -387,7 +387,7 @@ class slearn(symbolicML):
     >>> import numpy as np
     >>> from slearn import slearn
     >>> ts = [np.sin(0.05*i) for i in range(1000)]
-    >>> sl = slearn(series=ts, method='ABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
+    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
     >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
     >>> sl.predict(**params)
     array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
@@ -412,7 +412,7 @@ class slearn(symbolicML):
     >>> sl.predict(**params)
     """
         
-    def __init__(self, series, method='ABBA', ws=1, step=10,
+    def __init__(self, series, method='fABBA', ws=1, step=10,
                  classifier_name="MLPClassifier",
                  form='numeric', random_seed=0, verbose=0, **params):
         
@@ -440,7 +440,7 @@ class slearn(symbolicML):
         self.length = len(series)
         self.params_secure()
         
-        if self.method == 'ABBA':
+        if self.method == 'fABBA':
             from fABBA import fabba_model
             try:
                 self.s_model = fabba_model(**params, verbose=self.verbose, return_list=True)  
@@ -469,7 +469,7 @@ class slearn(symbolicML):
             
         else:
             warnings.warn(
-                "Sorry, there is no {} method for now. Will use the 'ABBA' method with default settings.".format(self.method))
+                "Sorry, there is no {} method for now. Will use the 'fABBA' method with default settings.".format(self.method))
             self.s_model = fabba_model(tol=0.1, alpha=0.1, sorting='2-norm', 
                                        verbose=self.verbose, return_list=True)
                 
