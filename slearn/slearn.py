@@ -492,7 +492,7 @@ class slearn(symbolicML):
             print("The number of symbols to be predicted: ", self.step)
             print("The parameters of classifiers: ", params)
         
-        if self.method == 'ABBA':
+        if self.method == 'fABBA':
             x, y = self.cmodel._encoding(self.string[:-1]) # abandon the last symbol
         else:
             x, y = self.cmodel._encoding(self.string)
@@ -504,7 +504,7 @@ class slearn(symbolicML):
             return self.cmodel.forecasting(x, y, step=self.step, **params)
         else:
             pred = self.cmodel.forecasting(x, y, step=self.step, **params)
-            if self.method == 'ABBA':
+            if self.method == 'fABBA':
                 inverse_ts = self.s_model.inverse_transform(self.string[:-1]+pred, self.start)
             else:
                 inverse_ts = self.s_model.inverse_transform(self.string+pred)
