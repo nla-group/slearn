@@ -9,7 +9,7 @@ setuptools.setup(
     packages=["slearn"],
     version="0.0.4",
     setup_requires=["numpy>=1.20.0"],
-    install_requires=["numpy>=1.20.0", "scikit-learn", "pandas", "fABBA", "lightgbm", "request"],
+    install_requires=["numpy>=1.20.0", "scikit-learn", "pandas", "fABBA", "lightgbm", "request>=2.26.0"],
     include_dirs=[numpy.get_include()],
     long_description=long_description,
     author="Stefan Güttel, Xinye Chen, Roberto Cahuantzi",
