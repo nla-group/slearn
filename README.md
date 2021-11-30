@@ -90,7 +90,7 @@ Use Gaussian Naive Bayes method:
 Use neural network models method: 
 ```python
 >>> sl = slearn(series=ts, method='ABBA',
-            gap=3, step=step,
+            ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="MLPClassifier",
             random_seed=1, verbose=1)
