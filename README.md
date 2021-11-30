@@ -11,6 +11,7 @@ A package linking symbolic representation with sklearn for time series predictio
 Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation method do not only reduce the dimensionality of time series but also speedup the downstream time series task. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.
 
 <strong><em> Now let's get started! </em></strong>
+
 Install the slearn package simply by
 ```
 $ pip install slearn
