@@ -77,7 +77,7 @@ You can select the available classifiers and symbolic representation method (cur
 
 Use Gaussian Naive Bayes method: 
 ```python
->>> sl = slearn(series=ts, method='ABBA', 
+>>> sl = slearn(series=ts, method='fABBA', 
             ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="GaussianNB",
@@ -89,7 +89,7 @@ Use Gaussian Naive Bayes method:
 
 Use neural network models method: 
 ```python
->>> sl = slearn(series=ts, method='ABBA',
+>>> sl = slearn(series=ts, method='fABBA',
             ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="MLPClassifier",
