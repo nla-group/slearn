@@ -165,4 +165,4 @@ Roberto Cahuantzi
 Xinye Chen 
 Stefan Güttel 
 ```
-Equal contributions, ordered by first name.
+Equal contributions, ordered by the last name.
