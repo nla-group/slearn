@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: slearn
-Version: 0.0.6
+Version: 0.0.8
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn.git
 Author: Stefan Güttel, Xinye Chen, Roberto Cahuantzi
@@ -20,7 +20,11 @@ License-File: LICENSE
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nla-group/slearn.git/HEAD)
 
-A package linking symbolic representation with sklearn for time series prediction
+A package linking symbolic representation with sklearn for time series prediction.
+
+Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation method do not only reduce the dimensionality of time series but also speedup the downstream time series task. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.
+
+<strong><em> Now let's get started! </em></strong>
 
 Install the slearn package simply by
 ```
@@ -49,7 +53,7 @@ Import the package
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
 ```python
 >>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", gap=3, random_seed=0, verbose=0)
+>>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
 >>> x, y = sbml._encoding(string)
 >>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
 >>> print(pred)
@@ -59,7 +63,7 @@ We can predict any symbolic sequence by choosing the classifiers available in sc
 Also, you can use it by passing into parameters of dictionary form
 ```python
 >>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", gap=3, random_seed=0, verbose=0)
+>>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
 >>> x, y = sbml._encoding(string)
 >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
 >>> pred = sbml.forecasting(x, y, step=5, **params)
@@ -91,8 +95,8 @@ You can select the available classifiers and symbolic representation method (cur
 
 Use Gaussian Naive Bayes method: 
 ```python
->>> sl = slearn(series=ts, method='ABBA', 
-            gap=3, step=step,
+>>> sl = slearn(series=ts, method='fABBA', 
+            ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="GaussianNB",
             random_seed=1, verbose=1)
@@ -103,8 +107,8 @@ Use Gaussian Naive Bayes method:
 
 Use neural network models method: 
 ```python
->>> sl = slearn(series=ts, method='ABBA',
-            gap=3, step=step,
+>>> sl = slearn(series=ts, method='fABBA',
+            ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="MLPClassifier",
             random_seed=1, verbose=1)
