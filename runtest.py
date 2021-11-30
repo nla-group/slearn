@@ -22,7 +22,7 @@ recon_ts = sax.inverse_transform(sax_ts)
 
 # TEST3
 ts = [np.sin(0.05*i) for i in range(1000)]
-sl = slearn(series=ts, method='ABBA', 
+sl = slearn(series=ts, method='fABBA', 
             ws=10, step=1, tol=0.5,  alpha=0.5,
             form='numeric', classifier_name="GaussianNB",
             random_seed=1, verbose=0)
