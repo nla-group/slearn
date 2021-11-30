@@ -35,7 +35,7 @@ Import the package
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
 ```python
 >>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", gap=3, random_seed=0, verbose=0)
+>>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
 >>> x, y = sbml._encoding(string)
 >>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
 >>> print(pred)
@@ -45,7 +45,7 @@ We can predict any symbolic sequence by choosing the classifiers available in sc
 Also, you can use it by passing into parameters of dictionary form
 ```python
 >>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", gap=3, random_seed=0, verbose=0)
+>>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
 >>> x, y = sbml._encoding(string)
 >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
 >>> pred = sbml.forecasting(x, y, step=5, **params)
@@ -78,7 +78,7 @@ You can select the available classifiers and symbolic representation method (cur
 Use Gaussian Naive Bayes method: 
 ```python
 >>> sl = slearn(series=ts, method='ABBA', 
-            gap=3, step=step,
+            ws=3, step=step,
             tol=0.01, alpha=0.2, 
             form='numeric', classifier_name="GaussianNB",
             random_seed=1, verbose=1)
