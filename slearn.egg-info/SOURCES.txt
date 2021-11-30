@@ -1,6 +1,7 @@
 LICENSE
 README.md
 setup.py
+slearn/LZWStringGenerator.py
 slearn/__init__.py
 slearn/slearn.py
 slearn.egg-info/PKG-INFO

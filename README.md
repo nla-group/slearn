@@ -98,9 +98,10 @@ Use neural network models method:
 >>> abba_nn_pred = sl.predict(**sklearn_params)
 ```
 
-We can plot the prediction, 
+We can plot the prediction and compare the results, 
 
 ```python
+>>> min_len = np.min([len(abba_nb_pred), len(abba_nn_pred)])
 >>> sns.set_theme(style="whitegrid")
 >>> plt.figure(figsize=(25, 9))
 >>> sns.set(font_scale=2, style="whitegrid")
