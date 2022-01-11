@@ -188,7 +188,7 @@ class symbolicML:
             clf = self.Classifiers(**cparams)
             clf.fit(x, y)
         except:
-            warnings.warn("fail to set_random_state.")
+            # warnings.warn("fail to set_random_state.")
             params.pop('random_state', None)
             
             clf = self.Classifiers(**params)
@@ -219,8 +219,8 @@ class SAX:
    
     def __init__(self, *, width = 2, n_paa_segments=None, k = 5, return_list=False, verbose=True):
         if n_paa_segments is not None:
-            if verbose == True:
-                warnings.warn("Set width to ``len(ts) // n_paa_segments''")
+            # if verbose == True:
+                # warnings.warn("Set width to ``len(ts) // n_paa_segments''")
             self.n_paa_segments = n_paa_segments
             self.width = None 
         else:

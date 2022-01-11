@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: slearn
-Version: 0.0.8
+Version: 0.0.9
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn.git
 Author: Stefan Güttel, Xinye Chen, Roberto Cahuantzi
@@ -9,6 +9,15 @@ Maintainer: Xinye Chen
 Maintainer-email: xinye.chen@manchester.ac.uk
 License: MIT License
 Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
@@ -17,6 +26,7 @@ License-File: LICENSE
 
 [![Build Status](https://app.travis-ci.com/nla-group/slearn.svg?token=SziD2n1qxpnRwysssUVq&branch=master)](https://app.travis-ci.com/github/nla-group/slearn)
 [![PyPI version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/slearn.svg)](https://pypi.python.org/pypi/slearn/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nla-group/slearn.git/HEAD)
 
