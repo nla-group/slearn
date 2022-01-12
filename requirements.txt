@@ -1,7 +1,7 @@
 numpy>=1.20.0
 scipy>1.6.0
 pandas
-fABBA
+fABBA>=0.7.1
 lightgbm
 scikit-learn
 requests
