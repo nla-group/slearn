@@ -101,7 +101,7 @@ abba_nn_pred = sl.predict(**sklearn_params)
 
 
 
-Preduct real-world time series. We can plot the prediction and compare the results. 
+Now we try to preduct real-world time series. We can plot the prediction and compare the results. 
 
 ```python
 import pandas as pd
