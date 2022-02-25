@@ -81,9 +81,9 @@ slean leverages user-friendly API, time series forecasting follows:
 
 - Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
 
-- Step 2: DTransform time series into symbols with user specified parameters defined for symbolic representation.
+- Step 2: Transform time series into symbols with user specified parameters defined for symbolic representation.
 
-- Step 3: DDefine the classifier parameters and forecast the future values.
+- Step 3: Define the classifier parameters and forecast the future values.
 
 Use Gaussian Naive Bayes method: 
 ```python
