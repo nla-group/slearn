@@ -27,7 +27,7 @@ setuptools.setup(
                 "Programming Language :: Python :: 3.8",
                 "Programming Language :: Python :: 3.9",
                 ],
-    maintainer_email="xinye.chen@manchester.ac.uk",
+    maintainer_email="stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk",
     description="A package linking symbolic representation with sklearn for time series prediction",
     long_description_content_type='text/markdown',
     url="https://github.com/nla-group/slearn.git",
