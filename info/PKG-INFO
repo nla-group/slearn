@@ -1,3 +1,26 @@
+Metadata-Version: 2.1
+Name: slearn
+Version: 0.0.9
+Summary: A package linking symbolic representation with sklearn for time series prediction
+Home-page: https://github.com/nla-group/slearn.git
+Author: Stefan Güttel, Xinye Chen, Roberto Cahuantzi
+Author-email: stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk, Roberto.Cahuantzi@manchester.ac.uk
+Maintainer: Xinye Chen
+Maintainer-email: xinye.chen@manchester.ac.uk
+License: MIT License
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # slearn
 
 
@@ -5,10 +28,11 @@
 [![PyPI version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/slearn.svg)](https://pypi.python.org/pypi/slearn/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nla-group/slearn.git/HEAD)
 
 A package linking symbolic representation with sklearn for time series prediction.
 
-Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation method do not only reduce the dimensionality of time series but also speedup the downstream time series task. It has been demonstrated by [S. Elsworth and S. Güttel, Time series forecasting using LSTM networks: a symbolic approach, arXiv, 2020] that symbolic forecasting has greatly reduce the sensitivity of hyperparameter settings for Long Short Term Memory networks. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.
+Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation method do not only reduce the dimensionality of time series but also speedup the downstream time series task. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.
 
 <strong><em> Now let's get started! </em></strong>
 
@@ -56,7 +80,7 @@ Also, you can use it by passing into parameters of dictionary form
 >>> print(pred)
 ['d', 'b', 'a', 'b', 'b'] # the prediction
 ```
-The parameter settings for the chosen classifier follow the same as the scikit-learn library, so just ensure that parameters are existing in the scikit-learn classifiers. More details are refer to scikit-learn website.
+The parameters for the chosen classifier follow the same as the scikit-learn library, so just ensure that parameters are existing in the scikit-learn classifiers.
 
 ## Prediction with symbolic representation
 
@@ -81,22 +105,23 @@ You can select the available classifiers and symbolic representation method (cur
 
 Use Gaussian Naive Bayes method: 
 ```python
->>> sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB")
->>> sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
+>>> sl = slearn(series=ts, method='fABBA', 
+            ws=3, step=step,
+            tol=0.01, alpha=0.2, 
+            form='numeric', classifier_name="GaussianNB",
+            random_seed=1, verbose=1)
 >>> sklearn_params = {'var_smoothing':0.001}
 >>> abba_nb_pred = sl.predict(**sklearn_params)
 ```
 
-For the last two lines, they can also be replaced with the alternative way in a clear form:
-```python
->>> abba_nb_pred = sl.predict(var_smoothing=0.001)
-```
-This follows the same as below.
 
-Try neural network models method: 
+Use neural network models method: 
 ```python
->>> sl = slearn(method='fABBA', ws=3, step=step, classifier_name="MLPClassifier")
->>> sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
+>>> sl = slearn(series=ts, method='fABBA',
+            ws=3, step=step,
+            tol=0.01, alpha=0.2, 
+            form='numeric', classifier_name="MLPClassifier",
+            random_seed=1, verbose=1)
 >>> sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
 >>> abba_nn_pred = sl.predict(**sklearn_params)
 ```
@@ -160,4 +185,15 @@ Processing: 2 of 2
 |1	|1.000000	|1.0	|14	|ABCABCABCA	|ABCABCABCA	|2.436733	|3	|3	|3|
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
+
+
+
+## Software Contributors
+```
+Roberto Cahuantzi
+Xinye Chen 
+Stefan Güttel 
+```
+Equal contributions, ordered by the last name.
+
 
