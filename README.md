@@ -137,6 +137,7 @@ Preduct real-world time series. We can plot the prediction and compare the resul
 >>> plt.tick_params(axis='both', labelsize=25)
 >>> plt.show()
 ```
+![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo1.PNG)
 
 
 ## Flexible symbolic sequence generator
