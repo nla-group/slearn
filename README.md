@@ -80,7 +80,9 @@ You can select the available classifiers and symbolic representation method (cur
 ``slean`` leverages user-friendly API, time series forecasting follows:
 
 -1. Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
+
 -2. Transform time series into symbols with user specified parameters defined for symbolic representation.
+
 -3. Define the classifier parameters and forecast the future values.
 
 Use Gaussian Naive Bayes method: 
