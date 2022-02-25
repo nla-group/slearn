@@ -38,23 +38,21 @@ Import the package
 
 We can predict any symbolic sequence by choosing the classifiers available in scikit-learn.
 ```python
->>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
->>> x, y = sbml._encoding(string)
->>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
->>> print(pred)
-['d', 'b', 'a', 'b', 'b'] # the prediction
+string = 'aaaabbbccd'
+sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
+x, y = sbml._encoding(string)
+pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
+print(pred) #  ['d', 'b', 'a', 'b', 'b'] 
 ```
 
 Also, you can use it by passing into parameters of dictionary form
 ```python
->>> string = 'aaaabbbccd'
->>> sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
->>> x, y = sbml._encoding(string)
->>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
->>> pred = sbml.forecasting(x, y, step=5, **params)
->>> print(pred)
-['d', 'b', 'a', 'b', 'b'] # the prediction
+string = 'aaaabbbccd'
+sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
+x, y = sbml._encoding(string)
+params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
+pred = sbml.forecasting(x, y, step=5, **params)
+print(pred) # ['d', 'b', 'a', 'b', 'b'] # the prediction
 ```
 The parameter settings for the chosen classifier follow the same as the scikit-learn library, so just ensure that parameters are existing in the scikit-learn classifiers. More details are refer to scikit-learn website.
 
@@ -62,43 +60,43 @@ The parameter settings for the chosen classifier follow the same as the scikit-l
 
 Load libraries.
 ```python
->>> import pandas as pd
->>> import numpy as np
->>> import seaborn as sns
->>> import matplotlib.pyplot as plt
->>> from slearn import *
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from slearn import *
 
->>> time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
->>> ts = time_series.Close.values
+time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
+ts = time_series.Close.values
 ```
 
 Set the number of symbols you would like to predict.
 ```python
->>> step = 50
+step = 50
 ```
 
 You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
 Use Gaussian Naive Bayes method: 
 ```python
->>> sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB")
->>> sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
->>> sklearn_params = {'var_smoothing':0.001}
->>> abba_nb_pred = sl.predict(**sklearn_params)
+sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB")
+sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
+sklearn_params = {'var_smoothing':0.001}
+abba_nb_pred = sl.predict(**sklearn_params)
 ```
 
 For the last two lines, they can also be replaced with the alternative way in a clear form:
 ```python
->>> abba_nb_pred = sl.predict(var_smoothing=0.001)
+abba_nb_pred = sl.predict(var_smoothing=0.001)
 ```
 This follows the same as below.
 
 Try neural network models method: 
 ```python
->>> sl = slearn(method='fABBA', ws=3, step=step, classifier_name="MLPClassifier")
->>> sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
->>> sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
->>> abba_nn_pred = sl.predict(**sklearn_params)
+sl = slearn(method='fABBA', ws=3, step=step, classifier_name="MLPClassifier")
+sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
+sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
+abba_nn_pred = sl.predict(**sklearn_params)
 ```
 
 
@@ -106,36 +104,35 @@ Try neural network models method:
 Preduct real-world time series. We can plot the prediction and compare the results. 
 
 ```python
->>> import pandas as pd
->>> import numpy as np
->>> import seaborn as sns
->>> import matplotlib.pyplot as plt
->>> from slearn import * # old code, now updated
->>> np.random.seed(0)
->>> time_series = pd.read_csv("doc/Amazon.csv")
->>> ts = time_series.Close.values
->>> length = len(ts)
->>> train, test = ts[:round(0.9*length)], ts[round(0.9*length):]
->>> step = 100 # predict 30 symbolss
->>> sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="GaussianNB")
->>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
->>> abba_nb_pred = sl.predict(var_smoothing=0.001)
->>> sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="DecisionTreeClassifier")
->>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
->>> abba_nn_pred = sl.predict(max_depth=10, random_state=0)
->>> sl = slearn(method='fABBA', ws=8, step=100, classifier_name="SVC")
->>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
->>> abba_svc_pred = sl.predict(C=20)
->>> min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
->>> plt.figure(figsize=(20, 5))
->>> sns.set(font_scale=2, style="whitegrid")
->>> sns.lineplot(data=test[:min_len], linewidth=6, color='c', label='ground truth')
->>> sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
->>> sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
->>> sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
->>> plt.legend()
->>> plt.tick_params(axis='both', labelsize=25)
->>> plt.show()
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from slearn import * # old code, now updated
+np.random.seed(0)
+time_series = pd.read_csv("doc/Amazon.csv")
+ts = time_series.Close.values
+length = len(ts)
+train, test = ts[:round(0.9*length)], ts[round(0.9*length):]
+sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="GaussianNB")
+sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+abba_nb_pred = sl.predict(var_smoothing=0.001)
+sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="DecisionTreeClassifier")
+sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+abba_nn_pred = sl.predict(max_depth=10, random_state=0)
+sl = slearn(method='fABBA', ws=8, step=100, classifier_name="SVC")
+sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+abba_svc_pred = sl.predict(C=20)
+min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
+plt.figure(figsize=(20, 5))
+sns.set(font_scale=2, style="whitegrid")
+sns.lineplot(data=test[:min_len], linewidth=6, color='c', label='ground truth')
+sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
+sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
+sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
+plt.legend()
+plt.tick_params(axis='both', labelsize=25)
+plt.show()
 ```
 ![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo1.PNG)
 
@@ -145,9 +142,9 @@ slearn library also contains functions for the generation of strings of tunable 
 
 
 ```python
->>> from slearn import *
->>> df_strings = LZWStringLibrary(symbols=3, complexity=[3, 9])
->>> df_strings
+from slearn import *
+df_strings = LZWStringLibrary(symbols=3, complexity=[3, 9])
+df_strings
 ```
 Processing: 2 of 2
  ||nr_symbols | LZW_complexity | length | string |
@@ -155,19 +152,19 @@ Processing: 2 of 2
 | 0 | 3 | 3 | 3 | BCA |
 | 1 | 3 | 9 | 12 | ABCBBCBBABCC |
 ```python
->>> df_iters = pd.DataFrame()
->>> for i, string in enumerate(df_strings['string']):
->>>     kwargs = df_strings.iloc[i,:-1].to_dict()
->>>     seed_string = df_strings.iloc[i,-1]
->>>     df_iter = RNN_Iteration(seed_string, iterations=2, architecture='LSTM', **kwargs)
->>>     df_iter.loc[:, kwargs.keys()] = kwargs.values()
->>>     df_iters = df_iters.append(df_iter)
->>> df_iter.reset_index(drop=True, inplace=True)
+df_iters = pd.DataFrame()
+for i, string in enumerate(df_strings['string']):
+    kwargs = df_strings.iloc[i,:-1].to_dict()
+    seed_string = df_strings.iloc[i,-1]
+    df_iter = RNN_Iteration(seed_string, iterations=2, architecture='LSTM', **kwargs)
+    df_iter.loc[:, kwargs.keys()] = kwargs.values()
+    df_iters = df_iters.append(df_iter)
+df_iter.reset_index(drop=True, inplace=True)
 ```
 ...
 ```python
->>> df_iters.reset_index(drop=True, inplace=True)
->>> df_iters
+df_iters.reset_index(drop=True, inplace=True)
+df_iters
 ```
  || jw | dl | total_epochs | seq_test | seq_forecast | total_time | nr_symbols | LZW_complexity | length |
 |:---:| --------:| --------:| --------:| --------------:| --------------:| --------:| ---:| ---:| ---:|
