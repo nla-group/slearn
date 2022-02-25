@@ -77,7 +77,7 @@ step = 50
 
 You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
-``slean`` leverages user-friendly API, time series forecasting follows:
+slean leverages user-friendly API, time series forecasting follows:
 
 - Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
 
