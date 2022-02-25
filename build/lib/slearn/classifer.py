@@ -31,11 +31,10 @@ import re
 import copy
 import random
 import warnings
-import collections
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
-from scipy.stats import norm
+from .symbols import *
 
 from sklearn.svm import SVC
 # from deepforest import CascadeForestClassifier
@@ -49,10 +48,15 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 import warnings
+            
+            
 
 
 class symbolicML:
     """
+    Classifier for symbolic sequences.
+
+
     Parameters
     ----------
     classifier_name - str, default=MLPClassifier, 
@@ -74,27 +78,6 @@ class symbolicML:
     verbose - int, default=0:
         Whether to print progress messages to stdout.
         
-    Examples
-    ----------
-    >>> from slearn import symbolicML
-    >>> string = 'aaaabbbccd'
-    >>> sbml = symbolicML(classifier_name="MLPClassifier", ws=5, random_seed=0)
-    >>> x, y = sbml._encoding(string)
-    >>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(3,3), activation='relu', learning_rate_init=0.01)
-    >>> print(pred)
-    ['b', 'b', 'b', 'c', 'c']
-    
-    or you can use a more general method like:
-    
-    >>> from slearn import symbolicML
-    >>> string = 'aaaabbbccd'
-    >>> string = 'aaaabbbccd'
-    >>> sbml = symbolicML(classifier_name="mlp", ws=5, random_seed=0)
-    >>> x, y = sbml._encoding(string)
-    >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
-    >>> pred = sbml.forecasting(x, y, step=5, **params)
-    >>> print(pred)
-    ['b', 'b', 'c', 'c', 'd']
     """
         
     def __init__(self, classifier_name='MLPClassifier', ws=3, random_seed=0, verbose=0):
@@ -111,6 +94,15 @@ class symbolicML:
         
         
     def _encoding(self, string):
+        """
+        Construct features and target labels for symbols and encode to numerical values.
+
+        Parameters
+        ----------
+        string: {str, list}
+            symbolic string.
+        
+        """
         if not isinstance(string, list):
             string_split = [s for s in re.split('', string) if s != '']
         else:
@@ -120,17 +112,29 @@ class symbolicML:
         if self.ws > len(string_encoding):
             warnings.warn("ws is larger than the series, please reset the ws.")
             self.ws = len(string_encoding) - 1
-        x, y = self.construct_train(string_encoding, ws=self.ws)
+        x, y = self.construct_train(string_encoding)
         return x, y
         
     
-    def construct_train(self, series, ws):
+    def construct_train(self, series):
+        """
+        Construct features and target labels for symbols.
+
+        Parameters
+        ----------
+        series - numpy.ndarray:
+            The numeric time series. 
+        
+        """
+
+
         features = list()
         targets = list()
-        for i in range(len(series) - ws):
-            features.append(series[i:i+ws])
-            targets.append(series[i+ws])
+        for i in range(len(series) - self.ws):
+            features.append(series[i:i+self.ws])
+            targets.append(series[i+self.ws])
         return np.array(features), np.array(targets)
+
 
 
     def init_classifier(self):
@@ -177,6 +181,8 @@ class symbolicML:
         else: # "MLPClassifier"
             self.Classifiers = MLPClassifier
          
+
+
     def forecasting(self, x, y, step=5, inversehash=None, centers=None, **params):
         try:
             cparams = copy.deepcopy(params)
@@ -214,129 +220,13 @@ class symbolicML:
 
     
     
-class SAX:
-    """Modified from https://github.com/nla-group/TARZAN"""
-   
-    def __init__(self, *, width = 2, n_paa_segments=None, k = 5, return_list=False, verbose=True):
-        if n_paa_segments is not None:
-            # if verbose == True:
-                # warnings.warn("Set width to ``len(ts) // n_paa_segments''")
-            self.n_paa_segments = n_paa_segments
-            self.width = None 
-        else:
-            self.n_paa_segments = None
-            self.width = width
-        self.number_of_symbols = k
-        self.return_list = return_list
 
-        
-    def transform(self, time_series):
-        if self.width is None:
-            self.width = len(time_series) // self.n_paa_segments
-        compressed_time_series = self.paa_mean(time_series)
-        symbolic_time_series = self._digitize(compressed_time_series)
-        return symbolic_time_series
-
-    
-    def inverse_transform(self, symbolic_time_series):
-        compressed_time_series = self._reverse_digitize(symbolic_time_series)
-        time_series = self._reconstruct(compressed_time_series)
-        return time_series
-
-    
-    def paa_mean(self, ts):
-        if len(ts) % self.width != 0:
-            warnings.warn("Result truncates, width does not divide length")
-        return [np.mean(ts[i*self.width:np.min([len(ts), (i+1)*self.width])]) for i in range(int(np.floor(len(ts)/self.width)))]
-
-    
-    def _digitize(self, ts):
-        symbolic_ts = self._gaussian_breakpoints(ts)
-        return symbolic_ts
-
-    
-    def _gaussian_breakpoints(self, ts):
-        # Construct Breakpoints
-        breakpoints = np.hstack(
-            (norm.ppf([float(a) / self.number_of_symbols for a in range(1, self.number_of_symbols)], scale=1), 
-             np.inf))
-        labels = []
-        for i in ts:
-            for j in range(len(breakpoints)):
-                if i < breakpoints[j]:
-                    labels.append(j)
-                    break
-        strings, self.hashm, self.inverse_hashm = self.symbolsAssign(labels)
-        if not self.return_list:
-            strings = "".join(strings)
-        return strings
-
-    
-    def _reconstruct(self, reduced_ts):
-        return self._reverse_pca(reduced_ts)
-    
-    
-    def _reverse_pca(self, ts):
-        return np.kron(ts, np.ones([1,self.width])[0])
-
-    
-    def _reverse_digitize(self, symbolic_ts):
-        return self._reverse_gaussian_breakpoints(symbolic_ts)
-    
-    
-    def _reverse_gaussian_breakpoints(self, symbols):
-        breakpoint_values = norm.ppf([float(a) / (2 * self.number_of_symbols) for a in range(1, 2 * self.number_of_symbols, 2)], scale=1)
-        ts = []
-        for s in symbols:
-            j = self.inverse_hashm[s]
-            ts.append(breakpoint_values[j])
-        return ts
-    
-    
-    def symbolsAssign(self, clusters):
-        """ automatically assign symbols to different clusters, start with '!'
-            from https://github.com/nla-group/fABBA.
-        
-        Parameters
-        ----------
-        clusters - list or pd.Series or array
-                the list of clusters.
-        ----------
-        Return:
-        
-        symbols(list of string), inverse_hash(dict): repectively for the
-        corresponding symbolic sequence and the hashmap for inverse transform.
-        
-        """
-        
-        clusters = pd.Series(clusters)
-        N = len(clusters.unique())
-
-        cluster_sort = [0] * N 
-        counter = collections.Counter(clusters)
-        for ind, el in enumerate(counter.most_common()):
-            cluster_sort[ind] = el[0]
-
-        alphabet= [chr(i) for i in range(33,33 + N)]
-        hashm = dict(zip(cluster_sort, alphabet))
-        inverse_hashm = dict(zip(alphabet, cluster_sort))
-        strings = [hashm[i] for i in clusters]
-        return strings, hashm, inverse_hashm
-    
-    
-    
-    
 class slearn(symbolicML):
     """
+    A package linking symbolic representation with scikit-learn for time series prediction.
+
     Parameters
-    ----------
-    series - numpy.ndarray:
-        The numeric time series. 
-        
-    method - str {'fABBA', 'SAX'}:
-        The symbolic time series representation.
-        We use fABBA for ABBA method.
-    
+    ----------    
     classifier_name - str, default=MLPClassifier, 
                       optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
                       "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
@@ -350,73 +240,26 @@ class slearn(symbolicML):
     
     step - int, default=1,
         The number of symbols for prediction.
-        
+
+    method - str {'fABBA', 'SAX'}:
+        The symbolic time series representation.
+        We use fABBA for ABBA method.
+          
+    form - str, default='numeric':
+        predict in symboli form or numerical form.
+
     random_seed - int, default=0:
         The random state fixed for classifers in scikit-learn.
 
     verbose - int, default=0:
         log print. Whether to print progress or other messages to stdout.
-    
 
-    Examples
-    ----------
-    Use Multi-layer Perceptron classifier for prediction:
-    >>> import numpy as np
-    >>> from slearn import slearn
-    >>> ts = [np.sin(0.05*i) for i in range(1000)]
-    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5, alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
-    >>> sl.predict(hidden_layer_sizes=(10,10), activation='relu', learning_rate_init=0.1)
-    array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
-       -0.49625277, -0.52724904, -0.55824531, -0.58924158, -0.62023785,
-       -0.65123412, -0.68223039, -0.71322666, -0.74422293, -0.7752192 ,
-       -0.80621547, -0.83721174, -0.86820801, -0.89920428, -0.93020055,
-       -0.96119682, -0.99219309, -1.02318936, -1.05418563, -1.0851819 ,
-       -1.11617817, -1.14717444, -1.17817071, -1.20916698, -1.24016325,
-       -1.27115952, -1.30215579, -1.33315206, -1.36414833, -1.3951446 ,
-       -1.42614087, -1.45713714, -1.48813341, -1.51912968, -1.55012595,
-       -1.58112222, -1.61211849, -1.64311476, -1.67411103, -1.7051073 ,
-       -1.73610357, -1.76709984, -1.79809611, -1.82909238, -1.86008865,
-       -1.89108492, -1.92208119, -1.95307746, -1.98407373, -2.01507   ,
-       -2.04606627, -2.07706254, -2.10805881, -2.13905508, -2.17005135,
-       -2.20104762, -2.23204389, -2.26304016])
-    >>> sl.predict(step=10, form='string', hidden_layer_sizes=(3,3), activation='relu', learning_rate_init=0.1)
-    ['"', '!', '"', '!', '"', '!', '"', '!', '"', '!']
-    
-    or you can use a more general method like:
-    
-    >>> import numpy as np
-    >>> from slearn import slearn
-    >>> ts = [np.sin(0.05*i) for i in range(1000)]
-    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
-    >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
-    >>> sl.predict(**params)
-    array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
-           -0.49625277, -0.52724904, -0.55824531, -0.58924158, -0.62023785,
-           -0.65123412, -0.68223039, -0.71322666, -0.74422293, -0.7752192 ,
-           -0.80621547, -0.83721174, -0.86820801, -0.89920428, -0.93020055,
-           -0.96119682, -0.99219309, -1.02318936, -1.05418563, -1.0851819 ,
-           -1.11617817, -1.14717444, -1.17817071, -1.20916698, -1.24016325,
-           -1.27115952, -1.30215579, -1.33315206, -1.36414833, -1.3951446 ,
-           -1.42614087, -1.45713714, -1.48813341, -1.51912968, -1.55012595,
-           -1.58112222, -1.61211849, -1.64311476, -1.67411103, -1.7051073 ,
-           -1.73610357, -1.76709984, -1.79809611, -1.82909238, -1.86008865,
-           -1.89108492, -1.92208119, -1.95307746, -1.98407373, -2.01507   ,
-           -2.04606627, -2.07706254, -2.10805881, -2.13905508, -2.17005135,
-           -2.20104762, -2.23204389, -2.26304016])
-           
-    Use Gaussian Naive Bayes classifier for prediction:
-    >>> import numpy as np
-    >>> ts = [np.sin(0.05*i) for i in range(1000)]
-    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="GaussianNB", random_seed=1, verbose=0)
-    >>> params = {'var_smoothing':0.001}
-    >>> sl.predict(**params)
     """
         
-    def __init__(self, series, method='fABBA', ws=1, step=10,
+    def __init__(self, method='fABBA', ws=1, step=10, 
                  classifier_name="MLPClassifier",
-                 form='numeric', random_seed=0, verbose=0, **params):
+                 form='numeric', random_seed=0, verbose=1):
         
-        self.method = method
         self.random_seed = random_seed
         np.random.seed(self.random_seed)
         random.seed(self.random_seed)
@@ -426,6 +269,24 @@ class slearn(symbolicML):
         self.verbose = verbose
         self.form = form
         self.step = step
+        self.method = method
+        self.params_secure()
+        
+
+
+    def set_symbols(self, series, **kwargs):
+        """Transform time series to specified symplic representation
+        
+        Please feed into the parameters for the corresponding symbolic representation.
+
+        Parameters
+        ----------
+        series - numpy.ndarray:
+            The numeric time series. 
+            
+        """
+
+        
         if not isinstance(series, np.ndarray):
             series = np.array(series)
             
@@ -438,16 +299,13 @@ class slearn(symbolicML):
         
         self.start = scale_series[0]
         self.length = len(series)
-        self.params_secure()
-        
+
         if self.method == 'fABBA':
-            from fABBA import fabba_model
             try:
-                self.s_model = fabba_model(**params, verbose=self.verbose, return_list=True)  
+                self.s_model = fABBA(**kwargs, verbose=self.verbose)  
             except:
                 warnings.warn("Exception, default setting (tol=0.1, alpha=0.1, sorting='2-norm') apply.")
-                self.s_model = fabba_model(tol=0.1, alpha=0.1, sorting='2-norm', verbose=self.verbose,
-                                          return_list=True)
+                self.s_model = fABBA(tol=0.1, alpha=0.1, sorting='2-norm', verbose=self.verbose)
             
             self.string = self.s_model.fit_transform(scale_series)         
             self.last_symbol = self.string[-1] # deprecated symbol, won't take into account
@@ -455,14 +313,14 @@ class slearn(symbolicML):
                 
         elif self.method == 'SAX':
             try:
-                if 'n_paa_segments' in params:
-                    params['width'] = self.length // params['n_paa_segments']
-                    del params['n_paa_segments']
-                self.s_model = SAX(**params, verbose=self.verbose, return_list=True)
+                if 'n_paa_segments' in kwargs:
+                    kwargs['width'] = self.length // kwargs['n_paa_segments']
+                    del kwargs['n_paa_segments']
+                self.s_model = SAX(**kwargs, verbose=self.verbose, return_list=True)
             except:
-                # params['n_paa_segments'] = 10
-                # width = self.length // params['n_paa_segments']
-                # self.s_model = SAX(width=width, k=params['k'], return_list=True)
+                # kwargs['n_paa_segments'] = 10
+                # width = self.length // kwargs['n_paa_segments']
+                # self.s_model = SAX(width=width, k=kwargs['k'], return_list=True)
                 warnings.warn("Exception, width for SAX is set to 1.")
                 self.s_model = SAX(width=1, k=self.length, return_list=True)
             self.string = self.s_model.transform(scale_series)
@@ -475,8 +333,9 @@ class slearn(symbolicML):
             warnings.warn("Parameters are not appropriate, classifier might not converge.")
             warnings.warn("Degenerate to trivial case that ws=1.")
             self.ws = 1
-            
-            
+
+
+
     def predict(self, **params):
         self.cmodel = symbolicML(classifier_name=self.classifier_name,
                           ws=self.ws, 
@@ -510,7 +369,8 @@ class slearn(symbolicML):
             inverse_ts = np.array(inverse_ts) * self.scl + self.mu
             return inverse_ts[self.length:]
     
-    
+
+
     def params_secure(self):
         if not isinstance(self.method, str):
             raise ValueError("Please ensure method is string type!")
@@ -522,5 +382,3 @@ class slearn(symbolicML):
             raise ValueError("Please ensure ws is integer!")
         if not isinstance(self.classifier_name, str):
             raise ValueError("Please ensure classifier_name is string type!")
-            
-            
