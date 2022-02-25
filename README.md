@@ -77,26 +77,32 @@ step = 50
 
 You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
+``slean`` leverages user-friendly API, time series forecasting follows:
+
+-1. Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
+-2. Transform time series into symbols with user specified parameters defined for symbolic representation.
+-3. Define the classifier parameters and forecast the future values.
+
 Use Gaussian Naive Bayes method: 
 ```python
-sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB")
-sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
-sklearn_params = {'var_smoothing':0.001}
-abba_nb_pred = sl.predict(**sklearn_params)
+sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB") # step 1
+sl.set_symbols(series=ts, tol=0.01, alpha=0.2) # step 2
+sklearn_params = {'var_smoothing':0.001} # step 3
+abba_nb_pred = sl.predict(**sklearn_params) # step 3
 ```
 
 For the last two lines, they can also be replaced with the alternative way in a clear form:
 ```python
-abba_nb_pred = sl.predict(var_smoothing=0.001)
+abba_nb_pred = sl.predict(var_smoothing=0.001) # step 3
 ```
 This follows the same as below.
 
 Try neural network models method: 
 ```python
-sl = slearn(method='fABBA', ws=3, step=step, classifier_name="MLPClassifier")
-sl.set_symbols(series=ts, tol=0.01, alpha=0.2) 
-sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1}
-abba_nn_pred = sl.predict(**sklearn_params)
+sl = slearn(method='fABBA', ws=3, step=step, classifier_name="MLPClassifier") # step 1
+sl.set_symbols(series=ts, tol=0.01, alpha=0.2)  # step 2
+sklearn_params = {'hidden_layer_sizes':(20,80), 'learning_rate_init':0.1} # step 3
+abba_nn_pred = sl.predict(**sklearn_params) # step 3
 ```
 
 
