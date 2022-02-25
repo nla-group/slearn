@@ -14,7 +14,7 @@ setuptools.setup(
     long_description=long_description,
     author="nla-group",
     maintainer="Stefan Güttel, Xinye Chen",
-    author_email="stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk, Roberto.Cahuantzi@manchester.ac.uk",
+    author_email="stefan.guettel@manchester.ac.uk",
     classifiers=["Intended Audience :: Science/Research",
                 "Intended Audience :: Developers",
                 "Programming Language :: Python",
