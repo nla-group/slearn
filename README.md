@@ -101,28 +101,42 @@ Try neural network models method:
 >>> abba_nn_pred = sl.predict(**sklearn_params)
 ```
 
-We can plot the prediction and compare the results, 
+
+
+Preduct real-world time series. We can plot the prediction and compare the results. 
 
 ```python
->>> min_len = np.min([len(abba_nb_pred), len(abba_nn_pred)])
->>> sns.set_theme(style="whitegrid")
->>> plt.figure(figsize=(25, 9))
+>>> import pandas as pd
+>>> import numpy as np
+>>> import seaborn as sns
+>>> import matplotlib.pyplot as plt
+>>> from slearn import * # old code, now updated
+>>> np.random.seed(0)
+>>> time_series = pd.read_csv("doc/Amazon.csv")
+>>> ts = time_series.Close.values
+>>> length = len(ts)
+>>> train, test = ts[:round(0.9*length)], ts[round(0.9*length):]
+>>> step = 100 # predict 30 symbolss
+>>> sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="GaussianNB")
+>>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+>>> abba_nb_pred = sl.predict(var_smoothing=0.001)
+>>> sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="DecisionTreeClassifier")
+>>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+>>> abba_nn_pred = sl.predict(max_depth=10, random_state=0)
+>>> sl = slearn(method='fABBA', ws=8, step=100, classifier_name="SVC")
+>>> sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
+>>> abba_svc_pred = sl.predict(C=20)
+>>> min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
+>>> plt.figure(figsize=(20, 5))
 >>> sns.set(font_scale=2, style="whitegrid")
->>> sns.lineplot(x=np.arange(0, len(ts)), y= ts, color='c', linewidth=6, label='Time series')
->>> sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nb_pred[:min_len], color='tomato', linewidth=6, label='Prediction (ABBA - GaussianNB)')
->>> sns.lineplot(x=np.arange(len(ts), len(ts)+min_len), y=abba_nn_pred[:min_len], color='darkgreen', linewidth=6, label='Prediction (ABBA - MLPClassifier)')
->>> plt.tight_layout()
+>>> sns.lineplot(data=test[:min_len], linewidth=6, color='c', label='ground truth')
+>>> sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
+>>> sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
+>>> sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
+>>> plt.legend()
 >>> plt.tick_params(axis='both', labelsize=25)
 >>> plt.show()
 ```
-
-
-
-
-
-
-![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo.PNG)
-
 
 
 ## Flexible symbolic sequence generator
