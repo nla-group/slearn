@@ -134,7 +134,7 @@ plt.legend()
 plt.tick_params(axis='both', labelsize=25)
 plt.show()
 ```
-![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo1.PNG)
+![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/demo1.png)
 
 
 ## Flexible symbolic sequence generator
