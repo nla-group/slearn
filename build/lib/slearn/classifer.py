@@ -93,7 +93,7 @@ class symbolicML:
         self.scl = 1
         
         
-    def _encoding(self, string):
+    def encode(self, string):
         """
         Construct features and target labels for symbols and encode to numerical values.
 
@@ -183,7 +183,7 @@ class symbolicML:
          
 
 
-    def forecasting(self, x, y, step=5, inversehash=None, centers=None, **params):
+    def forecast(self, x, y, step=5, inversehash=None, centers=None, **params):
         try:
             cparams = copy.deepcopy(params)
             if "verbose" in self.Classifiers().__dict__:
@@ -350,17 +350,17 @@ class slearn(symbolicML):
             print("The parameters of classifiers: ", params)
         
         if self.method == 'fABBA':
-            x, y = self.cmodel._encoding(self.string[:-1]) # abandon the last symbol
+            x, y = self.cmodel.encode(self.string[:-1]) # abandon the last symbol
         else:
-            x, y = self.cmodel._encoding(self.string)
+            x, y = self.cmodel.encode(self.string)
         
         if 'random_state' not in params:
             params['random_state'] = self.random_seed
             
         if self.form == 'string':
-            return self.cmodel.forecasting(x, y, step=self.step, **params)
+            return self.cmodel.forecast(x, y, step=self.step, **params)
         else:
-            pred = self.cmodel.forecasting(x, y, step=self.step, **params)
+            pred = self.cmodel.forecast(x, y, step=self.step, **params)
             if self.method == 'SAX':
                 inverse_ts = self.s_model.inverse_transform(self.string+pred)
             else:

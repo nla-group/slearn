@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>slearn.symbols &mdash; slearn 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> slearn
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols_machine_learning.html">Symbolic machine learning prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">slearn</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>slearn.symbols</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for slearn.symbols</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2021, nla group, manchester</span>
+<span class="c1"># All rights reserved. </span>
+
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+
+<span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this</span>
+<span class="c1">#    list of conditions and the following disclaimer.</span>
+
+<span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c1">#    this list of conditions and the following disclaimer in the documentation</span>
+<span class="c1">#    and/or other materials provided with the distribution.</span>
+
+<span class="c1"># 3. Neither the name of the copyright holder nor the names of its</span>
+<span class="c1">#    contributors may be used to endorse or promote products derived from</span>
+<span class="c1">#    this software without specific prior written permission.</span>
+
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="c1"># DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</span>
+<span class="c1"># FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span class="c1"># DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</span>
+<span class="c1"># SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</span>
+<span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+
+
+<span class="k">def</span> <span class="nf">symbolsAssign</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; automatically assign symbols to different clusters, start with &#39;!&#39;</span>
+<span class="sd">        from https://github.com/nla-group/fABBA.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    clusters - list or pd.Series or array</span>
+<span class="sd">            the list of clusters.</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Return:</span>
+<span class="sd">    </span>
+<span class="sd">    symbols(list of string), inverse_hash(dict): repectively for the</span>
+<span class="sd">    corresponding symbolic sequence and the hashmap for inverse transform.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;J&#39;</span><span class="p">,</span><span class="s1">&#39;j&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="s1">&#39;q&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;U&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+                
+    <span class="n">clusters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+    <span class="n">cluster_sort</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span> 
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">()):</span>
+        <span class="n">cluster_sort</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">N</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">):</span>
+        <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">33</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span><span class="p">[:</span><span class="n">N</span><span class="p">]</span>
+    <span class="n">hashm</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cluster_sort</span> <span class="o">+</span> <span class="n">alphabet</span><span class="p">,</span> <span class="n">alphabet</span> <span class="o">+</span> <span class="n">cluster_sort</span><span class="p">))</span>
+    <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="n">hashm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">strings</span><span class="p">,</span> <span class="n">hashm</span>
+
+
+
+<div class="viewcode-block" id="SAX"><a class="viewcode-back" href="../../_autosummary/slearn.SAX.html#slearn.SAX">[docs]</a><span class="k">class</span> <span class="nc">SAX</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Modified from https://github.com/nla-group/TARZAN&quot;&quot;&quot;</span>
+   
+<div class="viewcode-block" id="SAX.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.SAX.html#slearn.SAX.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_paa_segments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n_paa_segments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># if verbose == True:</span>
+                <span class="c1"># warnings.warn(&quot;Set width to ``len(ts) // n_paa_segments&#39;&#39;&quot;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span> <span class="o">=</span> <span class="n">n_paa_segments</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="kc">None</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_list</span> <span class="o">=</span> <span class="n">return_list</span></div>
+
+        
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_series</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span>
+        <span class="n">compressed_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paa_mean</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
+        <span class="n">symbolic_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digitize</span><span class="p">(</span><span class="n">compressed_time_series</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbolic_time_series</span>
+
+    
+    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbolic_time_series</span><span class="p">):</span>
+        <span class="n">compressed_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_digitize</span><span class="p">(</span><span class="n">symbolic_time_series</span><span class="p">)</span>
+        <span class="n">time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reconstruct</span><span class="p">(</span><span class="n">compressed_time_series</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">time_series</span>
+
+    
+    <span class="k">def</span> <span class="nf">paa_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Result truncates, width does not divide length&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">])])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)))]</span>
+
+    
+    <span class="k">def</span> <span class="nf">_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+        <span class="n">symbolic_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gaussian_breakpoints</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbolic_ts</span>
+
+    
+    <span class="k">def</span> <span class="nf">_gaussian_breakpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+        <span class="c1"># Construct Breakpoints</span>
+        <span class="n">breakpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">)],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">breakpoints</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">breakpoints</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashm</span> <span class="o">=</span> <span class="n">symbolsAssign</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_list</span><span class="p">:</span>
+            <span class="n">strings</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strings</span>
+
+    
+    <span class="k">def</span> <span class="nf">_reconstruct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduced_ts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_pca</span><span class="p">(</span><span class="n">reduced_ts</span><span class="p">)</span>
+    
+    
+    <span class="k">def</span> <span class="nf">_reverse_pca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+
+    
+    <span class="k">def</span> <span class="nf">_reverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbolic_ts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_gaussian_breakpoints</span><span class="p">(</span><span class="n">symbolic_ts</span><span class="p">)</span>
+    
+    
+    <span class="k">def</span> <span class="nf">_reverse_gaussian_breakpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
+        <span class="n">breakpoint_values</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashm</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">breakpoint_values</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ts</span></div>
+    
+    
+
+    
+<span class="c1"># python implementation for aggregation</span>
+<span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sorting</span><span class="o">=</span><span class="s2">&quot;2-norm&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span> <span class="c1"># , verbose=1</span>
+    <span class="sd">&quot;&quot;&quot;aggregate the data</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : numpy.ndarray</span>
+<span class="sd">        the input that is array-like of shape (n_samples,).</span>
+<span class="sd">    sorting : str</span>
+<span class="sd">        the sorting method for aggregation, default=&#39;2-norm&#39;, alternative option: &#39;1-norm&#39; and &#39;lexi&#39;.</span>
+<span class="sd">    tol : float</span>
+<span class="sd">        the tolerance to control the aggregation. if the distance between the starting point </span>
+<span class="sd">        of a group and another data point is less than or equal to the tolerance,</span>
+<span class="sd">        the point is allocated to that group.  </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    labels (numpy.ndarray) : </span>
+<span class="sd">        the group categories of the data after aggregation</span>
+<span class="sd">    </span>
+<span class="sd">    splist (list) : </span>
+<span class="sd">        the list of the starting points</span>
+<span class="sd">    </span>
+<span class="sd">    nr_dist (int) :</span>
+<span class="sd">        number of pairwise distance calculations</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">splist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span> <span class="c1"># store the starting points</span>
+    <span class="n">len_ind</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">sorting</span> <span class="o">==</span> <span class="s2">&quot;2-norm&quot;</span><span class="p">:</span> 
+        <span class="n">sort_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">sort_vals</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">sorting</span> <span class="o">==</span> <span class="s2">&quot;1-norm&quot;</span><span class="p">:</span> 
+        <span class="n">sort_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">sort_vals</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lexsort</span><span class="p">((</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+        
+    <span class="n">lab</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">len_ind</span>
+    <span class="n">nr_dist</span> <span class="o">=</span> <span class="mi">0</span> 
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_ind</span><span class="p">):</span> <span class="c1"># tqdm（range(len_ind), disable=not verbose)</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1"># starting point</span>
+        <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">sp</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clustc</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">sp</span><span class="p">,:]</span> 
+            <span class="n">labels</span><span class="p">[</span><span class="n">sp</span><span class="p">]</span> <span class="o">=</span> <span class="n">lab</span>
+            <span class="n">num_group</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">ind</span><span class="p">[</span><span class="n">i</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">dat</span> <span class="o">=</span> <span class="n">clustc</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,:]</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="n">dat</span><span class="p">)</span>
+            <span class="n">nr_dist</span> <span class="o">+=</span> <span class="mi">1</span>
+                
+            <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">num_group</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">lab</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># apply early stopping</span>
+                <span class="k">if</span> <span class="n">sorting</span> <span class="o">==</span> <span class="s2">&quot;2-norm&quot;</span> <span class="ow">or</span> <span class="n">sorting</span> <span class="o">==</span> <span class="s2">&quot;1-norm&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">sort_vals</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">sort_vals</span><span class="p">[</span><span class="n">sp</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">):</span>
+                        <span class="k">break</span>       
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">sp</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">[</span><span class="n">sp</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span> <span class="ow">or</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">sp</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">):</span> 
+                        <span class="k">break</span>
+        <span class="n">splist</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">sp</span><span class="p">,</span> <span class="n">lab</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">num_group</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">sp</span><span class="p">,:])</span> <span class="p">)</span> <span class="c1"># respectively store starting point</span>
+                                                               <span class="c1"># index, label, number of neighbor objects, center (starting point).</span>
+        <span class="n">lab</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">splist</span><span class="p">,</span> <span class="n">nr_dist</span> 
+
+
+
+<span class="k">def</span> <span class="nf">compress</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Approximate a time series using a continuous piecewise linear function.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ts - numpy ndarray</span>
+<span class="sd">        Time series as input of numpy array</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pieces - numpy array</span>
+<span class="sd">        Numpy ndarray with three columns, each row contains length, increment, error for the segment.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">pieces</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span> <span class="c1"># np.empty([0, 3])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+    <span class="n">epsilon</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+
+    <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
+        <span class="n">inc</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">-</span> <span class="n">ts</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">inc</span><span class="o">/</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">))</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ts</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="o">*</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">max_len</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">lastinc</span><span class="p">,</span> <span class="n">lasterr</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">inc</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> 
+            <span class="n">end</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># pieces = np.vstack([pieces, np.array([end-start-1, lastinc, lasterr])])</span>
+            <span class="n">pieces</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">lastinc</span><span class="p">,</span> <span class="n">lasterr</span><span class="p">])</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># pieces = np.vstack([pieces, np.array([end-start-1, lastinc, lasterr])])</span>
+    <span class="n">pieces</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">lastinc</span><span class="p">,</span> <span class="n">lasterr</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">pieces</span>
+
+
+
+
+<div class="viewcode-block" id="fABBA"><a class="viewcode-back" href="../../_autosummary/slearn.fABBA.html#slearn.fABBA">[docs]</a><span class="k">class</span> <span class="nc">fABBA</span><span class="p">:</span>
+<div class="viewcode-block" id="fABBA.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.fABBA.html#slearn.fABBA.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">sorting</span><span class="o">=</span><span class="s1">&#39;2-norm&#39;</span><span class="p">,</span> <span class="n">scl</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tol - float</span>
+<span class="sd">            Control tolerence for compression, default as 0.1.</span>
+<span class="sd">        scl - int</span>
+<span class="sd">            Scale for length, default as 1, means 2d-digitization, otherwise implement 1d-digitization.</span>
+<span class="sd">        verbose - int</span>
+<span class="sd">            Control logs print, default as 1, print logs.</span>
+<span class="sd">        max_len - int</span>
+<span class="sd">            The max length for each segment, default as np.inf. </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">tol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scl</span> <span class="o">=</span> <span class="n">scl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_len</span> <span class="o">=</span> <span class="n">max_len</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compress</span> <span class="o">=</span> <span class="n">compress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compression_rate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span></div>
+    
+        
+
+    <span class="k">def</span> <span class="nf">image_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">adjust</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">adjust</span><span class="p">:</span>
+            <span class="n">_mean</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">_std</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">_std</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="p">(</span><span class="n">ts</span> <span class="o">-</span> <span class="n">_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">_std</span>
+            <span class="n">strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">img_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">_mean</span><span class="p">,</span> <span class="n">_std</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">img_norm</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strings</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span>
+
+
+    
+    <span class="k">def</span> <span class="nf">image_decompress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_norm</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">img_norm</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">reconstruction</span> <span class="o">=</span> <span class="n">reconstruction</span><span class="o">.</span><span class="n">round</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">return</span>  <span class="n">reconstruction</span>
+    
+    
+
+    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        Compress and digitize the time series together.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        series - array or list</span>
+<span class="sd">            Time series.</span>
+
+<span class="sd">        alpha - float</span>
+<span class="sd">            Control tolerence for digitization, default as 0.5.</span>
+
+<span class="sd">        string_form - boolean</span>
+<span class="sd">            Whether to return with string form, default as True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">series</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">ts</span><span class="o">=</span><span class="n">series</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_len</span><span class="p">))</span>
+        <span class="n">strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compression_rate</span> <span class="o">=</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Compression: Reduced series of length </span><span class="si">{0}</span><span class="s2"> to </span><span class="si">{1}</span><span class="s2"> segments.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="sd">&quot;&quot;&quot;Digitization: Reduced {} pieces&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strings</span><span class="p">)),</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;symbols.&quot;</span><span class="p">)</span>  
+        <span class="c1"># strings = &#39;&#39;.join(strings)</span>
+        <span class="k">return</span> <span class="n">strings</span>
+    
+    
+
+    <span class="k">def</span> <span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Greedy 2D clustering of pieces (a Nx2 numpy array),</span>
+<span class="sd">        using tolernce tol and len/inc scaling parameter scl.</span>
+<span class="sd">        In this variant, a &#39;temporary&#39; cluster center is used </span>
+<span class="sd">        when assigning pieces to clusters. This temporary cluster</span>
+<span class="sd">        is the first piece available after appropriate scaling </span>
+<span class="sd">        and sorting of all pieces. It is *not* necessarily the </span>
+<span class="sd">        mean of all pieces in that cluster and hence the final</span>
+<span class="sd">        cluster centers, which are just the means, might achieve </span>
+<span class="sd">        a smaller within-cluster tol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;2-norm&#39;</span><span class="p">,</span> <span class="s1">&#39;1-norm&#39;</span><span class="p">,</span> <span class="s1">&#39;lexi&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please refer to a specific and correct sorting way, namely &#39;2-norm&#39;, &#39;1-norm&#39; and &#39;lexi&#39;&quot;</span><span class="p">)</span>
+        
+        <span class="n">_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># prevent zero-division</span>
+        <span class="k">if</span> <span class="n">_std</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+             <span class="n">_std</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">_std</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+             <span class="n">_std</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                
+        <span class="n">npieces</span> <span class="o">=</span> <span class="n">pieces</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">scl</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">_std</span>
+        <span class="n">labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">splist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nr_dist</span> <span class="o">=</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">npieces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span> <span class="c1"># other two variables are used for experiment</span>
+        <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">splist</span><span class="p">)):</span>
+            <span class="n">indc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">labels</span><span class="o">==</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">indc</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span> <span class="n">centers</span><span class="p">,</span> <span class="n">center</span> <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="n">centers</span>
+        <span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span> <span class="o">=</span> <span class="n">symbolsAssign</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strings</span>
+            
+            
+
+    <span class="k">def</span> <span class="nf">symbolsAssign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; automatically assign symbols to different clusters, start with &#39;!&#39;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        clusters(list or pd.Series or array): the list of clusters.</span>
+<span class="sd">        -------------------------------------------------------------</span>
+<span class="sd">        Return:</span>
+<span class="sd">        symbols(list of string), inverse_hash(dict): repectively for corresponding symbols and hashmap for inverse transform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;E&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="s1">&#39;I&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;J&#39;</span><span class="p">,</span><span class="s1">&#39;j&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="s1">&#39;q&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;S&#39;</span><span class="p">,</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;U&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+        <span class="n">cluster_sort</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span> 
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">el</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">()):</span>
+            <span class="n">cluster_sort</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">N</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">):</span>
+            <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">33</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span><span class="p">[:</span><span class="n">N</span><span class="p">]</span>
+        <span class="n">hashm</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cluster_sort</span> <span class="o">+</span> <span class="n">alphabet</span><span class="p">,</span> <span class="n">alphabet</span> <span class="o">+</span> <span class="n">cluster_sort</span><span class="p">))</span>
+        <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="n">hashm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">strings</span><span class="p">,</span> <span class="n">hashm</span>
+
+
+    
+    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_digitize</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">)</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+        <span class="n">time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_compress</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">time_series</span>
+
+    
+
+    <span class="k">def</span> <span class="nf">inverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">hashmap</span><span class="p">):</span>
+        <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+            <span class="n">pc</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">hashmap</span><span class="p">[</span><span class="n">p</span><span class="p">])]</span>
+            <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">pieces</span><span class="p">,</span> <span class="n">pc</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+
+
+    
+    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">corr</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">corr</span><span class="p">)</span>
+                <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">corr</span>
+                <span class="k">if</span> <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pieces</span>
+
+    
+
+    <span class="k">def</span> <span class="nf">inverse_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modified from ABBA package, please see ABBA package to see guidance.&quot;&quot;&quot;</span>
+        
+        <span class="n">time_series</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="c1"># stitch linear piece onto last</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1">#print(x)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">time_series</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
+            <span class="n">time_series</span> <span class="o">=</span> <span class="n">time_series</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">time_series</span></div>
+    
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Numerical Linear Algebra Group, The University of Manchester.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

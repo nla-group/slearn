@@ -1,0 +1,5 @@
+numpy>=1.22.0
+scikit-learn
+pandas
+lightgbm
+requests

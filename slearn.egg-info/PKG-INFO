@@ -1,3 +1,28 @@
+Metadata-Version: 2.1
+Name: slearn
+Version: 0.1.5
+Summary: A package linking symbolic representation with sklearn for time series prediction
+Home-page: https://github.com/nla-group/slearn.git
+Author: nla-group
+Author-email: stefan.guettel@manchester.ac.uk
+Maintainer: Stefan Güttel, Xinye Chen
+Maintainer-email: stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk
+License: MIT License
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # slearn
 
 
@@ -117,37 +142,30 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from slearn import * 
+from slearn import * # old code, now updated
 np.random.seed(0)
-
-time_series = pd.read_csv("Amazon.csv")
+time_series = pd.read_csv("doc/Amazon.csv")
 ts = time_series.Close.values
 length = len(ts)
 train, test = ts[:round(0.9*length)], ts[round(0.9*length):]
-
 sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="GaussianNB")
 sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
 abba_nb_pred = sl.predict(var_smoothing=0.001)
 sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="DecisionTreeClassifier")
 sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
 abba_nn_pred = sl.predict(max_depth=10, random_state=0)
-sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="KNeighborsClassifier")
-sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
-abba_kn_pred = sl.predict(n_neighbors=10)
 sl = slearn(method='fABBA', ws=8, step=100, classifier_name="SVC")
 sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
 abba_svc_pred = sl.predict(C=20)
 min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
-
 plt.figure(figsize=(20, 5))
-sns.set(font_scale=1.5, style="whitegrid")
-sns.lineplot(data=test[:min_len], linewidth=6, color='k', label='ground truth')
+sns.set(font_scale=2, style="whitegrid")
+sns.lineplot(data=test[:min_len], linewidth=6, color='c', label='ground truth')
 sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
 sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
-sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='c', label='prediction (ABBA - KNeighborsClassifier)')
 sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
 plt.legend()
-plt.tick_params(axis='both', labelsize=15)
+plt.tick_params(axis='both', labelsize=25)
 plt.show()
 ```
 ![original image](https://raw.githubusercontent.com/nla-group/slearn/master/doc/img/demo1.png)
@@ -188,4 +206,6 @@ df_iters
 |1	|1.000000	|1.0	|14	|ABCABCABCA	|ABCABCABCA	|2.436733	|3	|3	|3|
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
+
+
 

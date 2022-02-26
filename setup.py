@@ -7,7 +7,7 @@ with open("README.md", 'r') as f:
 setuptools.setup(
     name="slearn",
     packages=["slearn"],
-    version="0.1.2",
+    version="0.1.5",
     setup_requires=["numpy>=1.22.0"],
     install_requires=["numpy>=1.22.0", "scikit-learn", "pandas", "lightgbm", "requests"],
     include_dirs=[numpy.get_include()],

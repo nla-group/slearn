@@ -1,0 +1,76 @@
+
+    Examples
+    ----------
+    >>> from slearn import symbolicML
+    >>> string = 'aaaabbbccd'
+    >>> sbml = symbolicML(classifier_name="MLPClassifier", ws=5, random_seed=0)
+    >>> x, y = sbml._encoding(string)
+    >>> pred = sbml.forecasting(x, y, step=5, hidden_layer_sizes=(3,3), activation='relu', learning_rate_init=0.01)
+    >>> print(pred)
+    ['b', 'b', 'b', 'c', 'c']
+    
+    or you can use a more general method like:
+    
+    >>> from slearn import symbolicML
+    >>> string = 'aaaabbbccd'
+    >>> string = 'aaaabbbccd'
+    >>> sbml = symbolicML(classifier_name="mlp", ws=5, random_seed=0)
+    >>> x, y = sbml._encoding(string)
+    >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
+    >>> pred = sbml.forecasting(x, y, step=5, **params)
+    >>> print(pred)
+    ['b', 'b', 'c', 'c', 'd']
+    
+    Examples
+    ----------
+    Use Multi-layer Perceptron classifier for prediction:
+    >>> import numpy as np
+    >>> from slearn import slearn
+    >>> ts = [np.sin(0.05*i) for i in range(1000)]
+    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5, alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
+    >>> sl.predict(hidden_layer_sizes=(10,10), activation='relu', learning_rate_init=0.1)
+    array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
+       -0.49625277, -0.52724904, -0.55824531, -0.58924158, -0.62023785,
+       -0.65123412, -0.68223039, -0.71322666, -0.74422293, -0.7752192 ,
+       -0.80621547, -0.83721174, -0.86820801, -0.89920428, -0.93020055,
+       -0.96119682, -0.99219309, -1.02318936, -1.05418563, -1.0851819 ,
+       -1.11617817, -1.14717444, -1.17817071, -1.20916698, -1.24016325,
+       -1.27115952, -1.30215579, -1.33315206, -1.36414833, -1.3951446 ,
+       -1.42614087, -1.45713714, -1.48813341, -1.51912968, -1.55012595,
+       -1.58112222, -1.61211849, -1.64311476, -1.67411103, -1.7051073 ,
+       -1.73610357, -1.76709984, -1.79809611, -1.82909238, -1.86008865,
+       -1.89108492, -1.92208119, -1.95307746, -1.98407373, -2.01507   ,
+       -2.04606627, -2.07706254, -2.10805881, -2.13905508, -2.17005135,
+       -2.20104762, -2.23204389, -2.26304016])
+    >>> sl.predict(step=10, form='string', hidden_layer_sizes=(3,3), activation='relu', learning_rate_init=0.1)
+    ['"', '!', '"', '!', '"', '!', '"', '!', '"', '!']
+    
+    or you can use a more general method like:
+    
+    >>> import numpy as np
+    >>> from slearn import slearn
+    >>> ts = [np.sin(0.05*i) for i in range(1000)]
+    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="MLPClassifier", random_seed=1, verbose=0)
+    >>> params = {'hidden_layer_sizes':(10,10), 'activation':'relu', 'learning_rate_init':0.1}
+    >>> sl.predict(**params)
+    array([-0.34127142, -0.37226769, -0.40326396, -0.43426023, -0.4652565 ,
+           -0.49625277, -0.52724904, -0.55824531, -0.58924158, -0.62023785,
+           -0.65123412, -0.68223039, -0.71322666, -0.74422293, -0.7752192 ,
+           -0.80621547, -0.83721174, -0.86820801, -0.89920428, -0.93020055,
+           -0.96119682, -0.99219309, -1.02318936, -1.05418563, -1.0851819 ,
+           -1.11617817, -1.14717444, -1.17817071, -1.20916698, -1.24016325,
+           -1.27115952, -1.30215579, -1.33315206, -1.36414833, -1.3951446 ,
+           -1.42614087, -1.45713714, -1.48813341, -1.51912968, -1.55012595,
+           -1.58112222, -1.61211849, -1.64311476, -1.67411103, -1.7051073 ,
+           -1.73610357, -1.76709984, -1.79809611, -1.82909238, -1.86008865,
+           -1.89108492, -1.92208119, -1.95307746, -1.98407373, -2.01507   ,
+           -2.04606627, -2.07706254, -2.10805881, -2.13905508, -2.17005135,
+           -2.20104762, -2.23204389, -2.26304016])
+           
+    Use Gaussian Naive Bayes classifier for prediction:
+    >>> import numpy as np
+    >>> ts = [np.sin(0.05*i) for i in range(1000)]
+    >>> sl = slearn(series=ts, method='fABBA', ws=10, step=1, tol=0.5,  alpha=0.5, form='numeric', classifier_name="GaussianNB", random_seed=1, verbose=0)
+    >>> params = {'var_smoothing':0.001}
+    >>> sl.predict(**params)
+    """
