@@ -310,6 +310,17 @@ class slearn(symbolicML):
             self.string = self.s_model.fit_transform(scale_series)         
             self.last_symbol = self.string[-1] # deprecated symbol, won't take into account
                                             # only apply to ABBA
+        
+        elif self.method == 'ABBA':
+            try:
+                self.s_model = ABBA(**kwargs, verbose=self.verbose)
+            except:
+                warnings.warn(f"Exception, default setting (tol=0.1, k_cluster=2, apply.")
+                self.s_model = ABBA(tol=0.1, k_cluster=2, verbose=self.verbose)
+                
+            self.string = self.s_model.fit_transform(scale_series)         
+            self.last_symbol = self.string[-1] # deprecated symbol, won't take into account
+                                            # only apply to ABBA
                 
         elif self.method == 'SAX':
             try:
@@ -334,7 +345,8 @@ class slearn(symbolicML):
             warnings.warn("Degenerate to trivial case that ws=1.")
             self.ws = 1
 
-
+        return
+    
 
     def predict(self, **params):
         self.cmodel = symbolicML(classifier_name=self.classifier_name,
@@ -349,7 +361,7 @@ class slearn(symbolicML):
             print("The number of symbols to be predicted: ", self.step)
             print("The parameters of classifiers: ", params)
         
-        if self.method == 'fABBA':
+        if self.method == 'fABBA' or self.method == 'ABBA':
             x, y = self.cmodel.encode(self.string[:-1]) # abandon the last symbol
         else:
             x, y = self.cmodel.encode(self.string)

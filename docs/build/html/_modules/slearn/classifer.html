@@ -36,7 +36,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../symbols_machine_learning.html">Symbolic machine learning prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
@@ -379,6 +379,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scale_series</span><span class="p">)</span>         
             <span class="bp">self</span><span class="o">.</span><span class="n">last_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># deprecated symbol, won&#39;t take into account</span>
                                             <span class="c1"># only apply to ABBA</span>
+        
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;ABBA&#39;</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">s_model</span> <span class="o">=</span> <span class="n">ABBA</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception, default setting (tol=0.1, k_cluster=2, apply.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">s_model</span> <span class="o">=</span> <span class="n">ABBA</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k_cluster</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+                
+            <span class="bp">self</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scale_series</span><span class="p">)</span>         
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># deprecated symbol, won&#39;t take into account</span>
+                                            <span class="c1"># only apply to ABBA</span>
                 
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;SAX&#39;</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -403,7 +414,8 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Degenerate to trivial case that ws=1.&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ws</span> <span class="o">=</span> <span class="mi">1</span>
 
-
+        <span class="k">return</span>
+    
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cmodel</span> <span class="o">=</span> <span class="n">symbolicML</span><span class="p">(</span><span class="n">classifier_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">classifier_name</span><span class="p">,</span>
@@ -418,7 +430,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of symbols to be predicted: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The parameters of classifiers: &quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
         
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;fABBA&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;fABBA&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;ABBA&#39;</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmodel</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># abandon the last symbol</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmodel</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
