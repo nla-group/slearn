@@ -88,11 +88,17 @@ class SAX:
             self.width = width
         self.number_of_symbols = k
         self.return_list = return_list
-
+        self.mu, self.std = 0, 1
+        
         
     def transform(self, time_series):
         if self.width is None:
             self.width = len(time_series) // self.n_paa_segments
+        self.mu = np.mean(time_series)
+        self.std = np.std(time_series)
+        if self.std == 0:
+            self.std = 1
+        time_series = (time_series - self.mu)/self.std
         compressed_time_series = self.paa_mean(time_series)
         symbolic_time_series = self._digitize(compressed_time_series)
         return symbolic_time_series
@@ -101,6 +107,7 @@ class SAX:
     def inverse_transform(self, symbolic_time_series):
         compressed_time_series = self._reverse_digitize(symbolic_time_series)
         time_series = self._reconstruct(compressed_time_series)
+        time_series = time_series*self.std + self.mu
         return time_series
 
     
