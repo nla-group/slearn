@@ -5,7 +5,7 @@ slearn package contains the fast symbolic representation method, namely SAX and 
 
 .. admonition:: Summmary
 
-    You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
+    You can select the available classifiers and symbolic representation method (currently we support SAX, ABBA and fABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
     slean leverages user-friendly API, time series forecasting follows:
 
@@ -32,7 +32,7 @@ First of all, we set the number of symbols you would like to predict and load li
     ts = time_series.Close.values
     step = 50
 
-we start off with initializing the slearn with fABBA and GaussianNB classifier, setting windows size to 3 and step to 50:
+we start off with initializing the slearn with fABBA (alternative options: ``SAX`` and ``ABBA``) and GaussianNB classifier, setting windows size to 3 and step to 50:
 
 .. code:: python
 

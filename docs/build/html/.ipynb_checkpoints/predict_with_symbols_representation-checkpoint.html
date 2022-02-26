@@ -72,7 +72,7 @@
 <p>slearn package contains the fast symbolic representation method, namely SAX and fABBA (more methods will be included).</p>
 <div class="admonition-summmary admonition">
 <p class="admonition-title">Summmary</p>
-<p>You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.</p>
+<p>You can select the available classifiers and symbolic representation method (currently we support SAX, ABBA and fABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.</p>
 <p>slean leverages user-friendly API, time series forecasting follows:</p>
 <p>Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.</p>
 <p>Step 2: Transform time series into symbols with user specified parameters defined for symbolic representation.</p>
@@ -91,7 +91,7 @@
 <span class="n">step</span> <span class="o">=</span> <span class="mi">50</span>
 </pre></div>
 </div>
-<p>we start off with initializing the slearn with fABBA and GaussianNB classifier, setting windows size to 3 and step to 50:</p>
+<p>we start off with initializing the slearn with fABBA (alternative options: <code class="docutils literal notranslate"><span class="pre">SAX</span></code> and <code class="docutils literal notranslate"><span class="pre">ABBA</span></code>) and GaussianNB classifier, setting windows size to 3 and step to 50:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span>  <span class="n">ws</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;GaussianNB&quot;</span><span class="p">)</span> <span class="c1"># step 1</span>
 </pre></div>
 </div>

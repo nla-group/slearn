@@ -18,7 +18,7 @@ Install the slearn package simply by
 $ pip install slearn
 ```
 
-slearn currently support SAX, ABBA and fABBA symbolic representation and the machine learning classifiers as below:
+slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the machine learning classifiers as below:
 
 |  Support Classifiers | Parameter call |
 |  ----  | ----  |

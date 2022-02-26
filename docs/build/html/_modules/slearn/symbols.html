@@ -95,7 +95,7 @@
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 
-
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -480,8 +480,8 @@
     
 
 
-<span class="k">class</span> <span class="nc">ABBA</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k_cluster</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+<div class="viewcode-block" id="ABBA"><a class="viewcode-back" href="../../_autosummary/slearn.ABBA.html#slearn.ABBA">[docs]</a><span class="k">class</span> <span class="nc">ABBA</span><span class="p">:</span>
+<div class="viewcode-block" id="ABBA.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.ABBA.html#slearn.ABBA.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k_cluster</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -505,7 +505,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_len</span> <span class="o">=</span> <span class="n">max_len</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_cluster</span> <span class="o">=</span> <span class="n">k_cluster</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compression_rate</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span></div>
     
         
 
@@ -610,7 +610,7 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">time_series</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
             <span class="n">time_series</span> <span class="o">=</span> <span class="n">time_series</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">time_series</span>
+        <span class="k">return</span> <span class="n">time_series</span></div>
     
     
 </pre></div>

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: slearn
-Version: 0.1.9
+Version: 0.2.1
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn.git
 Author: nla-group
@@ -43,7 +43,7 @@ Install the slearn package simply by
 $ pip install slearn
 ```
 
-slearn currently support SAX, ABBA and fABBA symbolic representation and the machine learning classifiers as below:
+slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the machine learning classifiers as below:
 
 |  Support Classifiers | Parameter call |
 |  ----  | ----  |

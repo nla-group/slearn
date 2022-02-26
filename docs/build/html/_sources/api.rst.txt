@@ -7,5 +7,7 @@ API Reference
 
    slearn.slearn
    slearn.symbolicML
-   slearn.fABBA
+   
    slearn.SAX
+   slearn.fABBA
+   slearn.ABBA
