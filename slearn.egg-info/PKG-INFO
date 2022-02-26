@@ -1,3 +1,28 @@
+Metadata-Version: 2.1
+Name: slearn
+Version: 0.1.6
+Summary: A package linking symbolic representation with sklearn for time series prediction
+Home-page: https://github.com/nla-group/slearn.git
+Author: nla-group
+Author-email: stefan.guettel@manchester.ac.uk
+Maintainer: Stefan Güttel, Xinye Chen
+Maintainer-email: stefan.guettel@manchester.ac.uk, xinye.chen@manchester.ac.uk
+License: MIT License
+Platform: UNKNOWN
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development
+Classifier: Topic :: Scientific/Engineering
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # slearn
 
 
@@ -194,4 +219,6 @@ df_iters
 |1	|1.000000	|1.0	|14	|ABCABCABCA	|ABCABCABCA	|2.436733	|3	|3	|3|
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
+
+
 

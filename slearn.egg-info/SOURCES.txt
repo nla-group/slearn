@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+slearn/__init__.py
+slearn/classifer.py
+slearn/lsg.py
+slearn/symbols.py
+slearn.egg-info/PKG-INFO
+slearn.egg-info/SOURCES.txt
+slearn.egg-info/dependency_links.txt
+slearn.egg-info/requires.txt
+slearn.egg-info/top_level.txt
