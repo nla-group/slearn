@@ -160,7 +160,7 @@ plt.show()
 
 
 ## Flexible symbolic sequence generator
-slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. This part of code is from https://github.com/robcah/RNNExploration4SymbolicTS, developed by Roberto Cahuantzi.
+slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. This part of code is from https://github.com/robcah/RNNExploration4SymbolicTS, developed by Dr. Roberto Cahuantzi and Prof. Stefan Güttel.
 
 
 ```python
