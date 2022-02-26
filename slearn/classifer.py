@@ -241,7 +241,7 @@ class slearn(symbolicML):
     step - int, default=1,
         The number of symbols for prediction.
 
-    method - str {'fABBA', 'SAX'}:
+    method - str {'SAX', 'ABBA', 'fABBA'}:
         The symbolic time series representation.
         We use fABBA for ABBA method.
           

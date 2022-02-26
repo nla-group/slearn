@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: slearn
-Version: 0.1.6
+Version: 0.1.9
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn.git
 Author: nla-group
@@ -42,6 +42,9 @@ Install the slearn package simply by
 ```
 $ pip install slearn
 ```
+
+slearn currently support SAX, ABBA and fABBA symbolic representation and the machine learning classifiers as below:
+
 |  Support Classifiers | Parameter call |
 |  ----  | ----  |
 | [Multi-layer Perceptron](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron)   |'MLPClassifier' |
@@ -170,10 +173,10 @@ min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
 plt.figure(figsize=(20, 5))
 sns.set(font_scale=1.5, style="whitegrid")
 sns.lineplot(data=test[:min_len], linewidth=6, color='k', label='ground truth')
-sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
-sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
-sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='c', label='prediction (ABBA - KNeighborsClassifier)')
-sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
+sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (fABBA - GaussianNB)')
+sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (fABBA - DecisionTreeClassifier)')
+sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='c', label='prediction (fABBA - KNeighborsClassifier)')
+sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (fABBA - Support Vector Classification)')
 plt.legend()
 plt.tick_params(axis='both', labelsize=15)
 plt.show()
