@@ -195,3 +195,15 @@ df_iters
 |2	|0.657143	|0.5	|36	|CBBCBBABCC	|AABCABCABC	|3.352712	|3	|9	|12|
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
 
+
+## LZW compression
+Lempel–Ziv–Welch (LZW) is a lossless data compression method created by Abraham Lempel, Jacob Ziv, and Terry Welch. Its simplicity makes it prevalent and universal nowadays. slearn provides a convenient API to easily implement the algorithm.
+
+```python
+import slearn
+
+string = 'abcabcdabcacbd'
+compressed = slearn.LZWcompress(string)
+decompressed = slearn.LZWdecompress(compressed)
+print(string == decompressed)
+```
