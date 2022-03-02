@@ -225,7 +225,7 @@ If you use the function of ``flexible symbolic sequence generator'', please cite
   type    = {arXiv EPrint},
   url     = {https://arxiv.org/abs/2107.02248}
 }
-
+```
 Otherwise:
 ```bibtex
 @article{roberto cahuantzi_xinye chen_stefan güttel_2022, title={slearn: v0.2.2}, DOI={10.5281/zenodo.6323342}, abstractNote={<p>A package linking symbolic representation with scikit-learn machine learning for time series prediction.</p>}, publisher={Zenodo}, author={Roberto Cahuantzi and Xinye Chen and Stefan Güttel}, year={2022}, month={Feb}}
