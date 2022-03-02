@@ -7,13 +7,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
 
-A package linking symbolic representation with scikit-learn machine learning for time series prediction.
+⚡ A package linking symbolic representation with scikit-learn machine learning for time series prediction.
 
 Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation methods do not only reduce the dimensionality of time series but also speedup the downstream time series task. It has been demonstrated by [S. Elsworth and S. Güttel, Time series forecasting using LSTM networks: a symbolic approach, arXiv, 2020] that symbolic forecasting has greatly reduce the sensitivity of hyperparameter settings for Long Short Term Memory networks. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation. 
 
 <strong><em> Now let's get started! </em></strong>
 
-Install the slearn package simply by
+🚀 Install the slearn package simply by 
 ```
 $ pip install slearn
 ```
@@ -36,7 +36,7 @@ slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the 
 
 Our [documentation](https://slearn.readthedocs.io/en/latest/?badge=latest) is available.
 
-## Symbolic machine learning prediction
+## 🔮 Symbolic machine learning prediction 
 Import the package
 ```python
 from slearn import symbolicML
@@ -62,7 +62,7 @@ print(pred) # ['d', 'b', 'a', 'b', 'b'] # the prediction
 ```
 The parameter settings for the chosen classifier follow the same as the scikit-learn library, so just ensure that parameters are existing in the scikit-learn classifiers. More details are refer to scikit-learn website.
 
-## Time series forecasting with symbolic representation
+## 🏁 Time series forecasting with symbolic representation 🌟
 
 Load libraries.
 ```python
@@ -159,7 +159,7 @@ plt.show()
 ![original image](https://raw.githubusercontent.com/nla-group/slearn/master/docs/demo1.png)
 
 
-## Flexible symbolic sequence generator
+## 🏃 Flexible symbolic sequence generator
 slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. This part of code is from https://github.com/robcah/RNNExploration4SymbolicTS, developed by Dr. Roberto Cahuantzi and Prof. Stefan Güttel.
 
 
@@ -196,7 +196,7 @@ df_iters
 |3	|0.704762	|0.4	|36	|CBBCBBABCC	|ABCBABBBBB	|3.811584	|3	|9	|12|
 
 
-## LZW compression
+## 🙌 LZW compression
 Lempel–Ziv–Welch (LZW) is a lossless data compression method created by Abraham Lempel, Jacob Ziv, and Terry Welch. Its simplicity makes it prevalent and universal nowadays. slearn provides a convenient API to easily implement the algorithm.
 
 ```python
@@ -210,7 +210,7 @@ print(string == decompressed)
 
 
 
-## Citation
+## Citation ✨
 
 If you use the function of ``LZWStringLibrary`` in your research, please cite:
 ```bibtex
