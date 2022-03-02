@@ -207,3 +207,20 @@ compressed = slearn.LZWcompress(string)
 decompressed = slearn.LZWdecompress(compressed)
 print(string == decompressed)
 ```
+
+
+
+## Citation
+```bibtex
+@techreport{CCG21,
+  title   = {{A comparison of LSTM and GRU networks for learning symbolic sequences}},
+  author  = {Cahuantzi, Roberto and Chen, Xinye and G\"{u}ttel, Stefan},
+  year    = {2021},
+  number  = {arXiv:2107.02248},
+  pages   = {12},
+  institution = {The University of Manchester},
+  address = {UK},
+  type    = {arXiv EPrint},
+  url     = {https://arxiv.org/abs/2107.02248}
+}
+```
