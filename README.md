@@ -212,7 +212,7 @@ print(string == decompressed)
 
 ## Citation
 
-If you use the function of ``flexible symbolic sequence generator'', please cite:
+If you use the function of ``LZWStringLibrary`` in your research, please cite:
 ```bibtex
 @techreport{CCG21,
   title   = {{A comparison of LSTM and GRU networks for learning symbolic sequences}},
