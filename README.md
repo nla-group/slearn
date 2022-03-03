@@ -226,3 +226,16 @@ If you use the function of ``LZWStringLibrary`` in your research, please cite:
   url     = {https://arxiv.org/abs/2107.02248}
 }
 ```
+
+
+
+## 📝 License
+This project is licensed under the terms of the [MIT license](https://github.com/nla-group/classix/blob/master/LICENSE).
+
+
+<p align="left">
+  <a>
+    <img alt="CLASSIX" src="https://raw.githubusercontent.com/nla-group/classix/master/docs/_images/nla_group.png" width="240" />
+  </a>
+</p>
+
