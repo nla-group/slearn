@@ -15,7 +15,7 @@ Symbolic representations of time series have proved their usefulness in the fiel
 
 🚀 Install the slearn package simply by 
 ```
-$ pip install slearn
+pip install slearn
 ```
 
 slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the machine learning classifiers as below:
