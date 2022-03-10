@@ -1,5 +1,5 @@
 LICENSE
-README.md
+README.rst
 setup.py
 slearn/__init__.py
 slearn/classifer.py

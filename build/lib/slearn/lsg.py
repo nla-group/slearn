@@ -35,6 +35,9 @@ import numpy as np
 from itertools import product
 import warnings
 
+
+
+
 def Symbols(n=52):
     '''Creation of a dictionary with the compression symbols, restricted
     up to 52 alphabetical characters from 'A' to 'z'
@@ -55,6 +58,8 @@ def Symbols(n=52):
     dict_symbols = {symbol:i for i,symbol in enumerate(collection) if i<n}
     
     return dict_symbols
+
+
 
 def LZWcompress(uncompressed):
     """LZW compress a string to a list of numerical codes, it is 
@@ -101,6 +106,7 @@ def LZWcompress(uncompressed):
     return result
  
  
+
 def LZWdecompress(compressed):
     """ LZW decompression from a list of integers to a string.
 
@@ -144,6 +150,8 @@ def LZWdecompress(compressed):
     
     return string 
     
+    
+    
 def Reduce(s):
     """ Reduce a string 's' to its shortest period.
 
@@ -170,6 +178,8 @@ def Reduce(s):
             return s[0:j]
 
     return s
+
+
 
 def LZWStringGenerator(nr_symbols, target_complexity, 
                        priorise_complexity=True):
@@ -246,6 +256,8 @@ def LZWStringGenerator(nr_symbols, target_complexity,
             stop = False if len(list(set(string))) < nr_symbols else True
             
     return string, complexity_0
+    
+    
     
 def LZWStringLibrary(symbols=(1,10,5), complexity=(5,25,5), 
                      symbols_range_distribution=None, 
