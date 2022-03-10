@@ -23,6 +23,7 @@ Install
 ---------
 
 Install the slearn package simply by
-```
-pip install slearn
-```
+.. code:: bash
+    
+    pip install slearn
+
