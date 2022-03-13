@@ -1,4 +1,28 @@
-
+---
+title: 'slearn: The machine learning benchmark for symbolic time series representation'
+tags:
+  - machine learning
+  - time series
+  - symbolic representation
+  - data mining
+authors:
+  - name: Roberto Cahuantzi
+    orcid: 0000-0002-0212-6825
+    affiliation: 1
+    
+  - name: Xinye Chen
+    orcid: 0000-0003-1778-393X
+    affiliation: 1
+    
+  - name: Stefan G\"{u}ttel
+    orcid: 0000-0003-1494-4478
+    affiliation: 1
+affiliations:
+  - name: Department of Mathematics, The University of Manchester
+    index: 1
+date: 11 March 2022
+bibliography: paper.bib
+---
 
 ## Summary
 
