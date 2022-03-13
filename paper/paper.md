@@ -2,11 +2,20 @@
 
 ## Summary
 
-Symbolic representations of time series have proved their usefulness in the field of time series motif discovery \citep{10.1007/s10618-007-0064-z}, clustering \citep{10.1007/s10618-007-0064-z}, classification \citep{Schfer2014TheBI}, forecasting \citep{EG20b}, anomaly detection \citep{10.1145/775047.775128}, etc. Transforming time series into symbolic representation reduces the dimensionality of time series by compressing time series while preserving its underlying structure, and therefore speedups the downstream time series task. With the meaningful patterns underlying informative symbols, a compressed sequence can greatly speed up the algorithm inference time in prediction. Appropriately employing machine learning algorithms on the level of symbols instead of raw time series poses a great challenge to symbolic time series forecasting problems. For the convenience of the research community on studying the symbolic representation, we design a Python module for benchmarking the process of machine learning algorithm practice with symbolic representation, called slearn.  Our software includes some basic symbols preprocessing tools and builds a baseline for various machine learning models through scikit-learn package \cite{scikit-learn} for symbolic prediction. Our library mainly concerns two components, namely string generator, machine learning forecasting. The string generator and compression follow the new research paper \citep{CCG21} while the forecasting follows the \citep{EG20b}. The forecasting empirical result of slearn prediction for amazon stock close price is as shown in \figurename~\ref{demo}.
+Symbolic representations of time series have proved their usefulness in the field of time series motif discovery \citep{10.1007/s10618-007-0064-z}, clustering \citep{10.1007/s10618-007-0064-z}, classification \citep{Schfer2014TheBI}, forecasting \citep{EG20b}, anomaly detection \citep{10.1145/775047.775128}, etc. Transforming time series into symbolic representation reduces the dimensionality of time series by compressing time series while preserving its underlying structure, and therefore speedups the downstream time series task. With the meaningful patterns underlying informative symbols, a compressed sequence can greatly speed up the algorithm inference time in prediction. Appropriately employing machine learning algorithms on the level of symbols instead of raw time series poses a great challenge to symbolic time series forecasting problems. For the convenience of the research community on studying the symbolic representation, we design a Python module for benchmarking the process of machine learning algorithm practice with symbolic representation, called slearn.  Our software includes some basic symbols preprocessing tools and builds a baseline for various machine learning models through scikit-learn package \cite{scikit-learn} for symbolic prediction. Our library mainly concerns two components, namely string generator, machine learning forecasting. The string generator and compression follow the new research paper \citep{CCG21} while the forecasting follows the \citep{EG20b}. 
 
 ## Examples of use
 
-slearn is publicly available on GitHub and can be installed via the pip package manager. The documentation in \url{https://slearn.readthedocs.io/en/latest/?badge=latest} provides detailed functionality guidance and deployment of prediction with SAX \cite{10.1145/882082.882086}, ABBA \cite{EG19b}, and fABBA \cite{CG22a}. slean module offers user-friendly APIs, and consistent parameters for prediction as scikit-learn package.
+slearn is publicly available on GitHub and can be installed via the pip package manager. The documentation in \url{https://slearn.readthedocs.io/en/latest/?badge=latest} provides detailed functionality guidance and deployment of prediction with SAX \cite{10.1145/882082.882086}, ABBA \cite{EG19b}, and fABBA \cite{CG22a}. slean module offers user-friendly APIs, and consistent parameters for prediction as scikit-learn package. The forecasting empirical result of slearn prediction for amazon stock close price is as shown in \figurename~\ref{demo}.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1\textwidth]{demo1}
+	\caption{Prediction with various machine learning models}
+	\label{demo}
+\end{figure} 
+
 
 ## Statement of need
 
