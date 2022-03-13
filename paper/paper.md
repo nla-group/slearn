@@ -1,5 +1,5 @@
 ---
-title: 'slearn: The machine learning benchmark for symbolic time series representation'
+title: 'slearn: A symbolic time series test tool'
 tags:
   - machine learning
   - time series
