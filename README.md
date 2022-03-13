@@ -209,6 +209,9 @@ decompressed = slearn.LZWdecompress(compressed)
 print(string == decompressed)
 ```
 
+## Contributing
+Contributing to this repo is welcome! We will work through all the pull requests and try to merge into main branch. 
+
 
 
 ## Citation ✨
