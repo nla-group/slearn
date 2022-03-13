@@ -14,7 +14,7 @@ authors:
     orcid: 0000-0003-1778-393X
     affiliation: 1
     
-  - name: Stefan G\"{u}ttel
+  - name: Stefan Güttel
     orcid: 0000-0003-1494-4478
     affiliation: 1
 affiliations:
