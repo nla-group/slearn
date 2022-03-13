@@ -16,3 +16,6 @@ Currently, there is no software that leverages the symbolic time series represen
 ## Acknowledgements
 
 Roberto Cahuantzi's work has been funded by the UK's Alan Turing Institute. Stefan Güttel has been supported by a Fellowship of the Alan Turing Institute, EPSRC grant EP/N510129/1.
+
+
+## References
