@@ -82,11 +82,11 @@ Set the number of symbols you would like to predict.
 step = 50
 ```
 
-You can select the available classifiers and symbolic representation method (currently we support SAX and ABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
+You can select the available classifiers and symbolic representation method (currently we support SAX, ABBA and fABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
 
 slean leverages user-friendly API, time series forecasting follows:
 
-- Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
+- Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX, ABBA or fABBA) and classifier.
 
 - Step 2: Transform time series into symbols with user specified parameters defined for symbolic representation.
 
