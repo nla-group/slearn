@@ -37,7 +37,7 @@ Symbolic representations of time series have proved their usefulness in the fiel
 
 ## Statement of need
 
-To the best of our knowledge, this is the first module that conveniently combines symbolic time series representations with machine learning-based forecasting algorithms.
+To the best of our knowledge, this is the first module that conveniently combines symbolic time series representations with machine learning-based forecasting algorithms. By providing a consistent interface to symbolic representation and forecasting techniques we hope to facilitate research in the field and enable a more consistent comparison of emerging algorithms.
 
 ## Acknowledgements
 
