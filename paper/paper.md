@@ -31,7 +31,7 @@ Symbolic representations of time series have proved their usefulness in the fiel
 
 ## Examples of use
 
-`slearn` is publicly available on GitHub and can be installed via the pip package manager. The documentation in \url{https://slearn.readthedocs.io/en/latest/?badge=latest} provides detailed functionality guidance and deployment of prediction using SAX [@10.1145/882082.882086], ABBA [@EG19b], and fABBA [@CG22a]. `slearn` offers user-friendly APIs and consistent parameters inspired by the scikit-learn package. Figure \autoref{fig:demo} shows a forecast of the Amazon stock close price produced by `slearn`.
+`slearn` is publicly available on GitHub and can be installed via the pip package manager. The documentation in \url{https://slearn.readthedocs.io/en/latest/?badge=latest} provides detailed functionality guidance and deployment of prediction using SAX [@10.1145/882082.882086], ABBA [@EG19b], and fABBA [@CG22a]. `slearn` offers user-friendly APIs and consistent parameters inspired by the scikit-learn package. \autoref{fig:demo} shows a forecast of the Amazon stock close price produced by `slearn`.
 
 ![Prediction with various machine learning models.\label{fig:demo}](demo1.png)
 
