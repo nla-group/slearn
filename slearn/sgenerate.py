@@ -4,9 +4,9 @@
 
 import random
 import numpy as np
-from symbolicTools.mcsymbolic import *
+from .mcsymbolic import *
 from random import randint
-from symbolicTools.sprocess import *
+from .sprocess import *
 
 
 def random_generate(start,num,power,length,capital=True,random_state=42):
