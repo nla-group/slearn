@@ -58,35 +58,38 @@ class MarkovChain(object):
 
         return ''.join(future_states)
 
-def MarkovMatrix(n = 26):
-  '''
-  Generates a Markov matrix for transition among n symbols
-  
-  Parameters
-  ----------
-  n: int
-      number of symbols
-  '''
-
-  np.random.seed(0) # for replicability
-  symbols = [chr(i+65) for i in range(n)] # list of available symbols
-
-  markov_matrix = {}
-  for i, s in enumerate(symbols):
-    dim = len(symbols)
-
-    # Probabilities of change of state (symbol)
-    # Random with a decreasing probability to jump to the farthest states
-    # It could be replaced by a negative logarithmic function  to make it more 
-    # likely to land in the same state and change the complexity of the sequence
-    probs = np.random.random(dim*3) 
-    probs.sort()
-    probs = np.append(probs[dim%2::2], probs[::-2])
-    offset = -int(dim*1.5)
-    # to keep the highest value in the current state
-    probs = np.roll(probs, offset+i)[:dim] 
-    probs /= probs.sum()
     
-    markov_matrix[s] = {s: p for s, p in zip(symbols, probs)}
+    
+    
+def MarkovMatrix(n = 26):
+    '''
+    Generates a Markov matrix for transition among n symbols
 
-  return markov_matrix
+    Parameters
+    ----------
+    n: int
+      number of symbols
+    '''
+
+    np.random.seed(0) # for replicability
+    symbols = [chr(i+65) for i in range(n)] # list of available symbols
+
+    markov_matrix = {}
+    for i, s in enumerate(symbols):
+        dim = len(symbols)
+
+        # Probabilities of change of state (symbol)
+        # Random with a decreasing probability to jump to the farthest states
+        # It could be replaced by a negative logarithmic function  to make it more 
+        # likely to land in the same state and change the complexity of the sequence
+        probs = np.random.random(dim*3) 
+        probs.sort()
+        probs = np.append(probs[dim%2::2], probs[::-2])
+        offset = -int(dim*1.5)
+        # to keep the highest value in the current state
+        probs = np.roll(probs, offset+i)[:dim] 
+        probs /= probs.sum()
+
+        markov_matrix[s] = {s: p for s, p in zip(symbols, probs)}
+
+    return markov_matrix

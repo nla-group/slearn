@@ -26,7 +26,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from .lsg import *
+from .tools import *
 from .symbols import SAX, fABBA
 from .classifer import symbolicML, slearn
-
+from .mksgenerate import random_generate, markovChain_gererate

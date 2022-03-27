@@ -4,12 +4,10 @@
 
 import random
 import numpy as np
-from .mcsymbolic import *
+from .mkc import *
 from random import randint
-from .sprocess import *
 
-
-def random_generate(start,num,power,length,capital=True,random_state=42):
+def random_generate(start,num,power,length,capital=True,random_state=42, verbose=0):
     """
     Args:
     ------------------------------------------------------------------------------
@@ -45,11 +43,12 @@ def random_generate(start,num,power,length,capital=True,random_state=42):
     string_gen = []
     for i in range(round(length / len(list_gen))):
         string_gen += list_gen
-    print("generate:", "".join(string_gen))
+    if verbose:
+        print("generate:", "".join(string_gen))
     return "".join(string_gen)
     
 
-def markovChain_gererate(n,current_state,no):
+def markovChain_gererate(n,current_state,no, verbose=0):
     """Apply Markov Chain to generate string sequence
     
     Args
@@ -69,58 +68,8 @@ def markovChain_gererate(n,current_state,no):
     transition_prob = MarkovMatrix(n)
     sequence = MarkovChain(transition_prob)
     string_gen = sequence.generate_states(current_state, no)
-    print("generate:", string_gen)
+    if verbose:
+        print("generate:", string_gen)
     return string_gen
     
 
-
-def generate_string(let,tc,c='A',sc=1,maxlet=66):
-    """ 
-    Args
-    ------------------------------------------------------------------------------
-        let(int): nr of letters
-        tc(int):  target LZW complexity
-        c(str):   current string
-        sc(int):  current complexity of s
-        maxlet(int): maximal potential letter
-    ------------------------------------------------------------------------------
-    """
-    ssp = symbolic_process()
-    while sc < tc:
-        char = randint(65,maxlet)
-        if char == maxlet and maxlet < 65+let-1:
-            maxlet += 1
-        c += chr(char)
-        sc = len(compress(ssp.reduce(c)))
-        
-    print("generate a string of complexity {}:".format(sc),c)
-    return c,sc
-
-
-def compress(uncompressed):
-    """
-    LZW compress a string to a list of output symbols.
-    Taken from https://rosettacode.org/wiki/LZW_compression#Python
-    """
- 
-    # Build the dictionary.
-    dict_size = 123
-    dictionary = {chr(i): i for i in range(dict_size)}
- 
-    w = ''
-    result = []
-    for c in uncompressed:
-        wc = w + c
-        if wc in dictionary:
-            w = wc
-        else:
-            result.append(dictionary[w])
-            # Add wc to the dictionary.
-            dictionary[wc] = dict_size
-            dict_size += 1
-            w = c
- 
-    # Output the code for w.
-    if w:
-        result.append(dictionary[w])
-    return result

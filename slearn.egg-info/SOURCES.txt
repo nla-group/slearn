@@ -1,0 +1,14 @@
+LICENSE
+README.rst
+setup.py
+slearn/__init__.py
+slearn/classifer.py
+slearn/mkc.py
+slearn/mksgenerate.py
+slearn/symbols.py
+slearn/tools.py
+slearn.egg-info/PKG-INFO
+slearn.egg-info/SOURCES.txt
+slearn.egg-info/dependency_links.txt
+slearn.egg-info/requires.txt
+slearn.egg-info/top_level.txt
