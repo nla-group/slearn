@@ -14,10 +14,23 @@ Symbolic representations of time series have proved their usefulness in the fiel
 
 <strong><em> Now let's get started! </em></strong>
 
+
 Install the slearn package simply by 
+#### pip
 ```
 pip install slearn
 ```
+
+#### conda
+```
+conda install -c conda-forge slearn
+```
+
+To check which version you install, please use:
+```
+conda list slearn
+```
+
 
 slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the machine learning classifiers as below:
 
