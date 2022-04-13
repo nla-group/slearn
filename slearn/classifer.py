@@ -60,12 +60,12 @@ class symbolicML:
     Parameters
     ----------
     classifier_name - str, default=MLPClassifier, 
-                      optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
-                      "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
-                      "LogisticRegression", "AdaBoostClassifier",
-                      "RandomForestClassifier", "GaussianNB",
-                      "DeepForest", "LGBM",
-                      "SVC", "RBF"}: 
+          optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
+          "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
+          "LogisticRegression", "AdaBoostClassifier",
+          "RandomForestClassifier", "GaussianNB",
+          "DeepForest", "LGBM",
+          "SVC", "RBF"}: 
         The classifier you specify for symbols prediction.
 
     ws - int, default=3:
@@ -93,6 +93,13 @@ class symbolicML:
         self.scl = 1
         
 
+
+    @property
+    def random_seed(self):
+        return self._random_seed
+
+
+
     @random_seed.setter
     def random_seed(self, value):
         if not isinstance(value, float) and not isinstance(value,int):
@@ -107,14 +114,8 @@ class symbolicML:
 
 
     @property
-    def random_seed(self):
-        return self._random_seed
-    @property
     def ws(self):
         return self._ws
-
-
-
 
 
 
@@ -134,23 +135,23 @@ class symbolicML:
             
             
             
-    @random_seed.setter
-    def random_seed(self, value):
+    @property
+    def verbose(self):
+        return self._verbose 
+
+
+
+    @verbose.setter
+    def verbose(self, value):
         if not isinstance(value, float) and not isinstance(value,int):
-            raise TypeError('Expected int type.')
+            raise TypeError('Expected int numeric type.')
         
         if value < 0:
             raise ValueError(
-                "Please feed an correct value for random_seed.")
+                "Please feed an correct value for verbose.")
         
-        self._random_seed = value
+        self._verbose = value
         
-
-
-    @property
-    def random_seed(self):
-        return self._random_seed
-
 
 
     def encode(self, string):
