@@ -92,7 +92,67 @@ class symbolicML:
         self.mu = 0
         self.scl = 1
         
+
+    @random_seed.setter
+    def random_seed(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int type.')
         
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for random_seed.")
+        
+        self._random_seed = value
+        
+
+
+    @property
+    def random_seed(self):
+        return self._random_seed
+    @property
+    def ws(self):
+        return self._ws
+
+
+
+
+
+
+    @ws.setter
+    def ws(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for ws.")
+        
+        if value == 1:
+            warnings.warn("There is no dimensionaity reduction in symbolic representation.")
+        
+        self._ws = value
+            
+            
+            
+    @random_seed.setter
+    def random_seed(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for random_seed.")
+        
+        self._random_seed = value
+        
+
+
+    @property
+    def random_seed(self):
+        return self._random_seed
+
+
+
     def encode(self, string):
         """
         Construct features and target labels for symbols and encode to numerical values.
