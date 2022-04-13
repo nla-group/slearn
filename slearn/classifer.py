@@ -335,6 +335,85 @@ class slearn(symbolicML):
         
 
 
+    @property
+    def random_seed(self):
+        return self._random_seed
+
+
+
+    @random_seed.setter
+    def random_seed(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for random_seed.")
+        
+        self._random_seed = value
+        
+
+
+    @property
+    def step(self):
+        return self._step
+
+
+
+    @step.setter
+    def step(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for step.")
+        
+        self._step = value
+            
+            
+            
+    @property
+    def ws(self):
+        return self._ws
+
+
+
+    @ws.setter
+    def ws(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for ws.")
+        
+        if value == 1:
+            warnings.warn("There is no dimensionaity reduction in symbolic representation.")
+        
+        self._ws = value
+            
+            
+            
+    @property
+    def verbose(self):
+        return self._verbose 
+
+
+
+    @verbose.setter
+    def verbose(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int numeric type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for verbose.")
+        
+        self._verbose = value
+            
+            
+            
     def set_symbols(self, series, **kwargs):
         """Transform time series to specified symplic representation
         
@@ -455,3 +534,7 @@ class slearn(symbolicML):
             raise ValueError("Please ensure ws is integer!")
         if not isinstance(self.classifier_name, str):
             raise ValueError("Please ensure classifier_name is string type!")
+
+            
+            
+            
