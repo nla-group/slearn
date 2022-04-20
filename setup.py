@@ -12,7 +12,7 @@ setuptools.setup(
     install_requires=["numpy", "scikit-learn", "pandas", "lightgbm", "requests"],
     include_dirs=[numpy.get_include()],
     long_description=long_description,
-    author="Roberto Cahuantzi, Xinye Chen, & Stefan Güttel",
+    author="Roberto Cahuantzi, Xinye Chen, Stefan Güttel",
     maintainer="nla-group",
     author_email="stefan.guettel@manchester.ac.uk",
     classifiers=["Intended Audience :: Science/Research",
