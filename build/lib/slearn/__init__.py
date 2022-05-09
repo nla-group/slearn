@@ -29,4 +29,4 @@
 from .tools import *
 from .symbols import SAX, fABBA
 from .classifer import symbolicML, slearn
-from .mksgenerate import random_generate, markovChain_gererate
+from .sgenerate import random_generate, mkc_gererate

@@ -37,7 +37,6 @@ import warnings
 
 
 
-
 def Symbols(n=52):
     '''Creation of a dictionary with the compression symbols, restricted
     up to 52 alphabetical characters from 'A' to 'z'

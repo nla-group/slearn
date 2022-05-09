@@ -60,12 +60,12 @@ class symbolicML:
     Parameters
     ----------
     classifier_name - str, default=MLPClassifier, 
-                      optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
-                      "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
-                      "LogisticRegression", "AdaBoostClassifier",
-                      "RandomForestClassifier", "GaussianNB",
-                      "DeepForest", "LGBM",
-                      "SVC", "RBF"}: 
+          optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
+          "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
+          "LogisticRegression", "AdaBoostClassifier",
+          "RandomForestClassifier", "GaussianNB",
+          "DeepForest", "LGBM",
+          "SVC", "RBF"}: 
         The classifier you specify for symbols prediction.
 
     ws - int, default=3:
@@ -92,7 +92,68 @@ class symbolicML:
         self.mu = 0
         self.scl = 1
         
+
+
+    @property
+    def random_seed(self):
+        return self._random_seed
+
+
+
+    @random_seed.setter
+    def random_seed(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int type.')
         
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for random_seed.")
+        
+        self._random_seed = value
+        
+
+
+    @property
+    def ws(self):
+        return self._ws
+
+
+
+    @ws.setter
+    def ws(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for ws.")
+        
+        if value == 1:
+            warnings.warn("There is no dimensionaity reduction in symbolic representation.")
+        
+        self._ws = value
+            
+            
+            
+    @property
+    def verbose(self):
+        return self._verbose 
+
+
+
+    @verbose.setter
+    def verbose(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int numeric type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for verbose.")
+        
+        self._verbose = value
+        
+
+
     def encode(self, string):
         """
         Construct features and target labels for symbols and encode to numerical values.
@@ -274,6 +335,85 @@ class slearn(symbolicML):
         
 
 
+    @property
+    def random_seed(self):
+        return self._random_seed
+
+
+
+    @random_seed.setter
+    def random_seed(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for random_seed.")
+        
+        self._random_seed = value
+        
+
+
+    @property
+    def step(self):
+        return self._step
+
+
+
+    @step.setter
+    def step(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for step.")
+        
+        self._step = value
+            
+            
+            
+    @property
+    def ws(self):
+        return self._ws
+
+
+
+    @ws.setter
+    def ws(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected a float or int type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for ws.")
+        
+        if value == 1:
+            warnings.warn("There is no dimensionaity reduction in symbolic representation.")
+        
+        self._ws = value
+            
+            
+            
+    @property
+    def verbose(self):
+        return self._verbose 
+
+
+
+    @verbose.setter
+    def verbose(self, value):
+        if not isinstance(value, float) and not isinstance(value,int):
+            raise TypeError('Expected int numeric type.')
+        
+        if value < 0:
+            raise ValueError(
+                "Please feed an correct value for verbose.")
+        
+        self._verbose = value
+            
+            
+            
     def set_symbols(self, series, **kwargs):
         """Transform time series to specified symplic representation
         
@@ -384,13 +524,23 @@ class slearn(symbolicML):
 
 
     def params_secure(self):
+        """Check parameter settings"""
+        
         if not isinstance(self.method, str):
             raise ValueError("Please ensure method is string type!")
+            
         if not (isinstance(self.random_seed, float) or isinstance(self.random_seed, int)):
             raise ValueError("Please ensure random_seed is numeric type!")
+            
         if (not isinstance(self.ws, int)) and self.ws > 0:
             raise ValueError("Please ensure ws is integer!")
+            
         if (not isinstance(self.step, int)) and self.step > 0:
             raise ValueError("Please ensure ws is integer!")
+            
         if not isinstance(self.classifier_name, str):
             raise ValueError("Please ensure classifier_name is string type!")
+
+            
+            
+            

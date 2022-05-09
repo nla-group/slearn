@@ -5,7 +5,7 @@
 
 import numpy as np
 
-class MarkovChain(object):
+class markovChain(object):
     def __init__(self, transition_prob):
         """
         Initialize the MarkovChain instance.
@@ -61,7 +61,7 @@ class MarkovChain(object):
     
     
     
-def MarkovMatrix(n = 26):
+def markovMatrix(n = 26):
     '''
     Generates a Markov matrix for transition among n symbols
 

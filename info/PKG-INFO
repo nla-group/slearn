@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: slearn
-Version: 0.2.4
+Version: 0.2.5
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn.git
-Author: nla-group
+Author: Roberto Cahuantzi, Xinye Chen, Stefan Güttel
 Author-email: stefan.guettel@manchester.ac.uk
 Maintainer: nla-group
 Maintainer-email: stefan.guettel@manchester.ac.uk

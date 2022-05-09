@@ -3,8 +3,9 @@ README.rst
 setup.py
 slearn/__init__.py
 slearn/classifer.py
+slearn/dmetric.py
 slearn/mkc.py
-slearn/mksgenerate.py
+slearn/sgenerate.py
 slearn/symbols.py
 slearn/tools.py
 slearn.egg-info/PKG-INFO
