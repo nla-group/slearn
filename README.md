@@ -5,7 +5,6 @@
 [![PyPI version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Anaconda-Server Badge](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/slearn/badges/installer/conda.svg)](https://conda.anaconda.org/conda-forge)
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
 
 
