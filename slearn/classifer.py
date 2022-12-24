@@ -48,8 +48,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 import warnings
-            
-            
+import os            
 
 
 class symbolicML:
@@ -81,6 +80,9 @@ class symbolicML:
     """
         
     def __init__(self, classifier_name='MLPClassifier', ws=3, random_seed=0, verbose=0):
+
+        os.environ['PYTHONHASHSEED']=str(42)
+
         self.classifier_name = classifier_name 
         self.init_classifier()
         self.random_seed = random_seed
