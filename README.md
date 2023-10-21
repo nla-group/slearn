@@ -68,8 +68,6 @@ year="2023",
 publisher="Springer Nature Switzerland",
 pages="771--785"
 }
-
-
 ```
 
 
