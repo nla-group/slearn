@@ -58,17 +58,18 @@ Our [documentation](https://slearn.readthedocs.io/en/latest/?badge=latest) is av
 
 If you use the function of ``LZWStringLibrary`` in your research, please cite:
 ```bibtex
-@techreport{CCG21,
-  title   = {{A comparison of LSTM and GRU networks for learning symbolic sequences}},
-  author  = {Cahuantzi, Roberto and Chen, Xinye and G\"{u}ttel, Stefan},
-  year    = {2021},
-  number  = {arXiv:2107.02248},
-  pages   = {12},
-  institution = {The University of Manchester},
-  address = {UK},
-  type    = {arXiv EPrint},
-  url     = {https://arxiv.org/abs/2107.02248}
+@InProceedings{10.1007/978-3-031-37963-5_53,
+author="Cahuantzi, Roberto
+and Chen, Xinye
+and G{\"u}ttel, Stefan",
+title="A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences",
+booktitle="Intelligent Computing",
+year="2023",
+publisher="Springer Nature Switzerland",
+pages="771--785"
 }
+
+
 ```
 
 
