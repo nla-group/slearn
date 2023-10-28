@@ -77,7 +77,7 @@ def symbolsAssign(clusters):
 class SAX:
     """Modified from https://github.com/nla-group/TARZAN"""
    
-    def __init__(self, *, width = 2, n_paa_segments=None, k = 5, return_list=False, verbose=True):
+    def __init__(self, *, width=2, n_paa_segments=None, k=5, return_list=False, verbose=True):
         if n_paa_segments is not None:
             # if verbose == True:
                 # warnings.warn("Set width to ``len(ts) // n_paa_segments''")
@@ -86,47 +86,62 @@ class SAX:
         else:
             self.n_paa_segments = None
             self.width = width
-        self.number_of_symbols = k
+
+        self.verbose = verbose
+        self.breakpoints = None
+        self.breakpoint_values = None
+
+        self.num_of_symbols = k
         self.return_list = return_list
         self.mu, self.std = 0, 1
         
 
-    def fit_transform(self, time_series):
-        return self.fit(time_series)
+    def fit_transform(self, ts):
+        return self.fit(ts)
 
     
-    def fit(self, time_series):
+    def fit(self, ts):
         if self.width is None:
-            self.width = len(time_series) // self.n_paa_segments
+            self.width = len(ts) // self.n_paa_segments
             
-        self.mu = np.mean(time_series)
-        self.std = np.std(time_series)
+        self.mu = np.mean(ts)
+        self.std = np.std(ts)
+
         if self.std == 0:
             self.std = 1
-        time_series = (time_series - self.mu)/self.std
-        compressed_time_series = self.paa_mean(time_series)
-        symbolic_time_series = self._digitize(compressed_time_series)
-        return symbolic_time_series
+
+        ts = (ts - self.mu)/self.std
+        compressed_ts = self.paa_mean(ts)
+        symbolic_ts = self._digitize(compressed_ts)
+        if self.verbose:
+            print("Compress {0} time series points into {1} pieces and {2} symbols.".format(
+                len(ts), len(compressed_ts), self.num_of_symbols
+            ))
 
 
-    def transform(self, time_series):
-        time_series = (time_series - self.mu)/self.std
-        compressed_time_series = self.paa_mean(time_series)
-        symbolic_time_series = self._digitize(compressed_time_series)
-        return symbolic_time_series
+        return symbolic_ts
+
+
+    def transform(self, ts):
+        ts = (ts - self.mu)/self.std
+        compressed_ts = self.paa_mean(ts)
+        symbolic_ts = self._digitize(compressed_ts)
+        return symbolic_ts
 
     
-    def inverse_transform(self, symbolic_time_series):
-        compressed_time_series = self._reverse_digitize(symbolic_time_series)
-        time_series = self._reconstruct(compressed_time_series)
-        time_series = time_series*self.std + self.mu
-        return time_series
+    def inverse_transform(self, symbolic_ts):
+        compressed_ts = self._reverse_digitize(symbolic_ts)
+        ts = self._reconstruct(compressed_ts)
+        ts = ts*self.std + self.mu
+        return ts
 
     
     def paa_mean(self, ts):
         if len(ts) % self.width != 0:
             warnings.warn("Result truncates, width does not divide length")
-        return [np.mean(ts[i*self.width:np.min([len(ts), (i+1)*self.width])]) for i in range(int(np.floor(len(ts)/self.width)))]
+        return [np.mean(
+            ts[i*self.width:np.min([len(ts), (i+1)*self.width])]
+            ) for i in range(int(np.floor(len(ts)/self.width)))]
 
     
     def _digitize(self, ts):
@@ -136,18 +151,20 @@ class SAX:
     
     def _gaussian_breakpoints(self, ts):
         # Construct Breakpoints
-        breakpoints = np.hstack(
-            (norm.ppf([float(a) / self.number_of_symbols for a in range(1, self.number_of_symbols)], scale=1), 
-             np.inf))
+        if self.breakpoints is None:
+            self.breakpoints = self.breakpoints_build(self.num_of_symbols)
+        
         labels = []
         for i in ts:
-            for j in range(len(breakpoints)):
-                if i < breakpoints[j]:
+            for j in range(len(self.breakpoints)):
+                if i < self.breakpoints[j]:
                     labels.append(j)
                     break
+
         strings, self.hashm = symbolsAssign(labels)
         if not self.return_list:
             strings = "".join(strings)
+
         return strings
 
     
@@ -164,16 +181,26 @@ class SAX:
     
     
     def _reverse_gaussian_breakpoints(self, symbols):
-        breakpoint_values = norm.ppf([float(a) / (2 * self.number_of_symbols) for a in range(1, 2 * self.number_of_symbols, 2)], scale=1)
+        if self.breakpoint_values is None:
+            self.breakpoint_values = self.breakpoint_values_build(self.num_of_symbols)
+
         ts = []
         for s in symbols:
             j = self.hashm[s]
-            ts.append(breakpoint_values[j])
+            ts.append(self.breakpoint_values[j])
         return ts
     
+    def breakpoints_build(self, num_of_symbols):
+        return np.hstack(
+            (norm.ppf([float(a) / num_of_symbols for a in range(1, num_of_symbols)], scale=1), 
+             np.inf))
     
+    def breakpoint_values_build(self, num_of_symbols):
+        return norm.ppf(
+                [float(a) / (2 * num_of_symbols) for a in range(1, 2 * num_of_symbols, 2)], scale=1)
 
-    
+
+
 # python implementation for aggregation
 def aggregate(data, sorting="2-norm", tol=0.5): # , verbose=1
     """aggregate the data
@@ -383,8 +410,8 @@ class fABBA:
     def inverse_transform(self, strings, start=0):
         pieces = self.inverse_digitize(strings, self.centers, self.hashmap)
         pieces = self.quantize(pieces)
-        time_series = self.inverse_compress(pieces, start)
-        return time_series
+        ts = self.inverse_compress(pieces, start)
+        return ts
 
     
 
@@ -416,15 +443,15 @@ class fABBA:
     def inverse_compress(self, pieces, start):
         """Modified from ABBA package, please see ABBA package to see guidance."""
         
-        time_series = [start]
+        ts = [start]
         # stitch linear piece onto last
         for j in range(0, len(pieces)):
             x = np.arange(0,pieces[j,0]+1)/(pieces[j,0])*pieces[j,1]
             #print(x)
-            y = time_series[-1] + x
-            time_series = time_series + y[1:].tolist()
+            y = ts[-1] + x
+            ts = ts + y[1:].tolist()
 
-        return time_series
+        return ts
     
     
     
@@ -519,8 +546,8 @@ class ABBA:
     def inverse_transform(self, strings, start=0):
         pieces = self.inverse_digitize(strings, self.centers, self.hashmap)
         pieces = self.quantize(pieces)
-        time_series = self.inverse_compress(pieces, start)
-        return time_series
+        ts = self.inverse_compress(pieces, start)
+        return ts
 
     
 
@@ -552,14 +579,14 @@ class ABBA:
     def inverse_compress(self, pieces, start):
         """Modified from ABBA package, please see ABBA package to see guidance."""
         
-        time_series = [start]
+        ts = [start]
         # stitch linear piece onto last
         for j in range(0, len(pieces)):
             x = np.arange(0,pieces[j,0]+1)/(pieces[j,0])*pieces[j,1]
             #print(x)
-            y = time_series[-1] + x
-            time_series = time_series + y[1:].tolist()
+            y = ts[-1] + x
+            ts = ts + y[1:].tolist()
 
-        return time_series
+        return ts
     
     
