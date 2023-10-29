@@ -50,7 +50,6 @@ slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the 
 | [Quadratic Discriminant Analysis](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)  | 'QuadraticDiscriminantAnalysis' |
 | [AdaBoost classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)  | 'AdaBoostClassifier' |
 | [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier)  | 'RandomForestClassifier' |
-| [LightGBM](https://lightgbm.readthedocs.io/en/latest/) | 'LGBM' |
 
 Our [documentation](https://slearn.readthedocs.io/en/latest/?badge=latest) is available.
 
