@@ -54,8 +54,9 @@ slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the 
 Our [documentation](https://slearn.readthedocs.io/en/latest/?badge=latest) is available.
 
 ## Citation
+This slearn implementation is maintained by Roberto Cahuantzi (University of Manchester), Xinye Chen (Charles University Prague),  and Stefan Güttel (University of Manchester). If you use the function of ``LZWStringLibrary`` in your research, or if you find slearn useful in your work, please consider citing the paper below. If you have any problems or questions, just drop us an email.
 
-If you use the function of ``LZWStringLibrary`` in your research, please cite:
+ 
 ```bibtex
 @InProceedings{10.1007/978-3-031-37963-5_53,
 author="Cahuantzi, Roberto
