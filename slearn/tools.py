@@ -28,16 +28,13 @@
 
 
 # https://github.com/robcah/RNNExploration4SymbolicTS
-from .symbols import *
 from random import randint
 import pandas as pd
 import numpy as np
 from itertools import product
 import warnings
 
-
-
-def Symbols(n=52):
+def _symbols(n=52):
     '''Creation of a dictionary with the compression symbols, restricted
     up to 52 alphabetical characters from 'A' to 'z'
     
@@ -58,9 +55,7 @@ def Symbols(n=52):
     
     return dict_symbols
 
-
-
-def LZWcompress(uncompressed):
+def lzwcompress(uncompressed):
     """LZW compress a string to a list of numerical codes, it is 
     restricted to alphabetical values from 'A' to 'z'.
     Based on from https://rosettacode.org/wiki/LZW_compression#Python
@@ -79,7 +74,7 @@ def LZWcompress(uncompressed):
     """
  
     # Build the dictionary.
-    dictionary = Symbols()
+    dictionary = _symbols()
     dict_size = len(dictionary)
  
     w = ''
@@ -105,8 +100,7 @@ def LZWcompress(uncompressed):
     return result
  
  
-
-def LZWdecompress(compressed):
+def lzwdecompress(compressed):
     """ LZW decompression from a list of integers to a string.
 
     Parameters
@@ -123,7 +117,7 @@ def LZWdecompress(compressed):
     """
 
     # Build the dictionary.
-    dictionary = Symbols()
+    dictionary = _symbols()
     # Swapping keys and values
     dictionary = {value:key for key, value in dictionary.items()}
     dict_size = len(dictionary)
@@ -149,9 +143,7 @@ def LZWdecompress(compressed):
     
     return string 
     
-    
-    
-def Reduce(s):
+def reduce(s):
     """ Reduce a string 's' to its shortest period.
 
     Parameters
@@ -178,10 +170,7 @@ def Reduce(s):
 
     return s
 
-
-
-def LZWStringGenerator(nr_symbols, target_complexity, 
-                       priorise_complexity=True):
+def lzw_string_generator(nr_symbols, target_complexity, priorise_complexity=True, random_state=42):
     """Generator of strings based on LZW complexity (elements within the 
         compression symbols' list). If complexity is priorised it will 
         stop the string creation until the aimed complexity is achieved.
@@ -190,8 +179,10 @@ def LZWStringGenerator(nr_symbols, target_complexity,
     ----------
     nr_symbols : int
         Aimed number of symbols to use to build the string.
+    
     target_complexity : int
         Aimed level of complexity for the string.
+
     priorise_complexity :  boolean, default True
         If true generates a string with complexity about target_complexity, 
         otherwise the generated string goes above the target complexity until 
@@ -200,10 +191,13 @@ def LZWStringGenerator(nr_symbols, target_complexity,
     Return
     ------
     str :
-        String produced within the specified parameters
+        String produced within the specified parameters.
+
     int :
         Level of LZW complexity.
     """
+
+    np.random.seed(random_state)
     
     # Caping the highest value of number of symbols to 52.
     if nr_symbols > 52:
@@ -213,12 +207,12 @@ def LZWStringGenerator(nr_symbols, target_complexity,
         nr_symbols = 52
     
     # Creation of symbol dictionary
-    symbols = Symbols()
+    symbols = _symbols()
 
     string = 'A'          # current string
     complexity_0 = 1      # current complexity of s
     symbol_max = 1 #65 + 1   # maximal potential symbol
-    symbols_pool = ''.join(list(Symbols().keys()))
+    symbols_pool = ''.join(list(_symbols().keys()))
     stop = True
     
     # Prevents the error of trying to generate a string of complexity >1 with 
@@ -248,7 +242,7 @@ def LZWStringGenerator(nr_symbols, target_complexity,
         # Limits the pool of symbols to select
         symbol_i = randint(0, symbol_max-1)
         string += symbols_pool[symbol_i]
-        complexity_0 = len(LZWcompress(Reduce(string)))
+        complexity_0 = len(lzwcompress(reduce(string)))
 
         # Switch to create strings without priorising complexity
         if not priorise_complexity:
@@ -256,14 +250,10 @@ def LZWStringGenerator(nr_symbols, target_complexity,
             
     return string, complexity_0
     
-    
-    
-def LZWStringLibrary(symbols=(1,10,5), complexity=(5,25,5), 
-                     symbols_range_distribution=None, 
-                     complexity_range_distribution=None,
-                     iterations=1, save_csv=False, 
-                     priorise_complexity=True):
-    '''Serialiser generator of string libraries based on LZWStringGenerator
+def lzw_string_library(symbols=(1,10,5), complexity=(5,25,5), 
+                       symbols_range_distribution=None, complexity_range_distribution=None,
+                       iterations=1, save_csv=False, priorise_complexity=True):
+    '''Serialiser generator of string libraries based on lzw_string_generator
 
     Parameters
     ----------
@@ -273,23 +263,29 @@ def LZWStringLibrary(symbols=(1,10,5), complexity=(5,25,5),
         it will return strings produced serially within the specified 
         range (start,stop,values). If the array is larger than three it will 
         produce strings with values within the array.
+        
     complexity : integer or array-like, default (5,25,5)
         If integer the function will return a collection of strings with the 
         specified LZW complexity. If it is an array-like  with value two or three 
         it will return strings produced serially within the specified 
         range (start,stop,values). If the array is larger than three it will 
         produce strings with values within the array.
+        
     symbols_range_distribution : str, default None
         Type of distribution of values within the range specified on symbols.
         Only accept the strings 'linear' or 'geometrical'.
+        
     complexity_range_distribution : str, default None
         Type of distribution of values within the range specified on complexity.
         Only accept the strings 'linear' or 'geometrical'.
+        
     iterations : int, default 1
         Defines the number of iterations of strings to generate within the set 
         parameters.
+        
     save_csv: boolean, default False
         Saves the returned data frame into a CSV file.
+        
     priorise_complexity : boolean, default True
         If true generates a string with complexity about target_complexity, 
         otherwise the generated string goes above the target complexity until 
@@ -359,18 +355,20 @@ def LZWStringLibrary(symbols=(1,10,5), complexity=(5,25,5),
 
     for n, i in enumerate(iterator, 1):
         _, symb_i, complex_i = i
-        str_, str_complex = LZWStringGenerator(symb_i, complex_i,
-                                priorise_complexity=priorise_complexity)
+        print(n, i)
+        str_, str_complex = lzw_string_generator(symb_i, complex_i, priorise_complexity=priorise_complexity, random_state=n)
+        
         if not isinstance(str_, str):
             nr_symbols = 0
             str_length = 0
         else: 
             nr_symbols = len(set(str_))
             str_length = len(str_)
-        df = pd.DataFrame([[nr_symbols, str_complex, str_length, str_]], 
-                                        columns = cols)
-        string_lib = string_lib.append(df)
         
+        df = pd.DataFrame([[nr_symbols, str_complex, str_length, str_]], columns = cols)
+        # string_lib = string_lib.append(df)
+        string_lib = pd.concat([string_lib, df], ignore_index=True)
+
         # To show level of progress
         print(f'\rProcessing: {n} of {n_iter}', end = '\r')
   
