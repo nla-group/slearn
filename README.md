@@ -31,6 +31,20 @@ To check which version you install, please use:
 conda list slearn
 ```
 
+## Usage
+
+```python
+from slearn import *
+df_strings = lzw_string_library(symbols=3, complexity=[4, 9], random_state=0)
+print(df_strings)
+```
+
+Output:
+```
+  nr_symbols LZW_complexity length       string
+0          3              4      4         ACBB
+1          3              9     11  CBACBCABABB
+```
 
 ## Model support
 
