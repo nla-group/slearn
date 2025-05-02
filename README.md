@@ -96,4 +96,7 @@ This project is licensed under the terms of the [MIT license](https://github.com
 ## Contributing
 Contributing to this repo is welcome! We will work through all the pull requests and try to merge into main branch. 
 
-
+TO DO LIST:
+* more symbolic time series methods included
+* comphrehensive documentation
+* performance optimization 
