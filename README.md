@@ -33,6 +33,9 @@ conda list slearn
 
 ## Usage
 
+### Generate strings with customized complexity
+``skearn`` enables the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. It also contains the tools for the exploration of the hyperparameter space of commonly used RNNs as well as novel ones.
+
 ```python
 from slearn import *
 df_strings = lzw_string_library(symbols=3, complexity=[4, 9], random_state=0)
