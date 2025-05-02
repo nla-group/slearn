@@ -92,13 +92,6 @@ pages="771--785"
 This project is licensed under the terms of the [MIT license](https://github.com/nla-group/classix/blob/master/LICENSE).
 
 
-<p align="left">
-  <a>
-    <img alt="CLASSIX" src="https://raw.githubusercontent.com/nla-group/classix/master/docs/_images/nla_group.png" width="240" />
-  </a>
-</p>
-
-
 
 ## Contributing
 Contributing to this repo is welcome! We will work through all the pull requests and try to merge into main branch. 
