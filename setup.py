@@ -13,7 +13,8 @@ INREUIRES=["numpy>=1.7.2",
            "scikit-learn",
            "pandas",
            "lightgbm",
-           "requests"
+           "requests",
+           "textdistance"
           ]
 
 
