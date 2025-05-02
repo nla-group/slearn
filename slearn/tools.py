@@ -28,6 +28,36 @@
 
 
 # https://github.com/robcah/RNNExploration4SymbolicTS
+# Copyright (c) 2021, nla group, manchester
+# All rights reserved. 
+
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+# https://github.com/robcah/RNNExploration4SymbolicTS
 from random import randint
 import pandas as pd
 import numpy as np
@@ -252,7 +282,7 @@ def lzw_string_generator(nr_symbols, target_complexity, priorise_complexity=True
     
 def lzw_string_library(symbols=(1,10,5), complexity=(5,25,5), 
                        symbols_range_distribution=None, complexity_range_distribution=None,
-                       iterations=1, save_csv=False, priorise_complexity=True):
+                       iterations=1, save_csv=False, priorise_complexity=True, random_state=42):
     '''Serialiser generator of string libraries based on lzw_string_generator
 
     Parameters
@@ -355,8 +385,8 @@ def lzw_string_library(symbols=(1,10,5), complexity=(5,25,5),
 
     for n, i in enumerate(iterator, 1):
         _, symb_i, complex_i = i
-        print(n, i)
-        str_, str_complex = lzw_string_generator(symb_i, complex_i, priorise_complexity=priorise_complexity, random_state=n)
+        # print(n, i)
+        str_, str_complex = lzw_string_generator(symb_i, complex_i, priorise_complexity=priorise_complexity, random_state=random_state+n)
         
         if not isinstance(str_, str):
             nr_symbols = 0
