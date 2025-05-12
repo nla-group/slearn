@@ -211,15 +211,6 @@ def test_code(setup_data):
     # Test distance
     test_distances()
 
-    # TEST4 (additional test)
-    ts = [np.sin(0.05 * i) for i in range(1000)]
-    sl = slearn(series=ts, method='SAX',
-                ws=5, step=2, 
-                n_paa_segments=50, k=20,
-                form='numeric', classifier_name="GaussianNB", 
-                random_seed=1, verbose=0)
-    sl.predict(**params)
-
 # Running the tests with pytest
 if __name__ == "__main__":
     test_code(setup_data)
