@@ -1,24 +1,22 @@
 import setuptools
-import numpy
 import platform
 import importlib
 import logging
 
 PACKAGE_NAME = "slearn"
 VERSION = "0.2.6"
-SETREQUIRES=["numpy"]
-MAINTAINER="nla-group"
-EMAIL="stefan.guettel@manchester.ac.uk"
-INREUIRES=["numpy>=1.7.2",
-           "scikit-learn",
-           "pandas",
-           "lightgbm",
-           "requests",
-           "textdistance"
-          ]
-
-
-AUTHORS="Roberto Cahuantzi, Xinye Chen, Stefan Güttel"
+SETUP_REQUIRES = ["numpy>=1.17.2"] 
+INSTALL_REQUIRES = [  
+    "numpy>=1.17.2",
+    "scikit-learn",
+    "pandas",
+    "lightgbm",
+    "requests",
+    "textdistance"
+]
+MAINTAINER = "nla-group"
+EMAIL = "stefan.guettel@manchester.ac.uk"
+AUTHORS = "Roberto Cahuantzi, Xinye Chen, Stefan Güttel"
 
 with open("README.rst", 'r') as f:
     long_description = f.read()
@@ -31,44 +29,44 @@ if platform.python_implementation() == "PyPy":
     NUMPY_MIN_VERSION = "1.19.2"
 else:
     NUMPY_MIN_VERSION = "1.17.2"
-   
-    
-metadata = {"name":PACKAGE_NAME,
-            "packages":[PACKAGE_NAME],
-            "version":VERSION,
-            "setup_requires":SETREQUIRES,
-            "install_requires":INREUIRES,
-            "include_dirs":[numpy.get_include()],
-            "long_description":long_description,
-            "author":AUTHORS,
-            "maintainer":MAINTAINER,
-            "author_email":EMAIL,
-            "classifiers":[
-            "Intended Audience :: Science/Research",
-            "Intended Audience :: Developers",
-            "Programming Language :: Python",
-            "Topic :: Software Development",
-            "Topic :: Scientific/Engineering",
-            "Operating System :: Microsoft :: Windows",
-            "Operating System :: Unix",
-            "Programming Language :: Python :: 3",
-            ],
-            "maintainer_email":EMAIL,
-            "description":"A package linking symbolic representation with sklearn for time series prediction",
-            "long_description_content_type":'text/x-rst',
-            "url":"https://github.com/nla-group/slearn.git",
-            "license":'MIT License'
+
+metadata = {
+    "name": PACKAGE_NAME,
+    "packages": [PACKAGE_NAME],
+    "version": VERSION,
+    "setup_requires": SETUP_REQUIRES,
+    "install_requires": INSTALL_REQUIRES,
+    # Defer numpy.get_include() to avoid requiring numpy at module level
+    "include_dirs": [],  # Will be set in setup_package
+    "long_description": long_description,
+    "author": AUTHORS,
+    "maintainer": MAINTAINER,
+    "author_email": EMAIL,
+    "classifiers": [
+        "Intended Audience :: Science/Research",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python",
+        "Topic :: Software Development",
+        "Topic :: Scientific/Engineering",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: Unix",
+        "Programming Language :: Python :: 3",
+    ],
+    "maintainer_email": EMAIL,
+    "description": "A package linking symbolic representation with sklearn for time series prediction",
+    "long_description_content_type": 'text/x-rst',
+    "url": "https://github.com/nla-group/slearn.git",
+    "license": 'MIT License'
 }
-            
 
 class InvalidVersion(ValueError):
-    """raise invalid version error"""
+    """Raise invalid version error"""
 
-    
 def check_package_status(package, min_version):
     """
-    check whether given package.
+    Check whether given package is installed and meets the minimum version.
     """
+    import traceback
     package_status = {}
     try:
         module = importlib.import_module(package)
@@ -80,33 +78,27 @@ def check_package_status(package, min_version):
         package_status["up_to_date"] = False
         package_status["version"] = ""
 
-    req_str = "slearn requires {} >= {}.\n".format(package, min_version)
+    req_str = f"slearn requires {package} >= {min_version}.\n"
 
-    if package_status["up_to_date"] is False:
+    if not package_status["up_to_date"]:
         if package_status["version"]:
             raise ImportError(
-                "Your installation of {} {} is out-of-date.\n{}".format(
-                    package, package_status["version"], req_str
-                )
+                f"Your installation of {package} {package_status['version']} is out-of-date.\n{req_str}"
             )
         else:
             raise ImportError(
-                "{} is not installed.\n{}{}".format(package, req_str)
+                f"{package} is not installed.\n{req_str}"
             )
 
-
 def setup_package():
+    import numpy  # Import numpy here, after setup_requires is processed
+    metadata["include_dirs"] = [numpy.get_include()]  # Set include_dirs dynamically
     check_package_status("numpy", NUMPY_MIN_VERSION)
-    
-    setuptools.setup(
-        **metadata
-    )
-    
-
+    setuptools.setup(**metadata)
 
 if __name__ == "__main__":
     try:
         setup_package()
     except ext_errors as ext:
-        log.warn(ext)
-        log.warn("failure Installation.")
+        log.warning(f"{ext}")
+        log.warning("Failed installation.")
