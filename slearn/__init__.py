@@ -30,6 +30,7 @@ from .tools import *
 # from .symbols import SAX, fABBA
 from .classifer import symbolicML, slearn
 from .sgenerate import random_generate, mkc_gererate
+from .dmetric import *
 
 import os
-os.environ['PYTHONHASHSEED']=str(42)
+os.environ['PYTHONHASHSEED'] = str(42)

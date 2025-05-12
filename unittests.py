@@ -2,6 +2,7 @@ import numpy as np
 import pickle
 from slearn import symbolicML, slearn
 from slearn.symbols import *
+from slearn.dmetric import *
 import pytest
 
 def test_sax_variant_with_rmse(test_function, ts, t, name, is_multivariate=False):
@@ -108,6 +109,27 @@ def setup_data():
     ts_short = np.sin(t_short)  # Edge case: short series
     
     return t, ts, ts_multi, ts_constant, ts_short
+
+
+def test_distances():
+    # Test Damerau-Levenshtein
+    assert damerau_levenshtein_distance("cat", "act") == 1  # Transposition
+    assert damerau_levenshtein_distance("cat", "hat") == 1  # Substitution
+    assert damerau_levenshtein_distance("cat", "cats") == 1  # Insertion
+    assert damerau_levenshtein_distance("cat", "") == 3  # Deletion
+    assert damerau_levenshtein_distance("kitten", "sitting") == 3  # Complex case
+    
+    # Test Jaro-Winkler
+    assert abs(jaro_winkler_distance("martha", "marhta") - 0.961) < 0.001  # Common example
+    assert jaro_winkler_distance("dixon", "dicksonx") > 0.8  # Prefix match
+    assert jaro_winkler_distance("cat", "") == 0.0  # Empty string
+    assert jaro_winkler_distance("same", "same") == 1.0  # Identical strings
+    assert jaro_winkler_distance("abc", "xyz") < 0.1  # No similarity
+    
+    print("All tests passed!")
+
+# Run tests
+test_distances()
 
 def test_code(setup_data):
     t, ts, ts_multi, ts_constant, ts_short = setup_data

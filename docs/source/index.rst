@@ -33,6 +33,7 @@ To install the current release via PIP use:
 
    symbols_machine_learning
    predict_with_symbols_representation
+   dmetric
    api.rst
    license
 
