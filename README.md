@@ -90,165 +90,27 @@ asax = ASAX(n_segments=10, alphabet_size=8)
 rmse = test_sax_variant(asax, ts, t, "aSAX")
 ```
 
-### measure distance
-ilarity metrics, each strictly adhering to their formal definitions. All implementations are robust, handle edge cases (e.g., empty strings), and are tested for correctness.
+### String distance and similarity metrics
 
-|
- Metric Name                  
-|
- Type       
-|
- Key Features                                                                 
-|
- Complexity 
-|
- Primary Use Cases                          
-|
-|
-------------------------------
-|
-------------
-|
-------------------------------------------------------------------------------
-|
-------------
-|
---------------------------------------------
-|
-|
-**
-Levenshtein Distance
-**
-|
- Distance   
-|
- Counts insertions, deletions, substitutions needed to transform strings       
-|
- O(n*m)     
-|
- Spell-checking, sequence alignment         
-|
-|
-**
-Hamming Distance
-**
-|
- Distance   
-|
- Counts differing positions in equal-length strings                           
-|
- O(n)       
-|
- Error detection, fixed-length sequences    
-|
-|
-**
-Jaro Similarity
-**
-|
- Similarity 
-|
- Measures matching characters and transpositions, normalized to [0,1]         
-|
- O(n*m)     
-|
- Record linkage, fuzzy matching             
-|
-|
-**
-Jaro-Winkler Distance
-**
-|
- Similarity 
-|
- Enhances Jaro with prefix weighting, normalized to [0,1]                     
-|
- O(n*m)     
-|
- Name matching, deduplication               
-|
-|
-**
-Cosine Similarity
-**
-|
- Similarity 
-|
- Compares word frequency vectors, normalized to [0,1]                         
-|
- O(n)       
-|
- Text similarity, document comparison       
-|
-|
-**
-Cosine Bigram Similarity
-**
-|
- Similarity 
-|
- Compares bigram frequency vectors, normalized to [0,1]                       
-|
- O(n)       
-|
- Character-level text similarity            
-|
-|
-**
-LCS Distance
-**
-|
- Distance   
-|
- Based on longest common subsequence, distance = len(s1) + len(s2) - 2*len(LCS) 
-|
- O(n*m)     
-|
- Sequence alignment, diff tools             
-|
-|
-**
-Dice’s Coefficient
-**
-|
- Similarity 
-|
- Measures shared bigram overlap, normalized to [0,1]                          
-|
- O(n)       
-|
- Short text similarity, fuzzy matching       
-|
-|
-**
-Smith-Waterman Distance
-**
-|
- Distance   
-|
- Local alignment score (match=2, mismatch=-1, gap=-1), distance = -score      
-|
- O(n*m)     
-|
- Bioinformatics, partial sequence matching   
-|
-|
-**
-Damerau-Levenshtein Distance
-**
-|
- Distance 
-|
- Extends Levenshtein with transpositions                                      
-|
- O(n*m)     
-|
- Typo correction, spell-checking            
-|
+The following table summarizes the implemented string distance and similarity metrics, each strictly adhering to their formal definitions. All implementations are robust, handle edge cases (e.g., empty strings), and are tested for correctness.
+
+| Metric Name                        | Type       | Key Features                                                                      | Complexity | Primary Use Cases                        |
+|------------------------------------|------------|-----------------------------------------------------------------------------------|------------|------------------------------------------|
+| Levenshtein Distance               | Distance   | Counts insertions, deletions, substitutions needed to transform strings            | O(n*m)     | Spell-checking, sequence alignment       |
+| Hamming Distance                   | Distance   | Counts differing positions in equal-length strings                                | O(n)       | Error detection, fixed-length sequences  |
+| Jaro Similarity                    | Similarity | Measures matching characters and transpositions, normalized to [0,1]              | O(n*m)     | Record linkage, fuzzy matching           |
+| Jaro-Winkler Distance              | Similarity | Enhances Jaro with prefix weighting, normalized to [0,1]                          | O(n*m)     | Name matching, deduplication             |
+| Cosine Similarity                  | Similarity | Compares word frequency vectors, normalized to [0,1]                              | O(n)       | Text similarity, document comparison     |
+| Cosine Bigram Similarity           | Similarity | Compares bigram frequency vectors, normalized to [0,1]                            | O(n)       | Character-level text similarity          |
+| LCS Distance                       | Distance   | Based on longest common subsequence, distance = len(s1) + len(s2) - 2*len(LCS)    | O(n*m)     | Sequence alignment, diff tools           |
+| Dice’s Coefficient                 | Similarity | Measures shared bigram overlap, normalized to [0,1]                               | O(n)       | Short text similarity, fuzzy matching     |
+| Smith-Waterman Distance            | Distance   | Local alignment score (match=2, mismatch=-1, gap=-1), distance = -score           | O(n*m)     | Bioinformatics, partial sequence matching |
+| Damerau-Levenshtein Distance       | Distance   | Extends Levenshtein with transpositions                                           | O(n*m)     | Typo correction, spell-checking          |
 
 ## Notes
-- **Complexity**: \( n \) and \( m \) are the lengths of the input strings.
+- **Complexity**: `n` and `m` are the lengths of the input strings.
 - **Type**: Distance metrics return non-negative values (higher = more different); similarity metrics return [0,1] (1 = identical).
+- **Implementations**: Python functions with consistent docstrings, thoroughly tested for correctness, including edge cases.
 
 ```python
 from slearn.dmetric import *
