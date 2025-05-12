@@ -112,6 +112,64 @@ def setup_data():
 
 
 def test_distances():
+    # Test Levenshtein
+    assert levenshtein_distance("cat", "act") == 2  # Two substitutions
+    assert levenshtein_distance("cat", "hat") == 1  # One substitution
+    assert levenshtein_distance("cat", "cats") == 1  # One insertion
+    assert levenshtein_distance("cat", "") == 3  # Deletion
+    assert levenshtein_distance("kitten", "sitting") == 3  # Complex case
+    
+    # Test Hamming
+    assert hamming_distance("karolin", "kathrin") == 3  # Three differences
+    assert hamming_distance("10110", "11110") == 1  # One difference
+    try:
+        hamming_distance("cat", "cats")  # Should raise ValueError
+        assert False, "Hamming should raise ValueError for unequal lengths"
+    except ValueError:
+        pass
+    
+    # Test Jaro
+    assert abs(jaro_similarity("martha", "marhta") - 0.944) < 0.001  # Standard example
+    assert jaro_similarity("cat", "") == 0.0  # Empty string
+    assert jaro_similarity("same", "same") == 1.0  # Identical strings
+    
+    # Test Jaro-Winkler
+    assert abs(jaro_winkler_distance("martha", "marhta") - 0.961) < 0.001  # Standard example
+    assert jaro_winkler_distance("dixon", "dicksonx") > 0.8  # Prefix match
+    assert jaro_winkler_distance("cat", "") == 0.0  # Empty string
+    
+    # Test Cosine Similarity (Word-Based)
+    assert abs(cosine_similarity("cat hat", "hat cat") - 1.0) < 0.001  # Same words
+    assert cosine_similarity("cat", "dog") == 0.0  # No shared words
+    assert cosine_similarity("", "dog") == 0.0  # Empty string
+    
+    # Test Cosine Bigram Similarity
+    assert abs(cosine_bigram_similarity("cat", "cap") - 0.5) < 0.001  # Shared bigram "ca"
+    assert cosine_bigram_similarity("cat", "act") == 0.0  # No shared bigrams
+    assert cosine_bigram_similarity("cat", "dog") < 0.1  # Few shared bigrams
+    assert cosine_bigram_similarity("", "dog") == 0.0  # Empty string
+    
+    # Test LCS Distance
+    assert lcs_distance("kitten", "sitting") == 5  # LCS = "ittn"
+    assert lcs_distance("cat", "act") == 2  # LCS = "at" or "ct"
+    assert lcs_distance("cat", "") == 3  # Empty string
+    
+    
+    # Test Dice’s Coefficient
+    assert abs(dice_coefficient("night", "nacht") - 0.25) < 0.001  # One shared bigram
+    assert dice_coefficient("cat", "cat") == 1.0  # Identical
+    assert dice_coefficient("cat", "") == 0.0  # Empty string
+    
+    # Test Smith-Waterman
+    assert smith_waterman_distance("kitten", "sitting") < 0  # Negative due to inverse scoring
+    assert smith_waterman_distance("cat", "act") < 0  # Local alignment
+    assert smith_waterman_distance("cat", "") == 0  # No alignment possible
+    
+    
+    # Test Damerau-Levenshtein
+    assert damerau_levenshtein_distance("cat", "act") == 1  # Transposition
+    assert damerau_levenshtein_distance("cat", "hat") == 1  # Substitution
+    assert damerau_levenshtein_distance("cat", "cats") == 1  # Insertion
     # Test Damerau-Levenshtein
     assert damerau_levenshtein_distance("cat", "act") == 1  # Transposition
     assert damerau_levenshtein_distance("cat", "hat") == 1  # Substitution
@@ -128,8 +186,7 @@ def test_distances():
     
     print("All tests passed!")
 
-# Run tests
-test_distances()
+
 
 def test_code(setup_data):
     t, ts, ts_multi, ts_constant, ts_short = setup_data
@@ -140,9 +197,12 @@ def test_code(setup_data):
 
     # Run edge case tests (e.g., constant and short series)
     RMSE.extend(run_edge_case_tests(t, ts_constant, ts_short))
-
+    
     # Save results
     save_results(RMSE)
+
+    # Test distance
+    test_distances()
 
     # TEST4 (additional test)
     ts = [np.sin(0.05 * i) for i in range(1000)]
