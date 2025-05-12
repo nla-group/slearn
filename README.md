@@ -131,17 +131,12 @@ The following table summarizes the implemented string distance and similarity me
 | Normalized Smith-Waterman Distance       | Distance   | Local alignment score (match=2, mismatch=-1, gap=-1); normalized by max score     | O(n*m)     | Bioinformatics, partial sequence matching |
 | Normalized Damerau-Levenshtein Distance  | Distance   | Extends Levenshtein with transpositions; normalized by max length                 | O(n*m)     | Typo correction, spell-checking          |
 
-## Notes
 - **Complexity**: `n` and `m` are the lengths of the input strings.
 - **Type**: Distance metrics return [0,1] (higher = more different); similarity metrics return [0,1] (1 = identical).
 - **Normalization**:
   - Edit-based metrics (Levenshtein, Damerau-Levenshtein, Hamming, LCS) are normalized by `max(len(s1), len(s2))`, matching `textdistance`.
   - Smith-Waterman is normalized by the maximum possible alignment score.
   - Jaro, Jaro-Winkler, Cosine, and Dice use inherent normalization (e.g., vector magnitudes, bigram counts).
-- **Implementations**: Python functions with consistent docstrings, thoroughly tested, including edge cases.
-## Notes
-- **Complexity**: `n` and `m` are the lengths of the input strings.
-- **Type**: Distance metrics return non-negative values (higher = more different); similarity metrics return [0,1] (1 = identical).
 
 ```python
 from slearn.dmetric import *
