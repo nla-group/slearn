@@ -5,7 +5,7 @@ import importlib
 import logging
 
 PACKAGE_NAME = "slearn"
-VERSION = "0.2.5"
+VERSION = "0.2.6"
 SETREQUIRES=["numpy"]
 MAINTAINER="nla-group"
 EMAIL="stefan.guettel@manchester.ac.uk"
