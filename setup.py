@@ -1,104 +1,116 @@
 import setuptools
 import platform
-import importlib
+import importlib.util
 import logging
+import numpy as np
 
 PACKAGE_NAME = "slearn"
 VERSION = "0.2.6"
-SETUP_REQUIRES = ["numpy>=1.17.2"] 
-INSTALL_REQUIRES = [  
+SETUP_REQUIRES = ["numpy>=1.17.2"]
+INSTALL_REQUIRES = [
     "numpy>=1.17.2",
-    "scikit-learn",
-    "pandas",
-    "lightgbm",
-    "requests",
-    "textdistance"
+    "scikit-learn>=1.0.0",
+    "pandas>=1.0.0",
+    "lightgbm>=3.0.0",
+    "requests>=2.25.0",
+    "textdistance>=4.2.0"
 ]
-MAINTAINER = "nla-group"
+MAINTAINER = "NLA Group"
 EMAIL = "stefan.guettel@manchester.ac.uk"
 AUTHORS = "Roberto Cahuantzi, Xinye Chen, Stefan Güttel"
 
-with open("README.rst", 'r') as f:
-    long_description = f.read()
+# Read README.rst
+try:
+    with open("README.rst", encoding="utf-8") as f:
+        long_description = f.read()
+except FileNotFoundError:
+    long_description = "A package linking symbolic representation with sklearn for time series prediction"
 
-ext_errors = (ModuleNotFoundError, IOError, SystemExit)
-logging.basicConfig()
-log = logging.getLogger(__file__)
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-if platform.python_implementation() == "PyPy":
-    NUMPY_MIN_VERSION = "1.19.2"
-else:
-    NUMPY_MIN_VERSION = "1.17.2"
+# Set numpy minimum version based on Python implementation
+NUMPY_MIN_VERSION = "1.19.2" if platform.python_implementation() == "PyPy" else "1.17.2"
 
+# Package metadata
 metadata = {
     "name": PACKAGE_NAME,
-    "packages": [PACKAGE_NAME],
     "version": VERSION,
+    "packages": setuptools.find_packages(),
     "setup_requires": SETUP_REQUIRES,
     "install_requires": INSTALL_REQUIRES,
-    # Defer numpy.get_include() to avoid requiring numpy at module level
-    "include_dirs": [],  # Will be set in setup_package
+    "include_package_data": True,
     "long_description": long_description,
+    "long_description_content_type": "text/x-rst",
     "author": AUTHORS,
     "maintainer": MAINTAINER,
     "author_email": EMAIL,
+    "maintainer_email": EMAIL,
+    "description": "A package linking symbolic representation with sklearn for time series prediction",
+    "url": "https://github.com/nla-group/slearn",
+    "license": "MIT",
     "classifiers": [
         "Intended Audience :: Science/Research",
         "Intended Audience :: Developers",
-        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development",
         "Topic :: Scientific/Engineering",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: Unix",
-        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
     ],
-    "maintainer_email": EMAIL,
-    "description": "A package linking symbolic representation with sklearn for time series prediction",
-    "long_description_content_type": 'text/x-rst',
-    "url": "https://github.com/nla-group/slearn.git",
-    "license": 'MIT License'
+    "python_requires": ">=3.7",
 }
 
-class InvalidVersion(ValueError):
-    """Raise invalid version error"""
-
-def check_package_status(package, min_version):
+def check_package_status(package: str, min_version: str) -> None:
     """
-    Check whether given package is installed and meets the minimum version.
+    Check if a package is installed and meets the minimum version requirement.
+    
+    Args:
+        package: Name of the package to check
+        min_version: Minimum required version
+    
+    Raises:
+        ImportError: If package is not installed or version is outdated
     """
-    import traceback
-    package_status = {}
     try:
-        module = importlib.import_module(package)
-        package_version = module.__version__
-        package_status["up_to_date"] = package_version >= min_version
-        package_status["version"] = package_version
-    except ImportError:
-        traceback.print_exc()
-        package_status["up_to_date"] = False
-        package_status["version"] = ""
-
-    req_str = f"slearn requires {package} >= {min_version}.\n"
-
-    if not package_status["up_to_date"]:
-        if package_status["version"]:
+        spec = importlib.util.find_spec(package)
+        if spec is None:
+            raise ImportError(f"{package} is not installed.\nRequired: {package}>={min_version}")
+        
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        
+        package_version = getattr(module, "__version__", "0.0.0")
+        from pkg_resources import parse_version
+        
+        if parse_version(package_version) < parse_version(min_version):
             raise ImportError(
-                f"Your installation of {package} {package_status['version']} is out-of-date.\n{req_str}"
+                f"{package} version {package_version} is outdated.\nRequired: {package}>={min_version}"
             )
-        else:
-            raise ImportError(
-                f"{package} is not installed.\n{req_str}"
-            )
+    except Exception as e:
+        logger.error(f"Error checking package {package}: {str(e)}")
+        raise
 
 def setup_package():
-    import numpy  # Import numpy here, after setup_requires is processed
-    metadata["include_dirs"] = [numpy.get_include()]  # Set include_dirs dynamically
-    check_package_status("numpy", NUMPY_MIN_VERSION)
-    setuptools.setup(**metadata)
+    """Configure and run the package setup."""
+    try:
+        # Add numpy include directories
+        metadata["include_dirs"] = [np.get_include()]
+        
+        # Verify numpy version
+        check_package_status("numpy", NUMPY_MIN_VERSION)
+        
+        # Run setup
+        setuptools.setup(**metadata)
+    except Exception as e:
+        logger.error(f"Setup failed: {str(e)}")
+        raise
 
 if __name__ == "__main__":
-    try:
-        setup_package()
-    except ext_errors as ext:
-        log.warning(f"{ext}")
-        log.warning("Failed installation.")
+    setup_package()
