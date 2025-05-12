@@ -59,7 +59,6 @@ The following table summarizes the implemented Symbolic Aggregate Approximation 
 | **aSAX**  | Univariate       | Adaptive segments (based on local variance) | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from adaptive segments |
 | **ABBA**  | Univariate       | Adaptive piecewise linear segments | Length, increment | Clustering (k-means), symbols assigned to clusters | Piecewise linear from cluster centers |
 
-### Notes
 - **SAX**: Standard SAX with fixed-size segments and mean-based symbolization.
 - **SAX-TD**: Extends SAX with trend information (up, down, flat) per segment.
 - **eSAX**: Enhanced SAX capturing min, mean, and max per segment for smoother reconstruction.
