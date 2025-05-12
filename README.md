@@ -110,7 +110,6 @@ The following table summarizes the implemented string distance and similarity me
 ## Notes
 - **Complexity**: `n` and `m` are the lengths of the input strings.
 - **Type**: Distance metrics return non-negative values (higher = more different); similarity metrics return [0,1] (1 = identical).
-- **Implementations**: Python functions with consistent docstrings, thoroughly tested for correctness, including edge cases.
 
 ```python
 from slearn.dmetric import *
