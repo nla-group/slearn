@@ -5,6 +5,13 @@ from slearn.symbols import *
 from slearn.dmetric import *
 import pytest
 
+def test_sax_variant(model, ts, t, name, is_multivariate=False):
+    symbols = model.fit_transform(ts)
+    recon = model.inverse_transform()
+    print(f"{name} reconstructed length: {len(recon)}")
+    rmse = np.sqrt(np.mean((ts - recon) ** 2))
+    return rmse
+    
 def test_sax_variant_with_rmse(test_function, ts, t, name, is_multivariate=False):
     rmse = test_sax_variant(test_function, ts, t, name, is_multivariate=is_multivariate)
     return rmse
