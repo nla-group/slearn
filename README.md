@@ -143,6 +143,10 @@ from slearn.dmetric import *
 
 print(damerau_levenshtein_distance("cat", "act"))
 print(jaro_winkler_distance("martha", "marhta"))
+
+print(normalized_damerau_levenshtein_distance("cat", "act"))
+print(normalized_jaro_winkler_distance("martha", "marhta"))
+
 ```
 
 ## Model support
