@@ -48,6 +48,25 @@ Output:
 ### Symbolic time seroes representation
 
 
+The following table summarizes the implemented Symbolic Aggregate Approximation (SAX) variants and the ABBA method for time series representation:
+
+| Algorithm | Time Series Type | Segmentation | Features Extracted | Symbolization | Reconstruction |
+|-----------|------------------|--------------|--------------------|---------------|----------------|
+| **SAX**   | Univariate       | Fixed-size segments | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from PAA values |
+| **SAX-TD** | Univariate       | Fixed-size segments | Mean (PAA), slope | Mean to symbol, trend suffix ('u', 'd', 'f') | Linear trends from PAA and slopes |
+| **eSAX**  | Univariate       | Fixed-size segments | Min, mean, max | Three symbols per segment (min, mean, max) | Quadratic interpolation from min, mean, max |
+| **mSAX**  | Multivariate     | Fixed-size segments | Mean per dimension | One symbol per dimension per segment | Piecewise constant per dimension |
+| **aSAX**  | Univariate       | Adaptive segments (based on local variance) | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from adaptive segments |
+| **ABBA**  | Univariate       | Adaptive piecewise linear segments | Length, increment | Clustering (k-means), symbols assigned to clusters | Piecewise linear from cluster centers |
+
+### Notes
+- **SAX**: Standard SAX with fixed-size segments and mean-based symbolization.
+- **SAX-TD**: Extends SAX with trend information (up, down, flat) per segment.
+- **eSAX**: Enhanced SAX capturing min, mean, and max per segment for smoother reconstruction.
+- **mSAX**: Multivariate SAX, processing each dimension independently.
+- **aSAX**: Adaptive SAX, adjusting segment sizes based on local variance for better representation of variable patterns.
+- **ABBA**: Adaptive Brownian Bridge-based Aggregation, using piecewise linear segmentation and k-means clustering for symbolization (based on https://github.com/nla-group/fABBA).
+
 ```python
 from slearn.symbols import *
 
