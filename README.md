@@ -167,6 +167,5 @@ Contributing to this repo is welcome! We will work through all the pull requests
 
 TO DO LIST:
 * language modeling functionalities
-* more symbolic time series methods included
 * comphrehensive documentation
 * performance optimization 
