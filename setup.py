@@ -1,8 +1,6 @@
 import setuptools
 import platform
-import importlib.util
 import logging
-import numpy as np
 
 PACKAGE_NAME = "slearn"
 VERSION = "0.2.6"
@@ -11,9 +9,7 @@ INSTALL_REQUIRES = [
     "numpy>=1.17.2",
     "scikit-learn>=1.0.0",
     "pandas>=1.0.0",
-    "lightgbm>=3.0.0",
-    "requests>=2.25.0",
-    "textdistance>=4.2.0"
+    "requests>=2.25.0"
 ]
 MAINTAINER = "NLA Group"
 EMAIL = "stefan.guettel@manchester.ac.uk"
@@ -67,46 +63,10 @@ metadata = {
     "python_requires": ">=3.7",
 }
 
-def check_package_status(package: str, min_version: str) -> None:
-    """
-    Check if a package is installed and meets the minimum version requirement.
-    
-    Args:
-        package: Name of the package to check
-        min_version: Minimum required version
-    
-    Raises:
-        ImportError: If package is not installed or version is outdated
-    """
-    try:
-        spec = importlib.util.find_spec(package)
-        if spec is None:
-            raise ImportError(f"{package} is not installed.\nRequired: {package}>={min_version}")
-        
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        
-        package_version = getattr(module, "__version__", "0.0.0")
-        from pkg_resources import parse_version
-        
-        if parse_version(package_version) < parse_version(min_version):
-            raise ImportError(
-                f"{package} version {package_version} is outdated.\nRequired: {package}>={min_version}"
-            )
-    except Exception as e:
-        logger.error(f"Error checking package {package}: {str(e)}")
-        raise
-
 def setup_package():
     """Configure and run the package setup."""
     try:
-        # Add numpy include directories
-        metadata["include_dirs"] = [np.get_include()]
-        
-        # Verify numpy version
-        check_package_status("numpy", NUMPY_MIN_VERSION)
-        
-        # Run setup
+        # Removed numpy check and include_dirs to avoid import during sdist
         setuptools.setup(**metadata)
     except Exception as e:
         logger.error(f"Setup failed: {str(e)}")

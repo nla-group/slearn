@@ -33,7 +33,7 @@ import random
 import warnings
 import numpy as np
 import pandas as pd
-import lightgbm as lgb
+# import lightgbm as lgb
 from .symbols import *
 
 from sklearn.svm import SVC
@@ -48,8 +48,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.linear_model import LogisticRegression
 import warnings
-            
-            
+import os            
 
 
 class symbolicML:
@@ -81,6 +80,9 @@ class symbolicML:
     """
         
     def __init__(self, classifier_name='MLPClassifier', ws=3, random_seed=0, verbose=0):
+
+        os.environ['PYTHONHASHSEED']=str(42)
+
         self.classifier_name = classifier_name 
         self.init_classifier()
         self.random_seed = random_seed
@@ -168,12 +170,15 @@ class symbolicML:
             string_split = [s for s in re.split('', string) if s != '']
         else:
             string_split = copy.deepcopy(string)
+        
         self.hashm = dict(zip(set(string_split), np.arange(len(set(string_split)))))
         string_encoding = [self.hashm[i] for i in string_split] 
+        
         if self.ws > len(string_encoding):
             warnings.warn("ws is larger than the series, please reset the ws.")
             self.ws = len(string_encoding) - 1
         x, y = self.construct_train(string_encoding)
+        
         return x, y
         
     
@@ -226,12 +231,12 @@ class symbolicML:
         # elif self.classifier_name == "DeepForest":
         #    self.Classifiers = CascadeForestClassifier
         
-        elif self.classifier_name == "LGBM":
+        # elif self.classifier_name == "LGBM":
             # lgb_params = {'boosting_type': 'gbdt',
             #          'learning_rate': 0.5,
             #          'max_depth': 5
             #          }
-            self.Classifiers = lgb.LGBMClassifier
+        #    self.Classifiers = lgb.LGBMClassifier
         
         elif self.classifier_name == "SVC":
             self.Classifiers = SVC

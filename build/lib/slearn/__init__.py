@@ -26,7 +26,10 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from .tools import *
-from .symbols import SAX, fABBA
+# from .symbols import SAX, fABBA
 from .classifer import symbolicML, slearn
-from .sgenerate import random_generate, mkc_gererate
+from .sgenerate import *
+from .dmetric import *
+
+import os
+os.environ['PYTHONHASHSEED'] = str(42)

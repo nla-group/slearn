@@ -106,7 +106,7 @@ rmse = test_sax_variant(asax, ts, t, "aSAX")
 
 ### String distance and similarity metrics
 
-The following table summarizes the implemented string distance and similarity metrics, each strictly adhering to their formal definitions. All implementations are robust, handle edge cases (e.g., empty strings), and are tested for correctness.
+The following table summarizes the implemented string distance and similarity metrics as well as their normalized implementations, each strictly adhering to their formal definitions. All implementations are robust, handle edge cases (e.g., empty strings), and are tested for correctness.
 
 | Metric Name                        | Type       | Key Features                                                                      | Complexity | Primary Use Cases                        |
 |------------------------------------|------------|-----------------------------------------------------------------------------------|------------|------------------------------------------|
@@ -120,7 +120,25 @@ The following table summarizes the implemented string distance and similarity me
 | Dice’s Coefficient                 | Similarity | Measures shared bigram overlap, normalized to [0,1]                               | O(n)       | Short text similarity, fuzzy matching     |
 | Smith-Waterman Distance            | Distance   | Local alignment score (match=2, mismatch=-1, gap=-1), distance = -score           | O(n*m)     | Bioinformatics, partial sequence matching |
 | Damerau-Levenshtein Distance       | Distance   | Extends Levenshtein with transpositions                                           | O(n*m)     | Typo correction, spell-checking          |
+| Normalized Levenshtein Distance          | Distance   | Counts insertions, deletions, substitutions; normalized by max length             | O(n*m)     | Spell-checking, sequence alignment       |
+| Normalized Hamming Distance              | Distance   | Counts differing positions in equal-length strings; normalized by length           | O(n)       | Error detection, fixed-length sequences  |
+| Normalized Jaro Similarity               | Similarity | Measures matching characters and transpositions, inherently normalized to [0,1]   | O(n*m)     | Record linkage, fuzzy matching           |
+| Normalized Jaro-Winkler Distance         | Similarity | Enhances Jaro with prefix weighting, inherently normalized to [0,1]               | O(n*m)     | Name matching, deduplication             |
+| Normalized Cosine Similarity             | Similarity | Compares word frequency vectors, inherently normalized to [0,1]                   | O(n)       | Text similarity, document comparison     |
+| Normalized Cosine Bigram Similarity      | Similarity | Compares bigram frequency vectors, inherently normalized to [0,1]                 | O(n)       | Character-level text similarity          |
+| Normalized LCS Distance                  | Distance   | Based on longest common subsequence; normalized by max length                      | O(n*m)     | Sequence alignment, diff tools           |
+| Normalized Dice’s Coefficient            | Similarity | Measures shared bigram overlap, inherently normalized to [0,1]                    | O(n)       | Short text similarity, fuzzy matching     |
+| Normalized Smith-Waterman Distance       | Distance   | Local alignment score (match=2, mismatch=-1, gap=-1); normalized by max score     | O(n*m)     | Bioinformatics, partial sequence matching |
+| Normalized Damerau-Levenshtein Distance  | Distance   | Extends Levenshtein with transpositions; normalized by max length                 | O(n*m)     | Typo correction, spell-checking          |
 
+## Notes
+- **Complexity**: `n` and `m` are the lengths of the input strings.
+- **Type**: Distance metrics return [0,1] (higher = more different); similarity metrics return [0,1] (1 = identical).
+- **Normalization**:
+  - Edit-based metrics (Levenshtein, Damerau-Levenshtein, Hamming, LCS) are normalized by `max(len(s1), len(s2))`, matching `textdistance`.
+  - Smith-Waterman is normalized by the maximum possible alignment score.
+  - Jaro, Jaro-Winkler, Cosine, and Dice use inherent normalization (e.g., vector magnitudes, bigram counts).
+- **Implementations**: Python functions with consistent docstrings, thoroughly tested, including edge cases.
 ## Notes
 - **Complexity**: `n` and `m` are the lengths of the input strings.
 - **Type**: Distance metrics return non-negative values (higher = more different); similarity metrics return [0,1] (1 = identical).
