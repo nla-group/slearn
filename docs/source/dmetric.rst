@@ -11,6 +11,128 @@ The metrics include edit-based distances (e.g., Levenshtein, Damerau-Levenshtein
    :local:
    :depth: 2
 
+.. _metrics:
+
+
+This project provides a collection of string distance and similarity metrics, both normalized and non-normalized, implemented in Python with thorough testing and robust edge-case handling. These metrics are useful for tasks like spell-checking, fuzzy matching, text similarity, and sequence alignment.
+
+The following table summarizes the implemented metrics, including both normalized and non-normalized versions.
+
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Metric Name                              | Type       | Normalized | Key Features                                                                      | Complexity | Primary Use Cases                        |
++==========================================+============+============+===================================================================================+============+==========================================+
+| Levenshtein Distance                     | Distance   | No         | Counts insertions, deletions, substitutions; returns raw edit count               | O(n*m)     | Spell-checking, sequence alignment       |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Normalized Levenshtein Distance          | Distance   | Yes        | Counts insertions, deletions, substitutions; normalized by max length to [0,1]    | O(n*m)     | Spell-checking, sequence alignment       |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Hamming Distance                         | Distance   | No         | Counts differing positions in equal-length strings; returns raw count             | O(n)       | Error detection, fixed-length sequences  |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Normalized Hamming Distance              | Distance   | Yes        | Counts differing positions in equal-length strings; normalized by length to [0,1] | O(n)       | Error detection, fixed-length sequences  |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Jaro Similarity                          | Similarity | Yes        | Measures matching characters and transpositions, inherently normalized to [0,1]   | O(n*m)     | Record linkage, fuzzy matching           |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Jaro-Winkler Distance                    | Similarity | Yes        | Enhances Jaro with prefix weighting, inherently normalized to [0,1]               | O(n*m)     | Name matching, deduplication             |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Cosine Similarity                        | Similarity | Yes        | Compares word frequency vectors, inherently normalized to [0,1]                   | O(n)       | Text similarity, document comparison     |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Cosine Bigram Similarity                 | Similarity | Yes        | Compares bigram frequency vectors, inherently normalized to [0,1]                 | O(n)       | Character-level text similarity          |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| LCS Distance                             | Distance   | No         | Based on longest common subsequence; returns raw difference                       | O(n*m)     | Sequence alignment, diff tools           |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Normalized LCS Distance                  | Distance   | Yes        | Based on longest common subsequence; normalized by max length to [0,1]            | O(n*m)     | Sequence alignment, diff tools           |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Dice’s Coefficient                       | Similarity | Yes        | Measures shared bigram overlap, inherently normalized to [0,1]                    | O(n)       | Short text similarity, fuzzy matching     |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Smith-Waterman Distance                  | Distance   | No         | Local alignment score (match=2, mismatch=-1, gap=-1); returns negative score      | O(n*m)     | Bioinformatics, partial sequence matching |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Normalized Smith-Waterman Distance       | Distance   | Yes        | Local alignment score (match=2, mismatch=-1, gap=-1); normalized to [0,1]         | O(n*m)     | Bioinformatics, partial sequence matching |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Damerau-Levenshtein Distance             | Distance   | No         | Extends Levenshtein with transpositions; returns raw edit count                   | O(n*m)     | Typo correction, spell-checking          |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+| Normalized Damerau-Levenshtein Distance  | Distance   | Yes        | Extends Levenshtein with transpositions; normalized by max length to [0,1]        | O(n*m)     | Typo correction, spell-checking          |
++------------------------------------------+------------+------------+-----------------------------------------------------------------------------------+------------+------------------------------------------+
+
+Usage Illustration
+------------------
+
+Below are examples demonstrating how to use each metric. These examples use the strings ``"hello"`` and ``"helo"`` (or equal-length strings for Hamming distance) to illustrate typical outputs.
+
+.. code-block:: python
+
+    from string_metrics import (
+        levenshtein_distance, normalized_levenshtein_distance,
+        hamming_distance, normalized_hamming_distance,
+        jaro_similarity, jaro_winkler_distance,
+        cosine_similarity, cosine_bigram_similarity,
+        lcs_distance, normalized_lcs_distance,
+        dice_coefficient,
+        smith_waterman_distance, normalized_smith_waterman_distance,
+        damerau_levenshtein_distance, normalized_damerau_levenshtein_distance
+    )
+
+    # Example strings
+    s1 = "hello"
+    s2 = "helo"
+    s3 = "cat"
+    s4 = "hat"  # For Hamming distance (equal length)
+
+    # Levenshtein Distance
+    print(f"Levenshtein Distance: {levenshtein_distance(s1, s2)}")  # Output: 1
+    print(f"Normalized Levenshtein Distance: {normalized_levenshtein_distance(s1, s2):.4f}")  # Output: 0.2000
+
+    # Hamming Distance (requires equal-length strings)
+    try:
+        print(hamming_distance(s1, s2))
+    except ValueError as e:
+        print(f"Hamming Distance Error: {e}")
+    print(f"Hamming Distance: {hamming_distance(s3, s4)}")  # Output: 1
+    print(f"Normalized Hamming Distance: {normalized_hamming_distance(s3, s4):.4f}")  # Output: 0.3333
+
+    # Jaro Similarity
+    print(f"Jaro Similarity: {jaro_similarity(s1, s2):.4f}")  # Output: 0.9333
+    print(f"Jaro-Winkler Distance: {jaro_winkler_distance(s1, s2):.4f}")  # Output: 0.9533
+
+    # Cosine Similarity
+    print(f"Cosine Similarity: {cosine_similarity(s1, s2):.4f}")  # Output: 1.0000
+    print(f"Cosine Bigram Similarity: {cosine_bigram_similarity(s1, s2):.4f}")  # Output: 0.8660
+
+    # LCS Distance
+    print(f"LCS Distance: {lcs_distance(s1, s2)}")  # Output: 2
+    print(f"Normalized LCS Distance: {normalized_lcs_distance(s1, s2):.4f}")  # Output: 0.4000
+
+    # Dice’s Coefficient
+    print(f"Dice’s Coefficient: {dice_coefficient(s1, s2):.4f}")  # Output: 0.8571
+
+    # Smith-Waterman Distance
+    print(f"Smith-Waterman Distance: {smith_waterman_distance(s1, s2)}")  # Output: -8
+    print(f"Normalized Smith-Waterman Distance: {normalized_smith_waterman_distance(s1, s2):.4f}")  # Output: 0.2000
+
+    # Damerau-Levenshtein Distance
+    print(f"Damerau-Levenshtein Distance: {damerau_levenshtein_distance(s1, s2)}")  # Output: 1
+    print(f"Normalized Damerau-Levenshtein Distance: {normalized_damerau_levenshtein_distance(s1, s2):.4f}")  # Output: 0.2000
+
+API Reference
+-------------
+
+The following functions are available in the ``string_metrics`` module. Each function is documented with its parameters, return values, and examples.
+
+.. automodule:: string_metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Notes
+-----
+
+- **Complexity**: ``n`` and ``m`` are the lengths of the input strings.
+- **Type**: Distance metrics measure dissimilarity (higher = more different); similarity metrics measure similarity (higher = more similar).
+- **Normalized**:
+  - **Yes**: Output is in [0,1]. Edit-based metrics (Levenshtein, Damerau-Levenshtein, Hamming, LCS) are normalized by ``max(len(s1), len(s2))``, matching ``textdistance``. Smith-Waterman is normalized by the maximum possible alignment score. Jaro, Jaro-Winkler, Cosine, and Dice are inherently normalized (e.g., via match ratios, vector magnitudes, bigram counts).
+  - **No**: Output is a raw count or score. Levenshtein, Damerau-Levenshtein, Hamming, and LCS return non-negative integers; Smith-Waterman returns negative integers.
+- **Implementations**: Python functions with consistent docstrings, thoroughly tested, including edge cases.
+- **Jaro-Winkler Note**: Uses a prefix scaling factor ``p = 0.15`` to match ``textdistance`` implementation, differing from the standard ``p = 0.1``.
+
+
 Installation
 ------------
 
