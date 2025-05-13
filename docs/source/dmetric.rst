@@ -111,40 +111,9 @@ Below are examples demonstrating how to use each metric. These examples use the 
     print(f"Damerau-Levenshtein Distance: {damerau_levenshtein_distance(s1, s2)}")  # Output: 1
     print(f"Normalized Damerau-Levenshtein Distance: {normalized_damerau_levenshtein_distance(s1, s2):.4f}")  # Output: 0.2000
 
+
 API Reference
 -------------
-
-The following functions are available in the ``string_metrics`` module. Each function is documented with its parameters, return values, and examples.
-
-.. automodule:: string_metrics
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Notes
------
-
-- **Complexity**: ``n`` and ``m`` are the lengths of the input strings.
-- **Type**: Distance metrics measure dissimilarity (higher = more different); similarity metrics measure similarity (higher = more similar).
-- **Normalized**:
-  - **Yes**: Output is in [0,1]. Edit-based metrics (Levenshtein, Damerau-Levenshtein, Hamming, LCS) are normalized by ``max(len(s1), len(s2))``, matching ``textdistance``. Smith-Waterman is normalized by the maximum possible alignment score. Jaro, Jaro-Winkler, Cosine, and Dice are inherently normalized (e.g., via match ratios, vector magnitudes, bigram counts).
-  - **No**: Output is a raw count or score. Levenshtein, Damerau-Levenshtein, Hamming, and LCS return non-negative integers; Smith-Waterman returns negative integers.
-- **Implementations**: Python functions with consistent docstrings, thoroughly tested, including edge cases.
-- **Jaro-Winkler Note**: Uses a prefix scaling factor ``p = 0.15`` to match ``textdistance`` implementation, differing from the standard ``p = 0.1``.
-
-
-Installation
-------------
-
-The functions are implemented in pure Python and require no external dependencies beyond the standard library (``collections.Counter`` and ``math``). To use them, include the ``string_metrics.py`` module in your project.
-
-.. code-block:: bash
-
-   git clone <repository-url>
-   cp string_metrics.py your_project/
-
-Functions
----------
 
 Below are the detailed descriptions and usage examples for each function in the ``string_metrics`` module.
 
@@ -166,11 +135,35 @@ Levenshtein Distance
 
    .. code-block:: python
 
-      from slearn.symbols import levenshtein_distance
+      from string_metrics import levenshtein_distance
 
       print(levenshtein_distance("kitten", "sitting"))  # Output: 3
       print(levenshtein_distance("cat", "act"))         # Output: 2
       print(levenshtein_distance("cat", ""))            # Output: 3
+
+Normalized Levenshtein Distance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. py:function:: normalized_levenshtein_distance(s1: str, s2: str) -> float
+
+   Calculate the normalized Levenshtein distance between two strings.
+
+   :param s1: The first input string.
+   :type s1: str
+   :param s2: The second input string.
+   :type s2: str
+   :return: The Levenshtein distance normalized by the maximum string length, ranging from 0 (identical) to 1 (completely different).
+   :rtype: float
+
+   **Example**:
+
+   .. code-block:: python
+
+      from string_metrics import normalized_levenshtein_distance
+
+      print(normalized_levenshtein_distance("kitten", "sitting"))  # Output: 0.4286
+      print(normalized_levenshtein_distance("cat", "act"))         # Output: 0.6667
+      print(normalized_levenshtein_distance("cat", ""))            # Output: 1.0
 
 Hamming Distance
 ~~~~~~~~~~~~~~~~
@@ -191,11 +184,36 @@ Hamming Distance
 
    .. code-block:: python
 
-      from slearn.symbols import hamming_distance
+      from string_metrics import hamming_distance
 
       print(hamming_distance("karolin", "kathrin"))  # Output: 3
       print(hamming_distance("10110", "11110"))      # Output: 1
-      # hamming_distance("cat", "cats")              # Raises ValueError
+      # print(hamming_distance("cat", "cats"))       # Raises ValueError
+
+Normalized Hamming Distance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. py:function:: normalized_hamming_distance(s1: str, s2: str) -> float
+
+   Calculate the normalized Hamming distance between two strings of equal length.
+
+   :param s1: The first input string.
+   :type s1: str
+   :param s2: The second input string.
+   :type s2: str
+   :return: The Hamming distance normalized by the string length, ranging from 0 (identical) to 1 (completely different).
+   :rtype: float
+   :raises ValueError: If the strings have different lengths.
+
+   **Example**:
+
+   .. code-block:: python
+
+      from string_metrics import normalized_hamming_distance
+
+      print(normalized_hamming_distance("karolin", "kathrin"))  # Output: 0.4286
+      print(normalized_hamming_distance("10110", "11110"))      # Output: 0.2
+      # print(normalized_hamming_distance("cat", "cats"))       # Raises ValueError
 
 Jaro Similarity
 ~~~~~~~~~~~~~~~
@@ -215,16 +233,16 @@ Jaro Similarity
 
    .. code-block:: python
 
-      from slearn.symbols import jaro_similarity
+      from string_metrics import jaro_similarity
 
-      print(jaro_similarity("martha", "marhta"))  # Output: ~0.944
+      print(jaro_similarity("martha", "marhta"))  # Output: 0.9444
       print(jaro_similarity("cat", ""))           # Output: 0.0
       print(jaro_similarity("same", "same"))     # Output: 1.0
 
 Jaro-Winkler Distance
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. py:function:: jaro_winkler_distance(s1: str, s2: str, p: float = 0.1, max_prefix: int = 4) -> float
+.. py:function:: jaro_winkler_distance(s1: str, s2: str, p: float = 0.15) -> float
 
    Calculate the Jaro-Winkler similarity between two strings.
 
@@ -232,10 +250,8 @@ Jaro-Winkler Distance
    :type s1: str
    :param s2: The second input string.
    :type s2: str
-   :param p: Prefix scaling factor (default is 0.1).
+   :param p: Prefix scaling factor (default is 0.15 to match textdistance).
    :type p: float, optional
-   :param max_prefix: Maximum prefix length to consider (default is 4).
-   :type max_prefix: int, optional
    :return: The Jaro-Winkler similarity score, ranging from 0 (no similarity) to 1 (identical strings).
    :rtype: float
 
@@ -243,10 +259,10 @@ Jaro-Winkler Distance
 
    .. code-block:: python
 
-      from slearn.symbols import jaro_winkler_distance
+      from string_metrics import jaro_winkler_distance
 
-      print(jaro_winkler_distance("martha", "marhta"))     # Output: ~0.961
-      print(jaro_winkler_distance("dixon", "dicksonx"))    # Output: >0.8
+      print(jaro_winkler_distance("martha", "marhta"))     # Output: 0.9667
+      print(jaro_winkler_distance("dixon", "dicksonx"))    # Output: 0.8133
       print(jaro_winkler_distance("cat", ""))              # Output: 0.0
 
 Cosine Similarity (Word-Based)
@@ -267,7 +283,7 @@ Cosine Similarity (Word-Based)
 
    .. code-block:: python
 
-      from slearn.symbols import cosine_similarity
+      from string_metrics import cosine_similarity
 
       print(cosine_similarity("cat hat", "hat cat"))  # Output: 1.0
       print(cosine_similarity("cat", "dog"))          # Output: 0.0
@@ -291,9 +307,9 @@ Cosine Bigram Similarity
 
    .. code-block:: python
 
-      from slearn.symbols import cosine_bigram_similarity
+      from string_metrics import cosine_bigram_similarity
 
-      print(cosine_bigram_similarity("cat", "cap"))   # Output: ~0.5
+      print(cosine_bigram_similarity("cat", "cap"))   # Output: 0.5
       print(cosine_bigram_similarity("cat", "act"))   # Output: 0.0
       print(cosine_bigram_similarity("", "dog"))      # Output: 0.0
 
@@ -315,11 +331,35 @@ Longest Common Subsequence (LCS) Distance
 
    .. code-block:: python
 
-      from slearn.symbols import lcs_distance
+      from string_metrics import lcs_distance
 
       print(lcs_distance("kitten", "sitting"))  # Output: 5
       print(lcs_distance("cat", "act"))         # Output: 2
       print(lcs_distance("cat", ""))            # Output: 3
+
+Normalized LCS Distance
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. py:function:: normalized_lcs_distance(s1: str, s2: str) -> float
+
+   Calculate the normalized LCS-based distance between two strings.
+
+   :param s1: The first input string.
+   :type s1: str
+   :param s2: The second input string.
+   :type s2: str
+   :return: The LCS distance normalized by the maximum string length, ranging from 0 (identical) to 1 (completely different).
+   :rtype: float
+
+   **Example**:
+
+   .. code-block:: python
+
+      from string_metrics import normalized_lcs_distance
+
+      print(normalized_lcs_distance("kitten", "sitting"))  # Output: 0.7143
+      print(normalized_lcs_distance("cat", "act"))         # Output: 0.6667
+      print(normalized_lcs_distance("cat", ""))            # Output: 1.0
 
 Dice’s Coefficient
 ~~~~~~~~~~~~~~~~~~
@@ -339,9 +379,9 @@ Dice’s Coefficient
 
    .. code-block:: python
 
-      from slearn.symbols import dice_coefficient
+      from string_metrics import dice_coefficient
 
-      print(dice_coefficient("night", "nacht"))  # Output: ~0.25
+      print(dice_coefficient("night", "nacht"))  # Output: 0.25
       print(dice_coefficient("cat", "cat"))      # Output: 1.0
       print(dice_coefficient("cat", ""))         # Output: 0.0
 
@@ -362,18 +402,48 @@ Smith-Waterman Distance
    :type mismatch_score: int, optional
    :param gap_score: Score for gaps (default is -1).
    :type gap_score: int, optional
-   :return: The inverse of the maximum alignment score (lower scores indicate greater distance).
+   :return: The inverse of the maximum local alignment score (lower scores indicate greater distance).
    :rtype: int
 
    **Example**:
 
    .. code-block:: python
 
-      from slearn.symbols import smith_waterman_distance
+      from string_metrics import smith_waterman_distance
 
-      print(smith_waterman_distance("kitten", "sitting"))  # Output: Negative value
-      print(smith_waterman_distance("cat", "act"))         # Output: Negative value
+      print(smith_waterman_distance("kitten", "sitting"))  # Output: -10
+      print(smith_waterman_distance("cat", "act"))         # Output: -5
       print(smith_waterman_distance("cat", ""))            # Output: 0
+
+Normalized Smith-Waterman Distance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. py:function:: normalized_smith_waterman_distance(s1: str, s2: str, match_score: int = 2, mismatch_score: int = -1, gap_score: int = -1) -> float
+
+   Calculate the normalized Smith-Waterman distance between two strings.
+
+   :param s1: The first input string.
+   :type s1: str
+   :param s2: The second input string.
+   :type s2: str
+   :param match_score: Score for matching characters (default is 2).
+   :type match_score: int, optional
+   :param mismatch_score: Score for mismatching characters (default is -1).
+   :type mismatch_score: int, optional
+   :param gap_score: Score for gaps (default is -1).
+   :type gap_score: int, optional
+   :return: The normalized Smith-Waterman distance, ranging from 0 (identical) to 1 (completely different).
+   :rtype: float
+
+   **Example**:
+
+   .. code-block:: python
+
+      from string_metrics import normalized_smith_waterman_distance
+
+      print(normalized_smith_waterman_distance("kitten", "sitting"))  # Output: 0.1667
+      print(normalized_smith_waterman_distance("cat", "act"))         # Output: 0.3333
+      print(normalized_smith_waterman_distance("cat", ""))            # Output: 0.0
 
 Damerau-Levenshtein Distance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -393,21 +463,47 @@ Damerau-Levenshtein Distance
 
    .. code-block:: python
 
-      from slearn.symbols import damerau_levenshtein_distance
+      from string_metrics import damerau_levenshtein_distance
 
       print(damerau_levenshtein_distance("cat", "act"))    # Output: 1
       print(damerau_levenshtein_distance("cat", "hat"))    # Output: 1
       print(damerau_levenshtein_distance("cat", "cats"))   # Output: 1
 
+Normalized Damerau-Levenshtein Distance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. py:function:: normalized_damerau_levenshtein_distance(s1: str, s2: str) -> float
+
+   Calculate the normalized Damerau-Levenshtein distance between two strings.
+
+   :param s1: The first input string.
+   :type s1: str
+   :param s2: The second input string.
+   :type s2: str
+   :return: The Damerau-Levenshtein distance normalized by the maximum string length, ranging from 0 (identical) to 1 (completely different).
+   :rtype: float
+
+   **Example**:
+
+   .. code-block:: python
+
+      from string_metrics import normalized_damerau_levenshtein_distance
+
+      print(normalized_damerau_levenshtein_distance("cat", "act"))    # Output: 0.3333
+      print(normalized_damerau_levenshtein_distance("cat", "hat"))    # Output: 0.3333
+      print(normalized_damerau_levenshtein_distance("cat", "cats"))   # Output: 0.25
+
 Usage Notes
 -----------
 
-- **Input Requirements**: All functions accept strings as input. For `hamming_distance`, strings must be of equal length.
+- **Input Requirements**: All functions accept strings as input. For ``hamming_distance`` and ``normalized_hamming_distance``, strings must be of equal length.
 - **Output Interpretation**:
-  - **Distance metrics** (Levenshtein, Hamming, LCS, Smith-Waterman, Damerau-Levenshtein): Return non-negative integers (higher values indicate greater difference).
-  - **Similarity metrics** (Jaro, Jaro-Winkler, Cosine, Cosine Bigram, Dice): Return floats in [0,1] (1 indicates identical strings).
+  - **Non-normalized distance metrics** (Levenshtein, Hamming, LCS, Smith-Waterman, Damerau-Levenshtein): Return non-negative integers (except Smith-Waterman, which returns negative integers); higher values indicate greater difference.
+  - **Normalized distance metrics** (Normalized Levenshtein, Normalized Hamming, Normalized LCS, Normalized Smith-Waterman, Normalized Damerau-Levenshtein): Return floats in [0,1]; 1 indicates completely different strings.
+  - **Similarity metrics** (Jaro, Jaro-Winkler, Cosine, Cosine Bigram, Dice): Return floats in [0,1]; 1 indicates identical strings.
 - **Edge Cases**: All functions handle empty strings, identical strings, and single-character strings appropriately.
 - **Dependencies**: Requires Python's standard library (``collections.Counter`` and ``math``).
+- **Jaro-Winkler Note**: The default prefix scaling factor is ``p = 0.15`` to match the ``textdistance`` library, differing from the standard ``p = 0.1``.
 
 Example Application
 -------------------
