@@ -8,7 +8,11 @@
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
 
 
-Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc.  Symbolic time series representation methods do not only reduce the dimensionality of time series but also speedup the downstream time series task. It has been demonstrated by [S. Elsworth and S. Güttel, Time series forecasting using LSTM networks: a symbolic approach, arXiv, 2020] that symbolic forecasting has greatly reduce the sensitivity of hyperparameter settings for Long Short Term Memory networks. How to appropriately deploy machine learning algorithm on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.  ``slearn`` library provide different API for symbols generation associated with complexity measure and machine learining traning. We will illustrate several topics in detail as below. 
+Symbolic representations of time series have demonstrated their effectiveness in tasks such as motif discovery, clustering, classification, forecasting, and anomaly detection. These methods not only reduce the dimensionality of time series data but also accelerate downstream tasks.
+Elsworth and Güttel [Time Series Forecasting Using LSTM Networks: A Symbolic Approach, arXiv, 2020] have shown that symbolic forecasting significantly reduces the sensitivity of Long Short-Term Memory (LSTM) networks to hyperparameter settings. However, deploying machine learning algorithms at the symbolic level—rather than on raw time series data—remains a challenging problem for many practical applications. To support the research community and streamline the application of machine learning to symbolic representations, we developed the ``slearn`` Python library. This library offers APIs for symbolic sequence generation, complexity measurement, and machine learning model training on symbolic data. We will illustrate several core features and use cases below.
+
+A key feature of slearn is its ability to compute distances between symbolic sequences, enabling similarity or dissimilarity measurements after transformation. The library includes the ``LZWStringLibrary``, which supports string distance computation based on Lempel-Ziv-Welch (LZW) complexity. This is particularly beneficial for time series classification, clustering, and anomaly detection tasks.
+
 
 <strong><em> Install the slearn package simply by  </em></strong>
 
@@ -31,6 +35,9 @@ conda list slearn
 
 ### Generate strings with customized complexity
 ``skearn`` enables the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. It also contains the tools for the exploration of the hyperparameter space of commonly used RNNs as well as novel ones.
+The ``skearn`` library uses the LZWStringLibrary to compute distances between symbolic sequences. The distance measure is based on the LZW complexity, which quantifies the complexity of a string by counting the number of unique substrings in its LZW compression dictionary. The library provides a method called distance in the LZWStringLibrary class to compute the distance between two strings, which can be used to compare symbolic representations of time series.
+The distance measure is typically normalized and leverages the LZW complexity to provide a similarity score between two sequences. This is particularly useful when comparing time series that have been transformed into symbolic sequences using methods like SAX.
+
 
 ```python
 from slearn import *
