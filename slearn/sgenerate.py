@@ -38,89 +38,6 @@ import pandas as pd
 from itertools import product
 import warnings
 
-def random_generate(start, num, power,length,capital=True,random_state=42, verbose=0):
-    """
-    Parameters
-    ----------
-    start : str: 
-       Letter such as "A"
-
-    num : int: 
-        This is for basic symbolic generation-.generate(),which means the number of unique symbols generated.           
-
-    power : int:   
-        The highest number of symbols repeating.
-
-    length : int:   
-        The length of the symbols sequence generated.
-
-    capital : bool:  
-        Case or not.
-
-    random_state : int: 
-        Ramdom seed, for basic_generate() and markovChain_generate()
-
-    """
-    
-    random.seed(random_state)
-    np.random.seed(random_state)
-        
-    if num > 256: 
-        raise symbolicError('please make sure the num < 256')
-
-        
-    slow = 97; shigh = 97 + 25
-    
-    if capital:
-        slow,shigh = 97 - 32, 97 + 25 -32
-        
-    numerical_sequence = [ord(start)] + random.sample(range(slow,shigh), num)
-    string_unique = [chr(i) for i in numerical_sequence]
-
-    ord_random = np.random.randint(low = 1, high = num)
-    dict_ord = dict(zip(string_unique, ord_random*[power]+(num-ord_random+1)*[1]))
-    list_gen = list()
-    for i in string_unique:
-        for j in range(dict_ord[i]):
-            list_gen.append(i)
-    string_gen = []
-    for i in range(round(length / len(list_gen))):
-        string_gen += list_gen
-    if verbose:
-        print("generate:", "".join(string_gen))
-    return "".join(string_gen)
-    
-
-    
-def mkc_gererate(n, current_state, no, verbose=0):
-    """Apply Markov Chain to generate string sequence
-    
-    Parameters
-    ----------
-    n : int: 
-        Number of symbols
-
-    transition_prob : dict: 
-        A dict object representing the transition 
-        
-        probabilities in Markov Chain. Should be of the form: 
-            {'state1': {'state1': 0.1, 'state2': 0.4}, 
-             'state2': {...}}
-
-    current_state : str:  
-        The state of the current random variable.
-    
-    no: int,
-        The number of future states to generate.
-    """
-    
-    transition_prob = markovMatrix(n)
-    sequence = markovChain(transition_prob)
-    string_gen = sequence.generate_states(current_state, no)
-    if verbose:
-        print("generate:", string_gen)
-    return string_gen
-    
 
 
 
@@ -391,7 +308,7 @@ def lzw_string_library(symbols=(1,10,5), complexity=(5,25,5),
     '''
 
     # Gets the ranges of the parameters to calculate the iterations.
-    if isinstance(symbols, int):
+    if np.isscalar(symbols):
         symbols = [symbols]
     else:
         symbols = list(symbols)
@@ -501,3 +418,91 @@ def lzw_string_library(symbols=(1,10,5), complexity=(5,25,5),
         print(f'\nString library saved in file: {file_name}')
 
     return string_lib
+
+
+
+
+
+def random_generate(start, num, power,length,capital=True,random_state=42, verbose=0):
+    """
+    Parameters
+    ----------
+    start : str: 
+       Letter such as "A"
+
+    num : int: 
+        This is for basic symbolic generation-.generate(),which means the number of unique symbols generated.           
+
+    power : int:   
+        The highest number of symbols repeating.
+
+    length : int:   
+        The length of the symbols sequence generated.
+
+    capital : bool:  
+        Case or not.
+
+    random_state : int: 
+        Ramdom seed, for basic_generate() and markovChain_generate()
+
+    """
+    
+    random.seed(random_state)
+    np.random.seed(random_state)
+        
+    if num > 256: 
+        raise ValueError('please make sure the num < 256')
+
+        
+    slow = 97; shigh = 97 + 25
+    
+    if capital:
+        slow,shigh = 97 - 32, 97 + 25 -32
+        
+    numerical_sequence = [ord(start)] + random.sample(range(slow,shigh), num)
+    string_unique = [chr(i) for i in numerical_sequence]
+
+    ord_random = np.random.randint(low = 1, high = num)
+    dict_ord = dict(zip(string_unique, ord_random*[power]+(num-ord_random+1)*[1]))
+    list_gen = list()
+    for i in string_unique:
+        for j in range(dict_ord[i]):
+            list_gen.append(i)
+    string_gen = []
+    for i in range(round(length / len(list_gen))):
+        string_gen += list_gen
+    if verbose:
+        print("generate:", "".join(string_gen))
+    return "".join(string_gen)
+    
+
+    
+def mkc_gererate(n, current_state, no, verbose=0):
+    """Apply Markov Chain to generate string sequence
+    
+    Parameters
+    ----------
+    n : int: 
+        Number of symbols
+
+    transition_prob : dict: 
+        A dict object representing the transition 
+        
+        probabilities in Markov Chain. Should be of the form: 
+            {'state1': {'state1': 0.1, 'state2': 0.4}, 
+             'state2': {...}}
+
+    current_state : str:  
+        The state of the current random variable.
+    
+    no: int,
+        The number of future states to generate.
+    """
+    
+    transition_prob = markovMatrix(n)
+    sequence = markovChain(transition_prob)
+    string_gen = sequence.generate_states(current_state, no)
+    if verbose:
+        print("generate:", string_gen)
+    return string_gen
+    
