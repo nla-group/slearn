@@ -15,19 +15,19 @@ import os
 from torch.cuda.amp import autocast, GradScaler
 from xlstm import xLSTMBlockStack, xLSTMBlockStackConfig, sLSTMBlockConfig, sLSTMLayerConfig, FeedForwardConfig
 
-# Suppress TensorFlow warnings
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress INFO and WARNING messages
 
-# Set random seed
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+
 np.random.seed(0)
 torch.manual_seed(0)
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(0)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Parameters
+
 symbols_list = [2, 3, 4, 5, 6]
-complexities = list(range(2, 13))
+complexities = list(range(2, 10))
 min_length = 1100
 window_size = 100
 validation_length = 100
@@ -37,17 +37,18 @@ stopping_loss = 0.1
 num_runs = 5
 units = [25, 50, 100, 200, 250]
 layers = [1, 2, 3]
-batch_size = 32
+batch_size = 128
 
-# Create directory for figures
-os.makedirs("figures", exist_ok=True)
 
-# Generate strings
+os.makedirs("figures_low", exist_ok=True)
+os.makedirs("results_partial_low", exist_ok=True)
+
+
 def generate_strings(symbols, complexities):
     df_strings = lzw_string_library(symbols=symbols, complexity=complexities, random_state=0)
     return df_strings
 
-# Prepare data
+
 def prepare_data(seed_string, window_size, validation_length):
     repeats = int(np.ceil(min_length / len(seed_string)))
     s = seed_string * repeats
@@ -84,7 +85,7 @@ def prepare_data(seed_string, window_size, validation_length):
     
     return X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, symbols
 
-# LSTM Model
+
 class LSTMModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(LSTMModel, self).__init__()
@@ -96,7 +97,7 @@ class LSTMModel(nn.Module):
         out = self.fc(hn[-1])
         return out
 
-# Transformer Model
+
 class TransformerModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(TransformerModel, self).__init__()
@@ -111,16 +112,16 @@ class TransformerModel(nn.Module):
         out = self.fc(x)
         return out
 
-# Official xLSTM Model
+
 class xLSTMModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(xLSTMModel, self).__init__()
-        self.embedding = nn.Linear(input_size, hidden_size)  # Project input_size to hidden_size
+        self.embedding = nn.Linear(input_size, hidden_size)
         cfg = xLSTMBlockStackConfig(
             slstm_block=sLSTMBlockConfig(
                 slstm=sLSTMLayerConfig(
-                    backend="vanilla",  # Use vanilla PyTorch backend
-                    num_heads=1,  # Minimal heads to align with paper's simplicity
+                    backend="vanilla",
+                    num_heads=1,
                     conv1d_kernel_size=4,
                     bias_init="powerlaw_blockdependent",
                 ),
@@ -129,19 +130,19 @@ class xLSTMModel(nn.Module):
             context_length=window_size,
             num_blocks=num_layers,
             embedding_dim=hidden_size,
-            slstm_at=list(range(num_layers)),  # Use sLSTM for all blocks
+            slstm_at=list(range(num_layers)),
         )
         self.xlstm_stack = xLSTMBlockStack(cfg)
         self.fc = nn.Linear(hidden_size, output_size)
     
     def forward(self, x):
-        x = self.embedding(x)  # Shape: [batch_size, window_size, hidden_size]
+        x = self.embedding(x)
         x = self.xlstm_stack(x)
-        x = x[:, -1, :]  # Take last time step
+        x = x[:, -1, :]
         out = self.fc(x)
         return out
 
-# T5 Model (Encoder-only for classification)
+
 class T5ClassificationModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(T5ClassificationModel, self).__init__()
@@ -155,7 +156,7 @@ class T5ClassificationModel(nn.Module):
         out = self.fc(pooled)
         return out
 
-# BERT Model (Encoder for classification)
+
 class BERTClassificationModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(BERTClassificationModel, self).__init__()
@@ -169,7 +170,7 @@ class BERTClassificationModel(nn.Module):
         out = self.fc(pooled)
         return out
 
-# GPT-like Model (Autoregressive Transformer Decoder)
+
 class GPTLikeModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super(GPTLikeModel, self).__init__()
@@ -185,7 +186,6 @@ class GPTLikeModel(nn.Module):
         out = self.fc(x)
         return out
 
-# Train and evaluate
 def train_and_evaluate(model, X_train, y_train, X_valid, y_valid, X_test, y_test, validation_string, enc, symbols, layer, unit):
     model = model.to(device)
     criterion = nn.CrossEntropyLoss()
@@ -262,142 +262,150 @@ def train_and_evaluate(model, X_train, y_train, X_valid, y_valid, X_test, y_test
     
     return training_time, dl_dist, jw_dist, epochs_used, memory_usage
 
-# Main experiment
-results = []
-for symbols in symbols_list:
-    print("symbols: ", symbols)
-    for complexity in complexities:
-        print("complexity: ", complexity)
-        df_strings = generate_strings(symbols, [complexity])
-        for _, row in df_strings.iterrows():
-            seed_string = row['string']
-            X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols = prepare_data(seed_string, window_size, validation_length)
-            
-            for layer in layers:
-                for unit in units:
-                    for run in range(num_runs):
-                        # LSTM
-                        lstm_model = LSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        lstm_time, lstm_dl, lstm_jw, lstm_epochs, lstm_memory = train_and_evaluate(
-                            lstm_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # Transformer
-                        transformer_model = TransformerModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        trans_time, trans_dl, trans_jw, trans_epochs, trans_memory = train_and_evaluate(
-                            transformer_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # xLSTM (Official)
-                        xlstm_model = xLSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        xlstm_time, xlstm_dl, xlstm_jw, xlstm_epochs, xlstm_memory = train_and_evaluate(
-                            xlstm_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # T5
-                        t5_model = T5ClassificationModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        t5_time, t5_dl, t5_jw, t5_epochs, t5_memory = train_and_evaluate(
-                            t5_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # BERT
-                        bert_model = BERTClassificationModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        bert_time, bert_dl, bert_jw, bert_epochs, bert_memory = train_and_evaluate(
-                            bert_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # GPT-like
-                        gpt_model = GPTLikeModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
-                        gpt_time, gpt_dl, gpt_jw, gpt_epochs, gpt_memory = train_and_evaluate(
-                            gpt_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
-                        
-                        # Store results
-                        for model, train_time, dl, jw, epochs, memory in [
-                            ('LSTM', lstm_time, lstm_dl, lstm_jw, lstm_epochs, lstm_memory),
-                            ('Transformer', trans_time, trans_dl, trans_jw, trans_epochs, trans_memory),
-                            ('xLSTM', xlstm_time, xlstm_dl, xlstm_jw, xlstm_epochs, xlstm_memory),
-                            ('T5', t5_time, t5_dl, t5_jw, t5_epochs, t5_memory),
-                            ('BERT', bert_time, bert_dl, bert_jw, bert_epochs, bert_memory),
-                            ('GPT-like', gpt_time, gpt_dl, gpt_jw, gpt_epochs, gpt_memory)
-                        ]:
-                            results.append({
-                                'symbols': symbols,
-                                'complexity': complexity,
-                                'layers': layer,
-                                'units': unit,
-                                'run': run,
-                                'model': model,
-                                'train_time': train_time,
-                                'DL': dl,
-                                'JW': jw,
-                                'epochs': epochs,
-                                'memory': memory
-                            })
 
-# Convert to DataFrame
-results_df = pd.DataFrame(results)
+def generate_visualizations(results_df):
+    for metric, title, ylabel, filename, log_scale in [
+        ('train_time', 'Training Time by Model and Layers (Low Complexity)', 'Time (seconds)', 'time_violin.png', True),
+        ('DL', 'Normalized Damerau-Levenshtein Distance by Model and Layers', 'DL Distance', 'dl_violin.png', False),
+        ('JW', 'Normalized Jaro-Winkler Distance by Model and Layers', 'JW Distance', 'jw_violin.png', False),
+        ('epochs', 'Epochs to Convergence by Model and Layers', 'Epochs', 'epochs_violin.png', False),
+        ('memory', 'Memory Usage by Model and Layers (Low Complexity)', 'Memory (MB)', 'memory_violin.png', False)
+    ]:
+        plt.figure(figsize=(12, 6))
+        sns.violinplot(x='model', y=metric, hue='layers', data=results_df, split=True)
+        plt.title(title)
+        plt.ylabel(ylabel)
+        if log_scale:
+            plt.yscale('log')
+        plt.legend(title='Layers')
+        plt.tight_layout()
+        plt.savefig(f'figures_low/{filename}', dpi=300, bbox_inches='tight')
+        plt.close()
 
-# Visualizations
-# 1. Violin Plots
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='model', y='train_time', hue='layers', data=results_df, split=True)
-plt.title('Training Time by Model and Layers (Low Complexity)')
-plt.ylabel('Time (seconds)')
-plt.yscale('log')
-plt.legend(title='Layers')
-plt.tight_layout()
-plt.savefig('figures/time_violin.png', dpi=300, bbox_inches='tight')
-plt.close()
+    
+    for metric in ['DL', 'JW']:
+        plt.figure(figsize=(12, 8))
+        pivot = results_df.pivot_table(values=metric, index='layers', columns='units', aggfunc='mean')
+        sns.heatmap(pivot, annot=True, cmap='viridis', fmt='.3f')
+        plt.title(f'Mean {metric} by Layers and Units (All Models)')
+        plt.tight_layout()
+        plt.savefig(f'figures_low/{metric.lower()}_heatmap.png', dpi=300, bbox_inches='tight')
+        plt.close()
 
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='model', y='DL', hue='layers', data=results_df, split=True)
-plt.title('Normalized Damerau-Levenshtein Distance by Model and Layers')
-plt.ylabel('DL Distance')
-plt.legend(title='Layers')
-plt.tight_layout()
-plt.savefig('figures/dl_violin.png', dpi=300, bbox_inches='tight')
-plt.close()
+    summary = results_df.groupby(['model', 'layers']).agg({
+        'train_time': ['median', 'std'],
+        'DL': ['median', 'std'],
+        'JW': ['median', 'std'],
+        'epochs': ['median', 'std'],
+        'memory': ['median', 'std']
+    }).round(3)
+    print("\nSummary Table:")
+    print(summary)
+    summary.to_csv('figures_low/summary_table.csv')
 
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='model', y='JW', hue='layers', data=results_df, split=True)
-plt.title('Normalized Jaro-Winkler Distance by Model and Layers')
-plt.ylabel('JW Distance')
-plt.legend(title='Layers')
-plt.tight_layout()
-plt.savefig('figures/jw_violin.png', dpi=300, bbox_inches='tight')
-plt.close()
 
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='model', y='epochs', hue='layers', data=results_df, split=True)
-plt.title('Epochs to Convergence by Model and Layers')
-plt.ylabel('Epochs')
-plt.legend(title='Layers')
-plt.tight_layout()
-plt.savefig('figures/epochs_violin.png', dpi=300, bbox_inches='tight')
-plt.close()
+def run_experiments():
+    for symbols in symbols_list:
+        print(f"Processing symbols: {symbols}")
+        for complexity in complexities:
+            if complexity < symbols:
+                continue
 
-plt.figure(figsize=(12, 6))
-sns.violinplot(x='model', y='memory', hue='layers', data=results_df, split=True)
-plt.title('Memory Usage by Model and Layers (Low Complexity)')
-plt.ylabel('Memory (MB)')
-plt.legend(title='Layers')
-plt.tight_layout()
-plt.savefig('figures/memory_violin.png', dpi=300, bbox_inches='tight')
-plt.close()
+            if symbols == 6 and complexity <= 8:
+                continue
 
-# 2. Heatmaps
-for metric in ['DL', 'JW']:
-    plt.figure(figsize=(12, 8))
-    pivot = results_df.pivot_table(values=metric, index='layers', columns='units', aggfunc='mean')
-    sns.heatmap(pivot, annot=True, cmap='viridis', fmt='.3f')
-    plt.title(f'Mean {metric} by Layers and Units (All Models)')
-    plt.tight_layout()
-    plt.savefig(f'figures/{metric.lower()}_heatmap.png', dpi=300, bbox_inches='tight')
-    plt.close()
+            result_file = f"results_partial_low/symbols_{symbols}_complexity_{complexity}.csv"
+            if os.path.exists(result_file):
+                print(f"Skipping symbols: {symbols}, complexity: {complexity} (results already exist)")
+                continue
+            print(f"Processing complexity: {complexity}")
+            results = []
+            df_strings = generate_strings(symbols, [complexity])
+            for _, row in df_strings.iterrows():
+                seed_string = row['string']
+                X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols = prepare_data(seed_string, window_size, validation_length)
+                
+                for layer in layers:
+                    for unit in units:
+                        for run in range(num_runs):
+                            # LSTM
+                            lstm_model = LSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            lstm_time, lstm_dl, lstm_jw, lstm_epochs, lstm_memory = train_and_evaluate(
+                                lstm_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # Transformer
+                            transformer_model = TransformerModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            trans_time, trans_dl, trans_jw, trans_epochs, trans_memory = train_and_evaluate(
+                                transformer_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # xLSTM
+                            xlstm_model = xLSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            xlstm_time, xlstm_dl, xlstm_jw, xlstm_epochs, xlstm_memory = train_and_evaluate(
+                                xlstm_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # T5
+                            t5_model = T5ClassificationModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            t5_time, t5_dl, t5_jw, t5_epochs, t5_memory = train_and_evaluate(
+                                t5_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # BERT
+                            bert_model = BERTClassificationModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            bert_time, bert_dl, bert_jw, bert_epochs, bert_memory = train_and_evaluate(
+                                bert_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # GPT-like
+                            gpt_model = GPTLikeModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                            gpt_time, gpt_dl, gpt_jw, gpt_epochs, gpt_memory = train_and_evaluate(
+                                gpt_model, X_train, y_train, X_valid, y_valid, X_test, y_test, v, enc, unique_symbols, layer, unit)
+                            
+                            # Store results
+                            for model, train_time, dl, jw, epochs, memory in [
+                                ('LSTM', lstm_time, lstm_dl, lstm_jw, lstm_epochs, lstm_memory),
+                                ('Transformer', trans_time, trans_dl, trans_jw, trans_epochs, trans_memory),
+                                ('xLSTM', xlstm_time, xlstm_dl, xlstm_jw, xlstm_epochs, xlstm_memory),
+                                ('T5', t5_time, t5_dl, t5_jw, t5_epochs, t5_memory),
+                                ('BERT', bert_time, bert_dl, bert_jw, bert_epochs, bert_memory),
+                                ('GPT-like', gpt_time, gpt_dl, gpt_jw, gpt_epochs, gpt_memory)
+                            ]:
+                                results.append({
+                                    'symbols': symbols,
+                                    'complexity': complexity,
+                                    'layers': layer,
+                                    'units': unit,
+                                    'run': run,
+                                    'model': model,
+                                    'train_time': train_time,
+                                    'DL': dl,
+                                    'JW': jw,
+                                    'epochs': epochs,
+                                    'memory': memory
+                                })
 
-# 3. Summary Table
-summary = results_df.groupby(['model', 'layers']).agg({
-    'train_time': ['median', 'std'],
-    'DL': ['median', 'std'],
-    'JW': ['median', 'std'],
-    'epochs': ['median', 'std'],
-    'memory': ['median', 'std']
-}).round(3)
-print("\nSummary Table:")
-print(summary)
-summary.to_csv('figures/summary_table.csv')
+            partial_df = pd.DataFrame(results)
+            partial_df.to_csv(result_file, index=False)
+            print(f"Saved results for symbols: {symbols}, complexity: {complexity}")
+
+
+def merge_results():
+    all_results = []
+    for symbols in symbols_list:
+        for complexity in complexities:
+            if complexity < symbols:
+                continue
+            result_file = f"results_partial_low/symbols_{symbols}_complexity_{complexity}.csv"
+            if os.path.exists(result_file):
+                partial_df = pd.read_csv(result_file)
+                all_results.append(partial_df)
+            else:
+                print(f"Missing results for symbols: {symbols}, complexity: {complexity}")
+    if not all_results:
+        raise ValueError("No partial results found to merge.")
+    return pd.concat(all_results, ignore_index=True)
+
+
+
+if __name__ == "__main__":
+    run_experiments()
+    
+    results_df = merge_results()
+    generate_visualizations(results_df)
