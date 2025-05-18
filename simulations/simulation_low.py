@@ -311,8 +311,8 @@ def run_experiments():
             if complexity < symbols:
                 continue
 
-            if symbols == 6 and complexity <= 8:
-                continue
+            #if symbols == 6 and complexity <= 8:
+            #    continue
 
             result_file = f"results_partial_low/symbols_{symbols}_complexity_{complexity}.csv"
             if os.path.exists(result_file):
