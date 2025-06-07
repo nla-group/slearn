@@ -676,7 +676,7 @@ def normalized_jaro_winkler_similarity(s1: str, s2: str, p: float =  0.1) -> flo
 
 
 def normalized_jaro_winkler_distance(s1: str, s2: str, p: float =  0.1) -> float:
-    """Calculate the Jaro-Winkler similarity between two strings (inherently normalized).
+    """Calculate the Jaro-Winkler distance between two strings (inherently normalized).
     
     Parameters
     ----------
