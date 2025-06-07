@@ -644,7 +644,7 @@ def normalized_jaro_similarity(s1: str, s2: str) -> float:
 
 
 # 4. Jaro-Winkler Distance (already normalized, retained for completeness)
-def normalized_jaro_winkler_distance(s1: str, s2: str, p: float =  0.1) -> float:
+def normalized_jaro_winkler_similarity(s1: str, s2: str, p: float =  0.1) -> float:
     """Calculate the Jaro-Winkler similarity between two strings (inherently normalized).
     
     Parameters
@@ -675,6 +675,27 @@ def normalized_jaro_winkler_distance(s1: str, s2: str, p: float =  0.1) -> float
     return jaro + prefix_len * p * (1 - jaro)
 
 
+def normalized_jaro_winkler_distance(s1: str, s2: str, p: float =  0.1) -> float:
+    """Calculate the Jaro-Winkler similarity between two strings (inherently normalized).
+    
+    Parameters
+    ----------
+    s1 : str
+        The first input string.
+    s2 : str
+        The second input string.
+    p : float, optional
+        Prefix scaling factor (default is 0.1).
+    
+    Returns
+    -------
+    similarity : float
+        The Jaro-Winkler similarity, ranging from 0 to 1.
+    """
+        
+    return 1 - normalized_jaro_winkler_similarity(s1, s2, p)
+    
+    
 
 # 5. Cosine Similarity (Word-Based) (already normalized, retained for completeness)
 def normalized_cosine_similarity(s1: str, s2: str) -> float:
