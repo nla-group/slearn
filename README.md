@@ -11,6 +11,8 @@
 Symbolic representations of time series have demonstrated their effectiveness in tasks such as motif discovery, clustering, classification, forecasting, and anomaly detection. These methods not only reduce the dimensionality of time series data but also accelerate downstream tasks.
 Elsworth and Güttel [Time Series Forecasting Using LSTM Networks: A Symbolic Approach, arXiv, 2020] have shown that symbolic forecasting significantly reduces the sensitivity of Long Short-Term Memory (LSTM) networks to hyperparameter settings. However, deploying machine learning algorithms at the symbolic level—rather than on raw time series data—remains a challenging problem for many practical applications. To support the research community and streamline the application of machine learning to symbolic representations, we developed the ``slearn`` Python library. This library offers APIs for symbolic sequence generation, complexity measurement, and machine learning model training on symbolic data. We will illustrate several core features and use cases below.
 
+## Install
+
 <strong><em> Install the slearn package simply by  </em></strong>
 
 #### pip
