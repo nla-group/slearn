@@ -52,6 +52,31 @@ Output:
 1          3              9     11  CBACBCABABB
 ```
 
+
+### Benchmarking Transformers and RNNs performance for memorizing capability
+``slean`` offers benchmarking tools for compare deep models ability to memorize. It will automatically generated analyzed documents and visualization for tested models via interface ``benchmark_models``. One can either use built-in models or design their own models following [model examples](https://github.com/nla-group/slearn/tree/master/slearn/deep_models.py).  The example can be viewed below.  
+```python
+from slearn.deep_models import (LSTMModel, GRUModel, TransformerModel, GPTLikeModel) # use built-in models or customized your own models. 
+from slearn.simulation import benchmark_models
+
+model_list = [LSTMModel, GRUModel, TransformerModel, GPTLikeModel] 
+benchmark_models(model_list, 
+                  symbols_list=[2, 4, 6, 8],  # number of distinctive numbers
+                  complexities=[210, 230, 250, 270, 290], # complexity, the higher complexity indicates a tougher task
+                  sequence_lengths=[3500],
+                  window_size=100,
+                  validation_length=100,
+                  stopping_loss=0.1,
+                  max_epochs=999,
+                  num_runs=5,
+                  units=[128],
+                  layers=[1, 2, 3],
+                  batch_size=256,
+                  max_strings_per_complexity=1000,
+                  learning_rates=[1e-3, 1e-4]
+            ) 
+```
+
 ### Symbolic time seroes representation
 
 

@@ -32,4 +32,6 @@ from .sgenerate import *
 from .dmetric import *
 
 import os
+
+__version__ = '0.2.8'
 os.environ['PYTHONHASHSEED'] = str(42)

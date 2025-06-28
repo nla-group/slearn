@@ -2,8 +2,18 @@ import setuptools
 import platform
 import logging
 
+def get_version(fname):
+    with open(fname) as f:
+        for line in f:
+            if line.startswith("__version__ = '"):
+                return line.split("'")[1]
+    raise RuntimeError('Error in parsing version string.')
+
+__version__ = get_version('slearn/__init__.py')
+
+
 PACKAGE_NAME = "slearn"
-VERSION = "0.2.7"
+VERSION = "0.2.8"
 SETUP_REQUIRES = ["numpy>=1.17.2"]
 INSTALL_REQUIRES = [
     "numpy>=1.17.2",

@@ -1,6 +1,6 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.4
 Name: slearn
-Version: 0.2.6
+Version: 0.2.8
 Summary: A package linking symbolic representation with sklearn for time series prediction
 Home-page: https://github.com/nla-group/slearn
 Author: Roberto Cahuantzi, Xinye Chen, Stefan Güttel
@@ -27,6 +27,7 @@ Requires-Dist: numpy>=1.17.2
 Requires-Dist: scikit-learn>=1.0.0
 Requires-Dist: pandas>=1.0.0
 Requires-Dist: requests>=2.25.0
+Requires-Dist: torch>=1.7.0
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
@@ -34,6 +35,7 @@ Dynamic: description
 Dynamic: description-content-type
 Dynamic: home-page
 Dynamic: license
+Dynamic: license-file
 Dynamic: maintainer
 Dynamic: maintainer-email
 Dynamic: requires-dist
