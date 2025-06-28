@@ -1,0 +1,92 @@
+Metric: DL
+           Mixed Linear Model Regression Results
+============================================================
+Model:              MixedLM   Dependent Variable:   DL      
+No. Observations:   3600      Method:               REML    
+No. Groups:         6         Scale:                0.0528  
+Min. group size:    600       Log-Likelihood:       162.3442
+Max. group size:    600       Converged:            Yes     
+Mean group size:    600.0                                   
+------------------------------------------------------------
+               Coef.    Std.Err.    z    P>|z| [0.025 0.975]
+------------------------------------------------------------
+Intercept       0.718       0.230  3.118 0.002  0.267  1.169
+model[T.GRU]   -0.377       0.325 -1.158 0.247 -1.014  0.261
+model[T.LSTM]  -0.329       0.325 -1.011 0.312 -0.966  0.309
+model[T.xLSTM] -0.389       0.325 -1.197 0.231 -1.027  0.248
+model[T.BERT]  -0.391       0.325 -1.202 0.229 -1.028  0.247
+model[T.GPT]   -0.355       0.325 -1.092 0.275 -0.993  0.282
+layers         -0.008       0.005 -1.674 0.094 -0.017  0.001
+Group Var       0.053 3855402.836                           
+============================================================
+
+
+Metric: JW
+           Mixed Linear Model Regression Results
+============================================================
+Model:               MixedLM  Dependent Variable:  JW       
+No. Observations:    3600     Method:              REML     
+No. Groups:          6        Scale:               0.0103   
+Min. group size:     600      Log-Likelihood:      3094.9829
+Max. group size:     600      Converged:           Yes      
+Mean group size:     600.0                                  
+------------------------------------------------------------
+               Coef.    Std.Err.    z    P>|z| [0.025 0.975]
+------------------------------------------------------------
+Intercept       0.447       0.102  4.393 0.000  0.248  0.647
+model[T.GRU]   -0.310       0.144 -2.155 0.031 -0.592 -0.028
+model[T.LSTM]  -0.293       0.144 -2.037 0.042 -0.575 -0.011
+model[T.xLSTM] -0.318       0.144 -2.209 0.027 -0.599 -0.036
+model[T.BERT]  -0.302       0.144 -2.098 0.036 -0.584 -0.020
+model[T.GPT]   -0.281       0.144 -1.957 0.050 -0.563  0.000
+layers          0.001       0.002  0.359 0.719 -0.003  0.005
+Group Var       0.010 1704491.064                           
+============================================================
+
+
+Metric: train_time
+           Mixed Linear Model Regression Results
+============================================================
+Model:            MixedLM Dependent Variable: log_train_time
+No. Observations: 3600    Method:             REML          
+No. Groups:       6       Scale:              0.9100        
+Min. group size:  600     Log-Likelihood:     -4951.9406    
+Max. group size:  600     Converged:          Yes           
+Mean group size:  600.0                                     
+------------------------------------------------------------
+               Coef.   Std.Err.     z    P>|z| [0.025 0.975]
+------------------------------------------------------------
+Intercept      1.509        0.956  1.579 0.114 -0.364  3.381
+model[T.GRU]   1.334        1.350  0.988 0.323 -1.312  3.981
+model[T.LSTM]  1.342        1.350  0.994 0.320 -1.305  3.988
+model[T.xLSTM] 1.391        1.350  1.030 0.303 -1.255  4.037
+model[T.BERT]  0.787        1.350  0.583 0.560 -1.859  3.433
+model[T.GPT]   1.195        1.350  0.885 0.376 -1.451  3.841
+layers         0.327        0.019 16.791 0.000  0.289  0.365
+Group Var      0.910 16004627.456                           
+============================================================
+
+
+Metric: test_accuracy
+           Mixed Linear Model Regression Results
+============================================================
+Model:             MixedLM Dependent Variable: test_accuracy
+No. Observations:  3600    Method:             REML         
+No. Groups:        6       Scale:              0.0362       
+Min. group size:   600     Log-Likelihood:     840.2648     
+Max. group size:   600     Converged:          Yes          
+Mean group size:   600.0                                    
+------------------------------------------------------------
+               Coef.    Std.Err.    z    P>|z| [0.025 0.975]
+------------------------------------------------------------
+Intercept       0.939       0.191  4.924 0.000  0.565  1.312
+model[T.GRU]    0.029       0.269  0.108 0.914 -0.499  0.557
+model[T.LSTM]  -0.040       0.269 -0.148 0.882 -0.568  0.488
+model[T.xLSTM]  0.083       0.269  0.308 0.758 -0.445  0.611
+model[T.BERT]  -0.005       0.269 -0.020 0.984 -0.533  0.523
+model[T.GPT]   -0.047       0.269 -0.175 0.861 -0.575  0.481
+layers         -0.020       0.004 -5.268 0.000 -0.028 -0.013
+Group Var       0.036 3192477.775                           
+============================================================
+
+

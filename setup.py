@@ -3,30 +3,30 @@ import platform
 import logging
 
 PACKAGE_NAME = "slearn"
-VERSION = "0.2.6"
+VERSION = "0.2.7"
 SETUP_REQUIRES = ["numpy>=1.17.2"]
 INSTALL_REQUIRES = [
     "numpy>=1.17.2",
     "scikit-learn>=1.0.0",
     "pandas>=1.0.0",
-    "requests>=2.25.0"
+    "requests>=2.25.0",
+    "torch>=1.7.0"
 ]
+
 MAINTAINER = "NLA Group"
 EMAIL = "stefan.guettel@manchester.ac.uk"
 AUTHORS = "Roberto Cahuantzi, Xinye Chen, Stefan Güttel"
 
-# Read README.rst
 try:
     with open("README.rst", encoding="utf-8") as f:
         long_description = f.read()
 except FileNotFoundError:
     long_description = "A package linking symbolic representation with sklearn for time series prediction"
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+
+logging.basicConfig(level=logging.INFO) # Configure logging
 logger = logging.getLogger(__name__)
 
-# Set numpy minimum version based on Python implementation
 NUMPY_MIN_VERSION = "1.19.2" if platform.python_implementation() == "PyPy" else "1.17.2"
 
 # Package metadata
@@ -66,8 +66,7 @@ metadata = {
 def setup_package():
     """Configure and run the package setup."""
     try:
-        # Removed numpy check and include_dirs to avoid import during sdist
-        setuptools.setup(**metadata)
+        setuptools.setup(**metadata) # Removed numpy check and include_dirs to avoid import during sdist
     except Exception as e:
         logger.error(f"Setup failed: {str(e)}")
         raise
