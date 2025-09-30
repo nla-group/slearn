@@ -23,7 +23,7 @@ jobs:
         pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
         pip install -U jax
         python3 setup.py build_ext --inplace
-        pytest unittests.py --cov=pychop
+        pytest unittests.py --cov=slearn
         coverage xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
