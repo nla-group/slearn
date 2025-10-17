@@ -258,6 +258,9 @@ def lzw_string_generator(nr_symbols, target_complexity, priorise_complexity=True
             
     return string, complexity_0
     
+
+
+
 def lzw_string_seeds(symbols=(1,10,5), complexity=(5,25,5), 
                        symbols_range_distribution=None, complexity_range_distribution=None,
                        iterations=1, save_csv=False, priorise_complexity=True, random_state=42):
