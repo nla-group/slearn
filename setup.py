@@ -13,7 +13,7 @@ __version__ = get_version('slearn/__init__.py')
 
 
 PACKAGE_NAME = "slearn"
-VERSION = "0.2.8"
+VERSION = "0.2.9"
 SETUP_REQUIRES = ["numpy>=1.17.2"]
 INSTALL_REQUIRES = [
     "numpy>=1.17.2",
