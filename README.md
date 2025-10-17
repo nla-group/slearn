@@ -181,20 +181,8 @@ print(normalized_jaro_winkler_distance("martha", "marhta"))   # Output: 0.961
 
 ## Supported Classifiers
 
-`slearn` integrates with scikit-learn classifiers for symbolic sequence analysis:
+`slearn` integrates with scikit-learn classifiers for symbolic sequence analysis: [TO DO]
 
-| Classifier | Parameter Call |
-|------------|----------------|
-| Multi-layer Perceptron | `MLPClassifier` |
-| K-Nearest Neighbors | `KNeighborsClassifier` |
-| Gaussian Naive Bayes | `GaussianNB` |
-| Decision Tree | `DecisionTreeClassifier` |
-| Support Vector Classification | `SVC` |
-| Radial-basis Function Kernel | `RBF` |
-| Logistic Regression | `LogisticRegression` |
-| Quadratic Discriminant Analysis | `QuadraticDiscriminantAnalysis` |
-| AdaBoost Classifier | `AdaBoostClassifier` |
-| Random Forest | `RandomForestClassifier` |
 
 ## Documentation
 
