@@ -47,15 +47,28 @@ The distance measure is typically normalized and leverages the LZW complexity to
 
 ```python
 from slearn import *
-df_strings = lzw_string_library(symbols=3, complexity=[4, 9], random_state=0)
+
+str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=True, random_state=2)
+print(f"string: {str_}, complexity: {str_complex}")
+
+str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=False, random_state=2)
+print(f"string: {str_}, complexity: {str_complex}")
+
+df_strings = lzw_string_seeds(symbols=[2, 3], complexity=[3, 6, 7], priorise_complexity=False, random_state=0)
 print(df_strings)
 ```
 
 Output:
 ```
+tring: BAA, complexity: 3
+string: BAB, complexity: 3
   nr_symbols LZW_complexity length       string
-0          3              4      4         ACBB
-1          3              9     11  CBACBCABABB
+0          2              3      3          ABA
+1          2              6      8     BABBABBA
+2          2              7     11  BAAABABAAAA
+3          3              3      3          BAC
+4          3              6      6       ABCACB
+5          3              7      8     ABCAAABB
 ```
 
 
