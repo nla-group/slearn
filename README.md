@@ -1,205 +1,213 @@
-# slearn: Python package for learning symbolic sequences
-
+# slearn: Python Package for Learning Symbolic Sequences
 
 [![Build Status](https://app.travis-ci.com/nla-group/slearn.svg?token=SziD2n1qxpnRwysssUVq&branch=master)](https://app.travis-ci.com/github/nla-group/slearn)
-[![Workflow for Codecov](https://github.com/nla-group/slearn/actions/workflows/unittests.yml/badge.svg)](https://github.com/nla-group/slearn/actions/workflows/unittests.yml)
-[![PyPI version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
+[![Codecov Workflow](https://github.com/nla-group/slearn/actions/workflows/unittests.yml/badge.svg)](https://github.com/nla-group/slearn/actions/workflows/unittests.yml)
+[![PyPI Version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
+[![Conda Version](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
 
+## Overview
 
-Symbolic representations of time series have demonstrated their effectiveness in tasks such as motif discovery, clustering, classification, forecasting, and anomaly detection. These methods not only reduce the dimensionality of time series data but also accelerate downstream tasks.
-Elsworth and Güttel [Time Series Forecasting Using LSTM Networks: A Symbolic Approach, arXiv, 2020] have shown that symbolic forecasting significantly reduces the sensitivity of Long Short-Term Memory (LSTM) networks to hyperparameter settings. However, deploying machine learning algorithms at the symbolic level—rather than on raw time series data—remains a challenging problem for many practical applications. 
+The `slearn` Python package is designed for learning and processing symbolic sequences, particularly for time series analysis. Symbolic representations reduce the dimensionality of time series data, accelerating tasks such as motif discovery, clustering, classification, forecasting, and anomaly detection. As demonstrated by Elsworth and Güttel ([arXiv, 2020](https://arxiv.org/abs/2003.11280)), symbolic forecasting reduces the sensitivity of Long Short-Term Memory (LSTM) networks to hyperparameter settings, making it a powerful approach for machine learning on symbolic data.
 
+`slearn` provides APIs for:
+- Generating symbolic sequences with controlled complexity using Lempel-Ziv-Welch (LZW) compression.
+- Computing distances between symbolic sequences for similarity analysis.
+- Benchmarking deep learning models (e.g., LSTMs, GRUs, Transformers) for sequence memorization.
+- Supporting symbolic time series representations like SAX and ABBA variants.
 
-To support the research community and streamline the application of machine learning to symbolic representations, we developed the ``slearn`` Python library. This library offers APIs for symbolic sequence generation, complexity measurement, and machine learning model training on symbolic data. We will illustrate several core features and use cases below.
+This package is ideal for researchers and practitioners working on symbolic time series analysis and machine learning.
 
-## Install
+## Installation
 
-<strong><em> Install the slearn package simply by  </em></strong>
+Install `slearn` using either pip or conda:
 
-#### pip
-```
+### pip
+```bash
 pip install slearn
 ```
 
-#### conda
-```
+### conda
+```bash
 conda install -c conda-forge slearn
 ```
 
-To check which version you install, please use:
-```
+To verify the installed version:
+```bash
+pip show slearn
+# or
 conda list slearn
 ```
 
-## Usage
+**Dependencies**:
+- Python 3.6+
+- NumPy
+- pandas
+- scikit-learn
+- tqdm (optional, for progress tracking)
 
-### Generate strings with customized complexity
+## Key Features
 
-A key feature of ``skearn`` is its ability to compute distances between symbolic sequences, enabling similarity or dissimilarity measurements after transformation. The library includes the ``LZWStringLibrary``, which supports string distance computation based on Lempel-Ziv-Welch (LZW) complexity. 
+### 1. Generating Strings with Controlled Complexity
 
-``skearn`` enables the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity. It also contains the tools for the exploration of the hyperparameter space of commonly used RNNs as well as novel ones.
-The ``skearn`` library uses the LZWStringLibrary to compute distances between symbolic sequences. The distance measure is based on the LZW complexity, which quantifies the complexity of a string by counting the number of unique substrings in its LZW compression dictionary. The library provides a method called distance in the LZWStringLibrary class to compute the distance between two strings, which can be used to compare symbolic representations of time series.
-The distance measure is typically normalized and leverages the LZW complexity to provide a similarity score between two sequences. This is particularly useful when comparing time series that have been transformed into symbolic sequences using methods like SAX.
+The `LZWStringLibrary` module generates strings with specified numbers of unique symbols and LZW complexity, approximating Kolmogorov complexity. It also computes distances between sequences based on LZW complexity, enabling similarity analysis for symbolic time series.
 
-
+**Example**:
 ```python
-from slearn import *
+from slearn import lzw_string_generator, lzw_string_seeds
 
+# Generate a single string with 2 symbols and target complexity 3
 str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=True, random_state=2)
 print(f"string: {str_}, complexity: {str_complex}")
 
+# Same, but prioritize symbol count over complexity
 str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=False, random_state=2)
 print(f"string: {str_}, complexity: {str_complex}")
 
+# Generate a library of strings with varying symbols and complexities
 df_strings = lzw_string_seeds(symbols=[2, 3], complexity=[3, 6, 7], priorise_complexity=False, random_state=0)
 print(df_strings)
 ```
 
-Output:
+**Output**:
 ```
 string: BAA, complexity: 3
 string: BAB, complexity: 3
-  nr_symbols LZW_complexity length       string
-0          2              3      3          ABA
-1          2              6      8     BABBABBA
-2          2              7     11  BAAABABAAAA
-3          3              3      3          BAC
-4          3              6      6       ABCACB
-5          3              7      8     ABCAAABB
+   nr_symbols  LZW_complexity  length       string
+0           2               3       3          ABA
+1           2               6       8     BABBABBA
+2           2               7      11  BAAABABAAAA
+3           3               3       3          BAC
+4           3               6       6       ABCACB
+5           3               7       8     ABCAAABB
 ```
 
+### 2. Benchmarking Deep Learning Models
 
-### Benchmarking Transformers and RNNs performance for memorizing capability
-``slean`` offers benchmarking tools for compare deep models ability to memorize. It will automatically generated analyzed documents and visualization for tested models via interface ``benchmark_models``. One can either use built-in models or design their own models following [model examples](https://github.com/nla-group/slearn/tree/master/slearn/deep_models.py).  The example can be viewed below.  
+`slearn` provides tools to benchmark the memorization capabilities of deep learning models (e.g., LSTMs, GRUs, Transformers) on symbolic sequences. The `benchmark_models` function generates performance reports and visualizations.
+
+**Example**:
 ```python
-from slearn.deep_models import (LSTMModel, GRUModel, TransformerModel, GPTLikeModel)
- # use built-in models or customized your own models. 
+from slearn.deep_models import LSTMModel, GRUModel, TransformerModel, GPTLikeModel
 from slearn.simulation import benchmark_models
 
-model_list = [LSTMModel, GRUModel, TransformerModel, GPTLikeModel] 
-benchmark_models(model_list, 
-                  symbols_list=[2, 4, 6, 8],  # number of distinctive numbers
-                  complexities=[210, 230, 250, 270, 290], # complexity, the higher complexity indicates a tougher task
-                  sequence_lengths=[3500],
-                  window_size=100,
-                  validation_length=100,
-                  stopping_loss=0.1,
-                  max_epochs=999,
-                  num_runs=5,
-                  units=[128],
-                  layers=[1, 2, 3],
-                  batch_size=256,
-                  max_strings_per_complexity=1000,
-                  learning_rates=[1e-3, 1e-4]
-            ) 
+model_list = [LSTMModel, GRUModel, TransformerModel, GPTLikeModel]
+benchmark_models(
+    model_list,
+    symbols_list=[2, 4, 6, 8],          # Number of unique symbols
+    complexities=[210, 230, 250, 270, 290],  # Target LZW complexities
+    sequence_lengths=[3500],
+    window_size=100,
+    validation_length=100,
+    stopping_loss=0.1,
+    max_epochs=999,
+    num_runs=5,
+    units=[128],
+    layers=[1, 2, 3],
+    batch_size=256,
+    max_strings_per_complexity=1000,
+    learning_rates=[1e-3, 1e-4]
+)
 ```
 
-### Symbolic time seroes representation
+Custom models can be implemented following the examples in [slearn/deep_models.py](https://github.com/nla-group/slearn/blob/master/slearn/deep_models.py).
 
+### 3. Symbolic Time Series Representations
 
-The following table summarizes the implemented Symbolic Aggregate Approximation (SAX) variants and the ABBA method for time series representation:
+`slearn` supports multiple Symbolic Aggregate Approximation (SAX) variants and the ABBA method for time series symbolization. The following table summarizes the implemented methods:
 
 | Algorithm | Time Series Type | Segmentation | Features Extracted | Symbolization | Reconstruction |
 |-----------|------------------|--------------|--------------------|---------------|----------------|
 | **SAX**   | Univariate       | Fixed-size segments | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from PAA values |
-| **SAX-TD** | Univariate       | Fixed-size segments | Mean (PAA), slope | Mean to symbol, trend suffix ('u', 'd', 'f') | Linear trends from PAA and slopes |
+| **SAX-TD**| Univariate       | Fixed-size segments | Mean (PAA), slope | Mean to symbol, trend suffix ('u', 'd', 'f') | Linear trends from PAA and slopes |
 | **eSAX**  | Univariate       | Fixed-size segments | Min, mean, max | Three symbols per segment (min, mean, max) | Quadratic interpolation from min, mean, max |
 | **mSAX**  | Multivariate     | Fixed-size segments | Mean per dimension | One symbol per dimension per segment | Piecewise constant per dimension |
-| **aSAX**  | Univariate       | Adaptive segments (based on local variance) | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from adaptive segments |
+| **aSAX**  | Univariate       | Adaptive segments (local variance) | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from adaptive segments |
 | **ABBA**  | Univariate       | Adaptive piecewise linear segments | Length, increment | Clustering (k-means), symbols assigned to clusters | Piecewise linear from cluster centers |
 
-- **SAX**: Standard SAX with fixed-size segments and mean-based symbolization.
-- **SAX-TD**: Extends SAX with trend information (up, down, flat) per segment.
-- **eSAX**: Enhanced SAX capturing min, mean, and max per segment for smoother reconstruction.
-- **mSAX**: Multivariate SAX, processing each dimension independently.
-- **aSAX**: Adaptive SAX, adjusting segment sizes based on local variance for better representation of variable patterns.
-- **ABBA**: Adaptive Brownian Bridge-based Aggregation, using piecewise linear segmentation and k-means clustering for symbolization (based on https://github.com/nla-group/fABBA).
-
+**Example**:
 ```python
-from slearn.symbols import *
-
+import numpy as np
+from slearn.symbols import SAX, SAXTD, ESAX, MSAX, ASAX
 
 def test_sax_variant(model, ts, t, name, is_multivariate=False):
     symbols = model.fit_transform(ts)
     recon = model.inverse_transform()
     print(f"{name} reconstructed length: {len(recon)}")
-    rmse = np.sqrt(np.mean((ts - recon) ** 2))
-    return rmse
+    return np.sqrt(np.mean((ts - recon) ** 2))  # RMSE
 
 # Generate test time series
 np.random.seed(42)
 t = np.linspace(0, 10, 100)
-ts = np.sin(t) + np.random.normal(0, 0.1, 100)  # Univariate, main test
+ts = np.sin(t) + np.random.normal(0, 0.1, 100)  # Univariate
 ts_multi = np.vstack([np.sin(t), np.cos(t)]).T + np.random.normal(0, 0.1, (100, 2))  # Multivariate
 
-
+# Test SAX variants
 sax = SAX(window_size=10, alphabet_size=8)
 rmse = test_sax_variant(sax, ts, t, "SAX")
-
 
 saxtd = SAXTD(window_size=10, alphabet_size=8)
 rmse = test_sax_variant(saxtd, ts, t, "SAX-TD")
 
-    
 esax = ESAX(window_size=10, alphabet_size=8)
 rmse = test_sax_variant(esax, ts, t, "eSAX")
 
-    
 msax = MSAX(window_size=10, alphabet_size=8)
 rmse = test_sax_variant(msax, ts_multi, t, "mSAX", is_multivariate=True)
 
-    
 asax = ASAX(n_segments=10, alphabet_size=8)
 rmse = test_sax_variant(asax, ts, t, "aSAX")
 ```
 
-### String distance and similarity metrics
+### 4. String Distance and Similarity Metrics
 
-``slearn`` includes the implemented interface for string distance and similarity metrics as well as their normalized implementations, each strictly adhering to their formal definitions.
+`slearn` provides interfaces for computing string distances and similarities, including normalized versions, based on formal definitions.
+
+**Example**:
 ```python
-from slearn.dmetric import *
+from slearn.dmetric import (
+    damerau_levenshtein_distance,
+    jaro_winkler_distance,
+    normalized_damerau_levenshtein_distance,
+    normalized_jaro_winkler_distance
+)
 
-print(damerau_levenshtein_distance("cat", "act"))
-print(jaro_winkler_distance("martha", "marhta"))
-
-print(normalized_damerau_levenshtein_distance("cat", "act"))
-print(normalized_jaro_winkler_distance("martha", "marhta"))
-
+print(damerau_levenshtein_distance("cat", "act"))  # Output: 1
+print(jaro_winkler_distance("martha", "marhta"))   # Output: 0.961
+print(normalized_damerau_levenshtein_distance("cat", "act"))  # Output: 0.333
+print(normalized_jaro_winkler_distance("martha", "marhta"))   # Output: 0.961
 ```
 
-## Model support
+## Supported Classifiers
 
+`slearn` integrates with scikit-learn classifiers for symbolic sequence analysis:
 
-slearn currently supports SAX, ABBA, and fABBA symbolic representation, and the machine learning classifiers as below:
+| Classifier | Parameter Call |
+|------------|----------------|
+| Multi-layer Perceptron | `MLPClassifier` |
+| K-Nearest Neighbors | `KNeighborsClassifier` |
+| Gaussian Naive Bayes | `GaussianNB` |
+| Decision Tree | `DecisionTreeClassifier` |
+| Support Vector Classification | `SVC` |
+| Radial-basis Function Kernel | `RBF` |
+| Logistic Regression | `LogisticRegression` |
+| Quadratic Discriminant Analysis | `QuadraticDiscriminantAnalysis` |
+| AdaBoost Classifier | `AdaBoostClassifier` |
+| Random Forest | `RandomForestClassifier` |
 
-|  Support Classifiers | Parameter call |
-|  ----  | ----  |
-| [Multi-layer Perceptron](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron)   |'MLPClassifier' |
-| [K-Nearest Neighbors](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier)  | 'KNeighborsClassifier' |
-| [Gaussian Naive Bayes](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier)   | 'GaussianNB'|
-| [Decision Tree](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)  | 'DecisionTreeClassifier' |
-| [Support Vector Classification](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) | 'SVC' |
-| [Radial-basis Function Kernel](https://scikit-learn.org/stable/modules/generated/sklearn.gaussian_process.kernels.RBF.html) | 'RBF'|
-| [Logistic Regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)  | 'LogisticRegression' |
-| [Quadratic Discriminant Analysis](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)  | 'QuadraticDiscriminantAnalysis' |
-| [AdaBoost classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html)  | 'AdaBoostClassifier' |
-| [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier)  | 'RandomForestClassifier' |
+## Documentation
 
-Our [documentation](https://slearn.readthedocs.io/en/latest/?badge=latest) is available.
+Comprehensive documentation is available at [slearn.readthedocs.io](https://slearn.readthedocs.io/en/latest/).
 
 ## Citation
-This slearn implementation is maintained by Roberto Cahuantzi (University of Manchester), Xinye Chen (Charles University Prague),  and Stefan Güttel (University of Manchester). If you use the function of ``LZWStringLibrary`` in your research, or if you find slearn useful in your work, please consider citing the paper below. If you have any problems or questions, just drop us an email.
 
- 
+If you use `slearn` or the `LZWStringLibrary` in your research, please cite:
+
 ```bibtex
 @InProceedings{10.1007/978-3-031-37963-5_53,
-    author="Cahuantzi, Roberto
-    and Chen, Xinye
-    and G{\"u}ttel, Stefan",
-    title="A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences",
+    author="Cahuantzi, Roberto and Chen, Xinye and Güttel, Stefan",
+    title="A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences",
     booktitle="Intelligent Computing",
     year="2023",
     publisher="Springer Nature Switzerland",
@@ -207,17 +215,21 @@ This slearn implementation is maintained by Roberto Cahuantzi (University of Man
 }
 ```
 
-
+For questions or issues, contact the maintainers via email.
 
 ## License
-This project is licensed under the terms of the [MIT license](https://github.com/nla-group/classix/blob/master/LICENSE).
 
-
+This project is licensed under the [MIT License](https://github.com/nla-group/slearn/blob/master/LICENSE).
 
 ## Contributing
-Contributing to this repo is welcome! We will work through all the pull requests and try to merge into main branch. 
 
-TO DO LIST:
-* language modeling functionalities
-* comphrehensive documentation
-* performance optimization 
+Contributions to `slearn` are welcome! To contribute:
+1. Fork the repository: [github.com/nla-group/slearn](https://github.com/nla-group/slearn).
+2. Create a branch for your feature or bug fix.
+3. Submit a pull request with a clear description of changes.
+4. Ensure tests pass (see `unittests.yml` workflow).
+
+**TODO List**:
+- Add language modeling functionalities.
+- Expand and refine documentation.
+- Optimize performance for large-scale sequence generation and processing.
