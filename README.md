@@ -45,7 +45,6 @@ conda list slearn
 - NumPy
 - pandas
 - scikit-learn
-- tqdm (optional, for progress tracking)
 
 ## Key Features
 
