@@ -60,7 +60,7 @@ print(df_strings)
 
 Output:
 ```
-tring: BAA, complexity: 3
+string: BAA, complexity: 3
 string: BAB, complexity: 3
   nr_symbols LZW_complexity length       string
 0          2              3      3          ABA
