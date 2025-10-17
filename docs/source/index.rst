@@ -13,7 +13,6 @@ slearn has the following dependencies for its clustering functionality:
    * numpy>=1.21
    * scipy>1.6.0
    * pandas
-   * lightgbm
    * scikit-learn
     
 To install the current release via PIP use:
@@ -31,10 +30,11 @@ To install the current release via PIP use:
    :maxdepth: 2
    :caption: Contents:
 
+   symbol_seeds
    symbols_machine_learning
    predict_with_symbols_representation
    dmetric
-   api.rst
+   api
    license
 
 
