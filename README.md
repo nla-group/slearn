@@ -212,6 +212,17 @@ If you use `slearn` or the `LZWStringLibrary` in your research, please cite:
     publisher="Springer Nature Switzerland",
     pages="771--785"
 }
+
+@phdthesis{Chen2024FastAggregationBasedAlgorithmsForKnowledgeDiscovery,
+  author       = {Xinye Chen},
+  title        = {Fast aggregation‐based algorithms for knowledge discovery},
+  school       = {The University of Manchester},
+  year         = {2024},
+  month        = {August},
+  type         = {PhD thesis},
+  note         = {Department of Mathematics, supervised by Nicholas Higham \& Stefan G\"uttel},
+  url          = {https://research.manchester.ac.uk/en/studentTheses/fast-aggregation-based-algorithms-for-knowledge-discovery}
+}
 ```
 
 For questions or issues, contact the maintainers via email.
