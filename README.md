@@ -204,26 +204,14 @@ Comprehensive documentation is available at [slearn.readthedocs.io](https://slea
 If you use `slearn` or the `LZWStringLibrary` in your research, please cite:
 
 ```bibtex
-@InProceedings{10.1007/978-3-031-37963-5_53,
-    author="Cahuantzi, Roberto and Chen, Xinye and Güttel, Stefan",
-    title="A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences",
-    booktitle="Intelligent Computing",
-    year="2023",
-    publisher="Springer Nature Switzerland",
-    pages="771--785"
-}
-
-@phdthesis{Chen2024FastAggregationBasedAlgorithmsForKnowledgeDiscovery,
-  author       = {Xinye Chen},
-  title        = {Fast aggregation‐based algorithms for knowledge discovery},
-  school       = {The University of Manchester},
-  year         = {2024},
-  month        = {August},
-  type         = {PhD thesis},
-  note         = {Department of Mathematics, supervised by Nicholas Higham \& Stefan G\"uttel},
-  url          = {https://research.manchester.ac.uk/en/studentTheses/fast-aggregation-based-algorithms-for-knowledge-discovery}
-}
+R. Cahuantzi, X. Chen, and S. Güttel, “A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences,” in Intelligent Computing, Springer Nature Switzerland, 2023, pp. 771–785.
 ```
+
+If you use the prediction with ABBA, please cite: 
+```bibtex
+X. Chen, Fast Aggregation-Based Algorithms for Knowledge Discovery, Ph.D. dissertation, The University of Manchester, 2024.
+```
+
 
 For questions or issues, contact the maintainers via email.
 
