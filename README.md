@@ -50,7 +50,7 @@ conda list slearn
 
 ### 1. Generating Strings with Controlled Complexity
 
-The `LZWStringLibrary` module generates strings with specified numbers of unique symbols and LZW complexity, approximating Kolmogorov complexity. It also computes distances between sequences based on LZW complexity, enabling similarity analysis for symbolic time series.
+The `lzw_string_seeds` module generates strings with specified numbers of unique symbols and LZW complexity, approximating Kolmogorov complexity. It also computes distances between sequences based on LZW complexity, enabling similarity analysis for symbolic time series.
 
 **Example**:
 ```python
