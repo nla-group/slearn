@@ -30,7 +30,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import _symbols
+      >>> from slearn.sgenerate import _symbols
       >>> _symbols(3)
       {'A': 0, 'B': 1, 'C': 2}
 
@@ -47,7 +47,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import lzwcompress
+      >>> from slearn.sgenerate import lzwcompress
       >>> lzwcompress("AABAB")
       [0, 0, 1, 52]
 
@@ -65,7 +65,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import lzwdecompress
+      >>> from slearn.sgenerate import lzwdecompress
       >>> lzwdecompress([0, 0, 1, 52])
       'AABAB'
 
@@ -82,7 +82,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import reduce
+      >>> from slearn.sgenerate import reduce
       >>> reduce("ABABAB")
       'AB'
       >>> reduce("ABC")
@@ -110,7 +110,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import lzw_string_generator
+      >>> from slearn import lzw_string_generator
       >>> str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=True, random_state=2)
       >>> print(f"string: {str_}, complexity: {str_complex}")
       string: BAA, complexity: 3
@@ -151,7 +151,7 @@ Functions
 
    .. code-block:: python
 
-      >>> from lzw_string_library import lzw_string_seeds
+      >>> from slearn import lzw_string_seeds
       >>> df = lzw_string_seeds(symbols=[2, 3], complexity=[3, 6, 7], priorise_complexity=False, random_state=0)
       >>> print(df)
          nr_symbols  LZW_complexity  length       string
@@ -181,7 +181,7 @@ Generate a library with 2-4 symbols, complexity of 5, and save to CSV:
 
 .. code-block:: python
 
-   from lzw_string_library import lzw_string_seeds
+   from slearn import lzw_string_seeds
    df = lzw_string_seeds(
        symbols=(2, 4, 2),
        complexity=5,
