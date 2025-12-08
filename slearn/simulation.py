@@ -5,7 +5,7 @@ import math
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
-from .sgenerate import lzw_string_library
+from .sgenerate import lzw_string_seeds
 from .dmetric import (normalized_damerau_levenshtein_distance, normalized_jaro_winkler_distance)
 from .deep_models import (LSTMModel, GRUModel, TransformerModel, GPTLikeModel)
 import time
@@ -54,7 +54,7 @@ def generate_strings(symbols, complexities, max_strings_per_complexity=1000):
     # strings_per_complexity = max(1, target_num_strings // len(complexities))
     for complexity in complexities:
         try:
-            df = lzw_string_library(symbols=symbols, complexity=[complexity], random_state=42)
+            df = lzw_string_seeds(symbols=symbols, complexity=[complexity], random_state=42)
             if df.empty or not all(isinstance(s, str) and len(s) > 0 for s in df['string']):
                 logging.warning(f"No valid strings generated for symbols={symbols}, complexity={complexity}")
                 continue
