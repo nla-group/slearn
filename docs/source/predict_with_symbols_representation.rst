@@ -1,101 +1,72 @@
-Time series forecasting with symbolic representation
-========================================================================
+Symbolic Time-Series Representation
+===================================
 
-slearn package contains the fast symbolic representation method, namely SAX and fABBA (more methods will be included).
+Overview
+--------
 
-.. admonition:: Summmary
+The ``slearn.symbols`` module converts real-valued sequences into discrete
+symbol strings. This can reduce dimension, make local structure easier to
+compare, and allow time-series workflows to use string metrics or categorical
+sequence models.
 
-    You can select the available classifiers and symbolic representation method (currently we support SAX, ABBA and fABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.
+SAX Example
+-----------
 
-    slean leverages user-friendly API, time series forecasting follows:
+.. code-block:: python
 
-    Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.
+   import numpy as np
+   from slearn.symbols import SAX
 
-    Step 2: Transform time series into symbols with user specified parameters defined for symbolic representation.
+   rng = np.random.default_rng(0)
+   t = np.linspace(0, 8 * np.pi, 400)
+   series = np.sin(t) + 0.1 * rng.normal(size=t.size)
 
-    Step 3: Define the classifier parameters and forecast the future values.
+   sax = SAX(window_size=32, alphabet_size=8)
+   symbols = sax.fit_transform(series)
+   reconstruction = sax.inverse_transform()
 
+   print(symbols[:8])
+   print(reconstruction.shape)
 
-Now we illustrate how to use slearn with symbolic representation to forecast time series step by step. 
+SAX normalizes the input, partitions it into ``window_size`` aggregate segments,
+computes each segment mean, and assigns a symbol according to Gaussian
+breakpoints. The inverse transform expands the stored aggregate values back to
+the original segment lengths.
 
-First of all, we set the number of symbols you would like to predict and load libraries and data..
+Trend-Aware SAX
+---------------
 
-.. code:: python
+``SAXTD`` augments SAX symbols with a trend suffix. Suffix ``u`` denotes an
+upward local slope, ``d`` a downward local slope, and ``f`` a flat segment under
+the selected threshold.
 
-    import pandas as pd
-    import numpy as np
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-    from slearn import *
+.. code-block:: python
 
-    time_series = pd.read_csv("Amazon.csv") # load the required dataset, here we use Amazon stock daily close price.
-    ts = time_series.Close.values
-    step = 50
+   from slearn.symbols import SAXTD
 
-we start off with initializing the slearn with fABBA (alternative options: ``SAX`` and ``ABBA``) and GaussianNB classifier, setting windows size to 3 and step to 50:
+   saxtd = SAXTD(window_size=24, alphabet_size=6, slope_threshold=0.01)
+   trend_symbols = saxtd.fit_transform(series)
 
-.. code:: python
+Adaptive And Aggregation-Based Methods
+--------------------------------------
 
-    sl = slearn(method='fABBA',  ws=3, step=step, classifier_name="GaussianNB") # step 1
+``ESAX``, ``MSAX``, and ``ASAX`` provide alternative SAX-style encodings that
+retain additional shape information or adapt segment boundaries. ``ABBA`` and
+``fABBA`` construct symbolic pieces from approximately linear increments and can
+reconstruct an approximate numeric signal from the symbolic representation.
 
+.. code-block:: python
 
-Next we transform the time series into symbols with method ``set_symbols``:
+   from slearn.symbols import fABBA
 
-.. code:: python
+   encoder = fABBA(tol=0.1, alpha=0.5, sorting='2-norm', verbose=0)
+   symbols = encoder.fit_transform(series)
+   recovered = encoder.inverse_transform(symbols, start=series[0])
 
-    sl.set_symbols(series=ts, tol=0.01, alpha=0.2) # step 2
+Choosing A Representation
+-------------------------
 
-
-Then we predict the time series with method ``predict``:
-
-.. code:: python
-
-    abba_nb_pred = sl.predict(var_smoothing=0.001) # step 3
-
-
-Together, we combine the code with three classifiers:
-
-.. code:: python
-
-    import pandas as pd
-    import numpy as np
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-    from slearn import * 
-    np.random.seed(0)
-
-    time_series = pd.read_csv("Amazon.csv")
-    ts = time_series.Close.values
-    length = len(ts)
-    train, test = ts[:round(0.9*length)], ts[round(0.9*length):]
-
-    sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="GaussianNB")
-    sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
-    abba_nb_pred = sl.predict(var_smoothing=0.001)
-    sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="DecisionTreeClassifier")
-    sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
-    abba_nn_pred = sl.predict(max_depth=10, random_state=0)
-    sl = slearn(method='fABBA', ws=8, step=1000, classifier_name="KNeighborsClassifier")
-    sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
-    abba_kn_pred = sl.predict(n_neighbors=10)
-    sl = slearn(method='fABBA', ws=8, step=100, classifier_name="SVC")
-    sl.set_symbols(series=train, tol=0.01, alpha=0.1) 
-    abba_svc_pred = sl.predict(C=20)
-    min_len = np.min([len(test), len(abba_nb_pred), len(abba_nn_pred)])
-
-    plt.figure(figsize=(20, 5))
-    sns.set(font_scale=1.5, style="whitegrid")
-    sns.lineplot(data=test[:min_len], linewidth=6, color='k', label='ground truth')
-    sns.lineplot(data=abba_nb_pred[:min_len], linewidth=6, color='tomato', label='prediction (ABBA - GaussianNB)')
-    sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='m', label='prediction (ABBA - DecisionTreeClassifier)')
-    sns.lineplot(data=abba_nn_pred[:min_len], linewidth=6, color='c', label='prediction (ABBA - KNeighborsClassifier)')
-    sns.lineplot(data=abba_svc_pred[:min_len], linewidth=6, color='yellowgreen', label='prediction (ABBA - Support Vector Classification)')
-    plt.legend()
-    plt.tick_params(axis='both', labelsize=15)
-    plt.savefig('demo1.png', bbox_inches = 'tight')
-    plt.show()
-
-The result is as plotted below:
-
-.. image:: img/demo1.png
-    :width: 1000
+Use ``SAX`` when a fast, stable, Gaussian-breakpoint discretization is enough.
+Use ``SAXTD`` when local trend direction matters. Use adaptive SAX variants when
+fixed equal-size segments are too restrictive. Use ``ABBA`` or ``fABBA`` when
+piecewise-linear reconstruction is part of the workflow.

@@ -758,27 +758,26 @@ def symbolsAssign(clusters):
 
 # python implementation for aggregation
 def aggregate(data, sorting="2-norm", tol=0.5): # , verbose=1
-    """aggregate the data
+    """Aggregate points into tolerance-based groups.
+
     Parameters
     ----------
     data : numpy.ndarray
-        the input that is array-like of shape (n_samples,).
-    sorting : str
-        the sorting method for aggregation, default='2-norm', alternative option: '1-norm' and 'lexi'.
-    tol : float
-        the tolerance to control the aggregation. if the distance between the starting point 
-        of a group and another data point is less than or equal to the tolerance,
-        the point is allocated to that group.  
+        Array-like input of shape ``(n_samples, n_features)``.
+    sorting : {'2-norm', '1-norm', 'lexi'}, default='2-norm'
+        Sorting rule used before aggregation.
+    tol : float, default=0.5
+        Distance tolerance. A point is assigned to a group when its distance
+        from the group's starting point is less than or equal to ``tol``.
+
     Returns
     -------
-    labels (numpy.ndarray) : 
-        the group categories of the data after aggregation
-    
-    splist (list) : 
-        the list of the starting points
-    
-    nr_dist (int) :
-        number of pairwise distance calculations
+    labels : numpy.ndarray
+        Group labels after aggregation.
+    splist : list
+        Starting points for the groups.
+    nr_dist : int
+        Number of pairwise distance calculations.
     """
 
     splist = list() # store the starting points

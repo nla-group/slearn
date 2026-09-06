@@ -23,4 +23,12 @@
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~symbolicML.random_seed
+      ~symbolicML.verbose
+      ~symbolicML.ws
+   
    

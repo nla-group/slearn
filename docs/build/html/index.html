@@ -1,24 +1,26 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to slearn’s documentation! &mdash; slearn 0.0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>slearn: Symbolic Sequence Learning &mdash; slearn documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=beddf052" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=42d1e199" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=14672bda"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Symbolic sequence prediction with machine learning" href="symbols_machine_learning.html" /> 
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -26,21 +28,36 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> slearn
+
+          
+          
+          <a href="#" class="icon icon-home">
+            slearn
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbol_seeds.html">LZW-Controlled Symbolic Seeds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Symbolic Time-Series Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmetric.html">String Distances And Similarities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Symbolic Benchmark Experiments</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -57,8 +74,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to slearn’s documentation!</li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">slearn: Symbolic Sequence Learning</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -68,47 +85,127 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-slearn-s-documentation">
-<h1>Welcome to slearn’s documentation!<a class="headerlink" href="#welcome-to-slearn-s-documentation" title="Permalink to this headline"></a></h1>
-<p>skearn is a package linking symbolic representation (SAX, ABBA, and fABBA) with scikit-learn machine learning for time series prediction. Symbolic representations of time series have proved their usefulness in the field of time series motif discovery, clustering, classification, forecasting, anomaly detection, etc. Symbolic time series representation methods do not only reduce the dimensionality of time series but also speed up the downstream time series task. It has been demonstrated by [S. Elsworth and S. Güttel, Time series forecasting using LSTM networks: a symbolic approach, arXiv, 2020] that symbolic forecasting has greatly reduced the sensitivity of hyperparameter settings for Long Short Term Memory networks. How to appropriately deploy machine learning algorithms on the level of symbols instead of raw time series poses a challenge to the interest of applications. To boost the development of the research community on symbolic representation, we develop this Python library to simplify the process of machine learning algorithm practice on symbolic representation.</p>
-<p>Before getting started, please install the slearn package simply by</p>
-<section id="installation-guide">
-<h2>Installation guide<a class="headerlink" href="#installation-guide" title="Permalink to this headline"></a></h2>
-<p>slearn has the following dependencies for its clustering functionality:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>numpy&gt;=1.21</p></li>
-<li><p>scipy&gt;1.6.0</p></li>
-<li><p>pandas</p></li>
-<li><p>lightgbm</p></li>
-<li><p>scikit-learn</p></li>
+  <section id="slearn-symbolic-sequence-learning">
+<h1>slearn: Symbolic Sequence Learning<a class="headerlink" href="#slearn-symbolic-sequence-learning" title="Link to this heading"></a></h1>
+<p class="slearn-hero"><code class="docutils literal notranslate"><span class="pre">slearn</span></code> is a Python package for symbolic sequence generation, symbolic
+representations of real-valued time series, string-distance evaluation, and
+controlled neural sequence-learning experiments. It combines classic symbolic
+methods such as SAX and ABBA-style representations with LZW-controlled synthetic
+strings and a modern benchmark for recurrent, attention-based, and hybrid
+architectures.</p>
+<p>The package is intended for researchers who want symbolic sequences with a known
+alphabet size and compression complexity, practitioners who want to convert time
+series into symbolic forms before applying machine learning, and authors who need
+a reproducible benchmark for finite-context sequence prediction.</p>
+<ul class="slearn-card-list simple">
+<li><p><strong>Controlled symbolic data.</strong> Generate strings with prescribed alphabet size
+and Lempel-Ziv-Welch (LZW) compression complexity.</p></li>
+<li><p><strong>Symbolic time-series representation.</strong> Encode real-valued series with SAX,
+SAX-TD, eSAX, mSAX, aSAX, ABBA, and fABBA-style transforms.</p></li>
+<li><p><strong>String-level evaluation.</strong> Compare symbolic predictions with normalized
+Damerau-Levenshtein, Jaro-Winkler, Hamming, cosine, LCS, Dice, and
+Smith-Waterman metrics.</p></li>
+<li><p><strong>Neural symbolic benchmark.</strong> Train LSTM, GRU, minGRU, minLSTM, Transformer,
+linear-attention, Performer, and RWKV-style predictors under one data protocol.</p></li>
 </ul>
-</div></blockquote>
-<p>To install the current release via PIP use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">slearn</span>
-</pre></div>
-</div>
-<div class="admonition-note admonition">
-<p class="admonition-title">Note</p>
-<p>The documentation is still on going.</p>
+<section id="where-to-start">
+<h2>Where To Start<a class="headerlink" href="#where-to-start" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>New users should begin with <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> and <a class="reference internal" href="quick_start.html"><span class="doc">Quick Start</span></a>.</p></li>
+<li><p>Time-series users should read <a class="reference internal" href="predict_with_symbols_representation.html"><span class="doc">Symbolic Time-Series Representation</span></a>.</p></li>
+<li><p>Benchmark users should read <a class="reference internal" href="experiments.html"><span class="doc">Symbolic Benchmark Experiments</span></a> and <code class="docutils literal notranslate"><span class="pre">exps/README.md</span></code>.</p></li>
+<li><p>API users can jump directly to <a class="reference internal" href="api.html"><span class="doc">API Reference</span></a>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#core-package">Core Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#experiment-dependencies">Experiment Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#documentation-dependencies">Documentation Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#version-notes">Version Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#generate-a-controlled-symbolic-string">Generate A Controlled Symbolic String</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#build-a-library-of-seeds">Build A Library Of Seeds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#train-a-symbolic-predictor">Train A Symbolic Predictor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#transform-a-time-series-to-symbols">Transform A Time Series To Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html#run-a-benchmark-smoke-test">Run A Benchmark Smoke Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#controlled-symbolic-sequence-experiments">Controlled Symbolic Sequence Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#symbolic-time-series-representation">Symbolic Time-Series Representation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#scikit-learn-forecasting-on-symbols">Scikit-Learn Forecasting On Symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#string-metrics-for-evaluation">String Metrics For Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="applications.html#neural-architecture-benchmarks">Neural Architecture Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#lzw-complexity-sweep">LZW Complexity Sweep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#compare-two-symbolic-forecasts">Compare Two Symbolic Forecasts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#build-a-sax-pipeline">Build A SAX Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#run-a-small-neural-benchmark">Run A Small Neural Benchmark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#generate-figures-from-a-result-csv">Generate Figures From A Result CSV</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="symbol_seeds.html">LZW-Controlled Symbolic Seeds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="symbol_seeds.html#why-lzw-complexity">Why LZW Complexity?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbol_seeds.html#canonical-reduction">Canonical Reduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbol_seeds.html#single-seed-generation">Single Seed Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbol_seeds.html#seed-libraries">Seed Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbol_seeds.html#practical-guidance">Practical Guidance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic Machine Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#fixed-window-prediction">Fixed-Window Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#supported-classifier-names">Supported Classifier Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#forecasting-behavior">Forecasting Behavior</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#time-series-wrapper">Time-Series Wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Symbolic Time-Series Representation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="predict_with_symbols_representation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predict_with_symbols_representation.html#sax-example">SAX Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predict_with_symbols_representation.html#trend-aware-sax">Trend-Aware SAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predict_with_symbols_representation.html#adaptive-and-aggregation-based-methods">Adaptive And Aggregation-Based Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="predict_with_symbols_representation.html#choosing-a-representation">Choosing A Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmetric.html">String Distances And Similarities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dmetric.html#basic-distances">Basic Distances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dmetric.html#metric-guide">Metric Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dmetric.html#normalized-variants">Normalized Variants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Symbolic Benchmark Experiments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#model-families">Model Families</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#local-smoke-test">Local Smoke Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#default-run">Default Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#slurm-workflow">Slurm Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#configurable-slurm-variables">Configurable Slurm Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#output-columns">Output Columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#reproducibility-notes">Reproducibility Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiments.html#performer-note">Performer Note</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#machine-learning-with-symbols">Machine learning with symbols</a></li>
-<li class="toctree-l2"><a class="reference internal" href="symbols_machine_learning.html#generating-symbols">Generating symbols</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.slearn.html">slearn.slearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.symbolicML.html">slearn.symbolicML</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.SAX.html">slearn.SAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.fABBA.html">slearn.fABBA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.ABBA.html">slearn.ABBA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-slearn.sgenerate">String Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-slearn.dmetric">String Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#symbolic-time-series-representations">Symbolic Time-Series Representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#scikit-learn-wrappers">Scikit-Learn Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#experiment-entry-points">Experiment Entry Points</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 </div>
@@ -119,13 +216,13 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="symbols_machine_learning.html" class="btn btn-neutral float-right" title="Symbolic sequence prediction with machine learning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Numerical Linear Algebra Group, The University of Manchester.</p>
+    <p>&#169; Copyright 2021-2026, Numerical Linear Algebra Group, The University of Manchester.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

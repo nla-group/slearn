@@ -1,19 +1,21 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>slearn.symbols &mdash; slearn 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>slearn.symbols &mdash; slearn documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=beddf052" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=42d1e199" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=14672bda"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -24,21 +26,36 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> slearn
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            slearn
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbol_seeds.html">LZW-Controlled Symbolic Seeds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../symbols_machine_learning.html">Symbolic Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../predict_with_symbols_representation.html">Symbolic Time-Series Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dmetric.html">String Distances And Similarities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../experiments.html">Symbolic Benchmark Experiments</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citations.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 </ul>
 
@@ -55,9 +72,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>slearn.symbols</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">slearn.symbols</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -95,16 +112,774 @@
 <span class="c1"># OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
 <span class="c1"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+
+<span class="c1"># SAX</span>
+<div class="viewcode-block" id="SAX">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAX">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SAX</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">=</span> <span class="n">alphabet_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="SAX.fit">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAX.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize the time series by computing mean and standard deviation.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self : SAX</span>
+<span class="sd">            The fitted SAX model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    
+<div class="viewcode-block" id="SAX.transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAX.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute Piecewise Aggregate Approximation (PAA) and map to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence representing the time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input length </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> &lt; window_size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">base_size</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">remainder</span> <span class="k">else</span> <span class="n">base_size</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">)]</span>
+        <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">:</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span> <span class="o">+</span> <span class="n">size</span><span class="p">]</span>
+            <span class="n">mean_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">mean_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span> <span class="o">+</span> <span class="n">symbol</span><span class="p">))</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span></div>
+
+    
+<div class="viewcode-block" id="SAX.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAX.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and transform the time series to symbols in one step.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence representing the time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="SAX.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAX.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reconstruct the time series from symbols or stored PAA values.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        symbols : list of str, optional</span>
+<span class="sd">            The symbolic sequence to reconstruct from. If None, uses stored symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon : ndarray</span>
+<span class="sd">            The reconstructed time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">97</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">])</span>
+            <span class="n">breakpoints_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]])</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                              <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+                                  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">])</span>
+        <span class="n">recon_norm</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">paa_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">):</span>
+            <span class="n">recon_norm</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">val</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">recon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">recon_norm</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
+        <span class="k">return</span> <span class="n">recon</span></div>
+</div>
 
 
-<span class="k">def</span> <span class="nf">symbolsAssign</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; automatically assign symbols to different clusters, start with &#39;!&#39;</span>
+<span class="c1"># SAX-TD</span>
+<div class="viewcode-block" id="SAXTD">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAXTD">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SAXTD</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">,</span> <span class="n">slope_threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">=</span> <span class="n">alphabet_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slope_threshold</span> <span class="o">=</span> <span class="n">slope_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_slopes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="SAXTD.fit">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAXTD.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize the time series by computing mean and standard deviation.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self : SAXTD</span>
+<span class="sd">            The fitted SAX-TD model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    
+<div class="viewcode-block" id="SAXTD.transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAXTD.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute PAA, slopes, and symbols with trend information.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with trend suffixes (&#39;u&#39;, &#39;d&#39;, &#39;f&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input length </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> &lt; window_size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">base_size</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">remainder</span> <span class="k">else</span> <span class="n">base_size</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">)]</span>
+        <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">slopes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">size</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="n">mean_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="n">slope</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">segment</span><span class="p">)),</span> <span class="n">segment</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+            <span class="n">slopes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
+            <span class="n">mean_symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">mean_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">trend</span> <span class="o">=</span> <span class="s1">&#39;u&#39;</span> <span class="k">if</span> <span class="n">slope</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">slope_threshold</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;d&#39;</span> <span class="k">if</span> <span class="n">slope</span> <span class="o">&lt;</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">slope_threshold</span> <span class="k">else</span> <span class="s1">&#39;f&#39;</span><span class="p">)</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mean_symbol</span><span class="p">)</span><span class="si">}{</span><span class="n">trend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_slopes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span></div>
+
+    
+<div class="viewcode-block" id="SAXTD.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAXTD.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and transform the time series to symbols with trends.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with trend suffixes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="SAXTD.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.SAXTD.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reconstruct the time series with linear trends from symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        symbols : list of str, optional</span>
+<span class="sd">            The symbolic sequence with trend suffixes. If None, uses stored symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon : ndarray</span>
+<span class="sd">            The reconstructed time series with linear trends.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span>
+            <span class="n">slopes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_slopes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">slopes</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">mean_symbol</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">97</span>
+                <span class="n">trend</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">breakpoints_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]])</span>
+                <span class="n">mean_val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                       <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">mean_symbol</span><span class="p">],</span> 
+                                       <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">mean_symbol</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slope_threshold</span> <span class="k">if</span> <span class="n">trend</span> <span class="o">==</span> <span class="s1">&#39;u&#39;</span> <span class="k">else</span> 
+                         <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">slope_threshold</span> <span class="k">if</span> <span class="n">trend</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+                <span class="n">slopes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+            <span class="n">slopes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">slopes</span><span class="p">)</span>
+        <span class="n">recon_norm</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">paa_values</span><span class="p">,</span> <span class="n">slopes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">):</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">val</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+            <span class="n">recon_norm</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+        <span class="n">recon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">recon_norm</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
+        <span class="k">return</span> <span class="n">recon</span></div>
+</div>
+
+
+<span class="c1"># eSAX</span>
+<div class="viewcode-block" id="ESAX">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ESAX">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ESAX</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">=</span> <span class="n">alphabet_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_min_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_mean_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_max_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="ESAX.fit">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ESAX.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize the time series by computing mean and standard deviation.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self : ESAX</span>
+<span class="sd">            The fitted eSAX model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    
+<div class="viewcode-block" id="ESAX.transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ESAX.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute min, mean, max per segment and map to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with three symbols per segment (min, mean, max).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input length </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> &lt; window_size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">base_size</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">remainder</span> <span class="k">else</span> <span class="n">base_size</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">)]</span>
+        <span class="n">min_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mean_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">max_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">size</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="n">min_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="n">mean_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="n">min_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_val</span><span class="p">)</span>
+            <span class="n">mean_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+            <span class="n">max_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_val</span><span class="p">)</span>
+            <span class="n">min_symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">min_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">mean_symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">mean_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">max_symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">max_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">min_symbol</span><span class="p">)</span><span class="si">}{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mean_symbol</span><span class="p">)</span><span class="si">}{</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">max_symbol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_min_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">min_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_mean_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mean_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_max_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">max_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span></div>
+
+    
+<div class="viewcode-block" id="ESAX.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ESAX.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and transform the time series to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with three symbols per segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="ESAX.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ESAX.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reconstruct the time series using quadratic interpolation.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        symbols : list of str, optional</span>
+<span class="sd">            The symbolic sequence with three symbols per segment. If None, uses stored values.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon : ndarray</span>
+<span class="sd">            The reconstructed time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">min_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_min_values</span>
+            <span class="n">mean_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mean_values</span>
+            <span class="n">max_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_max_values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">min_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">mean_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">max_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">breakpoints_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]])</span>
+                <span class="n">min_val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                      <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">97</span><span class="p">],</span> 
+                                      <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">96</span><span class="p">])</span>
+                <span class="n">mean_val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                       <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">97</span><span class="p">],</span> 
+                                       <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">96</span><span class="p">])</span>
+                <span class="n">max_val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                      <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">97</span><span class="p">],</span> 
+                                      <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">96</span><span class="p">])</span>
+                <span class="n">min_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_val</span><span class="p">)</span>
+                <span class="n">mean_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+                <span class="n">max_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_val</span><span class="p">)</span>
+            <span class="n">min_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">min_values</span><span class="p">)</span>
+            <span class="n">mean_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mean_values</span><span class="p">)</span>
+            <span class="n">max_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">max_values</span><span class="p">)</span>
+        <span class="n">recon_norm</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">mean_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">min_values</span><span class="p">,</span> <span class="n">mean_values</span><span class="p">,</span> <span class="n">max_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_val</span><span class="p">,</span> <span class="n">mean_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">]</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;quadratic&#39;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+            <span class="n">recon_norm</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+        <span class="n">recon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">recon_norm</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
+        <span class="k">return</span> <span class="n">recon</span></div>
+</div>
+
+
+<span class="c1"># mSAX</span>
+<div class="viewcode-block" id="MSAX">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.MSAX">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MSAX</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">=</span> <span class="n">alphabet_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="MSAX.fit">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.MSAX.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize multivariate time series per dimension.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input multivariate time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self : MSAX</span>
+<span class="sd">            The fitted mSAX model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stds</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    
+<div class="viewcode-block" id="MSAX.transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.MSAX.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute PAA per dimension and map to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input multivariate time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with one symbol per dimension per segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">stds</span>
+        <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_dims</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input length </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2"> &lt; window_size </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">base_size</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="n">remainder</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">remainder</span> <span class="k">else</span> <span class="n">base_size</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">window_size</span><span class="p">)]</span>
+        <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">idx</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="n">size</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">mean_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">segment</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_vals</span><span class="p">)</span>
+            <span class="n">dim_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">mean_vals</span><span class="p">]</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">dim_symbols</span><span class="p">))</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span></div>
+
+    
+<div class="viewcode-block" id="MSAX.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.MSAX.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and transform the multivariate time series to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input multivariate time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence with one symbol per dimension per segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MSAX.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.MSAX.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reconstruct the multivariate time series from symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        symbols : list of str, optional</span>
+<span class="sd">            The symbolic sequence with one symbol per dimension. If None, uses stored values.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon : ndarray</span>
+<span class="sd">            The reconstructed multivariate time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="mi">97</span>
+                    <span class="n">breakpoints_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]])</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                      <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                    <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="n">n_dims</span> <span class="o">=</span> <span class="n">paa_values</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">recon_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">),</span> <span class="n">n_dims</span><span class="p">))</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">vals</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">paa_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">):</span>
+            <span class="n">recon_norm</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">vals</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="n">size</span>
+        <span class="n">recon</span> <span class="o">=</span> <span class="n">recon_norm</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">stds</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span>
+        <span class="k">return</span> <span class="n">recon</span></div>
+</div>
+
+
+<span class="c1"># ASAX</span>
+<div class="viewcode-block" id="ASAX">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ASAX">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ASAX</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_segments</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="p">,</span> <span class="n">min_segment_size</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span> <span class="o">=</span> <span class="n">n_segments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">=</span> <span class="n">alphabet_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_segment_size</span> <span class="o">=</span> <span class="n">min_segment_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="kc">None</span>
+    
+<div class="viewcode-block" id="ASAX.fit">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ASAX.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize and compute adaptive segment sizes based on local variance.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self : ASAX</span>
+<span class="sd">            The fitted aSAX model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alphabet_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+        
+        <span class="c1"># Validate n_segments</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span> <span class="o">&gt;</span> <span class="n">n_samples</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_segments (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="si">}</span><span class="s2">) cannot exceed n_samples (</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_segment_size</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span> <span class="o">&gt;</span> <span class="n">n_samples</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: min_segment_size (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min_segment_size</span><span class="si">}</span><span class="s2">) too large for n_samples (</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">). Adjusting.&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Compute adaptive segment sizes based on local std</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">stds</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_norm</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">window</span><span class="p">])</span> <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">window</span> <span class="o">&lt;=</span> <span class="n">n_samples</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_norm</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span> 
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">window</span><span class="p">)]</span>
+        <span class="n">stds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">:</span>
+            <span class="n">stds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">stds</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">stds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">:</span>
+            <span class="n">stds</span> <span class="o">=</span> <span class="n">stds</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">]</span>
+        <span class="n">inv_stds</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">stds</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">total_weight</span> <span class="o">=</span> <span class="n">inv_stds</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        
+        <span class="c1"># Compute initial segment sizes</span>
+        <span class="n">segment_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">inv_stds</span> <span class="o">/</span> <span class="n">total_weight</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="c1"># Ensure at least 1 point per segment</span>
+        <span class="n">segment_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">segment_sizes</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        
+        <span class="c1"># Adjust to ensure sum equals n_samples</span>
+        <span class="n">current_sum</span> <span class="o">=</span> <span class="n">segment_sizes</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_sum</span> <span class="o">!=</span> <span class="n">n_samples</span><span class="p">:</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">-</span> <span class="n">current_sum</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Add points to segments with highest weights</span>
+                <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">inv_stds</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">diff</span><span class="p">):</span>
+                    <span class="n">segment_sizes</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Remove points from segments with lowest weights, respecting min size</span>
+                <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">inv_stds</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">:</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="n">sorted_indices</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">segment_sizes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">segment_sizes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                        <span class="n">diff</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># If still not resolved, use equal sizes</span>
+                <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Falling back to equal segment sizes due to constraints&quot;</span><span class="p">)</span>
+                    <span class="n">base_size</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span>
+                    <span class="n">remainder</span> <span class="o">=</span> <span class="n">n_samples</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span>
+                    <span class="n">segment_sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">base_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">remainder</span> <span class="k">else</span> <span class="n">base_size</span> 
+                                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">)])</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span> <span class="o">=</span> <span class="n">segment_sizes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">segment_sizes</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        
+        <span class="c1"># Validate</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aSAX segment_sizes: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="si">}</span><span class="s2">, Sum: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aSAX segment_bounds: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n_samples</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid segment bounds: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">, &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;or wrong number of segments: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_sizes</span><span class="p">)</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    
+<div class="viewcode-block" id="ASAX.transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ASAX.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute PAA for adaptive segments and map to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence for adaptive segments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">X_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span>
+        <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_segments</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span> <span class="ow">or</span> <span class="n">end</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_norm</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid segment [</span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">] for length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_norm</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">segment</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="n">mean_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">mean_val</span><span class="p">):</span>
+                <span class="n">mean_val</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_val</span><span class="p">)</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">([</span><span class="n">mean_val</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span> <span class="o">+</span> <span class="n">symbol</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_symbols</span></div>
+
+    
+<div class="viewcode-block" id="ASAX.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ASAX.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fit the model and transform the time series to symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            The input time series.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        symbols : list of str</span>
+<span class="sd">            The symbolic sequence for adaptive segments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="ASAX.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ASAX.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reconstruct the time series from adaptive segments.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        symbols : list of str, optional</span>
+<span class="sd">            The symbolic sequence to reconstruct from. If None, uses stored symbols.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        recon : ndarray</span>
+<span class="sd">            The reconstructed time series.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">symbols</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_paa_values</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">97</span>
+                <span class="n">breakpoints_ext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakpoints</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]])</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                  <span class="n">lb</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">ub</span><span class="o">=</span><span class="n">breakpoints_ext</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">paa_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">paa_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">paa_values</span><span class="p">)</span>
+        <span class="n">recon_norm</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">paa_values</span><span class="p">):</span>
+            <span class="n">segment_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_bounds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">recon_norm</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">val</span><span class="p">]</span> <span class="o">*</span> <span class="n">segment_size</span><span class="p">)</span>
+        <span class="n">recon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">recon_norm</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean</span>
+        <span class="k">return</span> <span class="n">recon</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="symbolsAssign">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.symbolsAssign">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">symbolsAssign</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; automatically assign symbols to different clusters, start with &#39;!&#39;</span>
 <span class="sd">        from https://github.com/nla-group/fABBA.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
@@ -139,114 +914,36 @@
         <span class="n">alphabet</span> <span class="o">=</span> <span class="n">alphabet</span><span class="p">[:</span><span class="n">N</span><span class="p">]</span>
     <span class="n">hashm</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cluster_sort</span> <span class="o">+</span> <span class="n">alphabet</span><span class="p">,</span> <span class="n">alphabet</span> <span class="o">+</span> <span class="n">cluster_sort</span><span class="p">))</span>
     <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="n">hashm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">strings</span><span class="p">,</span> <span class="n">hashm</span>
+    <span class="k">return</span> <span class="n">strings</span><span class="p">,</span> <span class="n">hashm</span></div>
 
 
 
-<div class="viewcode-block" id="SAX"><a class="viewcode-back" href="../../_autosummary/slearn.SAX.html#slearn.SAX">[docs]</a><span class="k">class</span> <span class="nc">SAX</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Modified from https://github.com/nla-group/TARZAN&quot;&quot;&quot;</span>
-   
-<div class="viewcode-block" id="SAX.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.SAX.html#slearn.SAX.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_paa_segments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">return_list</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">n_paa_segments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># if verbose == True:</span>
-                <span class="c1"># warnings.warn(&quot;Set width to ``len(ts) // n_paa_segments&#39;&#39;&quot;)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span> <span class="o">=</span> <span class="n">n_paa_segments</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="kc">None</span> 
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">return_list</span> <span class="o">=</span> <span class="n">return_list</span></div>
 
-        
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_series</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_paa_segments</span>
-        <span class="n">compressed_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">paa_mean</span><span class="p">(</span><span class="n">time_series</span><span class="p">)</span>
-        <span class="n">symbolic_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_digitize</span><span class="p">(</span><span class="n">compressed_time_series</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">symbolic_time_series</span>
 
-    
-    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbolic_time_series</span><span class="p">):</span>
-        <span class="n">compressed_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_digitize</span><span class="p">(</span><span class="n">symbolic_time_series</span><span class="p">)</span>
-        <span class="n">time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reconstruct</span><span class="p">(</span><span class="n">compressed_time_series</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">time_series</span>
-
-    
-    <span class="k">def</span> <span class="nf">paa_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Result truncates, width does not divide length&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">])])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)))]</span>
-
-    
-    <span class="k">def</span> <span class="nf">_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
-        <span class="n">symbolic_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gaussian_breakpoints</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">symbolic_ts</span>
-
-    
-    <span class="k">def</span> <span class="nf">_gaussian_breakpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
-        <span class="c1"># Construct Breakpoints</span>
-        <span class="n">breakpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">)],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> 
-             <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">breakpoints</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">breakpoints</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-                    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-                    <span class="k">break</span>
-        <span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashm</span> <span class="o">=</span> <span class="n">symbolsAssign</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_list</span><span class="p">:</span>
-            <span class="n">strings</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strings</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">strings</span>
-
-    
-    <span class="k">def</span> <span class="nf">_reconstruct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduced_ts</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_pca</span><span class="p">(</span><span class="n">reduced_ts</span><span class="p">)</span>
-    
-    
-    <span class="k">def</span> <span class="nf">_reverse_pca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-
-    
-    <span class="k">def</span> <span class="nf">_reverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbolic_ts</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reverse_gaussian_breakpoints</span><span class="p">(</span><span class="n">symbolic_ts</span><span class="p">)</span>
-    
-    
-    <span class="k">def</span> <span class="nf">_reverse_gaussian_breakpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
-        <span class="n">breakpoint_values</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_symbols</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">ts</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashm</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">breakpoint_values</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">ts</span></div>
-    
-    
-
-    
 <span class="c1"># python implementation for aggregation</span>
-<span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sorting</span><span class="o">=</span><span class="s2">&quot;2-norm&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span> <span class="c1"># , verbose=1</span>
-    <span class="sd">&quot;&quot;&quot;aggregate the data</span>
+<div class="viewcode-block" id="aggregate">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.aggregate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sorting</span><span class="o">=</span><span class="s2">&quot;2-norm&quot;</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span> <span class="c1"># , verbose=1</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Aggregate points into tolerance-based groups.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    data : numpy.ndarray</span>
-<span class="sd">        the input that is array-like of shape (n_samples,).</span>
-<span class="sd">    sorting : str</span>
-<span class="sd">        the sorting method for aggregation, default=&#39;2-norm&#39;, alternative option: &#39;1-norm&#39; and &#39;lexi&#39;.</span>
-<span class="sd">    tol : float</span>
-<span class="sd">        the tolerance to control the aggregation. if the distance between the starting point </span>
-<span class="sd">        of a group and another data point is less than or equal to the tolerance,</span>
-<span class="sd">        the point is allocated to that group.  </span>
+<span class="sd">        Array-like input of shape ``(n_samples, n_features)``.</span>
+<span class="sd">    sorting : {&#39;2-norm&#39;, &#39;1-norm&#39;, &#39;lexi&#39;}, default=&#39;2-norm&#39;</span>
+<span class="sd">        Sorting rule used before aggregation.</span>
+<span class="sd">    tol : float, default=0.5</span>
+<span class="sd">        Distance tolerance. A point is assigned to a group when its distance</span>
+<span class="sd">        from the group&#39;s starting point is less than or equal to ``tol``.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    labels (numpy.ndarray) : </span>
-<span class="sd">        the group categories of the data after aggregation</span>
-<span class="sd">    </span>
-<span class="sd">    splist (list) : </span>
-<span class="sd">        the list of the starting points</span>
-<span class="sd">    </span>
-<span class="sd">    nr_dist (int) :</span>
-<span class="sd">        number of pairwise distance calculations</span>
+<span class="sd">    labels : numpy.ndarray</span>
+<span class="sd">        Group labels after aggregation.</span>
+<span class="sd">    splist : list</span>
+<span class="sd">        Starting points for the groups.</span>
+<span class="sd">    nr_dist : int</span>
+<span class="sd">        Number of pairwise distance calculations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">splist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span> <span class="c1"># store the starting points</span>
@@ -295,12 +992,15 @@
                                                                <span class="c1"># index, label, number of neighbor objects, center (starting point).</span>
         <span class="n">lab</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">splist</span><span class="p">,</span> <span class="n">nr_dist</span> 
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">splist</span><span class="p">,</span> <span class="n">nr_dist</span> </div>
 
 
 
-<span class="k">def</span> <span class="nf">compress</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="compress">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.compress">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Approximate a time series using a continuous piecewise linear function.</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -334,14 +1034,17 @@
     <span class="c1"># pieces = np.vstack([pieces, np.array([end-start-1, lastinc, lasterr])])</span>
     <span class="n">pieces</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">lastinc</span><span class="p">,</span> <span class="n">lasterr</span><span class="p">])</span>
 
-    <span class="k">return</span> <span class="n">pieces</span>
+    <span class="k">return</span> <span class="n">pieces</span></div>
 
 
 
 
-<div class="viewcode-block" id="fABBA"><a class="viewcode-back" href="../../_autosummary/slearn.fABBA.html#slearn.fABBA">[docs]</a><span class="k">class</span> <span class="nc">fABBA</span><span class="p">:</span>
-<div class="viewcode-block" id="fABBA.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.fABBA.html#slearn.fABBA.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">sorting</span><span class="o">=</span><span class="s1">&#39;2-norm&#39;</span><span class="p">,</span> <span class="n">scl</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="fABBA">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">fABBA</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">sorting</span><span class="o">=</span><span class="s1">&#39;2-norm&#39;</span><span class="p">,</span> <span class="n">scl</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -363,12 +1066,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compression_rate</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span>
         
     
 
-    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; </span>
+<div class="viewcode-block" id="fABBA.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Compress and digitize the time series together.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -389,14 +1094,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Compression: Reduced series of length </span><span class="si">{0}</span><span class="s2"> to </span><span class="si">{1}</span><span class="s2"> segments.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                <span class="sd">&quot;&quot;&quot;Digitization: Reduced {} pieces&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strings</span><span class="p">)),</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;symbols.&quot;</span><span class="p">)</span>  
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Digitization: Reduced {} pieces&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strings</span><span class="p">)),</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;symbols.&quot;</span><span class="p">)</span>  
         <span class="c1"># strings = &#39;&#39;.join(strings)</span>
-        <span class="k">return</span> <span class="n">strings</span>
+        <span class="k">return</span> <span class="n">strings</span></div>
+
     
     
 
-    <span class="k">def</span> <span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="fABBA.digitize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.digitize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Greedy 2D clustering of pieces (a Nx2 numpy array),</span>
 <span class="sd">        using tolernce tol and len/inc scaling parameter scl.</span>
 <span class="sd">        In this variant, a &#39;temporary&#39; cluster center is used </span>
@@ -426,28 +1134,37 @@
             <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span> <span class="n">centers</span><span class="p">,</span> <span class="n">center</span> <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="n">centers</span>
         <span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span> <span class="o">=</span> <span class="n">symbolsAssign</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">strings</span>
+        <span class="k">return</span> <span class="n">strings</span></div>
+
     
 
     
-    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="fABBA.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_digitize</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">)</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
-        <span class="n">time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_compress</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">time_series</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_compress</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ts</span></div>
+
 
     
 
-    <span class="k">def</span> <span class="nf">inverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">hashmap</span><span class="p">):</span>
+<div class="viewcode-block" id="fABBA.inverse_digitize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.inverse_digitize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">hashmap</span><span class="p">):</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
             <span class="n">pc</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">hashmap</span><span class="p">[</span><span class="n">p</span><span class="p">])]</span>
             <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">pieces</span><span class="p">,</span> <span class="n">pc</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span></div>
+
 
 
     
-    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
+<div class="viewcode-block" id="fABBA.quantize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.quantize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -459,30 +1176,37 @@
                     <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
             <span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pieces</span>
+        <span class="k">return</span> <span class="n">pieces</span></div>
+
 
     
 
-    <span class="k">def</span> <span class="nf">inverse_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Modified from ABBA package, please see ABBA package to see guidance.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="fABBA.inverse_compress">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.fABBA.inverse_compress">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modified from ABBA package, please see ABBA package to see guidance.&quot;&quot;&quot;</span>
         
-        <span class="n">time_series</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
         <span class="c1"># stitch linear piece onto last</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)):</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
             <span class="c1">#print(x)</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">time_series</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
-            <span class="n">time_series</span> <span class="o">=</span> <span class="n">time_series</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">time_series</span></div>
+        <span class="k">return</span> <span class="n">ts</span></div>
+</div>
+
     
     
     
 
 
-<div class="viewcode-block" id="ABBA"><a class="viewcode-back" href="../../_autosummary/slearn.ABBA.html#slearn.ABBA">[docs]</a><span class="k">class</span> <span class="nc">ABBA</span><span class="p">:</span>
-<div class="viewcode-block" id="ABBA.__init__"><a class="viewcode-back" href="../../_autosummary/slearn.ABBA.html#slearn.ABBA.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k_cluster</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ABBA">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ABBA</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k_cluster</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -505,12 +1229,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">max_len</span> <span class="o">=</span> <span class="n">max_len</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">k_cluster</span> <span class="o">=</span> <span class="n">k_cluster</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compression_rate</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="kc">None</span>
     
         
 
-    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; </span>
+<div class="viewcode-block" id="ABBA.fit_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.fit_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Compress and digitize the time series together.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -531,14 +1257,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">digitization_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Compression: Reduced series of length </span><span class="si">{0}</span><span class="s2"> to </span><span class="si">{1}</span><span class="s2"> segments.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pieces</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-                <span class="sd">&quot;&quot;&quot;Digitization: Reduced {} pieces&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strings</span><span class="p">)),</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;symbols.&quot;</span><span class="p">)</span>  
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Digitization: Reduced {} pieces&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strings</span><span class="p">)),</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;symbols.&quot;</span><span class="p">)</span>  
         <span class="c1"># strings = &#39;&#39;.join(strings)</span>
-        <span class="k">return</span> <span class="n">strings</span>
+        <span class="k">return</span> <span class="n">strings</span></div>
+
     
     
 
-    <span class="k">def</span> <span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ABBA.digitize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.digitize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Greedy 2D clustering of pieces (a Nx2 numpy array),</span>
 <span class="sd">        using tolernce tol and len/inc scaling parameter scl.</span>
 <span class="sd">        In this variant, a &#39;temporary&#39; cluster center is used </span>
@@ -562,28 +1291,37 @@
         <span class="n">labels</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="o">*</span><span class="n">_std</span>
         <span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span> <span class="o">=</span> <span class="n">symbolsAssign</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">strings</span>
+        <span class="k">return</span> <span class="n">strings</span></div>
+
     
 
     
-    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="ABBA.inverse_transform">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.inverse_transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_digitize</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hashmap</span><span class="p">)</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
-        <span class="n">time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_compress</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">time_series</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_compress</span><span class="p">(</span><span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ts</span></div>
+
 
     
 
-    <span class="k">def</span> <span class="nf">inverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">hashmap</span><span class="p">):</span>
+<div class="viewcode-block" id="ABBA.inverse_digitize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.inverse_digitize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strings</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">hashmap</span><span class="p">):</span>
         <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
             <span class="n">pc</span> <span class="o">=</span> <span class="n">centers</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">hashmap</span><span class="p">[</span><span class="n">p</span><span class="p">])]</span>
             <span class="n">pieces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">pieces</span><span class="p">,</span> <span class="n">pc</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pieces</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span></div>
+
 
 
     
-    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
+<div class="viewcode-block" id="ABBA.quantize">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.quantize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -595,22 +1333,27 @@
                     <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                     <span class="n">pieces</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
             <span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">pieces</span>
+        <span class="k">return</span> <span class="n">pieces</span></div>
+
 
     
 
-    <span class="k">def</span> <span class="nf">inverse_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Modified from ABBA package, please see ABBA package to see guidance.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ABBA.inverse_compress">
+<a class="viewcode-back" href="../../api.html#slearn.symbols.ABBA.inverse_compress">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inverse_compress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modified from ABBA package, please see ABBA package to see guidance.&quot;&quot;&quot;</span>
         
-        <span class="n">time_series</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
         <span class="c1"># stitch linear piece onto last</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pieces</span><span class="p">)):</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">pieces</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
             <span class="c1">#print(x)</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">time_series</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
-            <span class="n">time_series</span> <span class="o">=</span> <span class="n">time_series</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">time_series</span></div>
+        <span class="k">return</span> <span class="n">ts</span></div>
+</div>
+
     
     
 </pre></div>
@@ -622,7 +1365,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Numerical Linear Algebra Group, The University of Manchester.</p>
+    <p>&#169; Copyright 2021-2026, Numerical Linear Algebra Group, The University of Manchester.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

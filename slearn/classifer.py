@@ -52,31 +52,24 @@ import os
 
 
 class symbolicML:
-    """
-    Classifier for symbolic sequences.
-
+    """Classifier for symbolic next-symbol prediction.
 
     Parameters
     ----------
-    classifier_name - str, default=MLPClassifier, 
-          optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
-          "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
-          "LogisticRegression", "AdaBoostClassifier",
-          "RandomForestClassifier", "GaussianNB",
-          "DeepForest", "LGBM",
-          "SVC", "RBF"}: 
-        The classifier you specify for symbols prediction.
-
-    ws - int, default=3:
-        The windows size for symbols to be the features, i.e, the dimensions of features.
-        The larger the window, the more information about time series can be taken into account.
-
-    random_seed - int, default=0:
-        The random state fixed for classifers in scikit-learn.
-    
-    verbose - int, default=0:
-        Whether to print progress messages to stdout.
-        
+    classifier_name : str, default='MLPClassifier'
+        Name of the scikit-learn estimator used for next-symbol prediction.
+        Common choices include ``MLPClassifier``, ``KNeighborsClassifier``,
+        ``GaussianProcessClassifier``, ``QuadraticDiscriminantAnalysis``,
+        ``DecisionTreeClassifier``, ``LogisticRegression``,
+        ``AdaBoostClassifier``, ``GaussianNB``, and ``SVC``.
+    ws : int, default=3
+        Context-window length used to construct fixed-dimensional symbolic
+        features. Larger windows expose more history to the classifier.
+    random_seed : int, default=0
+        Random seed forwarded to compatible scikit-learn estimators.
+    verbose : int, default=0
+        Verbosity level. A value of zero suppresses progress output where the
+        wrapped estimator supports it.
     """
         
     def __init__(self, classifier_name='MLPClassifier', ws=3, random_seed=0, verbose=0):
@@ -288,38 +281,24 @@ class symbolicML:
     
 
 class slearn(symbolicML):
-    """
-    A package linking symbolic representation with scikit-learn for time series prediction.
+    """Symbolic time-series forecasting wrapper.
 
     Parameters
-    ----------    
-    classifier_name - str, default=MLPClassifier, 
-                      optional choices = {"KNeighborsClassifier", "GaussianProcessClassifier"
-                      "QuadraticDiscriminantAnalysis", "DecisionTreeClassifier",
-                      "LogisticRegression", "AdaBoostClassifier",
-                      "RandomForestClassifier", "GaussianNB",
-                      "LGBM", "SVC", "RBF"}: 
-        The classifier you specify for symbols prediction.
-
-    ws - int, default=3:
-        The windows size for symbols to be the features, i.e, the dimensions of features.
-    
-    step - int, default=1,
-        The number of symbols for prediction.
-
-    method - str {'SAX', 'ABBA', 'fABBA'}:
-        The symbolic time series representation.
-        We use fABBA for ABBA method.
-          
-    form - str, default='numeric':
-        predict in symboli form or numerical form.
-
-    random_seed - int, default=0:
-        The random state fixed for classifers in scikit-learn.
-
-    verbose - int, default=0:
-        log print. Whether to print progress or other messages to stdout.
-
+    ----------
+    method : {'SAX', 'ABBA', 'fABBA'}, default='fABBA'
+        Symbolic representation used before classifier training.
+    ws : int, default=1
+        Context-window length used by the symbolic classifier.
+    step : int, default=10
+        Number of future symbols, or reconstructed numeric samples, to predict.
+    classifier_name : str, default='MLPClassifier'
+        Name of the scikit-learn estimator used by ``symbolicML``.
+    form : {'numeric', 'string'}, default='numeric'
+        Return reconstructed numeric forecasts or symbolic forecasts.
+    random_seed : int, default=0
+        Random seed used by compatible estimators.
+    verbose : int, default=1
+        Verbosity level for symbolic transformation and classifier training.
     """
         
     def __init__(self, method='fABBA', ws=1, step=10, 

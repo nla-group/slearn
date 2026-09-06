@@ -1,25 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; slearn 0.0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>API Reference &mdash; slearn documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=beddf052" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=42d1e199" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=14672bda"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="slearn.slearn" href="_autosummary/slearn.slearn.html" />
-    <link rel="prev" title="Time series forecasting with symbolic representation" href="predict_with_symbols_representation.html" /> 
+    <link rel="next" title="Citations" href="citations.html" />
+    <link rel="prev" title="Symbolic Benchmark Experiments" href="experiments.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -27,28 +29,155 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> slearn
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            slearn
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbol_seeds.html">LZW-Controlled Symbolic Seeds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Symbolic Time-Series Representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dmetric.html">String Distances And Similarities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Symbolic Benchmark Experiments</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predict_with_symbols_representation.html">Time series forecasting with symbolic representation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.slearn.html">slearn.slearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.symbolicML.html">slearn.symbolicML</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.SAX.html">slearn.SAX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.fABBA.html">slearn.fABBA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_autosummary/slearn.ABBA.html">slearn.ABBA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-slearn.sgenerate">String Generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.lzwcompress"><code class="docutils literal notranslate"><span class="pre">lzwcompress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.lzwdecompress"><code class="docutils literal notranslate"><span class="pre">lzwdecompress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.reduce"><code class="docutils literal notranslate"><span class="pre">reduce()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.lzw_string_generator"><code class="docutils literal notranslate"><span class="pre">lzw_string_generator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.lzw_string_seeds"><code class="docutils literal notranslate"><span class="pre">lzw_string_seeds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.random_generate"><code class="docutils literal notranslate"><span class="pre">random_generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.sgenerate.mkc_gererate"><code class="docutils literal notranslate"><span class="pre">mkc_gererate()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-slearn.dmetric">String Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.damerau_levenshtein_distance"><code class="docutils literal notranslate"><span class="pre">damerau_levenshtein_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.jaro_winkler_distance"><code class="docutils literal notranslate"><span class="pre">jaro_winkler_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.levenshtein_distance"><code class="docutils literal notranslate"><span class="pre">levenshtein_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.hamming_distance"><code class="docutils literal notranslate"><span class="pre">hamming_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.jaro_similarity"><code class="docutils literal notranslate"><span class="pre">jaro_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.cosine_similarity"><code class="docutils literal notranslate"><span class="pre">cosine_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.cosine_bigram_similarity"><code class="docutils literal notranslate"><span class="pre">cosine_bigram_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.lcs_distance"><code class="docutils literal notranslate"><span class="pre">lcs_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.dice_coefficient"><code class="docutils literal notranslate"><span class="pre">dice_coefficient()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.smith_waterman_distance"><code class="docutils literal notranslate"><span class="pre">smith_waterman_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_levenshtein_distance"><code class="docutils literal notranslate"><span class="pre">normalized_levenshtein_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_hamming_distance"><code class="docutils literal notranslate"><span class="pre">normalized_hamming_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_jaro_similarity"><code class="docutils literal notranslate"><span class="pre">normalized_jaro_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_jaro_winkler_similarity"><code class="docutils literal notranslate"><span class="pre">normalized_jaro_winkler_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_jaro_winkler_distance"><code class="docutils literal notranslate"><span class="pre">normalized_jaro_winkler_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_cosine_similarity"><code class="docutils literal notranslate"><span class="pre">normalized_cosine_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_cosine_bigram_similarity"><code class="docutils literal notranslate"><span class="pre">normalized_cosine_bigram_similarity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_lcs_distance"><code class="docutils literal notranslate"><span class="pre">normalized_lcs_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_dice_coefficient"><code class="docutils literal notranslate"><span class="pre">normalized_dice_coefficient()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_smith_waterman_distance"><code class="docutils literal notranslate"><span class="pre">normalized_smith_waterman_distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.dmetric.normalized_damerau_levenshtein_distance"><code class="docutils literal notranslate"><span class="pre">normalized_damerau_levenshtein_distance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#symbolic-time-series-representations">Symbolic Time-Series Representations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.SAX"><code class="docutils literal notranslate"><span class="pre">SAX</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAX.fit"><code class="docutils literal notranslate"><span class="pre">SAX.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAX.transform"><code class="docutils literal notranslate"><span class="pre">SAX.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAX.fit_transform"><code class="docutils literal notranslate"><span class="pre">SAX.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAX.inverse_transform"><code class="docutils literal notranslate"><span class="pre">SAX.inverse_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.SAXTD"><code class="docutils literal notranslate"><span class="pre">SAXTD</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAXTD.fit"><code class="docutils literal notranslate"><span class="pre">SAXTD.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAXTD.transform"><code class="docutils literal notranslate"><span class="pre">SAXTD.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAXTD.fit_transform"><code class="docutils literal notranslate"><span class="pre">SAXTD.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.SAXTD.inverse_transform"><code class="docutils literal notranslate"><span class="pre">SAXTD.inverse_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.ESAX"><code class="docutils literal notranslate"><span class="pre">ESAX</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ESAX.fit"><code class="docutils literal notranslate"><span class="pre">ESAX.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ESAX.transform"><code class="docutils literal notranslate"><span class="pre">ESAX.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ESAX.fit_transform"><code class="docutils literal notranslate"><span class="pre">ESAX.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ESAX.inverse_transform"><code class="docutils literal notranslate"><span class="pre">ESAX.inverse_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.MSAX"><code class="docutils literal notranslate"><span class="pre">MSAX</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.MSAX.fit"><code class="docutils literal notranslate"><span class="pre">MSAX.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.MSAX.transform"><code class="docutils literal notranslate"><span class="pre">MSAX.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.MSAX.fit_transform"><code class="docutils literal notranslate"><span class="pre">MSAX.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.MSAX.inverse_transform"><code class="docutils literal notranslate"><span class="pre">MSAX.inverse_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.ASAX"><code class="docutils literal notranslate"><span class="pre">ASAX</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ASAX.fit"><code class="docutils literal notranslate"><span class="pre">ASAX.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ASAX.transform"><code class="docutils literal notranslate"><span class="pre">ASAX.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ASAX.fit_transform"><code class="docutils literal notranslate"><span class="pre">ASAX.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ASAX.inverse_transform"><code class="docutils literal notranslate"><span class="pre">ASAX.inverse_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.symbolsAssign"><code class="docutils literal notranslate"><span class="pre">symbolsAssign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.aggregate"><code class="docutils literal notranslate"><span class="pre">aggregate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.compress"><code class="docutils literal notranslate"><span class="pre">compress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.fABBA"><code class="docutils literal notranslate"><span class="pre">fABBA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.fit_transform"><code class="docutils literal notranslate"><span class="pre">fABBA.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.digitize"><code class="docutils literal notranslate"><span class="pre">fABBA.digitize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.inverse_transform"><code class="docutils literal notranslate"><span class="pre">fABBA.inverse_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.inverse_digitize"><code class="docutils literal notranslate"><span class="pre">fABBA.inverse_digitize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.quantize"><code class="docutils literal notranslate"><span class="pre">fABBA.quantize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.fABBA.inverse_compress"><code class="docutils literal notranslate"><span class="pre">fABBA.inverse_compress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.symbols.ABBA"><code class="docutils literal notranslate"><span class="pre">ABBA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.fit_transform"><code class="docutils literal notranslate"><span class="pre">ABBA.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.digitize"><code class="docutils literal notranslate"><span class="pre">ABBA.digitize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.inverse_transform"><code class="docutils literal notranslate"><span class="pre">ABBA.inverse_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.inverse_digitize"><code class="docutils literal notranslate"><span class="pre">ABBA.inverse_digitize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.quantize"><code class="docutils literal notranslate"><span class="pre">ABBA.quantize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.symbols.ABBA.inverse_compress"><code class="docutils literal notranslate"><span class="pre">ABBA.inverse_compress()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#scikit-learn-wrappers">Scikit-Learn Wrappers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.classifer.symbolicML"><code class="docutils literal notranslate"><span class="pre">symbolicML</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.random_seed"><code class="docutils literal notranslate"><span class="pre">symbolicML.random_seed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.ws"><code class="docutils literal notranslate"><span class="pre">symbolicML.ws</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.verbose"><code class="docutils literal notranslate"><span class="pre">symbolicML.verbose</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.encode"><code class="docutils literal notranslate"><span class="pre">symbolicML.encode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.construct_train"><code class="docutils literal notranslate"><span class="pre">symbolicML.construct_train()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.init_classifier"><code class="docutils literal notranslate"><span class="pre">symbolicML.init_classifier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.symbolicML.forecast"><code class="docutils literal notranslate"><span class="pre">symbolicML.forecast()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#slearn.classifer.slearn"><code class="docutils literal notranslate"><span class="pre">slearn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.random_seed"><code class="docutils literal notranslate"><span class="pre">slearn.random_seed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.step"><code class="docutils literal notranslate"><span class="pre">slearn.step</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.ws"><code class="docutils literal notranslate"><span class="pre">slearn.ws</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.verbose"><code class="docutils literal notranslate"><span class="pre">slearn.verbose</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.set_symbols"><code class="docutils literal notranslate"><span class="pre">slearn.set_symbols()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.predict"><code class="docutils literal notranslate"><span class="pre">slearn.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slearn.classifer.slearn.params_secure"><code class="docutils literal notranslate"><span class="pre">slearn.params_secure()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#experiment-entry-points">Experiment Entry Points</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -65,8 +194,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>API Reference</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,44 +206,1334 @@
            <div itemprop="articleBody">
              
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline"></a></h1>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/slearn.slearn.html#slearn.slearn" title="slearn.slearn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slearn.slearn</span></code></a>([method, ws, step, ...])</p></td>
-<td><p>A package linking symbolic representation with scikit-learn for time series prediction.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/slearn.symbolicML.html#slearn.symbolicML" title="slearn.symbolicML"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slearn.symbolicML</span></code></a>([classifier_name, ws, ...])</p></td>
-<td><p>Classifier for symbolic sequences.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/slearn.SAX.html#slearn.SAX" title="slearn.SAX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slearn.SAX</span></code></a>(*[, width, n_paa_segments, k, ...])</p></td>
-<td><p>Modified from <a class="reference external" href="https://github.com/nla-group/TARZAN">https://github.com/nla-group/TARZAN</a></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/slearn.fABBA.html#slearn.fABBA" title="slearn.fABBA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slearn.fABBA</span></code></a>([tol, alpha, sorting, scl, ...])</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/slearn.ABBA.html#slearn.ABBA" title="slearn.ABBA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slearn.ABBA</span></code></a>([tol, k_cluster, verbose, max_len])</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>The public API is organized around four modules: symbolic string generation,
+string metrics, symbolic time-series representations, and scikit-learn-based
+symbolic predictors. The historical module name <code class="docutils literal notranslate"><span class="pre">slearn.classifer</span></code> is kept for
+backward compatibility.</p>
+<section id="module-slearn.sgenerate">
+<span id="string-generation"></span><h2>String Generation<a class="headerlink" href="#module-slearn.sgenerate" title="Link to this heading"></a></h2>
+<p>This part is mainly for symbolic sequence generation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.lzwcompress">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">lzwcompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uncompressed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#lzwcompress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.lzwcompress" title="Link to this definition"></a></dt>
+<dd><p>LZW compress a string to a list of numerical codes, it is
+restricted to alphabetical values from ‘A’ to ‘z’.
+Based on from <a class="reference external" href="https://rosettacode.org/wiki/LZW_compression#Python">https://rosettacode.org/wiki/LZW_compression#Python</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uncompressed</strong> (<em>string</em>) – String to be compressed using Lempel-Ziv-Welch method, as explained in
+‘A Technique for High-Performance Data Compression’, Welch, 1984.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Each element in the list is a code equivalent to a character or a
+groups of characters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of integers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.lzwdecompress">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">lzwdecompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">compressed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#lzwdecompress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.lzwdecompress" title="Link to this definition"></a></dt>
+<dd><p>LZW decompression from a list of integers to a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>compressed</strong> (<em>list</em><em> of </em><em>integers</em>) – Each element correspond to a character or combination of characters,
+as explained in ‘A Technique for High-Performance Data Compression’,
+Welch, 1984.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The representation of the list of codes into a string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>strb</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.reduce">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#reduce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.reduce" title="Link to this definition"></a></dt>
+<dd><p>Reduce a string ‘s’ to its shortest period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – This string will be evaluated to find whether it can be reduced to
+a simpler representation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the reduced string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.lzw_string_generator">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">lzw_string_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nr_symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_complexity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priorise_complexity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#lzw_string_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.lzw_string_generator" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Generator of strings based on LZW complexity (elements within the</dt><dd><p>compression symbols’ list). If complexity is priorised it will
+stop the string creation until the aimed complexity is achieved.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nr_symbols</strong> (<em>int</em>) – Aimed number of symbols to use to build the string.</p></li>
+<li><p><strong>target_complexity</strong> (<em>int</em>) – Aimed level of complexity for the string.</p></li>
+<li><p><strong>priorise_complexity</strong> (<em>boolean</em><em>, </em><em>default True</em>) – If true generates a string with complexity about target_complexity,
+otherwise the generated string goes above the target complexity until
+reach the nr_symbols.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>str</em> – String produced within the specified parameters.</p></li>
+<li><p><em>int</em> – Level of LZW complexity.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.lzw_string_seeds">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">lzw_string_seeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">10,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complexity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">25,</span> <span class="pre">5)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols_range_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complexity_range_distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priorise_complexity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#lzw_string_seeds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.lzw_string_seeds" title="Link to this definition"></a></dt>
+<dd><p>Serialiser generator of string libraries based on lzw_string_generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbols</strong> (<em>int</em><em> or </em><em>array-like</em><em>, </em><em>default</em><em> (</em><em>1</em><em>,</em><em>10</em><em>,</em><em>5</em><em>)</em>) – If integer the function will return a collection of strings of the
+specified number of symbols (<cite>nr_symbols</cite>). If array-like with value two or three
+it will return strings produced serially within the specified
+range (start,stop,values). If the array is larger than three it will
+produce strings with values within the array.</p></li>
+<li><p><strong>complexity</strong> (<em>integer</em><em> or </em><em>array-like</em><em>, </em><em>default</em><em> (</em><em>5</em><em>,</em><em>25</em><em>,</em><em>5</em><em>)</em>) – If integer the function will return a collection of strings with the
+specified LZW complexity. If it is an array-like  with value two or three
+it will return strings produced serially within the specified
+range (start,stop,values). If the array is larger than three it will
+produce strings with values within the array.</p></li>
+<li><p><strong>symbols_range_distribution</strong> (<em>str</em><em>, </em><em>default None</em>) – Type of distribution of values within the range specified on symbols.
+Only accept the strings ‘linear’ or ‘geometrical’.</p></li>
+<li><p><strong>complexity_range_distribution</strong> (<em>str</em><em>, </em><em>default None</em>) – Type of distribution of values within the range specified on complexity.
+Only accept the strings ‘linear’ or ‘geometrical’.</p></li>
+<li><p><strong>iterations</strong> (<em>int</em><em>, </em><em>default 1</em>) – Defines the number of iterations of strings to generate within the set
+parameters.</p></li>
+<li><p><strong>save_csv</strong> (<em>boolean</em><em>, </em><em>default False</em>) – Saves the returned data frame into a CSV file.</p></li>
+<li><p><strong>priorise_complexity</strong> (<em>boolean</em><em>, </em><em>default True</em>) – If true generates a string with complexity about target_complexity,
+otherwise the generated string goes above the target complexity until
+reach the nr_symbols.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>File and Data frame with columns: nr_symbols, LZW_complexity,
+length and string; which stand for number of symbols, quantity of LZW
+compression elements, length of the resulting string, and the string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CSV file and pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.random_generate">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">random_generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capital</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#random_generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.random_generate" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>str:</em>) – Letter such as “A”</p></li>
+<li><p><strong>num</strong> (<em>int:</em>) – This is for basic symbolic generation-.generate(),which means the number of unique symbols generated.</p></li>
+<li><p><strong>power</strong> (<em>int:</em>) – The highest number of symbols repeating.</p></li>
+<li><p><strong>length</strong> (<em>int:</em>) – The length of the symbols sequence generated.</p></li>
+<li><p><strong>capital</strong> (<em>bool:</em>) – Case or not.</p></li>
+<li><p><strong>random_state</strong> (<em>int:</em>) – Ramdom seed, for basic_generate() and markovChain_generate()</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.sgenerate.mkc_gererate">
+<span class="sig-prename descclassname"><span class="pre">slearn.sgenerate.</span></span><span class="sig-name descname"><span class="pre">mkc_gererate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/sgenerate.html#mkc_gererate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.sgenerate.mkc_gererate" title="Link to this definition"></a></dt>
+<dd><p>Apply Markov Chain to generate string sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int:</em>) – Number of symbols</p></li>
+<li><p><strong>transition_prob</strong> (<em>dict:</em>) – <p>A dict object representing the transition</p>
+<dl class="simple">
+<dt>probabilities in Markov Chain. Should be of the form:</dt><dd><dl class="simple">
+<dt>{‘state1’: {‘state1’: 0.1, ‘state2’: 0.4},</dt><dd><p>’state2’: {…}}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>current_state</strong> (<em>str:</em>) – The state of the current random variable.</p></li>
+<li><p><strong>no</strong> (<em>int</em><em>,</em>) – The number of future states to generate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-slearn.dmetric">
+<span id="string-metrics"></span><h2>String Metrics<a class="headerlink" href="#module-slearn.dmetric" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.damerau_levenshtein_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">damerau_levenshtein_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#damerau_levenshtein_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.damerau_levenshtein_distance" title="Link to this definition"></a></dt>
+<dd><p>Compute the Damerau-Levenshtein distance between two strings.
+Operations: insertion, deletion, substitution, and transposition of adjacent characters.
+Each operation has a cost of 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The minimum number of edit operations (insertions, deletions, substitutions, or transpositions) required.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.jaro_winkler_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">jaro_winkler_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#jaro_winkler_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.jaro_winkler_distance" title="Link to this definition"></a></dt>
+<dd><p>Compute the Jaro-Winkler similarity between two strings.
+The similarity is based on Jaro similarity with a prefix adjustment.
+Distance can be computed as 1 - similarity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>optional</em>) – Prefix scaling factor (default is 0.1).</p></li>
+<li><p><strong>max_prefix</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum prefix length to consider (default is 4).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Jaro-Winkler similarity score, ranging from 0 (no similarity) to 1 (identical strings).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.levenshtein_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">levenshtein_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#levenshtein_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.levenshtein_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Levenshtein distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The minimum number of edit operations (insertions, deletions, or substitutions) required.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.hamming_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">hamming_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#hamming_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.hamming_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Hamming distance between two strings of equal length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The number of positions where the strings differ.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the strings have different lengths.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.jaro_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">jaro_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#jaro_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.jaro_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jaro similarity between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Jaro similarity score, ranging from 0 (no similarity) to 1 (identical strings).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.cosine_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">cosine_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#cosine_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.cosine_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the cosine similarity between two strings using word vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The cosine similarity score, ranging from 0 (no similarity) to 1 (identical word sets).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.cosine_bigram_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">cosine_bigram_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#cosine_bigram_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.cosine_bigram_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the cosine similarity between two strings using bigram vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The cosine similarity score, ranging from 0 (no similarity) to 1 (identical bigram sets).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.lcs_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">lcs_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#lcs_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.lcs_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the LCS-based distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The LCS distance, defined as len(s1) + len(s2) - 2 * len(LCS).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.dice_coefficient">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">dice_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#dice_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.dice_coefficient" title="Link to this definition"></a></dt>
+<dd><p>Calculate Dice’s coefficient between two strings using bigrams.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – Dice’s coefficient, ranging from 0 (no shared bigrams) to 1 (identical bigram sets).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.smith_waterman_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">smith_waterman_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mismatch_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#smith_waterman_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.smith_waterman_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Smith-Waterman distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+<li><p><strong>match_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for matching characters (default is 2).</p></li>
+<li><p><strong>mismatch_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for mismatching characters (default is -1).</p></li>
+<li><p><strong>gap_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for gaps (default is -1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The inverse of the maximum alignment score (lower scores indicate greater distance).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_levenshtein_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_levenshtein_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_levenshtein_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_levenshtein_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the normalized Levenshtein distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The normalized Levenshtein distance, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_hamming_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_hamming_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_hamming_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_hamming_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the normalized Hamming distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The normalized Hamming distance, ranging from 0 to 1. Raises ValueError for unequal lengths.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_jaro_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_jaro_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_jaro_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_jaro_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jaro similarity between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Jaro similarity, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_jaro_winkler_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_jaro_winkler_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_jaro_winkler_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_jaro_winkler_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jaro-Winkler similarity between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>optional</em>) – Prefix scaling factor (default is 0.1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Jaro-Winkler similarity, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_jaro_winkler_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_jaro_winkler_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_jaro_winkler_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_jaro_winkler_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jaro-Winkler distance between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>optional</em>) – Prefix scaling factor (default is 0.1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Jaro-Winkler similarity, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_cosine_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_cosine_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_cosine_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_cosine_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the word-based cosine similarity between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The cosine similarity, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_cosine_bigram_similarity">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_cosine_bigram_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_cosine_bigram_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_cosine_bigram_similarity" title="Link to this definition"></a></dt>
+<dd><p>Calculate the bigram-based cosine similarity between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The cosine bigram similarity, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_lcs_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_lcs_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_lcs_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_lcs_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the normalized LCS distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The normalized LCS distance, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_dice_coefficient">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_dice_coefficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_dice_coefficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_dice_coefficient" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Dice’s coefficient between two strings (inherently normalized).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>similarity</strong> – The Dice’s coefficient, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_smith_waterman_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_smith_waterman_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mismatch_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gap_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_smith_waterman_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_smith_waterman_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the normalized Smith-Waterman distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+<li><p><strong>match_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for matching characters (default is 2).</p></li>
+<li><p><strong>mismatch_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for mismatching characters (default is -1).</p></li>
+<li><p><strong>gap_score</strong> (<em>int</em><em>, </em><em>optional</em>) – Score for gaps (default is -1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The normalized Smith-Waterman distance, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.dmetric.normalized_damerau_levenshtein_distance">
+<span class="sig-prename descclassname"><span class="pre">slearn.dmetric.</span></span><span class="sig-name descname"><span class="pre">normalized_damerau_levenshtein_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/dmetric.html#normalized_damerau_levenshtein_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.dmetric.normalized_damerau_levenshtein_distance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the normalized Damerau-Levenshtein distance between two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first input string.</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second input string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>distance</strong> – The normalized Damerau-Levenshtein distance, ranging from 0 to 1.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="symbolic-time-series-representations">
+<h2>Symbolic Time-Series Representations<a class="headerlink" href="#symbolic-time-series-representations" title="Link to this heading"></a></h2>
+<p>The main classes are <code class="docutils literal notranslate"><span class="pre">SAX</span></code>, <code class="docutils literal notranslate"><span class="pre">SAXTD</span></code>, <code class="docutils literal notranslate"><span class="pre">ESAX</span></code>, <code class="docutils literal notranslate"><span class="pre">MSAX</span></code>, <code class="docutils literal notranslate"><span class="pre">ASAX</span></code>, <code class="docutils literal notranslate"><span class="pre">fABBA</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">ABBA</span></code>.</p>
+<dl class="py class" id="module-slearn.symbols">
+<dt class="sig sig-object py" id="slearn.symbols.SAX">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">SAX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAX" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAX.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAX.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAX.fit" title="Link to this definition"></a></dt>
+<dd><p>Normalize the time series by computing mean and standard deviation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted SAX model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#slearn.symbols.SAX" title="slearn.symbols.SAX">SAX</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAX.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAX.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAX.transform" title="Link to this definition"></a></dt>
+<dd><p>Compute Piecewise Aggregate Approximation (PAA) and map to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence representing the time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAX.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAX.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAX.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fit the model and transform the time series to symbols in one step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence representing the time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAX.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAX.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAX.inverse_transform" title="Link to this definition"></a></dt>
+<dd><p>Reconstruct the time series from symbols or stored PAA values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The symbolic sequence to reconstruct from. If None, uses stored symbols.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon</strong> – The reconstructed time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.SAXTD">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">SAXTD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAXTD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAXTD" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAXTD.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAXTD.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAXTD.fit" title="Link to this definition"></a></dt>
+<dd><p>Normalize the time series by computing mean and standard deviation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted SAX-TD model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#slearn.symbols.SAXTD" title="slearn.symbols.SAXTD">SAXTD</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAXTD.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAXTD.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAXTD.transform" title="Link to this definition"></a></dt>
+<dd><p>Compute PAA, slopes, and symbols with trend information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with trend suffixes (‘u’, ‘d’, ‘f’).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAXTD.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAXTD.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAXTD.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fit the model and transform the time series to symbols with trends.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with trend suffixes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.SAXTD.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#SAXTD.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.SAXTD.inverse_transform" title="Link to this definition"></a></dt>
+<dd><p>Reconstruct the time series with linear trends from symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The symbolic sequence with trend suffixes. If None, uses stored symbols.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon</strong> – The reconstructed time series with linear trends.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.ESAX">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">ESAX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ESAX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ESAX" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ESAX.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ESAX.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ESAX.fit" title="Link to this definition"></a></dt>
+<dd><p>Normalize the time series by computing mean and standard deviation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted eSAX model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#slearn.symbols.ESAX" title="slearn.symbols.ESAX">ESAX</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ESAX.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ESAX.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ESAX.transform" title="Link to this definition"></a></dt>
+<dd><p>Compute min, mean, max per segment and map to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with three symbols per segment (min, mean, max).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ESAX.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ESAX.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ESAX.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fit the model and transform the time series to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with three symbols per segment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ESAX.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ESAX.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ESAX.inverse_transform" title="Link to this definition"></a></dt>
+<dd><p>Reconstruct the time series using quadratic interpolation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The symbolic sequence with three symbols per segment. If None, uses stored values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon</strong> – The reconstructed time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.MSAX">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">MSAX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#MSAX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.MSAX" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.MSAX.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#MSAX.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.MSAX.fit" title="Link to this definition"></a></dt>
+<dd><p>Normalize multivariate time series per dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input multivariate time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted mSAX model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#slearn.symbols.MSAX" title="slearn.symbols.MSAX">MSAX</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.MSAX.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#MSAX.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.MSAX.transform" title="Link to this definition"></a></dt>
+<dd><p>Compute PAA per dimension and map to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input multivariate time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with one symbol per dimension per segment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.MSAX.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#MSAX.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.MSAX.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fit the model and transform the multivariate time series to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input multivariate time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence with one symbol per dimension per segment.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.MSAX.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#MSAX.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.MSAX.inverse_transform" title="Link to this definition"></a></dt>
+<dd><p>Reconstruct the multivariate time series from symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The symbolic sequence with one symbol per dimension. If None, uses stored values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon</strong> – The reconstructed multivariate time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.ASAX">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">ASAX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_segments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_segment_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ASAX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ASAX" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ASAX.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ASAX.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ASAX.fit" title="Link to this definition"></a></dt>
+<dd><p>Normalize and compute adaptive segment sizes based on local variance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>self</strong> – The fitted aSAX model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#slearn.symbols.ASAX" title="slearn.symbols.ASAX">ASAX</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ASAX.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ASAX.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ASAX.transform" title="Link to this definition"></a></dt>
+<dd><p>Compute PAA for adaptive segments and map to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence for adaptive segments.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ASAX.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ASAX.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ASAX.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fit the model and transform the time series to symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input time series.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>symbols</strong> – The symbolic sequence for adaptive segments.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ASAX.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ASAX.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ASAX.inverse_transform" title="Link to this definition"></a></dt>
+<dd><p>Reconstruct the time series from adaptive segments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – The symbolic sequence to reconstruct from. If None, uses stored symbols.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>recon</strong> – The reconstructed time series.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.symbols.symbolsAssign">
+<span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">symbolsAssign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clusters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#symbolsAssign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.symbolsAssign" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>automatically assign symbols to different clusters, start with ‘!’</dt><dd><p>from <a class="reference external" href="https://github.com/nla-group/fABBA">https://github.com/nla-group/fABBA</a>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>array</strong> (<em>clusters - list</em><em> or </em><em>pd.Series or</em>) – the list of clusters.</p></li>
+<li><p><strong>----------</strong></p></li>
+<li><p><strong>Return</strong></p></li>
+<li><p><strong>string</strong><strong>)</strong> (<em>symbols</em><em>(</em><em>list of</em>)</p></li>
+<li><p><strong>inverse_hash</strong><strong>(</strong><strong>dict</strong><strong>)</strong> (<em>repectively for the</em>)</p></li>
+<li><p><strong>transform.</strong> (<em>corresponding symbolic sequence and the hashmap for inverse</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.symbols.aggregate">
+<span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2-norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#aggregate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.aggregate" title="Link to this definition"></a></dt>
+<dd><p>Aggregate points into tolerance-based groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – Array-like input of shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></code>.</p></li>
+<li><p><strong>sorting</strong> (<em>{'2-norm'</em><em>, </em><em>'1-norm'</em><em>, </em><em>'lexi'}</em><em>, </em><em>default='2-norm'</em>) – Sorting rule used before aggregation.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – Distance tolerance. A point is assigned to a group when its distance
+from the group’s starting point is less than or equal to <code class="docutils literal notranslate"><span class="pre">tol</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>labels</strong> (<em>numpy.ndarray</em>) – Group labels after aggregation.</p></li>
+<li><p><strong>splist</strong> (<em>list</em>) – Starting points for the groups.</p></li>
+<li><p><strong>nr_dist</strong> (<em>int</em>) – Number of pairwise distance calculations.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="slearn.symbols.compress">
+<span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">compress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#compress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.compress" title="Link to this definition"></a></dt>
+<dd><p>Approximate a time series using a continuous piecewise linear function.
+:param ts - numpy ndarray: Time series as input of numpy array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Numpy ndarray with three columns, each row contains length, increment, error for the segment.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pieces - numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">fABBA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sorting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2-norm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Compress and digitize the time series together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list</strong> (<em>series - array or</em>) – Time series.</p></li>
+<li><p><strong>float</strong> (<em>alpha -</em>) – Control tolerence for digitization, default as 0.5.</p></li>
+<li><p><strong>boolean</strong> (<em>string_form -</em>) – Whether to return with string form, default as True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.digitize">
+<span class="sig-name descname"><span class="pre">digitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.digitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.digitize" title="Link to this definition"></a></dt>
+<dd><p>Greedy 2D clustering of pieces (a Nx2 numpy array),
+using tolernce tol and len/inc scaling parameter scl.
+In this variant, a ‘temporary’ cluster center is used
+when assigning pieces to clusters. This temporary cluster
+is the first piece available after appropriate scaling
+and sorting of all pieces. It is <em>not</em> necessarily the
+mean of all pieces in that cluster and hence the final
+cluster centers, which are just the means, might achieve
+a smaller within-cluster tol.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.inverse_transform" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.inverse_digitize">
+<span class="sig-name descname"><span class="pre">inverse_digitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.inverse_digitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.inverse_digitize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.quantize">
+<span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.quantize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.quantize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.fABBA.inverse_compress">
+<span class="sig-name descname"><span class="pre">inverse_compress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#fABBA.inverse_compress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.fABBA.inverse_compress" title="Link to this definition"></a></dt>
+<dd><p>Modified from ABBA package, please see ABBA package to see guidance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.symbols.</span></span><span class="sig-name descname"><span class="pre">ABBA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_cluster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Compress and digitize the time series together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list</strong> (<em>series - array or</em>) – Time series.</p></li>
+<li><p><strong>float</strong> (<em>alpha -</em>) – Control tolerence for digitization, default as 0.5.</p></li>
+<li><p><strong>boolean</strong> (<em>string_form -</em>) – Whether to return with string form, default as True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.digitize">
+<span class="sig-name descname"><span class="pre">digitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.digitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.digitize" title="Link to this definition"></a></dt>
+<dd><p>Greedy 2D clustering of pieces (a Nx2 numpy array),
+using tolernce tol and len/inc scaling parameter scl.
+In this variant, a ‘temporary’ cluster center is used
+when assigning pieces to clusters. This temporary cluster
+is the first piece available after appropriate scaling
+and sorting of all pieces. It is <em>not</em> necessarily the
+mean of all pieces in that cluster and hence the final
+cluster centers, which are just the means, might achieve
+a smaller within-cluster tol.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.inverse_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.inverse_transform" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.inverse_digitize">
+<span class="sig-name descname"><span class="pre">inverse_digitize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.inverse_digitize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.inverse_digitize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.quantize">
+<span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.quantize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.quantize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.symbols.ABBA.inverse_compress">
+<span class="sig-name descname"><span class="pre">inverse_compress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/symbols.html#ABBA.inverse_compress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.symbols.ABBA.inverse_compress" title="Link to this definition"></a></dt>
+<dd><p>Modified from ABBA package, please see ABBA package to see guidance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="scikit-learn-wrappers">
+<h2>Scikit-Learn Wrappers<a class="headerlink" href="#scikit-learn-wrappers" title="Link to this heading"></a></h2>
+<p>The public wrappers are <code class="docutils literal notranslate"><span class="pre">symbolicML</span></code> for symbolic strings and <code class="docutils literal notranslate"><span class="pre">slearn</span></code> for
+symbolic time-series forecasting.</p>
+<dl class="py class" id="module-slearn.classifer">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.classifer.</span></span><span class="sig-name descname"><span class="pre">symbolicML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MLPClassifier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#symbolicML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.symbolicML" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classifier for symbolic next-symbol prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classifier_name</strong> (<em>str</em><em>, </em><em>default='MLPClassifier'</em>) – Name of the scikit-learn estimator used for next-symbol prediction.
+Common choices include <code class="docutils literal notranslate"><span class="pre">MLPClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">KNeighborsClassifier</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GaussianProcessClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">QuadraticDiscriminantAnalysis</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>,
+<code class="docutils literal notranslate"><span class="pre">AdaBoostClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">GaussianNB</span></code>, and <code class="docutils literal notranslate"><span class="pre">SVC</span></code>.</p></li>
+<li><p><strong>ws</strong> (<em>int</em><em>, </em><em>default=3</em>) – Context-window length used to construct fixed-dimensional symbolic
+features. Larger windows expose more history to the classifier.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>default=0</em>) – Random seed forwarded to compatible scikit-learn estimators.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Verbosity level. A value of zero suppresses progress output where the
+wrapped estimator supports it.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.random_seed">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">random_seed</span></span><a class="headerlink" href="#slearn.classifer.symbolicML.random_seed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.ws">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ws</span></span><a class="headerlink" href="#slearn.classifer.symbolicML.ws" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.verbose">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#slearn.classifer.symbolicML.verbose" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#symbolicML.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.symbolicML.encode" title="Link to this definition"></a></dt>
+<dd><p>Construct features and target labels for symbols and encode to numerical values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>{str</em><em>, </em><em>list}</em>) – symbolic string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.construct_train">
+<span class="sig-name descname"><span class="pre">construct_train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#symbolicML.construct_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.symbolicML.construct_train" title="Link to this definition"></a></dt>
+<dd><p>Construct features and target labels for symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>numpy.ndarray</strong> (<em>series -</em>) – The numeric time series.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.init_classifier">
+<span class="sig-name descname"><span class="pre">init_classifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#symbolicML.init_classifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.symbolicML.init_classifier" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.symbolicML.forecast">
+<span class="sig-name descname"><span class="pre">forecast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inversehash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">centers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#symbolicML.forecast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.symbolicML.forecast" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="slearn.classifer.slearn">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">slearn.classifer.</span></span><span class="sig-name descname"><span class="pre">slearn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fABBA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MLPClassifier'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'numeric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#slearn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.slearn" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#slearn.classifer.symbolicML" title="slearn.classifer.symbolicML"><code class="xref py py-class docutils literal notranslate"><span class="pre">symbolicML</span></code></a></p>
+<p>Symbolic time-series forecasting wrapper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>{'SAX'</em><em>, </em><em>'ABBA'</em><em>, </em><em>'fABBA'}</em><em>, </em><em>default='fABBA'</em>) – Symbolic representation used before classifier training.</p></li>
+<li><p><strong>ws</strong> (<em>int</em><em>, </em><em>default=1</em>) – Context-window length used by the symbolic classifier.</p></li>
+<li><p><strong>step</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of future symbols, or reconstructed numeric samples, to predict.</p></li>
+<li><p><strong>classifier_name</strong> (<em>str</em><em>, </em><em>default='MLPClassifier'</em>) – Name of the scikit-learn estimator used by <code class="docutils literal notranslate"><span class="pre">symbolicML</span></code>.</p></li>
+<li><p><strong>form</strong> (<em>{'numeric'</em><em>, </em><em>'string'}</em><em>, </em><em>default='numeric'</em>) – Return reconstructed numeric forecasts or symbolic forecasts.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>default=0</em>) – Random seed used by compatible estimators.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=1</em>) – Verbosity level for symbolic transformation and classifier training.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.random_seed">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">random_seed</span></span><a class="headerlink" href="#slearn.classifer.slearn.random_seed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.step">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">step</span></span><a class="headerlink" href="#slearn.classifer.slearn.step" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.ws">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ws</span></span><a class="headerlink" href="#slearn.classifer.slearn.ws" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.verbose">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#slearn.classifer.slearn.verbose" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.set_symbols">
+<span class="sig-name descname"><span class="pre">set_symbols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#slearn.set_symbols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.slearn.set_symbols" title="Link to this definition"></a></dt>
+<dd><p>Transform time series to specified symplic representation</p>
+<p>Please feed into the parameters for the corresponding symbolic representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>numpy.ndarray</strong> (<em>series -</em>) – The numeric time series.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#slearn.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.slearn.predict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="slearn.classifer.slearn.params_secure">
+<span class="sig-name descname"><span class="pre">params_secure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/slearn/classifer.html#slearn.params_secure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#slearn.classifer.slearn.params_secure" title="Link to this definition"></a></dt>
+<dd><p>Check parameter settings</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="experiment-entry-points">
+<h2>Experiment Entry Points<a class="headerlink" href="#experiment-entry-points" title="Link to this heading"></a></h2>
+<p>The neural benchmark is intentionally documented as a command-line workflow
+rather than an imported public API. The primary commands are:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>exps/symbolic_sequence_benchmark.py<span class="w"> </span>--help
+python<span class="w"> </span>exps/visualize_symbolic_results.py<span class="w"> </span>--help
+bash<span class="w"> </span>exps/scripts/install_experiment_deps.sh
+bash<span class="w"> </span>exps/scripts/run_symbolic_benchmark_slurm.sh
+bash<span class="w"> </span>exps/scripts/merge_symbolic_results.sh<span class="w"> </span>exps/results_symbolic/slurm_&lt;job_id&gt;
+bash<span class="w"> </span>exps/scripts/run_symbolic_visualizations.sh
+</pre></div>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="predict_with_symbols_representation.html" class="btn btn-neutral float-left" title="Time series forecasting with symbolic representation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="_autosummary/slearn.slearn.html" class="btn btn-neutral float-right" title="slearn.slearn" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="experiments.html" class="btn btn-neutral float-left" title="Symbolic Benchmark Experiments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="citations.html" class="btn btn-neutral float-right" title="Citations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Numerical Linear Algebra Group, The University of Manchester.</p>
+    <p>&#169; Copyright 2021-2026, Numerical Linear Algebra Group, The University of Manchester.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

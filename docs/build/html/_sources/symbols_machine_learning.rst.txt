@@ -1,103 +1,72 @@
-Symbolic sequence prediction with machine learning
-=====================================================
+Symbolic Machine Learning
+=========================
 
+Fixed-Window Prediction
+-----------------------
 
-Machine learning with symbols
-------------------------------
+``symbolicML`` treats a symbolic sequence as a supervised next-token problem. For
+window length :math:`w`, the string is converted into samples
+:math:`(s_t, \ldots, s_{t+w-1})` with target :math:`s_{t+w}`. Symbols are encoded
+as integer labels before fitting a scikit-learn classifier.
 
-Given a sequence of symbols, ask you to predict the following symbols, what will you do with machine learning? An intuitive way is to transform the symbols to numerical labels, 
-decide the appropriate windows size for features input (lag), and then define a classification problem. slearn build a pipeline for this process, and provide user-friendly API.
+.. code-block:: python
 
-First import the package:
+   from slearn import symbolicML
 
-.. code:: python
+   sequence = 'ABACABADABACABAD'
+   predictor = symbolicML(classifier_name='MLPClassifier', ws=4, random_seed=0)
+   X, y = predictor.encode(sequence)
 
-    from slearn import symbolicML
+   future = predictor.forecast(
+       X,
+       y,
+       step=5,
+       hidden_layer_sizes=(32,),
+       max_iter=500,
+   )
 
-We can predict any symbolic sequence by choosing the classifiers available in scikit-learn. Currently slearn supports:
+   print(''.join(future))
 
-+----------------------------------+----------------------------------+
-|             Classifiers          |         Parameter call           |
-+==================================+==================================+
-|Multi-layer Perceptron            |'MLPClassifier'                   |
-+----------------------------------+----------------------------------+
-|K-Nearest Neighbors               |'KNeighborsClassifier'            |       
-+----------------------------------+----------------------------------+
-|Gaussian Naive Bayes              |'GaussianNB'                      |
-+----------------------------------+----------------------------------+
-|Decision Tree                 	   |'DecisionTreeClassifier'          |
-+----------------------------------+----------------------------------+
-|Support Vector Classification	   |'SVC'                             |
-+----------------------------------+----------------------------------+
-|Radial-basis Function Kernel	   |'RBF'                             |
-+----------------------------------+----------------------------------+
-|Logistic Regression	           |'LogisticRegression'              |
-+----------------------------------+----------------------------------+
-|Quadratic Discriminant Analysis   |'QuadraticDiscriminantAnalysis'   |
-+----------------------------------+----------------------------------+
-|AdaBoost classifier	           |'AdaBoostClassifier'              |
-+----------------------------------+----------------------------------+
-|Random Forest        	           |'RandomForestClassifier'          |
-+----------------------------------+----------------------------------+
-|LightGBM                          |'LGBM'                            |
-+----------------------------------+----------------------------------+
+Supported Classifier Names
+--------------------------
 
+The public constructor selects a scikit-learn estimator by name. Common options
+include ``MLPClassifier``, ``KNeighborsClassifier``,
+``GaussianProcessClassifier``, ``QuadraticDiscriminantAnalysis``,
+``DecisionTreeClassifier``, ``LogisticRegression``, ``AdaBoostClassifier``,
+``GaussianNB``, and ``SVC``. Parameters not consumed by ``symbolicML`` are passed
+to the underlying estimator.
 
-Now we predict a simple synthetic symbolic sequence
+Forecasting Behavior
+--------------------
 
-.. code:: python
+After fitting on the observed sequence, ``forecast`` predicts one symbol at a
+time and appends each prediction to the context used for the next step. This is a
+closed-loop rollout. It is therefore stricter than teacher-forced one-step
+accuracy: early errors can change the future inputs seen by the classifier.
 
-    string = 'aaaabbbccd'
+Time-Series Wrapper
+-------------------
 
+The higher-level ``slearn`` class combines a symbolic representation method with
+a classifier. It first transforms a numeric time series into symbols, trains the
+classifier on the symbolic sequence, forecasts future symbols, and optionally
+maps the result back to the numeric domain.
 
-First, we define the classifier, and specify the ``ws`` (windows size or lag) and ``classifier_name`` following the above table, initialize with
+.. code-block:: python
 
-.. code:: python
+   import numpy as np
+   from slearn import slearn
 
-    sbml = symbolicML(classifier_name="MLPClassifier", ws=3, random_seed=0, verbose=0)
+   t = np.linspace(0, 12, 240)
+   series = np.sin(t)
 
+   model = slearn(method='fABBA', classifier_name='MLPClassifier', ws=3, step=20)
+   model.set_symbols(series, tol=0.1, alpha=0.5)
+   forecast = model.predict(hidden_layer_sizes=(64,), max_iter=500)
 
-Then we can use the method ``encode`` to split the features and target for training models. The we use method ``forecast`` to apply forecasting:
+   print(forecast.shape)
 
-.. code:: python
-
-    pred = sbml.forecast(x, y, step=5, hidden_layer_sizes=(10,10), learning_rate_init=0.1)
-
-
-The parameters of ``x``, ``y``, and ``step`` are fixed, the rest of parameters are depend on what classifier you specify, the parameter settings can be referred to scikit-learn library.
-For nerual network, you can define the parameters of ``hidden_layer_sizes`` and ``learning_rate_init``, while for support vector machine you might define ``C``.
-
-
-
-Generating symbols
-------------------------------
-
-slearn library also contains functions for the generation of strings of tunable complexity using the LZW compressing method as base to approximate Kolmogorov complexity.
-
-
-.. code:: python
-
-    from slearn import *
-    df_strings = LZWStringLibrary(symbols=3, complexity=[3, 9])
-    df_strings
-
-.. image:: img/screenshot1.png
-    :width: 600
-
-Also, you can deploy RNN test on the symbols you generate:
-
-.. code:: python
-
-    df_iters = pd.DataFrame()
-    for i, string in enumerate(df_strings['string']):
-        kwargs = df_strings.iloc[i,:-1].to_dict()
-        seed_string = df_strings.iloc[i,-1]
-        df_iter = RNN_Iteration(seed_string, iterations=2, architecture='LSTM', **kwargs)
-        df_iter.loc[:, kwargs.keys()] = kwargs.values()
-        df_iters = df_iters.append(df_iter)
-    df_iter.reset_index(drop=True, inplace=True)
-    df_iters.reset_index(drop=True, inplace=True)
-    print(df_iters)
-
-.. image:: img/screenshot2.png
-    :width: 600
+For new code that needs explicit control over the symbolic transform, use the
+low-level classes in ``slearn.symbols`` and then pass the resulting string to
+``symbolicML``.

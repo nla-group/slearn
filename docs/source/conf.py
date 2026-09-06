@@ -1,48 +1,58 @@
-import sys
 import os
-import sphinx_rtd_theme
-
+import sys
+from pathlib import Path
 
 sys.path.insert(0, os.path.abspath('../..'))
 
 project = 'slearn'
-copyright = '2022, Numerical Linear Algebra Group, The University of Manchester'
-author = 'NLA group'
-release = '0.0.1'
+author = 'Roberto Cahuantzi, Xinye Chen, and Stefan Guettel'
+copyright = '2021-2026, Numerical Linear Algebra Group, The University of Manchester'
+
+try:
+    from slearn import __version__
+except Exception:
+    __version__ = '0.2.9'
+
+release = __version__
+version = __version__
 
 extensions = [
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.autosummary',
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.mathjax',
+    'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
 ]
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+
+autosummary_generate = True
+autodoc_member_order = 'bysource'
+autodoc_typehints = 'description'
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+
 source_suffix = '.rst'
-exclude_patterns = []
+templates_path = ['_templates']
+exclude_patterns = ['build', 'Thumbs.db', '.DS_Store', '_autosummary']
 locale_dirs = ['locale/']
 gettext_compact = False
-
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
-
 pygments_style = 'lovelace'
 
-# -- Options for HTML output -------------------------------------------------
+try:
+    import pydata_sphinx_theme  # noqa: F401
+    html_theme = 'pydata_sphinx_theme'
+    html_theme_options = {
+        'github_url': 'https://github.com/nla-group/slearn',
+        'show_toc_level': 2,
+        'navbar_start': ['navbar-logo'],
+        'navbar_center': ['navbar-nav'],
+        'navbar_end': ['theme-switcher', 'navbar-icon-links'],
+        'use_edit_page_button': False,
+    }
+except Exception:
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_options = {'navigation_depth': 5}
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-html_theme = "sphinx_rtd_theme" # html_theme = 'alabaster'
-html_theme_options = {
-    'logo_only': True,
-    'navigation_depth': 5,
-}
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_title = 'slearn documentation'
+html_short_title = 'slearn'
+html_static_path = ['_static']
+html_css_files = ['custom.css']

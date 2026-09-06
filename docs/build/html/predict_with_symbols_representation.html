@@ -1,25 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Time series forecasting with symbolic representation &mdash; slearn 0.0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Symbolic Time-Series Representation &mdash; slearn documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=beddf052" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=42d1e199" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=14672bda"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="api.html" />
-    <link rel="prev" title="Symbolic sequence prediction with machine learning" href="symbols_machine_learning.html" /> 
+    <link rel="next" title="String Distances And Similarities" href="dmetric.html" />
+    <link rel="prev" title="Symbolic Machine Learning" href="symbols_machine_learning.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -27,21 +29,43 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> slearn
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            slearn
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic sequence prediction with machine learning</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Time series forecasting with symbolic representation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbol_seeds.html">LZW-Controlled Symbolic Seeds</a></li>
+<li class="toctree-l1"><a class="reference internal" href="symbols_machine_learning.html">Symbolic Machine Learning</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Symbolic Time-Series Representation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sax-example">SAX Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trend-aware-sax">Trend-Aware SAX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adaptive-and-aggregation-based-methods">Adaptive And Aggregation-Based Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#choosing-a-representation">Choosing A Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dmetric.html">String Distances And Similarities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Symbolic Benchmark Experiments</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citations.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
 </ul>
 
@@ -58,8 +82,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Time series forecasting with symbolic representation</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Symbolic Time-Series Representation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/predict_with_symbols_representation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,98 +93,84 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="time-series-forecasting-with-symbolic-representation">
-<h1>Time series forecasting with symbolic representation<a class="headerlink" href="#time-series-forecasting-with-symbolic-representation" title="Permalink to this headline"></a></h1>
-<p>slearn package contains the fast symbolic representation method, namely SAX and fABBA (more methods will be included).</p>
-<div class="admonition-summmary admonition">
-<p class="admonition-title">Summmary</p>
-<p>You can select the available classifiers and symbolic representation method (currently we support SAX, ABBA and fABBA) for prediction. Similarly, the parameters of the chosen classifier follow the same as the scikit-learn library. We usually deploy ABBA symbolic representation, since it achieves better forecasting against SAX.</p>
-<p>slean leverages user-friendly API, time series forecasting follows:</p>
-<p>Step 1: Define the windows size (features size), the forecasting steps, symbolic representation method (SAX or fABBA) and classifier.</p>
-<p>Step 2: Transform time series into symbols with user specified parameters defined for symbolic representation.</p>
-<p>Step 3: Define the classifier parameters and forecast the future values.</p>
-</div>
-<p>Now we illustrate how to use slearn with symbolic representation to forecast time series step by step.</p>
-<p>First of all, we set the number of symbols you would like to predict and load libraries and data..</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">slearn</span> <span class="kn">import</span> <span class="o">*</span>
+  <section id="symbolic-time-series-representation">
+<h1>Symbolic Time-Series Representation<a class="headerlink" href="#symbolic-time-series-representation" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">slearn.symbols</span></code> module converts real-valued sequences into discrete
+symbol strings. This can reduce dimension, make local structure easier to
+compare, and allow time-series workflows to use string metrics or categorical
+sequence models.</p>
+</section>
+<section id="sax-example">
+<h2>SAX Example<a class="headerlink" href="#sax-example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">slearn.symbols</span><span class="w"> </span><span class="kn">import</span> <span class="n">SAX</span>
 
-<span class="n">time_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Amazon.csv&quot;</span><span class="p">)</span> <span class="c1"># load the required dataset, here we use Amazon stock daily close price.</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">time_series</span><span class="o">.</span><span class="n">Close</span><span class="o">.</span><span class="n">values</span>
-<span class="n">step</span> <span class="o">=</span> <span class="mi">50</span>
-</pre></div>
-</div>
-<p>we start off with initializing the slearn with fABBA (alternative options: <code class="docutils literal notranslate"><span class="pre">SAX</span></code> and <code class="docutils literal notranslate"><span class="pre">ABBA</span></code>) and GaussianNB classifier, setting windows size to 3 and step to 50:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span>  <span class="n">ws</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;GaussianNB&quot;</span><span class="p">)</span> <span class="c1"># step 1</span>
-</pre></div>
-</div>
-<p>Next we transform the time series into symbols with method <code class="docutils literal notranslate"><span class="pre">set_symbols</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">.</span><span class="n">set_symbols</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">ts</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span> <span class="c1"># step 2</span>
-</pre></div>
-</div>
-<p>Then we predict the time series with method <code class="docutils literal notranslate"><span class="pre">predict</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">abba_nb_pred</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">var_smoothing</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span> <span class="c1"># step 3</span>
-</pre></div>
-</div>
-<p>Together, we combine the code with three classifiers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">slearn</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 
-<span class="n">time_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Amazon.csv&quot;</span><span class="p">)</span>
-<span class="n">ts</span> <span class="o">=</span> <span class="n">time_series</span><span class="o">.</span><span class="n">Close</span><span class="o">.</span><span class="n">values</span>
-<span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
-<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[:</span><span class="nb">round</span><span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">length</span><span class="p">)],</span> <span class="n">ts</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">length</span><span class="p">):]</span>
+<span class="n">sax</span> <span class="o">=</span> <span class="n">SAX</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+<span class="n">reconstruction</span> <span class="o">=</span> <span class="n">sax</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">()</span>
 
-<span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;GaussianNB&quot;</span><span class="p">)</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">set_symbols</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">abba_nb_pred</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">var_smoothing</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-<span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;DecisionTreeClassifier&quot;</span><span class="p">)</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">set_symbols</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">abba_nn_pred</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;KNeighborsClassifier&quot;</span><span class="p">)</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">set_symbols</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">abba_kn_pred</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">sl</span> <span class="o">=</span> <span class="n">slearn</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;fABBA&#39;</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">classifier_name</span><span class="o">=</span><span class="s2">&quot;SVC&quot;</span><span class="p">)</span>
-<span class="n">sl</span><span class="o">.</span><span class="n">set_symbols</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">abba_svc_pred</span> <span class="o">=</span> <span class="n">sl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">min_len</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">abba_nb_pred</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">abba_nn_pred</span><span class="p">)])</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ground truth&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">abba_nb_pred</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction (ABBA - GaussianNB)&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">abba_nn_pred</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction (ABBA - DecisionTreeClassifier)&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">abba_nn_pred</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction (ABBA - KNeighborsClassifier)&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">abba_svc_pred</span><span class="p">[:</span><span class="n">min_len</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellowgreen&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prediction (ABBA - Support Vector Classification)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;demo1.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">symbols</span><span class="p">[:</span><span class="mi">8</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reconstruction</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The result is as plotted below:</p>
-<a class="reference internal image-reference" href="_images/demo1.png"><img alt="_images/demo1.png" src="_images/demo1.png" style="width: 1000px;" /></a>
+<p>SAX normalizes the input, partitions it into <code class="docutils literal notranslate"><span class="pre">window_size</span></code> aggregate segments,
+computes each segment mean, and assigns a symbol according to Gaussian
+breakpoints. The inverse transform expands the stored aggregate values back to
+the original segment lengths.</p>
+</section>
+<section id="trend-aware-sax">
+<h2>Trend-Aware SAX<a class="headerlink" href="#trend-aware-sax" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SAXTD</span></code> augments SAX symbols with a trend suffix. Suffix <code class="docutils literal notranslate"><span class="pre">u</span></code> denotes an
+upward local slope, <code class="docutils literal notranslate"><span class="pre">d</span></code> a downward local slope, and <code class="docutils literal notranslate"><span class="pre">f</span></code> a flat segment under
+the selected threshold.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">slearn.symbols</span><span class="w"> </span><span class="kn">import</span> <span class="n">SAXTD</span>
+
+<span class="n">saxtd</span> <span class="o">=</span> <span class="n">SAXTD</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">alphabet_size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">slope_threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">trend_symbols</span> <span class="o">=</span> <span class="n">saxtd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adaptive-and-aggregation-based-methods">
+<h2>Adaptive And Aggregation-Based Methods<a class="headerlink" href="#adaptive-and-aggregation-based-methods" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ESAX</span></code>, <code class="docutils literal notranslate"><span class="pre">MSAX</span></code>, and <code class="docutils literal notranslate"><span class="pre">ASAX</span></code> provide alternative SAX-style encodings that
+retain additional shape information or adapt segment boundaries. <code class="docutils literal notranslate"><span class="pre">ABBA</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fABBA</span></code> construct symbolic pieces from approximately linear increments and can
+reconstruct an approximate numeric signal from the symbolic representation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">slearn.symbols</span><span class="w"> </span><span class="kn">import</span> <span class="n">fABBA</span>
+
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">fABBA</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sorting</span><span class="o">=</span><span class="s1">&#39;2-norm&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+<span class="n">recovered</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="choosing-a-representation">
+<h2>Choosing A Representation<a class="headerlink" href="#choosing-a-representation" title="Link to this heading"></a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">SAX</span></code> when a fast, stable, Gaussian-breakpoint discretization is enough.
+Use <code class="docutils literal notranslate"><span class="pre">SAXTD</span></code> when local trend direction matters. Use adaptive SAX variants when
+fixed equal-size segments are too restrictive. Use <code class="docutils literal notranslate"><span class="pre">ABBA</span></code> or <code class="docutils literal notranslate"><span class="pre">fABBA</span></code> when
+piecewise-linear reconstruction is part of the workflow.</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="symbols_machine_learning.html" class="btn btn-neutral float-left" title="Symbolic sequence prediction with machine learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="symbols_machine_learning.html" class="btn btn-neutral float-left" title="Symbolic Machine Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dmetric.html" class="btn btn-neutral float-right" title="String Distances And Similarities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Numerical Linear Algebra Group, The University of Manchester.</p>
+    <p>&#169; Copyright 2021-2026, Numerical Linear Algebra Group, The University of Manchester.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

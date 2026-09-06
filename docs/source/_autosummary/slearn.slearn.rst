@@ -26,4 +26,13 @@
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~slearn.random_seed
+      ~slearn.step
+      ~slearn.verbose
+      ~slearn.ws
+   
    
