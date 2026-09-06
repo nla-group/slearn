@@ -5,7 +5,7 @@
 [![PyPI Version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Conda Version](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
-[![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/)
 
 `slearn` is a research package for symbolic sequence generation, symbolic time-series representation, string-distance evaluation, and controlled sequence-learning experiments. It connects classic symbolic representations such as SAX and ABBA-style encodings with LZW-controlled synthetic strings and a modern benchmark for finite-context neural prediction.
 
