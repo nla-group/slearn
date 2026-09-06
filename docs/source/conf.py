@@ -1,6 +1,5 @@
 import os
 import sys
-from pathlib import Path
 
 sys.path.insert(0, os.path.abspath('../..'))
 
@@ -38,15 +37,28 @@ gettext_compact = False
 pygments_style = 'lovelace'
 
 try:
-    import pydata_sphinx_theme  # noqa: F401
-    html_theme = 'pydata_sphinx_theme'
+    import furo  # noqa: F401
+    html_theme = 'furo'
     html_theme_options = {
-        'github_url': 'https://github.com/nla-group/slearn',
-        'show_toc_level': 2,
-        'navbar_start': ['navbar-logo'],
-        'navbar_center': ['navbar-nav'],
-        'navbar_end': ['theme-switcher', 'navbar-icon-links'],
-        'use_edit_page_button': False,
+        'navigation_with_keys': True,
+        'top_of_page_button': 'edit',
+        'source_repository': 'https://github.com/nla-group/slearn/',
+        'source_branch': 'main',
+        'source_directory': 'docs/source/',
+        'light_css_variables': {
+            'color-brand-primary': '#2454a6',
+            'color-brand-content': '#2454a6',
+            'color-api-name': '#12366f',
+            'color-api-pre-name': '#0f766e',
+            'font-stack': "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            'font-stack--monospace': "'SFMono-Regular', Consolas, 'Liberation Mono', monospace",
+        },
+        'dark_css_variables': {
+            'color-brand-primary': '#8ab4ff',
+            'color-brand-content': '#8ab4ff',
+            'color-api-name': '#b7cdfc',
+            'color-api-pre-name': '#7dd3c7',
+        },
     }
 except Exception:
     html_theme = 'sphinx_rtd_theme'

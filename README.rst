@@ -106,9 +106,9 @@ After completion, merge shards and generate figures:
 Documentation
 -------------
 
-The full documentation covers installation, quick start examples, application
-workflows, experiment reproduction, API references, license, and citations. Build
-it locally with:
+The Furo-styled documentation covers installation, quick start examples,
+application workflows, experiment reproduction, API references, license, and
+citations. Build it locally with:
 
 .. code-block:: bash
 

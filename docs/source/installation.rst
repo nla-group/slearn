@@ -71,9 +71,8 @@ Build the documentation locally with Sphinx:
    python -m pip install -r docs/requirements.txt
    sphinx-build -b html docs/source docs/build/html
 
-The documentation prefers ``pydata-sphinx-theme`` for a modern scientific Python
-style and falls back to ``sphinx_rtd_theme`` when the PyData theme is not
-installed.
+The documentation uses ``furo`` for a clean modern scientific Python style and
+falls back to ``sphinx_rtd_theme`` if Furo is not installed.
 
 Version Notes
 -------------
