@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from slearn import lzw_string_library
 from slearn.dmetric import (normalized_damerau_levenshtein_distance, normalized_jaro_winkler_distance)
 from transformers import BertModel, BertConfig
+from models import LinearAttentionTransformerModel, MinGRUModel, MinLSTMModel, PerformerModel, RWKVModel
 import time
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -17,15 +18,18 @@ import shutil
 import logging
 import scipy.stats as stats
 from scipy.optimize import curve_fit
-from xlstm import (
-    xLSTMBlockStack,
-    xLSTMBlockStackConfig,
-    mLSTMBlockConfig,
-    mLSTMLayerConfig,
-    sLSTMBlockConfig,
-    sLSTMLayerConfig,
-    FeedForwardConfig,
-)
+try:
+    from xlstm import (
+        xLSTMBlockStack,
+        xLSTMBlockStackConfig,
+        mLSTMBlockConfig,
+        mLSTMLayerConfig,
+        sLSTMBlockConfig,
+        sLSTMLayerConfig,
+        FeedForwardConfig,
+    )
+except ImportError:
+    xLSTMBlockStack = None
 import random
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -249,6 +253,8 @@ class GRUModel(nn.Module):
 class xLSTMModel(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, num_layers=1):
         super().__init__()
+        if xLSTMBlockStack is None:
+            raise ImportError("xLSTM is not installed. Install xlstm or remove xLSTM from the model list.")
         self.embedding = nn.Linear(input_size, hidden_size)
         num_heads = NUM_HEAD
         assert hidden_size % num_heads == 0, f"hidden_size {hidden_size} must be divisible by num_heads {num_heads}"
@@ -663,7 +669,7 @@ def run_experiments():
                                     for d_model in d_models:
                                         for learning_rate in learning_rates:
                                             for run in range(num_runs):
-                                                for model_name in ['LSTM', 'GRU', 'Transformer', 'BERT', 'GPT']:
+                                                for model_name in ['LSTM', 'GRU', 'minGRU', 'minLSTM', 'Transformer', 'BERT', 'GPT', 'LinearAttention', 'Performer', 'RWKV']:
                                                     try:
                                                         logging.debug(f"Initializing {model_name} with layers={layer}, units={unit}, d_model={d_model}, run={run}, learning_rate={learning_rate}")
                                                         if model_name == 'LSTM':
@@ -672,12 +678,22 @@ def run_experiments():
                                                             model = GRUModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
                                                         elif model_name == 'xLSTM':
                                                             model = xLSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                                                        elif model_name == 'minGRU':
+                                                            model = MinGRUModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
+                                                        elif model_name == 'minLSTM':
+                                                            model = MinLSTMModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer)
                                                         elif model_name == 'Transformer':
                                                             model = TransformerModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model)
                                                         elif model_name == 'BERT':
                                                             model = BERTClassificationModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model)
                                                         elif model_name == 'GPT':
                                                             model = GPTLikeModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model)
+                                                        elif model_name == 'LinearAttention':
+                                                            model = LinearAttentionTransformerModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model, max_seq_len=window_size)
+                                                        elif model_name == 'Performer':
+                                                            model = PerformerModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model, max_seq_len=window_size)
+                                                        elif model_name == 'RWKV':
+                                                            model = RWKVModel(len(unique_symbols), unit, len(unique_symbols), num_layers=layer, d_model=d_model)
                                                         
                                                         model_size = sum(p.numel() for p in model.parameters()) / 1e6
                                                         train_time, dl, jw, epochs, memory, model_size, time_per_epoch, test_loss, test_accuracy = train_and_evaluate(

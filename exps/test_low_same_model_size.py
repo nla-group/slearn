@@ -474,7 +474,7 @@ def get_unique_model_configs(model_names_to_run, layers, units, d_models):
 
     for model_name in model_names_to_run:
         # BERT/Transformer/GPT use d_model and hidden_size is dim_feedforward
-        if model_name in ['Transformer', 'BERT', 'GPT']:
+        if model_name in ['Transformer', 'BERT', 'GPT', 'LinearAttention', 'Performer', 'RWKV']:
             # Use unit as dim_feedforward
             current_unit = 4 * d_model # A common convention to keep dim_feedforward large
             current_d_model = d_model
@@ -510,7 +510,7 @@ def get_unique_model_configs(model_names_to_run, layers, units, d_models):
 # --- MAIN EXPERIMENT FUNCTION (MODIFIED AND FIXED) ---
 def run_experiments():
     all_results = []
-    model_names_to_run = ['LSTM', 'GRU', 'Transformer', 'BERT', 'GPT'] 
+    model_names_to_run = ['LSTM', 'GRU', 'minGRU', 'minLSTM', 'Transformer', 'BERT', 'GPT', 'LinearAttention', 'Performer', 'RWKV']
 
     # 1. Pre-calculate all unique model configurations and their sizes
     unique_model_configs = get_unique_model_configs(model_names_to_run, layers, units, d_models)

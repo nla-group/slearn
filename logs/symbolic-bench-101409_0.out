@@ -1,0 +1,449 @@
+Node: node08
+Workdir: /home/xinye/slearn
+Job: 101410
+Array task: 0/8
+CUDA_VISIBLE_DEVICES=0
+Preparing experiment environment in .venv.
+Looking in links: /tmp/tmp4azw0rk8
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (25.0.1)
+Requirement already satisfied: pip in ./.venv/lib/python3.12/site-packages (25.0.1)
+Collecting pip
+  Using cached pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+Collecting setuptools
+  Using cached setuptools-84.0.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting wheel
+  Downloading wheel-0.48.0-py3-none-any.whl.metadata (2.3 kB)
+Collecting packaging>=24.0 (from wheel)
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Using cached pip-26.2.1-py3-none-any.whl (1.8 MB)
+Using cached setuptools-84.0.0-py3-none-any.whl (818 kB)
+Downloading wheel-0.48.0-py3-none-any.whl (33 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Installing collected packages: setuptools, pip, packaging, wheel
+  Attempting uninstall: pip
+    Found existing installation: pip 25.0.1
+    Uninstalling pip-25.0.1:
+      Successfully uninstalled pip-25.0.1
+Successfully installed packaging pip-25.0.1 setuptools wheel
+Obtaining file:///home/xinye/slearn
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting numpy>=1.17.2 (from slearn==0.2.9)
+  Using cached numpy-2.5.2-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting scikit-learn>=1.0.0 (from slearn==0.2.9)
+  Downloading scikit_learn-1.9.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+Collecting pandas>=1.0.0 (from slearn==0.2.9)
+  Downloading pandas-3.0.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+Collecting requests>=2.25.0 (from slearn==0.2.9)
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting torch>=1.7.0 (from slearn==0.2.9)
+  Downloading torch-2.14.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting python-dateutil>=2.8.2 (from pandas>=1.0.0->slearn==0.2.9)
+  Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=1.0.0->slearn==0.2.9)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting charset_normalizer<4,>=2 (from requests>=2.25.0->slearn==0.2.9)
+  Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (45 kB)
+Collecting idna<4,>=2.5 (from requests>=2.25.0->slearn==0.2.9)
+  Downloading idna-3.19-py3-none-any.whl.metadata (9.2 kB)
+Collecting urllib3<3,>=1.26 (from requests>=2.25.0->slearn==0.2.9)
+  Using cached urllib3-2.7.0-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2023.5.7 (from requests>=2.25.0->slearn==0.2.9)
+  Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+Collecting scipy>=1.10.0 (from scikit-learn>=1.0.0->slearn==0.2.9)
+  Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting joblib>=1.4.0 (from scikit-learn>=1.0.0->slearn==0.2.9)
+  Downloading joblib-1.6.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting narwhals>=2.0.1 (from scikit-learn>=1.0.0->slearn==0.2.9)
+  Downloading narwhals-2.25.0-py3-none-any.whl.metadata (15 kB)
+Collecting threadpoolctl>=3.5.0 (from scikit-learn>=1.0.0->slearn==0.2.9)
+  Using cached threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting cloudpickle>=3.0 (from joblib>=1.4.0->scikit-learn>=1.0.0->slearn==0.2.9)
+  Downloading cloudpickle-3.1.2-py3-none-any.whl.metadata (7.1 kB)
+Collecting filelock (from torch>=1.7.0->slearn==0.2.9)
+  Downloading filelock-3.32.5-py3-none-any.whl.metadata (2.0 kB)
+Collecting typing-extensions>=4.10.0 (from torch>=1.7.0->slearn==0.2.9)
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: setuptools>=77.0.3 in ./.venv/lib/python3.12/site-packages (from torch>=1.7.0->slearn==0.2.9) (84.0.0)
+Collecting sympy>=1.13.3 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx>=2.5.1 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting jinja2 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec>=0.8.5 (from torch>=1.7.0->slearn==0.2.9)
+  Downloading fsspec-2026.7.0-py3-none-any.whl.metadata (10 kB)
+Collecting cuda-toolkit==13.0.3 (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached cuda_toolkit-13.0.3.0-py2.py3-none-any.whl.metadata (17 kB)
+Collecting cuda-bindings<14,>=13.0.3 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached cuda_bindings-13.3.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (2.5 kB)
+Collecting nvidia-cudnn-cu13==9.24.0.43 (from torch>=1.7.0->slearn==0.2.9)
+  Downloading nvidia_cudnn_cu13-9.24.0.43-py3-none-manylinux_2_27_x86_64.whl.metadata (1.9 kB)
+Collecting nvidia-cusparselt-cu13==0.8.1 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_x86_64.whl.metadata (12 kB)
+Collecting nvidia-nccl-cu13==2.30.7 (from torch>=1.7.0->slearn==0.2.9)
+  Downloading nvidia_nccl_cu13-2.30.7-py3-none-manylinux_2_18_x86_64.whl.metadata (2.1 kB)
+Collecting nvidia-nvshmem-cu13==3.4.5 (from torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_nvshmem_cu13-3.4.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.1 kB)
+Collecting triton~=3.8.0 (from torch>=1.7.0->slearn==0.2.9)
+  Downloading triton-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (978 bytes)
+Collecting nvidia-cublas==13.1.1.3.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cublas-13.1.1.3-py3-none-manylinux_2_27_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-cuda-nvrtc==13.0.88.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cuda_nvrtc-13.0.88-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-cuda-runtime==13.0.96.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cuda_runtime-13.0.96-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-cufft==12.0.0.61.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cufft-12.0.0.61-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-nvjitlink<14,>=13.0.88 (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Downloading nvidia_nvjitlink-13.3.33-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-cufile==1.15.1.6.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cufile-1.15.1.6-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-cuda-cupti==13.0.85.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cuda_cupti-13.0.85-py3-none-manylinux_2_25_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-curand==10.4.0.35.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_curand-10.4.0.35-py3-none-manylinux_2_27_x86_64.whl.metadata (1.7 kB)
+Collecting nvidia-cusolver==12.0.4.66.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cusolver-12.0.4.66-py3-none-manylinux_2_27_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-cusparse==12.6.3.3.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_cusparse-12.6.3.3-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-nvtx==13.0.85.* (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=1.7.0->slearn==0.2.9)
+  Using cached nvidia_nvtx-13.0.85-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl.metadata (1.8 kB)
+Collecting cuda-pathfinder>=1.4.2 (from cuda-bindings<14,>=13.0.3->torch>=1.7.0->slearn==0.2.9)
+  Downloading cuda_pathfinder-1.8.1-py3-none-any.whl.metadata (1.9 kB)
+Collecting mpmath<1.4,>=1.1.0 (from sympy>=1.13.3->torch>=1.7.0->slearn==0.2.9)
+  Using cached mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch>=1.7.0->slearn==0.2.9)
+  Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Using cached numpy-2.5.2-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+Downloading pandas-3.0.5-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.0/11.0 MB 60.7 MB/s  0:00:00
+Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (248 kB)
+Downloading idna-3.19-py3-none-any.whl (68 kB)
+Using cached urllib3-2.7.0-py3-none-any.whl (131 kB)
+Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+Downloading scikit_learn-1.9.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (9.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.1/9.1 MB 57.8 MB/s  0:00:00
+Downloading joblib-1.6.0-py3-none-any.whl (306 kB)
+Downloading cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Downloading narwhals-2.25.0-py3-none-any.whl (467 kB)
+Downloading scipy-1.18.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 67.3 MB/s  0:00:00
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Downloading torch-2.14.0-cp312-cp312-manylinux_2_28_x86_64.whl (554.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 554.6/554.6 MB 60.5 MB/s  0:00:08
+Using cached cuda_toolkit-13.0.3.0-py2.py3-none-any.whl (2.5 kB)
+Downloading nvidia_cudnn_cu13-9.24.0.43-py3-none-manylinux_2_27_x86_64.whl (553.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 553.1/553.1 MB 43.2 MB/s  0:00:09
+Using cached nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_x86_64.whl (170.1 MB)
+Downloading nvidia_nccl_cu13-2.30.7-py3-none-manylinux_2_18_x86_64.whl (216.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 216.0/216.0 MB 58.0 MB/s  0:00:03
+Using cached nvidia_nvshmem_cu13-3.4.5-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (60.4 MB)
+Using cached cuda_bindings-13.3.1-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (6.7 MB)
+Using cached nvidia_cublas-13.1.1.3-py3-none-manylinux_2_27_x86_64.whl (423.1 MB)
+Using cached nvidia_cuda_cupti-13.0.85-py3-none-manylinux_2_25_x86_64.whl (10.7 MB)
+Using cached nvidia_cuda_nvrtc-13.0.88-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (90.2 MB)
+Using cached nvidia_cuda_runtime-13.0.96-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.2 MB)
+Using cached nvidia_cufft-12.0.0.61-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (214.1 MB)
+Using cached nvidia_cufile-1.15.1.6-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.2 MB)
+Using cached nvidia_curand-10.4.0.35-py3-none-manylinux_2_27_x86_64.whl (59.5 MB)
+Using cached nvidia_cusolver-12.0.4.66-py3-none-manylinux_2_27_x86_64.whl (200.9 MB)
+Using cached nvidia_cusparse-12.6.3.3-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (145.9 MB)
+Downloading nvidia_nvjitlink-13.3.33-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (40.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.7/40.7 MB 46.0 MB/s  0:00:00
+Using cached nvidia_nvtx-13.0.85-py3-none-manylinux1_x86_64.manylinux_2_5_x86_64.whl (148 kB)
+Downloading triton-3.8.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (248.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 248.0/248.0 MB 38.2 MB/s  0:00:06
+Downloading cuda_pathfinder-1.8.1-py3-none-any.whl (62 kB)
+Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+Using cached networkx-3.6.1-py3-none-any.whl (2.1 MB)
+Using cached sympy-1.14.0-py3-none-any.whl (6.3 MB)
+Using cached mpmath-1.3.0-py3-none-any.whl (536 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading filelock-3.32.5-py3-none-any.whl (100 kB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached markupsafe-3.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Building wheels for collected packages: slearn
+  Building editable for slearn (pyproject.toml): started
+  Building editable for slearn (pyproject.toml): finished with status 'done'
+  Created wheel for slearn: filename=slearn-0.2.9-0.editable-py3-none-any.whl size=4722 sha256=d30aa66d0dd1f52584e3ccc5c5ccf745a506ca22c59d5f4f7c1a4855d0e0672d
+  Stored in directory: /tmp/pip-ephem-wheel-cache-tuh97rto/wheels/c2/52/ce/360846ff3ed8bbeb11aab56d8353da74f578000980c1820fc9
+Successfully built slearn
+Installing collected packages: nvidia-cusparselt-cu13, mpmath, cuda-toolkit, urllib3, typing-extensions, triton, threadpoolctl, sympy, six, nvidia-nvtx, nvidia-nvshmem-cu13, nvidia-nvjitlink, nvidia-nccl-cu13, nvidia-curand, nvidia-cufile, nvidia-cuda-runtime, nvidia-cuda-nvrtc, nvidia-cuda-cupti, numpy, networkx, narwhals, MarkupSafe, idna, fsspec, filelock, cuda-pathfinder, cloudpickle, charset_normalizer, certifi, scipy, requests, python-dateutil, nvidia-cusparse, nvidia-cufft, nvidia-cublas, joblib, jinja2, cuda-bindings, scikit-learn, pandas, nvidia-cusolver, nvidia-cudnn-cu13, torch, slearn
+
+Successfully installed MarkupSafe certifi charset_normalizer cloudpickle cuda-bindings cuda-pathfinder cuda-toolkit filelock fsspec idna jinja2 joblib mpmath narwhals networkx numpy nvidia-cublas nvidia-cuda-cupti nvidia-cuda-nvrtc nvidia-cuda-runtime nvidia-cudnn-cu13 nvidia-cufft nvidia-cufile nvidia-curand nvidia-cusolver nvidia-cusparse nvidia-cusparselt-cu13 nvidia-nccl-cu13 nvidia-nvjitlink nvidia-nvshmem-cu13 nvidia-nvtx pandas python-dateutil requests scikit-learn scipy six slearn sympy threadpoolctl torch triton typing-extensions urllib3
+Requirement already satisfied: torch>=2.4 in ./.venv/lib/python3.12/site-packages (from -r requirements-experiments.txt (line 1)) (2.14.0)
+Collecting transformers>=4.40 (from -r requirements-experiments.txt (line 2))
+  Downloading transformers-5.16.1-py3-none-any.whl.metadata (32 kB)
+Collecting minGRU-pytorch>=0.2.1 (from -r requirements-experiments.txt (line 3))
+  Downloading mingru_pytorch-0.2.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting linear-attention-transformer>=0.19.1 (from -r requirements-experiments.txt (line 4))
+  Downloading linear_attention_transformer-0.19.1-py3-none-any.whl.metadata (787 bytes)
+Collecting performer-pytorch>=1.1.4 (from -r requirements-experiments.txt (line 5))
+  Downloading performer_pytorch-1.1.4-py3-none-any.whl.metadata (763 bytes)
+Collecting matplotlib>=3.7 (from -r requirements-experiments.txt (line 6))
+  Downloading matplotlib-3.11.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+Collecting seaborn>=0.12 (from -r requirements-experiments.txt (line 7))
+  Using cached seaborn-0.13.2-py3-none-any.whl.metadata (5.4 kB)
+Requirement already satisfied: scipy>=1.10 in ./.venv/lib/python3.12/site-packages (from -r requirements-experiments.txt (line 8)) (1.18.1)
+Requirement already satisfied: pandas>=1.5 in ./.venv/lib/python3.12/site-packages (from -r requirements-experiments.txt (line 9)) (3.0.5)
+Requirement already satisfied: scikit-learn>=1.2 in ./.venv/lib/python3.12/site-packages (from -r requirements-experiments.txt (line 10)) (1.9.0)
+Collecting textdistance>=4.6 (from -r requirements-experiments.txt (line 11))
+  Using cached textdistance-4.6.3-py3-none-any.whl.metadata (18 kB)
+Requirement already satisfied: filelock in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (3.32.5)
+Requirement already satisfied: typing-extensions>=4.10.0 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (4.16.0)
+Requirement already satisfied: setuptools>=77.0.3 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (84.0.0)
+Requirement already satisfied: sympy>=1.13.3 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (3.6.1)
+Requirement already satisfied: jinja2 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (2026.7.0)
+Requirement already satisfied: cuda-toolkit==13.0.3 in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.0.3.0)
+Requirement already satisfied: cuda-bindings<14,>=13.0.3 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (13.3.1)
+Requirement already satisfied: nvidia-cudnn-cu13==9.24.0.43 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (9.24.0.43)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.1 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (0.8.1)
+Requirement already satisfied: nvidia-nccl-cu13==2.30.7 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (2.30.7)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (3.4.5)
+Requirement already satisfied: triton~=3.8.0 in ./.venv/lib/python3.12/site-packages (from torch>=2.4->-r requirements-experiments.txt (line 1)) (3.8.0)
+Requirement already satisfied: nvidia-cublas==13.1.1.3.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.1.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.0.88)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (12.0.0.61)
+Requirement already satisfied: nvidia-nvjitlink<14,>=13.0.88 in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.3.33)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (12.6.3.3)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in ./.venv/lib/python3.12/site-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.3; platform_system == "Linux"->torch>=2.4->-r requirements-experiments.txt (line 1)) (13.0.85)
+Requirement already satisfied: cuda-pathfinder>=1.4.2 in ./.venv/lib/python3.12/site-packages (from cuda-bindings<14,>=13.0.3->torch>=2.4->-r requirements-experiments.txt (line 1)) (1.8.1)
+Collecting huggingface-hub<2.0,>=1.5.0 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading huggingface_hub-1.30.0-py3-none-any.whl.metadata (16 kB)
+Requirement already satisfied: numpy>=1.17 in ./.venv/lib/python3.12/site-packages (from transformers>=4.40->-r requirements-experiments.txt (line 2)) (2.5.2)
+Requirement already satisfied: packaging>=20.0 in ./.venv/lib/python3.12/site-packages (from transformers>=4.40->-r requirements-experiments.txt (line 2)) (26.3)
+Collecting pyyaml>=5.1 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting regex>=2025.10.22 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading regex-2026.9.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Collecting tokenizers<0.24.0,>=0.23.1 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.8 kB)
+Collecting typer (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading typer-0.27.2-py3-none-any.whl.metadata (16 kB)
+Collecting safetensors>=0.8.0 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting tqdm>=4.60 (from transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading tqdm-4.70.0-py3-none-any.whl.metadata (57 kB)
+Collecting click<9.0.0,>=8.4.2 (from huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting hf-xet<2.0.0,>=1.5.2 (from huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Collecting httpx<1,>=0.23.0 (from huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting anyio (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading anyio-4.15.0-py3-none-any.whl.metadata (4.7 kB)
+Requirement already satisfied: certifi in ./.venv/lib/python3.12/site-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2)) (2026.7.22)
+Collecting httpcore==1.* (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Requirement already satisfied: idna in ./.venv/lib/python3.12/site-packages (from httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2)) (3.19)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub<2.0,>=1.5.0->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting einops>=0.8.0 (from minGRU-pytorch>=0.2.1->-r requirements-experiments.txt (line 3))
+  Downloading einops-0.8.2-py3-none-any.whl.metadata (13 kB)
+Collecting axial-positional-embedding (from linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading axial_positional_embedding-0.3.12-py3-none-any.whl.metadata (4.3 kB)
+Collecting linformer>=0.1.0 (from linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading linformer-0.2.3-py3-none-any.whl.metadata (602 bytes)
+Collecting local-attention (from linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading local_attention-1.11.2-py3-none-any.whl.metadata (929 bytes)
+Collecting product-key-memory>=0.1.5 (from linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading product_key_memory-0.3.0-py3-none-any.whl.metadata (4.9 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Downloading contourpy-1.3.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Downloading fonttools-4.64.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (123 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting pillow>=9 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting pyparsing>=3 (from matplotlib>=3.7->-r requirements-experiments.txt (line 6))
+  Using cached pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Requirement already satisfied: python-dateutil>=2.7 in ./.venv/lib/python3.12/site-packages (from matplotlib>=3.7->-r requirements-experiments.txt (line 6)) (2.9.0.post0)
+Requirement already satisfied: joblib>=1.4.0 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.2->-r requirements-experiments.txt (line 10)) (1.6.0)
+Requirement already satisfied: narwhals>=2.0.1 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.2->-r requirements-experiments.txt (line 10)) (2.25.0)
+Requirement already satisfied: threadpoolctl>=3.5.0 in ./.venv/lib/python3.12/site-packages (from scikit-learn>=1.2->-r requirements-experiments.txt (line 10)) (3.6.0)
+Requirement already satisfied: cloudpickle>=3.0 in ./.venv/lib/python3.12/site-packages (from joblib>=1.4.0->scikit-learn>=1.2->-r requirements-experiments.txt (line 10)) (3.1.2)
+Collecting hyper-connections>=0.1.8 (from local-attention->linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading hyper_connections-0.4.11-py3-none-any.whl.metadata (7.5 kB)
+Collecting torch-einops-utils>=0.0.20 (from hyper-connections>=0.1.8->local-attention->linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading torch_einops_utils-0.1.24-py3-none-any.whl.metadata (2.2 kB)
+Collecting colt5-attention>=0.10.14 (from product-key-memory>=0.1.5->linear-attention-transformer>=0.19.1->-r requirements-experiments.txt (line 4))
+  Downloading colt5_attention-0.11.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: six>=1.5 in ./.venv/lib/python3.12/site-packages (from python-dateutil>=2.7->matplotlib>=3.7->-r requirements-experiments.txt (line 6)) (1.17.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in ./.venv/lib/python3.12/site-packages (from sympy>=1.13.3->torch>=2.4->-r requirements-experiments.txt (line 1)) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in ./.venv/lib/python3.12/site-packages (from jinja2->torch>=2.4->-r requirements-experiments.txt (line 1)) (3.0.3)
+Collecting shellingham>=1.3.0 (from typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+Collecting rich>=13.8.0 (from typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting annotated-doc>=0.0.2 (from typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Collecting markdown-it-py>=2.2.0 (from rich>=13.8.0->typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting pygments<3.0.0,>=2.13.0 (from rich>=13.8.0->typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers>=4.40->-r requirements-experiments.txt (line 2))
+  Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Downloading transformers-5.16.1-py3-none-any.whl (12.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.1/12.1 MB 51.7 MB/s  0:00:00
+Downloading huggingface_hub-1.30.0-py3-none-any.whl (796 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 796.8/796.8 kB 15.9 MB/s  0:00:00
+Downloading click-8.5.0-py3-none-any.whl (125 kB)
+Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 40.1 MB/s  0:00:00
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 39.2 MB/s  0:00:00
+Downloading mingru_pytorch-0.2.1-py3-none-any.whl (8.8 kB)
+Downloading linear_attention_transformer-0.19.1-py3-none-any.whl (12 kB)
+Downloading performer_pytorch-1.1.4-py3-none-any.whl (13 kB)
+Downloading matplotlib-3.11.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.0/10.0 MB 48.5 MB/s  0:00:00
+Using cached seaborn-0.13.2-py3-none-any.whl (294 kB)
+Using cached textdistance-4.6.3-py3-none-any.whl (31 kB)
+Downloading axial_positional_embedding-0.3.12-py3-none-any.whl (6.7 kB)
+Downloading contourpy-1.3.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (362 kB)
+Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading einops-0.8.2-py3-none-any.whl (65 kB)
+Downloading fonttools-4.64.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 50.4 MB/s  0:00:00
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 17.2 MB/s  0:00:00
+Downloading linformer-0.2.3-py3-none-any.whl (6.2 kB)
+Downloading local_attention-1.11.2-py3-none-any.whl (9.5 kB)
+Downloading hyper_connections-0.4.11-py3-none-any.whl (29 kB)
+Downloading pillow-12.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 34.9 MB/s  0:00:00
+Downloading product_key_memory-0.3.0-py3-none-any.whl (8.3 kB)
+Downloading colt5_attention-0.11.2-py3-none-any.whl (23 kB)
+Using cached pyparsing-3.3.2-py3-none-any.whl (122 kB)
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 12.8 MB/s  0:00:00
+Downloading regex-2026.9.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 802.0/802.0 kB 13.9 MB/s  0:00:00
+Downloading safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Downloading torch_einops_utils-0.1.24-py3-none-any.whl (14 kB)
+Downloading tqdm-4.70.0-py3-none-any.whl (80 kB)
+Downloading anyio-4.15.0-py3-none-any.whl (131 kB)
+Downloading typer-0.27.2-py3-none-any.whl (123 kB)
+Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Using cached rich-15.0.0-py3-none-any.whl (310 kB)
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 20.2 MB/s  0:00:00
+Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Using cached shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+Installing collected packages: tqdm, textdistance, shellingham, safetensors, regex, pyyaml, pyparsing, pygments, pillow, mdurl, kiwisolver, hf-xet, h11, fonttools, einops, cycler, contourpy, click, anyio, annotated-doc, matplotlib, markdown-it-py, httpcore, seaborn, rich, httpx, typer, huggingface-hub, torch-einops-utils, tokenizers, minGRU-pytorch, linformer, axial-positional-embedding, transformers, hyper-connections, local-attention, performer-pytorch, colt5-attention, product-key-memory, linear-attention-transformer
+
+Successfully installed annotated-doc anyio axial-positional-embedding click colt5-attention contourpy cycler einops fonttools h11 hf-xet httpcore httpx huggingface-hub hyper-connections kiwisolver linear-attention-transformer linformer local-attention markdown-it-py matplotlib mdurl minGRU-pytorch performer-pytorch pillow product-key-memory pygments pyparsing pyyaml regex rich safetensors seaborn shellingham textdistance tokenizers torch-einops-utils tqdm transformers typer
+Experiment environment ready. torch=2.14.0+cu130
+Verified: minGRU_pytorch, linear_attention_transformer, performer_pytorch
+Python: /home/xinye/slearn/.venv/bin/python
+Python 3.12.11
+torch=2.14.0+cu130
+cuda_available=True
+NVIDIA A100 80GB PCIe MIG 3g.40gb
+Processing: 1 of 10Processing: 2 of 10Processing: 3 of 10Processing: 4 of 10Processing: 5 of 10Processing: 6 of 10Processing: 7 of 10Processing: 8 of 10Processing: 9 of 10Processing: 10 of 10unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+Processing: 1 of 10Processing: 2 of 10Processing: 3 of 10Processing: 4 of 10Processing: 5 of 10Processing: 6 of 10Processing: 7 of 10Processing: 8 of 10Processing: 9 of 10Processing: 10 of 10unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+Processing: 1 of 10Processing: 2 of 10Processing: 3 of 10Processing: 4 of 10Processing: 5 of 10Processing: 6 of 10Processing: 7 of 10Processing: 8 of 10Processing: 9 of 10Processing: 10 of 10unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+Processing: 1 of 10Processing: 2 of 10Processing: 3 of 10Processing: 4 of 10Processing: 5 of 10Processing: 6 of 10Processing: 7 of 10Processing: 8 of 10Processing: 9 of 10Processing: 10 of 10unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+unable to import cuda code for auto-regressive Performer. will default to the memory inefficient non-cuda version
+Finished. Results shard: exps/results_symbolic/slurm_101409/results_task_000.csv

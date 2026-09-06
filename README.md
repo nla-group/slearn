@@ -1,4 +1,4 @@
-# slearn: Software for learning symbolic sequences
+# slearn: learning symbolic sequences
 
 [![Build Status](https://app.travis-ci.com/nla-group/slearn.svg?token=SziD2n1qxpnRwysssUVq&branch=master)](https://app.travis-ci.com/github/nla-group/slearn)
 [![Codecov Workflow](https://github.com/nla-group/slearn/actions/workflows/unittests.yml/badge.svg)](https://github.com/nla-group/slearn/actions/workflows/unittests.yml)
@@ -7,227 +7,265 @@
 [![Conda Version](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/?badge=latest)
 
-## Overview
+`slearn` is a research package for symbolic sequence generation, symbolic time-series representation, string-distance evaluation, and controlled sequence-learning experiments. It was originally developed around LZW-controlled symbolic strings and LSTM/GRU forecasting; the `exps/` directory now includes a unified benchmark for recurrent, Transformer, efficient-attention, and RWKV-style models on the same next-token task.
 
-The `slearn` Python package is designed for learning and processing symbolic sequences, particularly for time series analysis. Symbolic representations reduce the dimensionality of time series data, accelerating tasks such as motif discovery, clustering, classification, forecasting, and anomaly detection. As demonstrated by Elsworth and Güttel ([arXiv, 2020](https://arxiv.org/abs/2003.11280)), symbolic forecasting reduces the sensitivity of Long Short-Term Memory (LSTM) networks to hyperparameter settings, making it a powerful approach for machine learning on symbolic data.
+## Install
 
-`slearn` provides APIs for:
-- Generating symbolic sequences with controlled complexity using Lempel-Ziv-Welch (LZW) compression.
-- Computing distances between symbolic sequences for similarity analysis.
-- Benchmarking deep learning models (e.g., LSTMs, GRUs, Transformers) for sequence memorization.
-- Supporting symbolic time series representations like SAX and ABBA variants.
+For the core package:
 
-This package is ideal for researchers and practitioners working on symbolic time series analysis and machine learning.
-
-## Installation
-
-Install `slearn` using either pip or conda:
-
-### pip
 ```bash
 pip install slearn
-```
-
-### conda
-```bash
+# or
 conda install -c conda-forge slearn
 ```
 
-To verify the installed version:
+For the manuscript experiments, use an isolated environment because modern sequence models may require a newer PyTorch build:
+
 ```bash
-pip show slearn
-# or
-conda list slearn
+git clone https://github.com/chenxinye/slearn.git
+cd slearn
+bash scripts/install_experiment_deps.sh
+source .venv/bin/activate
 ```
 
-**Dependencies**:
-- Python 3.6+
-- NumPy
-- pandas
-- scikit-learn
+Set `INSTALL_RWKV_TRAINER=1` before running the script if you also want the separate `rwkv-trainer` package. The default RWKV baseline in `exps/models.py` is a compact PyTorch RWKV-style time-mixing block so that it can run inside the same supervised batch loop as the other models.
 
-## Key Features
+## Core Features
 
-### 1. Generating Strings with Controlled Complexity
+- LZW-controlled symbolic string generation through `lzw_string_generator` and `lzw_string_seeds`.
+- String distances and similarities, including Damerau-Levenshtein, Jaro-Winkler, Hamming, cosine, LCS, Dice, and Smith-Waterman variants.
+- Symbolic time-series transforms, including SAX, SAX-TD, eSAX, mSAX, aSAX, and ABBA-style representations.
+- A unified experiment harness for finite-context next-symbol prediction and recursive symbolic rollout.
 
-The `lzw_string_seeds` module generates strings with specified numbers of unique symbols and LZW complexity, approximating Kolmogorov complexity. It also computes distances between sequences based on LZW complexity, enabling similarity analysis for symbolic time series.
+## LZW String Generation
 
-**Example**:
 ```python
 from slearn import lzw_string_generator, lzw_string_seeds
 
-# Generate a single string with 2 symbols and target complexity 3
-str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=True, random_state=2)
-print(f"string: {str_}, complexity: {str_complex}")
-
-# Same, but prioritize symbol count over complexity
-str_, str_complex = lzw_string_generator(2, 3, priorise_complexity=False, random_state=2)
-print(f"string: {str_}, complexity: {str_complex}")
-
-# Generate a library of strings with varying symbols and complexities
-df_strings = lzw_string_seeds(symbols=[2, 3], complexity=[3, 6, 7], priorise_complexity=False, random_state=0)
-print(df_strings)
-```
-
-**Output**:
-```
-string: BAA, complexity: 3
-string: BAB, complexity: 3
-   nr_symbols  LZW_complexity  length       string
-0           2               3       3          ABA
-1           2               6       8     BABBABBA
-2           2               7      11  BAAABABAAAA
-3           3               3       3          BAC
-4           3               6       6       ABCACB
-5           3               7       8     ABCAAABB
-```
-
-### 2. Benchmarking Deep Learning Models
-
-`slearn` provides tools to benchmark the memorization capabilities of deep learning models (e.g., LSTMs, GRUs, Transformers) on symbolic sequences. The `benchmark_models` function generates performance reports and visualizations.
-
-**Example**:
-```python
-from slearn.deep_models import LSTMModel, GRUModel, TransformerModel, GPTLikeModel
-from slearn.simulation import benchmark_models
-
-model_list = [LSTMModel, GRUModel, TransformerModel, GPTLikeModel]
-benchmark_models(
-    model_list,
-    symbols_list=[2, 4, 6, 8],          # Number of unique symbols
-    complexities=[210, 230, 250, 270, 290],  # Target LZW complexities
-    sequence_lengths=[3500],
-    window_size=100,
-    validation_length=100,
-    stopping_loss=0.1,
-    max_epochs=999,
-    num_runs=5,
-    units=[128],
-    layers=[1, 2, 3],
-    batch_size=256,
-    max_strings_per_complexity=1000,
-    learning_rates=[1e-3, 1e-4]
+seed, complexity = lzw_string_generator(
+    nr_symbols=4,
+    target_complexity=30,
+    priorise_complexity=True,
+    random_state=2,
 )
+print(seed, complexity)
+
+library = lzw_string_seeds(
+    symbols=[2, 4, 6, 8],
+    complexity=[10, 30, 50],
+    iterations=3,
+    random_state=42,
+)
+print(library.head())
 ```
 
-Custom models can be implemented following the examples in [slearn/deep_models.py](https://github.com/nla-group/slearn/blob/master/slearn/deep_models.py).
+The generator first ensures that the requested alphabet appears in the seed and then appends symbols until the LZW complexity of the reduced string reaches the target. These seeds can be periodically repeated to create controlled symbolic sequences with known alphabet size, target complexity, and sequence length.
 
-### 3. Symbolic Time Series Representations
+## Symbolic Benchmark
 
-`slearn` supports multiple Symbolic Aggregate Approximation (SAX) variants and the ABBA method for time series symbolization. The following table summarizes the implemented methods:
+The main experiment script is:
 
-| Algorithm | Time Series Type | Segmentation | Features Extracted | Symbolization | Reconstruction |
-|-----------|------------------|--------------|--------------------|---------------|----------------|
-| **SAX**   | Univariate       | Fixed-size segments | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from PAA values |
-| **SAX-TD**| Univariate       | Fixed-size segments | Mean (PAA), slope | Mean to symbol, trend suffix ('u', 'd', 'f') | Linear trends from PAA and slopes |
-| **eSAX**  | Univariate       | Fixed-size segments | Min, mean, max | Three symbols per segment (min, mean, max) | Quadratic interpolation from min, mean, max |
-| **mSAX**  | Multivariate     | Fixed-size segments | Mean per dimension | One symbol per dimension per segment | Piecewise constant per dimension |
-| **aSAX**  | Univariate       | Adaptive segments (local variance) | Mean (PAA) | Gaussian breakpoints, single symbol per segment | Piecewise constant from adaptive segments |
-| **ABBA**  | Univariate       | Adaptive piecewise linear segments | Length, increment | Clustering (k-means), symbols assigned to clusters | Piecewise linear from cluster centers |
+```bash
+python exps/symbolic_sequence_benchmark.py
+```
 
-**Example**:
+The script trains a model on windows from the observed prefix of a repeated LZW seed. For a sequence `x_1, ..., x_N`, context length `w`, and forecast horizon `h`, it trains on pairs `(x_{t-w+1:t}, x_{t+1})` from `x_1, ..., x_{N-h}` and evaluates:
+
+- held-out next-token loss and accuracy on the prefix;
+- recursive rollout from `x_{N-h-w+1:N-h}` for `h` steps;
+- normalized Damerau-Levenshtein distance (`DL`, lower is better);
+- normalized Jaro-Winkler distance (`JW`, lower is better);
+- parameter count, training time, epoch count, and peak GPU memory.
+
+Supported model names:
+
+```text
+LSTM GRU minGRU minLSTM Transformer BERT GPT LinearAttention Performer RWKV
+```
+
+The newer baselines are implemented as:
+
+- `minGRU`: `minGRU-pytorch` wrapped as a sequence classifier.
+- `minLSTM`: a compact PyTorch implementation of the minimal LSTM gating equations.
+- `LinearAttention`: `linear-attention-transformer` with causal linear attention.
+- `Performer`: `performer-pytorch` with causal FAVOR+ attention.
+- `RWKV`: a lightweight RWKV-style time-mixing block for from-scratch symbolic experiments.
+
+### Quick Check
+
+```bash
+python exps/symbolic_sequence_benchmark.py --smoke
+```
+
+This runs a tiny configuration to verify imports, data preparation, training, and rollout.
+
+### Default Workload
+
+The default benchmark is intentionally a pilot-sized run:
+
+```text
+8 models x 4 alphabet sizes x 5 complexities x 2 seeds x 2 runs = 640 model fits
+```
+
+Each fit uses one model width, one learning rate, one weight decay, one sequence length, and at most 200 epochs with patience-based early stopping. This is still substantial, but it is small enough to shard across a Slurm array. A larger sweep with 10 models, 3 seeds, 2 widths, 2 learning rates, 2 weight decays, 3 runs, and 500 epochs would require about 14,400 model fits and should be treated as a full production experiment.
+
+### Example Paper Run
+
+```bash
+python exps/symbolic_sequence_benchmark.py \
+  --models LSTM GRU minGRU minLSTM Transformer LinearAttention Performer RWKV \
+  --symbols 2 4 6 8 \
+  --complexities 10 30 50 70 90 \
+  --sequence-lengths 3500 \
+  --window-size 100 \
+  --forecast-horizon 100 \
+  --layers 1 2 3 \
+  --units 64 128 256 \
+  --d-models 256 \
+  --optimizers AdamW \
+  --learning-rates 0.0001 0.0003 \
+  --weight-decays 0.0 0.01 \
+  --runs 3
+```
+
+For scaling-law-style sweeps, add token ratios. The script converts each ratio into a model-specific sequence length using `sequence_length = min(max_sequence_length, ceil(ratio * number_of_parameters))` and also keeps any fixed values passed through `--sequence-lengths`:
+
+```bash
+python exps/symbolic_sequence_benchmark.py \
+  --models LSTM GRU minGRU minLSTM LinearAttention Performer RWKV \
+  --token-ratios 1 5 20 \
+  --max-sequence-length 20000
+```
+
+Results are written incrementally to `exps/results_symbolic/results.csv`, with the exact run configuration saved as `exps/results_symbolic/config.json`.
+
+### Slurm on Convergence
+
+The repository includes a Convergence-ready Slurm script:
+
+```bash
+sbatch scripts/run_symbolic_benchmark_slurm.sh
+```
+
+The script requests one `a100_3g.40gb` GPU, 12 CPU threads, 64 GB RAM, and runs an eight-way array with at most five tasks active at once. It writes one CSV shard per array task. The array job uses a filesystem lock so that only one task creates or repairs `.venv`; the other tasks wait until `.venv/.slearn_experiment_deps_ready` exists.
+
+If an older job failed while creating `.venv`, resubmitting with the updated script is enough. To clean manually before resubmission, remove the incomplete environment and stale lock once from the login node:
+
+```bash
+rm -rf .venv .venv.lock
+```
+
+Merge the shards after completion with:
+
+```bash
+bash scripts/merge_symbolic_results.sh exps/results_symbolic/slurm_<array_job_id>
+```
+
+Generate publication-style figures locally after the CSV is available:
+
+```bash
+bash scripts/run_symbolic_visualizations.sh exps/results_symbolic/slurm_<array_job_id>/results_merged.csv
+```
+
+If `exps/results_symbolic/results_merged.csv` or `exps/results_symbolic/results.csv` exists, the script can also infer the input:
+
+```bash
+bash scripts/run_symbolic_visualizations.sh
+```
+
+The visualization script uses a fixed publication-style encoding for each model: color, marker shape, hollow/filled marker state, and line style are consistent across all generated figures. Legends are placed outside the axes at the bottom of each figure.
+
+For figure-specific layout tuning, edit `FIGURE_LAYOUTS` in `exps/visualize_symbolic_results.py`; entries such as `rollout_error_vs_horizon`, `compute_performance_pareto`, `test_loss_vs_model_params`, and `dl_vs_model_params` can each set independent `figsize`, `legend_y`, `bottom`, and `legend_ncol` values.
+
+The Slurm script can be configured through environment variables:
+
+```bash
+MODELS="LSTM GRU minGRU minLSTM Transformer LinearAttention Performer RWKV BERT GPT" \
+MAX_EPOCHS=300 \
+RUNS=3 \
+SEED_COUNT=3 \
+sbatch scripts/run_symbolic_benchmark_slurm.sh
+```
+
+### Local Visualization
+
+Visualization is intentionally kept outside the Slurm job so that figures can be regenerated locally after inspecting or filtering the CSV. After a single-machine run, use:
+
+```bash
+python exps/visualize_symbolic_results.py \
+  --results exps/results_symbolic/results.csv \
+  --output-dir exps/figures_symbolic
+```
+
+After a Slurm array run, merge first and then plot:
+
+```bash
+bash scripts/merge_symbolic_results.sh exps/results_symbolic/slurm_<array_job_id>
+python exps/visualize_symbolic_results.py \
+  --results exps/results_symbolic/slurm_<array_job_id>/results_merged.csv \
+  --output-dir exps/figures_symbolic/slurm_<array_job_id>
+```
+
+The script writes each analysis as a separate figure in PNG and PDF by default:
+
+- next-token accuracy, cross-entropy, DL, and JW versus LZW complexity;
+- cumulative rollout error versus forecast horizon;
+- compute-performance Pareto plot;
+- model-size and sequence-length scaling plots when the corresponding sweep exists;
+- context-window sensitivity when multiple window sizes exist;
+- model-by-complexity heatmaps.
+
+All plots use shared font-size constants for axis labels, ticks, titles, annotations, and legends. Multi-model legends are placed outside the axes at the bottom center.
+
+## Legacy Experiments
+
+The older `exps/it_*_scale.py` and `exps/test_low_*.py` scripts are retained for reproducibility and now recognize the added model names. For new manuscript runs, prefer `exps/symbolic_sequence_benchmark.py` because it avoids target leakage in the Transformer decoder path and initializes rollouts from the observed prefix instead of the withheld target.
+
+## Symbolic Time-Series Representation
+
+`slearn` also contains SAX-style transforms and ABBA-related utilities for converting real-valued time series into symbolic sequences and reconstructing approximate signals.
+
 ```python
 import numpy as np
-from slearn.symbols import SAX, SAXTD, ESAX, MSAX, ASAX
+from slearn.symbols import SAX
 
-def test_sax_variant(model, ts, t, name, is_multivariate=False):
-    symbols = model.fit_transform(ts)
-    recon = model.inverse_transform()
-    print(f"{name} reconstructed length: {len(recon)}")
-    return np.sqrt(np.mean((ts - recon) ** 2))  # RMSE
-
-# Generate test time series
-np.random.seed(42)
 t = np.linspace(0, 10, 100)
-ts = np.sin(t) + np.random.normal(0, 0.1, 100)  # Univariate
-ts_multi = np.vstack([np.sin(t), np.cos(t)]).T + np.random.normal(0, 0.1, (100, 2))  # Multivariate
+ts = np.sin(t) + np.random.normal(0, 0.1, 100)
 
-# Test SAX variants
 sax = SAX(window_size=10, alphabet_size=8)
-rmse = test_sax_variant(sax, ts, t, "SAX")
-
-saxtd = SAXTD(window_size=10, alphabet_size=8)
-rmse = test_sax_variant(saxtd, ts, t, "SAX-TD")
-
-esax = ESAX(window_size=10, alphabet_size=8)
-rmse = test_sax_variant(esax, ts, t, "eSAX")
-
-msax = MSAX(window_size=10, alphabet_size=8)
-rmse = test_sax_variant(msax, ts_multi, t, "mSAX", is_multivariate=True)
-
-asax = ASAX(n_segments=10, alphabet_size=8)
-rmse = test_sax_variant(asax, ts, t, "aSAX")
+symbols = sax.fit_transform(ts)
+reconstruction = sax.inverse_transform()
 ```
 
-### 4. String Distance and Similarity Metrics
+## Distances
 
-`slearn` provides interfaces for computing string distances and similarities, including normalized versions, based on formal definitions.
-
-**Example**:
 ```python
 from slearn.dmetric import (
-    damerau_levenshtein_distance,
-    jaro_winkler_distance,
     normalized_damerau_levenshtein_distance,
-    normalized_jaro_winkler_distance
+    normalized_jaro_winkler_distance,
 )
 
-print(damerau_levenshtein_distance("cat", "act"))  # Output: 1
-print(jaro_winkler_distance("martha", "marhta"))   # Output: 0.961
-print(normalized_damerau_levenshtein_distance("cat", "act"))  # Output: 0.333
-print(normalized_jaro_winkler_distance("martha", "marhta"))   # Output: 0.961
+dl = normalized_damerau_levenshtein_distance("ABBA", "ABAB")
+jw = normalized_jaro_winkler_distance("ABBA", "ABAB")
+print(dl, jw)
 ```
 
-## Supported Classifiers
-
-`slearn` integrates with scikit-learn classifiers for symbolic sequence analysis:
-
-| Classifier | Parameter Call |
-|------------|----------------|
-| Multi-layer Perceptron | `MLPClassifier` |
-| K-Nearest Neighbors | `KNeighborsClassifier` |
-| Gaussian Naive Bayes | `GaussianNB` |
-| Decision Tree | `DecisionTreeClassifier` |
-| Support Vector Classification | `SVC` |
-| Radial-basis Function Kernel | `RBF` |
-| Logistic Regression | `LogisticRegression` |
-| Quadratic Discriminant Analysis | `QuadraticDiscriminantAnalysis` |
-| AdaBoost Classifier | `AdaBoostClassifier` |
-| Random Forest | `RandomForestClassifier` |
-
-## Documentation
-
-Comprehensive documentation is available at [slearn.readthedocs.io](https://slearn.readthedocs.io/en/latest/).
+Both normalized distances are in `[0, 1]`; lower values indicate closer strings.
 
 ## Citation
 
-If you use `slearn` or the `LZWStringLibrary` in your research, please cite:
+If you use `slearn` or the LZW symbolic string library, please cite:
 
 ```bibtex
-R. Cahuantzi, X. Chen, and S. Güttel, “A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences,” in Intelligent Computing, Springer Nature Switzerland, 2023, pp. 771–785.
+R. Cahuantzi, X. Chen, and S. Guettel, "A Comparison of LSTM and GRU Networks for Learning Symbolic Sequences," in Intelligent Computing, Springer Nature Switzerland, 2023, pp. 771-785.
 ```
 
-If you use the prediction with ABBA, please cite: 
+If you use the ABBA-based symbolic prediction tools, please cite:
+
 ```bibtex
 X. Chen, Fast Aggregation-Based Algorithms for Knowledge Discovery, Ph.D. dissertation, The University of Manchester, 2024.
 ```
 
-
-For questions or issues, contact the maintainers via email.
-
 ## License
 
 This project is licensed under the [MIT License](https://github.com/nla-group/slearn/blob/master/LICENSE).
-
-## Contributing
-
-Contributions to `slearn` are welcome! To contribute:
-1. Fork the repository: [github.com/nla-group/slearn](https://github.com/nla-group/slearn).
-2. Create a branch for your feature or bug fix.
-3. Submit a pull request with a clear description of changes.
-4. Ensure tests pass (see `unittests.yml` workflow).
-
-**TODO List**:
-- Add language modeling functionalities.
-- Expand and refine documentation.
-- Optimize performance for large-scale sequence generation and processing.

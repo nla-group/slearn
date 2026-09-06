@@ -509,7 +509,7 @@ def get_unique_model_configs(model_names_to_run, layers, units, d_models):
 
     for model_name, layer, unit, d_model in all_combinations:
         # Skip redundant runs for RNNs which only use 'units' (hidden_size)
-        if model_name in ['LSTM', 'GRU'] and d_model != d_models[0]:
+        if model_name in ['LSTM', 'GRU', 'minGRU', 'minLSTM'] and d_model != d_models[0]:
             continue 
 
         try:
@@ -537,7 +537,7 @@ def get_unique_model_configs(model_names_to_run, layers, units, d_models):
 
 def run_experiments():
     all_results = []
-    model_names_to_run = ['LSTM', 'GRU', 'Transformer', 'BERT', 'GPT'] 
+    model_names_to_run = ['LSTM', 'GRU', 'minGRU', 'minLSTM', 'Transformer', 'BERT', 'GPT', 'LinearAttention', 'Performer', 'RWKV']
 
     # 1. Pre-calculate all unique model configurations and their sizes
     unique_model_configs = get_unique_model_configs(model_names_to_run, layers, units, d_models)

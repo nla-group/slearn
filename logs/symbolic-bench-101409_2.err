@@ -1,0 +1,177 @@
+2026-09-04 04:38:20,267 - INFO - Generating seeds for alphabet size 2
+2026-09-04 04:38:20,504 - INFO - Training GRU C=10 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:38:37,273 - INFO - GRU loss=0.0413 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:38:37,403 - INFO - Training LinearAttention C=10 A=2 N=3500 L=2 U=1024 D=256 run=0
+In file included from /software/python/anaconda3/include/python3.12/Python.h:12,
+                 from /home/xinye/slearn/.venv/lib/python3.12/site-packages/triton/backends/nvidia/driver.c:9:
+/software/python/anaconda3/include/python3.12/pyconfig.h:1874:9: warning: ‘_POSIX_C_SOURCE’ redefined
+ 1874 | #define _POSIX_C_SOURCE 200809L
+      |         ^~~~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33,
+                 from /usr/include/stdlib.h:26,
+                 from /home/xinye/slearn/.venv/lib/python3.12/site-packages/triton/backends/nvidia/include/cuda.h:56,
+                 from /home/xinye/slearn/.venv/lib/python3.12/site-packages/triton/backends/nvidia/driver.c:1:
+/usr/include/features.h:319:10: note: this is the location of the previous definition
+  319 | # define _POSIX_C_SOURCE        202405L
+      |          ^~~~~~~~~~~~~~~
+2026-09-04 04:38:48,210 - INFO - LinearAttention loss=0.0006 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:38:48,327 - INFO - Training GRU C=10 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:39:05,381 - INFO - GRU loss=0.0297 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:39:05,469 - INFO - Training LinearAttention C=10 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:39:15,510 - INFO - LinearAttention loss=0.0026 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:39:15,563 - INFO - Training GRU C=30 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:40:43,613 - INFO - GRU loss=0.0452 acc=0.988 DL=0.160 JW=0.051
+2026-09-04 04:40:43,708 - INFO - Training LinearAttention C=30 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:40:51,380 - INFO - LinearAttention loss=0.0002 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:40:51,428 - INFO - Training GRU C=30 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:41:42,466 - INFO - GRU loss=0.0434 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:41:42,552 - INFO - Training LinearAttention C=30 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:41:51,369 - INFO - LinearAttention loss=0.0001 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:41:51,419 - INFO - Training GRU C=50 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:42:42,293 - INFO - GRU loss=0.0383 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:42:42,389 - INFO - Training LinearAttention C=50 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:43:08,642 - INFO - LinearAttention loss=0.0471 acc=0.988 DL=0.000 JW=0.000
+2026-09-04 04:43:08,694 - INFO - Training GRU C=50 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:44:56,301 - INFO - GRU loss=0.0460 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:44:56,391 - INFO - Training LinearAttention C=50 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:45:24,862 - INFO - LinearAttention loss=0.0067 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:45:25,110 - INFO - Training GRU C=70 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:47:08,490 - INFO - GRU loss=0.0568 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:47:08,582 - INFO - Training LinearAttention C=70 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:47:41,907 - INFO - LinearAttention loss=0.0423 acc=0.988 DL=0.010 JW=0.006
+2026-09-04 04:47:41,966 - INFO - Training GRU C=70 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:49:14,433 - INFO - GRU loss=0.0575 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:49:14,522 - INFO - Training LinearAttention C=70 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:49:50,288 - INFO - LinearAttention loss=0.0277 acc=0.994 DL=0.000 JW=0.000
+2026-09-04 04:49:50,344 - INFO - Training GRU C=90 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:52:20,638 - INFO - GRU loss=0.1296 acc=0.955 DL=0.090 JW=0.016
+2026-09-04 04:52:20,727 - INFO - Training LinearAttention C=90 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:53:03,858 - INFO - LinearAttention loss=0.0522 acc=0.985 DL=0.020 JW=0.008
+2026-09-04 04:53:03,907 - INFO - Training GRU C=90 A=2 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:54:27,864 - INFO - GRU loss=0.0413 acc=0.997 DL=0.020 JW=0.004
+2026-09-04 04:54:27,949 - INFO - Training LinearAttention C=90 A=2 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:55:09,859 - INFO - LinearAttention loss=0.0347 acc=0.985 DL=0.160 JW=0.024
+2026-09-04 04:55:09,884 - INFO - Generating seeds for alphabet size 4
+2026-09-04 04:55:09,945 - INFO - Training GRU C=10 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:55:22,887 - INFO - GRU loss=0.0433 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:55:22,973 - INFO - Training LinearAttention C=10 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:55:28,118 - INFO - LinearAttention loss=0.0191 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:55:28,166 - INFO - Training GRU C=10 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:55:38,673 - INFO - GRU loss=0.0481 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:55:38,760 - INFO - Training LinearAttention C=10 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:55:43,903 - INFO - LinearAttention loss=0.0108 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:55:43,953 - INFO - Training GRU C=30 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:56:11,959 - INFO - GRU loss=0.0458 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:56:12,046 - INFO - Training LinearAttention C=30 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:56:18,416 - INFO - LinearAttention loss=0.0006 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:56:18,466 - INFO - Training GRU C=30 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:56:54,092 - INFO - GRU loss=0.0473 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:56:54,182 - INFO - Training LinearAttention C=30 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:56:59,324 - INFO - LinearAttention loss=0.0004 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:56:59,376 - INFO - Training GRU C=50 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:57:42,649 - INFO - GRU loss=0.0464 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:57:42,735 - INFO - Training LinearAttention C=50 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:57:47,879 - INFO - LinearAttention loss=0.0006 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:57:47,929 - INFO - Training GRU C=50 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:58:37,695 - INFO - GRU loss=0.0461 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:58:37,784 - INFO - Training LinearAttention C=50 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:58:42,932 - INFO - LinearAttention loss=0.0022 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:58:42,984 - INFO - Training GRU C=70 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 04:59:36,038 - INFO - GRU loss=0.0473 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:59:36,124 - INFO - Training LinearAttention C=70 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 04:59:52,308 - INFO - LinearAttention loss=0.0084 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 04:59:52,359 - INFO - Training GRU C=70 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:01:02,953 - INFO - GRU loss=0.0459 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:01:03,039 - INFO - Training LinearAttention C=70 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:01:15,611 - INFO - LinearAttention loss=0.0117 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:01:15,662 - INFO - Training GRU C=90 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:02:28,359 - INFO - GRU loss=0.0527 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:02:28,445 - INFO - Training LinearAttention C=90 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:02:44,614 - INFO - LinearAttention loss=0.0228 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:02:44,672 - INFO - Training GRU C=90 A=4 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:05:07,128 - INFO - GRU loss=0.0907 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:05:07,218 - INFO - Training LinearAttention C=90 A=4 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:05:23,437 - INFO - LinearAttention loss=0.0163 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:05:23,462 - INFO - Generating seeds for alphabet size 6
+2026-09-04 05:05:23,516 - INFO - Training GRU C=10 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:05:37,274 - INFO - GRU loss=0.0394 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:05:37,360 - INFO - Training LinearAttention C=10 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:05:42,501 - INFO - LinearAttention loss=0.0061 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:05:42,553 - INFO - Training GRU C=10 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:05:56,378 - INFO - GRU loss=0.0483 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:05:56,467 - INFO - Training LinearAttention C=10 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:06:00,411 - INFO - LinearAttention loss=0.0497 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:06:00,461 - INFO - Training GRU C=30 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:06:26,295 - INFO - GRU loss=0.0436 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:06:26,382 - INFO - Training LinearAttention C=30 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:06:33,975 - INFO - LinearAttention loss=0.0050 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:06:34,026 - INFO - Training GRU C=30 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:06:58,729 - INFO - GRU loss=0.0434 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:06:58,817 - INFO - Training LinearAttention C=30 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:07:06,444 - INFO - LinearAttention loss=0.0154 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:07:06,497 - INFO - Training GRU C=50 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:07:48,586 - INFO - GRU loss=0.0424 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:07:48,674 - INFO - Training LinearAttention C=50 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:07:57,489 - INFO - LinearAttention loss=0.0155 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:07:57,542 - INFO - Training GRU C=50 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:08:37,598 - INFO - GRU loss=0.0455 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:08:37,862 - INFO - Training LinearAttention C=50 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:08:46,694 - INFO - LinearAttention loss=0.0035 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:08:46,746 - INFO - Training GRU C=70 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:09:47,895 - INFO - GRU loss=0.0441 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:09:47,984 - INFO - Training LinearAttention C=70 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:09:59,282 - INFO - LinearAttention loss=0.0256 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:09:59,336 - INFO - Training GRU C=70 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:10:56,997 - INFO - GRU loss=0.0480 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:10:57,084 - INFO - Training LinearAttention C=70 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:11:08,439 - INFO - LinearAttention loss=0.0224 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:11:08,491 - INFO - Training GRU C=90 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:12:15,019 - INFO - GRU loss=0.0496 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:12:15,111 - INFO - Training LinearAttention C=90 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:12:27,628 - INFO - LinearAttention loss=0.0390 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:12:27,680 - INFO - Training GRU C=90 A=6 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:13:29,851 - INFO - GRU loss=0.0480 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:13:29,939 - INFO - Training LinearAttention C=90 A=6 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:13:43,850 - INFO - LinearAttention loss=0.0151 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:13:43,875 - INFO - Generating seeds for alphabet size 8
+2026-09-04 05:13:43,928 - INFO - Training GRU C=10 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:13:57,029 - INFO - GRU loss=0.0468 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:13:57,118 - INFO - Training LinearAttention C=10 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:14:02,273 - INFO - LinearAttention loss=0.0024 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:14:02,324 - INFO - Training GRU C=10 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:14:18,743 - INFO - GRU loss=0.0442 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:14:18,834 - INFO - Training LinearAttention C=10 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:14:23,990 - INFO - LinearAttention loss=0.0051 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:14:24,044 - INFO - Training GRU C=30 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:14:49,175 - INFO - GRU loss=0.0483 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:14:49,262 - INFO - Training LinearAttention C=30 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:14:55,642 - INFO - LinearAttention loss=0.0206 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:14:55,694 - INFO - Training GRU C=30 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:15:24,590 - INFO - GRU loss=0.0451 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:15:24,680 - INFO - Training LinearAttention C=30 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:15:29,827 - INFO - LinearAttention loss=0.0393 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:15:29,880 - INFO - Training GRU C=50 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:16:24,546 - INFO - GRU loss=0.0482 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:16:24,641 - INFO - Training LinearAttention C=50 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:16:32,317 - INFO - LinearAttention loss=0.0334 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:16:32,370 - INFO - Training GRU C=50 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:17:07,503 - INFO - GRU loss=0.0451 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:17:07,602 - INFO - Training LinearAttention C=50 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:17:15,276 - INFO - LinearAttention loss=0.0210 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:17:15,332 - INFO - Training GRU C=70 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:18:03,931 - INFO - GRU loss=0.0470 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:18:04,019 - INFO - Training LinearAttention C=70 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:18:14,121 - INFO - LinearAttention loss=0.0168 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:18:14,172 - INFO - Training GRU C=70 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:19:02,767 - INFO - GRU loss=0.0518 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:19:02,854 - INFO - Training LinearAttention C=70 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:19:09,216 - INFO - LinearAttention loss=0.0018 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:19:09,270 - INFO - Training GRU C=90 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:20:08,842 - INFO - GRU loss=0.0525 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:20:08,929 - INFO - Training LinearAttention C=90 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:20:20,192 - INFO - LinearAttention loss=0.0240 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:20:20,242 - INFO - Training GRU C=90 A=8 N=3500 L=2 U=128 D=256 run=0
+2026-09-04 05:21:26,892 - INFO - GRU loss=0.0498 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:21:26,980 - INFO - Training LinearAttention C=90 A=8 N=3500 L=2 U=1024 D=256 run=0
+2026-09-04 05:21:37,033 - INFO - LinearAttention loss=0.0350 acc=1.000 DL=0.000 JW=0.000
+2026-09-04 05:21:37,057 - INFO - Selected 80/640 configurations for this task
