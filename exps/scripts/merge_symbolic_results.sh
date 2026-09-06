@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-RESULT_DIR="${1:-exps/results_symbolic}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+EXPS_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+RESULT_DIR="${1:-${EXPS_DIR}/results_symbolic}"
 OUT_FILE="${2:-${RESULT_DIR}/results_merged.csv}"
 
-python - "${RESULT_DIR}" "${OUT_FILE}" <<'PY'
+PYTHON_BIN="${PYTHON:-python}"
+if [[ -x "${EXPS_DIR}/.venv/bin/python" && -z "${PYTHON:-}" ]]; then
+    PYTHON_BIN="${EXPS_DIR}/.venv/bin/python"
+fi
+
+"${PYTHON_BIN}" - "${RESULT_DIR}" "${OUT_FILE}" <<'PY'
 import sys
 from pathlib import Path
 

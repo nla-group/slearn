@@ -24,7 +24,7 @@ def _optional_import(package_name, import_name=None):
     except ImportError as exc:
         raise ImportError(
             f"Model dependency '{package_name}' is not installed. "
-            "Run scripts/install_experiment_deps.sh or install the package manually."
+            "Run exps/scripts/install_experiment_deps.sh or install the package manually."
         ) from exc
     return getattr(module, import_name) if import_name else module
 
