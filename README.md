@@ -3,7 +3,7 @@
 # slearn: learning symbolic sequences
 [![Build Status](https://app.travis-ci.com/nla-group/slearn.svg?token=SziD2n1qxpnRwysssUVq&branch=master)](https://app.travis-ci.com/github/nla-group/slearn)
 [![Codecov Workflow](https://github.com/nla-group/slearn/actions/workflows/unittests.yml/badge.svg)](https://github.com/nla-group/slearn/actions/workflows/unittests.yml)
-[![PyPI Version](https://badge.fury.io/py/slearn.svg)](https://badge.fury.io/py/slearn)
+[![Download Status](https://static.pepy.tech/badge/slearn)](https://pypi.org/project/slearn/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Conda Version](https://anaconda.org/conda-forge/slearn/badges/version.svg)](https://anaconda.org/conda-forge/slearn)
 [![Documentation Status](https://readthedocs.org/projects/slearn/badge/?version=latest)](https://slearn.readthedocs.io/en/latest/)
