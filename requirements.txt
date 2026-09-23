@@ -1,0 +1,6 @@
+numpy
+scipy
+pandas
+lightgbm
+scikit-learn
+textdistance

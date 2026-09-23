@@ -1,0 +1,11 @@
+torch>=2.4
+transformers>=4.40
+minGRU-pytorch>=0.2.1
+linear-attention-transformer>=0.19.1
+performer-pytorch>=1.1.4
+matplotlib>=3.7
+seaborn>=0.12
+scipy>=1.10
+pandas>=1.5
+scikit-learn>=1.2
+textdistance>=4.6
